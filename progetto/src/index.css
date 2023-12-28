@@ -44,5 +44,13 @@ code {
 
 .searchIcon {
   align-self: flex-end;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+}
+
+.highlightedEventsDiv {
+  display: flex;
+}
+
+.highlightedArtDiv {
+  display: flex;
 }
