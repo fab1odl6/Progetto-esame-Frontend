@@ -14,7 +14,9 @@ function HomePage() {
                 <div className="sectionElement">My Events</div>
             </div>
             <div className="searchBarHeader">
-                <div className="searchBar"></div>
+                <div className="searchBar">
+                    Cerca ...
+                </div>
             </div>
         </div>
     )

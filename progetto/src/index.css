@@ -36,5 +36,6 @@ code {
   border: 1px solid;
   height: 50px;
   width: 1200px;
-
+  color: grey;
+  text-align: justify;
 }
