@@ -38,4 +38,11 @@ code {
   width: 1200px;
   color: grey;
   text-align: justify;
+  display: flex;
+  justify-content: space-between;
+}
+
+.searchIcon {
+  align-self: flex-end;
+  margin-bottom: 20px;
 }

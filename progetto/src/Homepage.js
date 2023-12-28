@@ -1,4 +1,5 @@
 import React from "react";
+import SearchIcon from '@mui/icons-material/Search';
 
 function HomePage() {
 
@@ -16,6 +17,7 @@ function HomePage() {
             <div className="searchBarHeader">
                 <div className="searchBar">
                     Cerca ...
+                    <SearchIcon className="searchIcon" />
                 </div>
             </div>
         </div>
