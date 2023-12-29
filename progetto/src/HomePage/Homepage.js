@@ -5,14 +5,6 @@ import ArtSlideShow from "./ArtSlideShow";
 
 
 function HomePage() {
-<<<<<<< HEAD
-=======
-
-
-
-
-
->>>>>>> 732f68ff7ef9d4d496bcdff6fb4ab46644985b54
     return (
         <div>
             <div className="sectionHeader">

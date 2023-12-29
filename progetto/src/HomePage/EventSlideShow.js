@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useState } from "react";
 
@@ -52,24 +51,11 @@ function EventSlideShow() {
 
         seteventArrayState(updated);
     }
-=======
-import Favorite from "@mui/icons-material/Favorite";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import { FaChevronRight } from "react-icons/fa6";
-import { FaChevronLeft } from "react-icons/fa6";
-import { useState } from "react";
-
-
-function EventSlideShow() {
-
-    var eventArray = ["evento 1", "evento 2", "evento 3", "evento 4", "evento 5"];
->>>>>>> 732f68ff7ef9d4d496bcdff6fb4ab46644985b54
 
     return (
         <div>
             <div className="highlightedEventsText">Eventi in evidenza</div>
             <div className="highlightedEventsDiv">
-<<<<<<< HEAD
                 <div className="EventElement">
                     <FaChevronLeft className="chevronLeft" onClick={handleClickChevronLeft} />
                     {eventArrayState.length > 0 && (
@@ -83,21 +69,10 @@ function EventSlideShow() {
                         </>
                     )}
                     <FaChevronRight className="chevronRight" onClick={handleClickChevronRight} />
-=======
-                <div className="eventElement">
-                    <FaChevronLeft className="chevronLeft" />
-                    {eventArray[0]}
-                    <FavoriteBorder className="favoriteBorder" />
-                    <FaChevronRight className="chevronRight" />
->>>>>>> 732f68ff7ef9d4d496bcdff6fb4ab46644985b54
                 </div>
             </div>
         </div>
     )
 }
 
-<<<<<<< HEAD
 export default EventSlideShow;
-=======
-export default EventSlideShow;
->>>>>>> 732f68ff7ef9d4d496bcdff6fb4ab46644985b54

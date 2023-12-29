@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useState } from 'react';
 
@@ -53,53 +52,11 @@ function ArtSlideShow() {
         setArtArrayState(updated);
     }
 
-=======
-import Favorite from "@mui/icons-material/Favorite";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import { FaChevronRight } from "react-icons/fa6";
-import { FaChevronLeft } from "react-icons/fa6";
-import { useState } from "react";
-import { useEffect } from "react";
-
-
-function ArtSlideShow() {
-
-    const [artIndex, setArtIndex] = useState(0);
-
-    var artArray = ["opera 1", "opera 2", "opera 3", "opera 4", "opera 5"];
-
-    const handleClickChevronLeft = function () {
-        if (artIndex == 5) {
-            setArtIndex(0);
-        } else {
-            setArtIndex(artIndex + 1);
-        }
-    }
-
-    useEffect(() => {
-        handleClickChevronLeft();
-    }, []);
-
-    const handleClickChevronRight = function () {
-        if (artIndex == 0) {
-            setArtIndex(5)
-        }
-        else {
-            setArtIndex(artIndex - 1);
-        }
-    }
-
-    useEffect(() => {
-        handleClickChevronRight();
-    }, []);
-
->>>>>>> 732f68ff7ef9d4d496bcdff6fb4ab46644985b54
     return (
         <div>
             <div className="highlightedArtText">Opere in evidenza</div>
             <div className="highlightedArtDiv">
                 <div className="artElement">
-<<<<<<< HEAD
                     <FaChevronLeft className="chevronLeft" onClick={handleClickChevronLeft} />
                     {artArrayState.length > 0 && (
                         <>
@@ -119,16 +76,3 @@ function ArtSlideShow() {
 }
 
 export default ArtSlideShow;
-=======
-                    <FaChevronLeft className="chevronLeft" onClick={handleClickChevronLeft()} />
-                    {artArray[artIndex]}
-                    <FavoriteBorder className="favoriteBorder" />
-                    <FaChevronRight className="chevronRight" onClick={handleClickChevronRight()} />
-                </div>
-            </div>
-        </div>
-    )
-}
-
-export default ArtSlideShow;
->>>>>>> 732f68ff7ef9d4d496bcdff6fb4ab46644985b54
