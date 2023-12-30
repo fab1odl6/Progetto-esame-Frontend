@@ -1,5 +1,4 @@
 import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/fa';
-import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { swipeLeftArt, swipeRightArt, switchFavoriteArt } from './store';
 
@@ -20,7 +19,7 @@ function ArtSlideShow() {
     }
 
     const handleClickHeart = function () {
-        dispatch(handleClickHeart());
+        dispatch(switchFavoriteArt());
     }
 
     return (
@@ -28,7 +27,7 @@ function ArtSlideShow() {
             <div className="highlightedArtText">Opere in evidenza</div>
             <div className="highlightedArtDiv">
                 <div className="artElement">
-                    <FaChevronLeft className="chevronLeft" onClick={() => handleClickChevronLeft()} />
+                    <FaChevronLeft className="chevronLeft" onClick={handleClickChevronLeft} />
                     {array[index].name}
                     {array[index].favorite ? (
                         <FaHeart className="favorite" onClick={handleClickHeart} />

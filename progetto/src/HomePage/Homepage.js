@@ -21,7 +21,7 @@ function HomePage() {
                     <SearchIcon className="searchIcon" />
                 </div>
             </div>
-
+            <EventSlideShow />
             <ArtSlideShow />
         </div>
     )
