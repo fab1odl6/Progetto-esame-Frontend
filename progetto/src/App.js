@@ -1,12 +1,15 @@
-import HomePage from "./HomePage/Homepage";
+import HomePage from "./HomePage/components/Homepage";
 import Museums from "./Museums/Museums";
+import Route from "./components/Route";
+import HeaderBar from "./components/HeaderBar";
+import { NavigationProvider } from "./context/navigation";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// Cambiare riga 10 per testare
+
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <HomePage />
     </div>
   );
