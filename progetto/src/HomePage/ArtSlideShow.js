@@ -1,55 +1,26 @@
 import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { swipeLeftArt, swipeRightArt, switchFavoriteArt } from './store';
 
 function ArtSlideShow() {
 
-    let artArray = [
-        {
-            name: "opera 1",
-            favorite: false
-        },
-        {
-            name: "opera 2",
-            favorite: false
-        },
-        {
-            name: "opera 3",
-            favorite: false
-        },
-        {
-            name: "opera 4",
-            favorite: false
-        },
-        {
-            name: "opera 5",
-            favorite: false
-        }
-    ];
+    const { array, index } = useSelector((state) => {
+        return state.artworks;
+    });
 
-    const [artIndex, setArtIndex] = useState(0);
-    const [artArrayState, setArtArrayState] = useState(artArray);
+    const dispatch = useDispatch();
 
-    const handleClickChevronLeft = () => {
-        setArtIndex((prevIndex) => (prevIndex === 0 ? artArrayState.length - 1 : prevIndex - 1));
-    };
+    const handleClickChevronLeft = function () {
+        dispatch(swipeLeftArt());
+    }
 
-    const handleClickChevronRight = () => {
-        setArtIndex((prevIndex) => (prevIndex === artArrayState.length - 1 ? 0 : prevIndex + 1));
-    };
+    const handleClickChevronRight = function () {
+        dispatch(swipeRightArt());
+    }
 
     const handleClickHeart = function () {
-        const updated = artArrayState.map((el, i) => {
-            if (i === artIndex) {
-                return {
-                    ...el,
-                    favorite: !el.favorite
-                };
-            } else {
-                return el;
-            }
-        })
-
-        setArtArrayState(updated);
+        dispatch(handleClickHeart());
     }
 
     return (
@@ -57,16 +28,12 @@ function ArtSlideShow() {
             <div className="highlightedArtText">Opere in evidenza</div>
             <div className="highlightedArtDiv">
                 <div className="artElement">
-                    <FaChevronLeft className="chevronLeft" onClick={handleClickChevronLeft} />
-                    {artArrayState.length > 0 && (
-                        <>
-                            {artArrayState[artIndex].name}
-                            {artArrayState[artIndex].favorite ? (
-                                <FaHeart className="favorite" onClick={handleClickHeart} />
-                            ) : (
-                                <FaRegHeart className="favorite" onClick={handleClickHeart} />
-                            )}
-                        </>
+                    <FaChevronLeft className="chevronLeft" onClick={() => handleClickChevronLeft()} />
+                    {array[index].name}
+                    {array[index].favorite ? (
+                        <FaHeart className="favorite" onClick={handleClickHeart} />
+                    ) : (
+                        <FaRegHeart className="favorite" onClick={handleClickHeart} />
                     )}
                     <FaChevronRight className="chevronRight" onClick={handleClickChevronRight} />
                 </div>
