@@ -11,5 +11,5 @@ const store = configureStore({
 });
 
 export { store };
-export const { swipeLeftArt, swipeRightArt, switchFavoriteArt } = artworksSlice.actions;
-export const { swipeLeftEvent, swipeRightEvent, switchFavoriteEvent } = eventsSlice.actions; 
+export const { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt } = artworksSlice.actions;
+export const { swipeLeftEvent, swipeRightEvent, switchFavoriteEvent, switchFullEvent } = eventsSlice.actions; 

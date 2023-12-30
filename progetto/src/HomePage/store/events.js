@@ -49,7 +49,11 @@ const eventsSlice = createSlice({
             newArray[state.index] = { ...newArray[state.index], favorite: newFavorite };
 
             return { ...state, array: newArray, favorite: newFavorite };
-        }
+        },
+
+        switchFull(state, action) {
+
+        },
     },
 });
 
