@@ -56,7 +56,7 @@ code {
   display: flex;
 }
 
-.fullShow {
+.open {
   margin: 0 auto;
   border: solid;
   width: 300px;
@@ -71,4 +71,13 @@ code {
 
 .artElement {
   display: flex;
+}
+
+.firstRow {
+  display: flex;
+}
+
+.favoriteShow {
+  top: 5px;
+  right: 5px;
 }
