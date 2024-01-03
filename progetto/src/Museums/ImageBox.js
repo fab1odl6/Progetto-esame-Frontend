@@ -1,8 +1,10 @@
 // ImageBox.js
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-const ImageBox = ({ imageUrl, description }) => {
+const ImageBox = ({ imageUrl, department }) => {
+  console.log('imageUrl:', imageUrl);
+  console.log('department:', department);
+
   const containerStyle = {
     position: 'relative',
     width: '500px',
@@ -23,19 +25,20 @@ const ImageBox = ({ imageUrl, description }) => {
     bottom: '0',
     left: '0',
     width: '100%',
-    background: 'rgba(255, 255, 255, 0.8)', // Aggiungi un background leggermente trasparente per migliorare la leggibilità
+    background: 'rgba(255, 255, 255, 0.8)',
     padding: '10px',
   };
 
   return (
     <div className="box is-inline-block" style={containerStyle}>
-      <img src={imageUrl} alt="Immagine" style={imageStyle} />
-      {description && <div style={descriptionStyle}>{description}</div>}
+      <img
+        src={imageUrl}
+        alt="Immagine"
+        style={imageStyle}
+      />
+      {department && <div style={descriptionStyle}>{department.displayName}</div>}
     </div>
   );
 };
-
-
-
 
 export default ImageBox;

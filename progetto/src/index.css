@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -53,4 +54,30 @@ code {
 
 .highlightedArtDiv {
   display: flex;
+}
+
+.open {
+  margin: 0 auto;
+  border: solid;
+  width: 300px;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.artElement {
+  display: flex;
+}
+
+.firstRow {
+  display: flex;
+}
+
+.favoriteShow {
+  top: 5px;
+  right: 5px;
 }
