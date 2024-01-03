@@ -6,7 +6,7 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
 function ArtShow() {
 
-    const { array, index } = useSelector((state) => {
+    const { array, index, image } = useSelector((state) => {
         return state.artworks;
     })
 
@@ -20,9 +20,11 @@ function ArtShow() {
         dispatch(switchFavoriteArt());
     }
 
+    console.log(image)
     return (
         <div className="openedModal">
             <div className="firstRow">
+                <img key={array[index].id} src={image} alt={array[index].title} />
                 <div>{array[index].name}</div>
                 {array[index].favorite ? (
                     <FaHeart className="favoriteShow" onClick={handleClickHeart} />

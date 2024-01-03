@@ -1,40 +1,39 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-let artArray = [];
-
+const artArray = [];
 
 const fetchData = async function () {
     try {
         let url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
-        const searchRes = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/search?q=sunflowers");
+        const searchRes = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/search?q=sky");
         const searchData = await searchRes.json();
-        const objectIDs = searchData.objectIDs || [];
+        const objectIDs = searchData.objectIDs;
 
-        const objectRequests = objectIDs.slice(0, 5).map(async (objectId) => {
+        const objectRequests = objectIDs.slice(1, 6).map(async (objectId) => {
             const resObj = await fetch(url + objectId);
             const dataObj = await resObj.json();
 
-            artArray.push({
-                id: dataObj.objectID,
-                link: dataObj.linkResource,
-                name: dataObj.artistDisplayName,
-                image: dataObj.primaryImage,
-                favorite: false,
-                full: false
-            });
+            if (dataObj !== false) {
+                artArray.push({
+                    id: dataObj.objectID,
+                    link: dataObj.objectURL,
+                    authorName: dataObj.artistDisplayName,
+                    title: dataObj.title,
+                    image: dataObj.primaryImage,
+                    favorite: false,
+                    full: false
+                });
+            }
         });
 
+        console.log("artArray: ", artArray);
         await Promise.all(objectRequests);
-
-        console.log("artArray:", artArray);
     } catch (error) {
-        console.error("Errore durante il recupero dei dati:", error);
+        console.error("Errore durante il recupero dei dati: ", error);
     }
 };
 
-fetchData();
-
-fetchData();
+await fetchData();
 
 const artworksSlice = createSlice({
     name: "artworks",
@@ -42,7 +41,8 @@ const artworksSlice = createSlice({
         array: artArray,
         index: 0,
         favorite: false,
-        full: false
+        full: false,
+        image: "mannaggia_il_padre_eterno.jpg"
     },
     reducers: {
         swipeRightArt(state, action) {
