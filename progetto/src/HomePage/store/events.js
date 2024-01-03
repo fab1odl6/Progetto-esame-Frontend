@@ -3,23 +3,28 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 let eventArray = [
     {
         name: "evento 1",
-        favorite: false
+        favorite: false,
+        full: false
     },
     {
         name: "evento 2",
-        favorite: false
+        favorite: false,
+        full: false
     },
     {
         name: "evento 3",
-        favorite: false
+        favorite: false,
+        full: false
     },
     {
         name: "evento 4",
-        favorite: false
+        favorite: false,
+        full: false
     },
     {
         name: "evento 5",
-        favorite: false
+        favorite: false,
+        full: false
     }
 ];
 
@@ -30,7 +35,8 @@ const eventsSlice = createSlice({
     initialState: {
         array: eventArray,
         index: 0,
-        favorite: false
+        favorite: false,
+        full: false
     },
     reducers: {
         swipeRightEvent(state, action) {
@@ -51,8 +57,13 @@ const eventsSlice = createSlice({
             return { ...state, array: newArray, favorite: newFavorite };
         },
 
-        switchFull(state, action) {
+        switchFullEvent(state, action) {
+            console.log("a")
+            const newFull = !state.array[state.index].full;
+            const newArray = [...state.array];
+            newArray[state.index] = { ...newArray[state.index], full: newFull };
 
+            return { ...state, array: newArray, full: newFull };
         },
     },
 });

@@ -6,7 +6,7 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
 function ArtShow() {
 
-    const { array, index, full } = useSelector((state) => {
+    const { array, index } = useSelector((state) => {
         return state.artworks;
     })
 
@@ -21,8 +21,7 @@ function ArtShow() {
     }
 
     return (
-        <div className="open">
-            <IoIosClose className="closeButton" onClick={handleClickClose} />
+        <div className="openedModal">
             <div className="firstRow">
                 <div>{array[index].name}</div>
                 {array[index].favorite ? (
@@ -30,6 +29,7 @@ function ArtShow() {
                 ) : (
                     <FaRegHeart className="favoriteShow" onClick={handleClickHeart} />
                 )}
+                <IoIosClose className="closeButton" onClick={handleClickClose} />
             </div>
             <div>bbb</div>
         </div>

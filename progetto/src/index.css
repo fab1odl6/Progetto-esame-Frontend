@@ -56,25 +56,28 @@ code {
   display: flex;
 }
 
-.open {
-  margin: 0 auto;
-  border: solid;
-  width: 300px;
-  position: relative;
-}
-
-.closeButton {
+.openedModal {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  inset: 0 0 0 0;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .artElement {
   display: flex;
 }
 
+.eventElement {
+  display: flex;
+}
+
 .firstRow {
   display: flex;
+  justify-content: space-between;
 }
 
 .favoriteShow {
