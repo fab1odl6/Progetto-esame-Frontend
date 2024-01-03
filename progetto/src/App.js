@@ -11,7 +11,7 @@ import MuseumDetail from "./Museums/MuseumDetail";
 function App() {
   return (
     <div>
-      <Museums />
+      <HomePage />
     </div>
   );
 }

@@ -1,48 +1,40 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
+let artArray = [];
 
-let artArray = [
-    {
-        id: 1,
-        link: "",
-        name: "opera 1",
-        image: "image 1",
-        favorite: false,
-        full: false
-    },
-    {
-        id: 2,
-        link: "",
-        name: "opera 2",
-        image: "image 2",
-        favorite: false,
-        full: false
-    },
-    {
-        id: 3,
-        link: "",
-        name: "opera 3",
-        image: "image 3",
-        favorite: false,
-        full: false
-    },
-    {
-        id: 4,
-        link: "",
-        name: "opera 4",
-        image: "image 4",
-        favorite: false,
-        full: false
-    },
-    {
-        id: 5,
-        link: "",
-        name: "opera 5",
-        image: "image 5",
-        favorite: false,
-        full: false
+
+const fetchData = async function () {
+    try {
+        let url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
+        const searchRes = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/search?q=sunflowers");
+        const searchData = await searchRes.json();
+        const objectIDs = searchData.objectIDs || [];
+
+        const objectRequests = objectIDs.slice(0, 5).map(async (objectId) => {
+            const resObj = await fetch(url + objectId);
+            const dataObj = await resObj.json();
+
+            artArray.push({
+                id: dataObj.objectID,
+                link: dataObj.linkResource,
+                name: dataObj.artistDisplayName,
+                image: dataObj.primaryImage,
+                favorite: false,
+                full: false
+            });
+        });
+
+        await Promise.all(objectRequests);
+
+        console.log("artArray:", artArray);
+    } catch (error) {
+        console.error("Errore durante il recupero dei dati:", error);
     }
-];
+};
+
+fetchData();
+
+fetchData();
 
 const artworksSlice = createSlice({
     name: "artworks",
@@ -82,3 +74,4 @@ const artworksSlice = createSlice({
 });
 
 export default artworksSlice;
+export { fetchData };

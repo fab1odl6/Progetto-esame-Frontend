@@ -2,6 +2,10 @@ import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/
 import { useDispatch, useSelector } from "react-redux";
 import { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt } from '../store';
 import ArtShow from "./ArtShow";
+import { fetchData } from '../store/artworks';
+
+await fetchData();
+
 
 function ArtSlideShow() {
 
@@ -35,7 +39,7 @@ function ArtSlideShow() {
                 <div className="artElement">
                     <FaChevronLeft className="chevronLeft" onClick={handleClickChevronLeft} />
                     <div onClick={handleClickArtwork}>
-                        {array[index].image}
+                        <img src={array[index].image} ></img>
                     </div>
                     <div>
                         {array[index].favorite ? (
