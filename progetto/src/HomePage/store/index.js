@@ -1,4 +1,4 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import artworksSlice from "./artworks";
 import eventsSlice from "./events";
 
