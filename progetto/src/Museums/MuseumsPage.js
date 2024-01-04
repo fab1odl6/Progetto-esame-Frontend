@@ -3,6 +3,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ImageBox from './ImageBox';
 import Grid from './Grid';
 import { Link } from 'react-router-dom';
+import MuseumModal from './MuseumModal';
 
 
 
@@ -10,6 +11,8 @@ function Museums() {
 
 
     const [museums, setMuseums] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedMuseum, setSelectedMuseum] = useState(null);
 
     useEffect(() => {
     // Fai la chiamata API qui e aggiorna lo stato dei musei
@@ -34,6 +37,16 @@ function Museums() {
     fetchData();
     }, []);
 
+    const openModal = (museum) => {
+      setSelectedMuseum(museum);
+      setModalOpen(true);
+    };
+  
+    const closeModal = () => {
+      setSelectedMuseum(null);
+      setModalOpen(false);
+    };
+
 
     return (
 
@@ -49,10 +62,11 @@ function Museums() {
                 backgroundRepeat: 'no-repeat', 
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                minHeight: 'calc(100vh - 100px)', // Regola l'altezza in base alle tue esigenze
+                minHeight: 'calc(100vh - 100px)', 
             }}>
                 <h1 style={{ textAlign: 'center', paddingTop: '50px' }}>MUSEUMS</h1>
-                <Grid museums={museums} />
+                <Grid museums={museums} openModal={openModal} />
+                <MuseumModal open={modalOpen} onClose={closeModal} museum={selectedMuseum} /> 
             </div>
         </div>
     );
