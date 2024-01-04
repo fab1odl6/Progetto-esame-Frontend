@@ -5,6 +5,7 @@ import HeaderBar from "./components/HeaderBar";
 import { NavigationProvider } from "./context/navigation";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MuseumDetail from "./Museums/MuseumDetail";
+import EveryArtworkPage from "./pages/EveryArtworkPage";
 
 
 
@@ -19,7 +20,7 @@ function App() {
             <HomePage />
           </Route>
           <Route path="/everyArtwork">
-            <Museums />
+            <EveryArtworkPage />
           </Route>
           <Route path="/museums">
             <Museums />
