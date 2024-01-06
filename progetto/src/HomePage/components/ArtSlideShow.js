@@ -2,8 +2,19 @@ import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/
 import { useDispatch, useSelector } from "react-redux";
 import { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt } from '../store';
 import ArtShow from "./ArtShow";
+import className from "classnames";
 
 function ArtSlideShow() {
+
+    const artText = className("");
+    const artDiv = className("");
+    const artContainer = className("flex flex-row place-content-center");
+    const artElement = className("");
+    const image = className("w-full h-auto max-h-96");
+    const chevron = className("place-self-center text-2xl");
+    const titleAndHeart = className("flex");
+    const favorite = className("ml-auto text-2xl");
+    const title = className("text-lg place-content-center");
 
     const { array, index, full } = useSelector((state) => {
         return state.artworks;
@@ -28,23 +39,27 @@ function ArtSlideShow() {
     }
 
 
+    const altText = "Image of " + array[index].title;
     return (
         <div>
-            <div className="highlightedArtText">Opere in evidenza</div>
-            <div className="highlightedArtDiv">
-                <div className="artElement">
-                    <FaChevronLeft className="chevronLeft" onClick={handleClickChevronLeft} />
-                    <div onClick={handleClickArtwork}>
-                        {array[index].title}
+            <div className={artText}>Opere in evidenza</div>
+            <div className={artDiv}>
+                <div className={artContainer}>
+                    <FaChevronLeft className={chevron} onClick={handleClickChevronLeft} />
+                    <div className={artElement}>
+                        <div onClick={handleClickArtwork}>
+                            <img className={image} src={array[index].image} alt={altText} />
+                        </div>
+                        <div className={titleAndHeart}>
+                            <div className={title}>{array[index].title}</div>
+                            {array[index].favorite ? (
+                                <FaHeart className={favorite} onClick={handleClickHeart} />
+                            ) : (
+                                <FaRegHeart className={favorite} onClick={handleClickHeart} />
+                            )}
+                        </div>
                     </div>
-                    <div>
-                        {array[index].favorite ? (
-                            <FaHeart className="favorite" onClick={handleClickHeart} />
-                        ) : (
-                            <FaRegHeart className="favorite" onClick={handleClickHeart} />
-                        )}
-                    </div>
-                    <FaChevronRight className="chevronRight" onClick={handleClickChevronRight} />
+                    <FaChevronRight className={chevron} onClick={handleClickChevronRight} />
                 </div>
                 {full && <ArtShow />}
             </div>

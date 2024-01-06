@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   height: 100%;
@@ -48,53 +52,6 @@ code {
   margin-bottom: 25px;
 }
 
-.highlightedEventsDiv {
-  display: flex;
-}
-
-.highlightedArtDiv {
-  display: flex;
-}
-
-.openedModal {
-  position: absolute;
-  inset: 0 0 0 0;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.artElement {
-  display: flex;
-  justify-content: space-between;
-}
-
 .eventElement {
   display: flex;
-}
-
-.firstRow {
-  display: flex;
-  justify-content: space-between;
-}
-
-.favoriteShow {
-  top: 5px;
-  right: 5px;
-  font-size: 24px;
-  margin-left: 10px;
-  margin-right: 10px;
-  justify-content: flex-end;
-}
-
-.imageFullShow {
-  max-width: 600px;
-  max-height: 600px;
-}
-
-.closeButton {
-  font-size: 30px;
 }

@@ -12,30 +12,32 @@ const fetchData = async function () {
         const objectRequests = objectIDs.slice(1, 6).map(async (objectId) => {
             const resObj = await fetch(url + objectId);
             const dataObj = await resObj.json();
+            console.log(dataObj)
 
-            if (dataObj !== null) {
-                artArray.push({
-                    id: dataObj.objectID,
-                    link: dataObj.objectURL,
-                    authorName: dataObj.artistDisplayName,
-                    title: dataObj.title,
-                    image: dataObj.primaryImage,
-                    department: dataObj.department,
-                    culture: dataObj.culture,
-                    period: dataObj.period,
-                    date: dataObj.objectDate,
-                    dimensions: dataObj.dimensions,
-                    city: dataObj.city,
-                    state: dataObj.state,
-                    country: dataObj.country,
-                    classification: dataObj.classification,
-                    favorite: false,
-                    full: false
-                });
+            if (dataObj.message !== "Not a valid object") {
+                if (artArray.length < 5) {
+                    artArray.push({
+                        id: dataObj.objectID,
+                        link: dataObj.objectURL,
+                        authorName: dataObj.artistDisplayName,
+                        title: dataObj.title,
+                        image: dataObj.primaryImage,
+                        department: dataObj.department,
+                        culture: dataObj.culture,
+                        period: dataObj.period,
+                        date: dataObj.objectDate,
+                        dimensions: dataObj.dimensions,
+                        city: dataObj.city,
+                        state: dataObj.state,
+                        country: dataObj.country,
+                        classification: dataObj.classification,
+                        favorite: false,
+                        full: false
+                    });
+                }
             }
         });
 
-        console.log("artArray: ", artArray);
         await Promise.all(objectRequests);
     } catch (error) {
         console.error("Errore durante il recupero dei dati: ", error);
