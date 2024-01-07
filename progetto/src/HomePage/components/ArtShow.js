@@ -6,7 +6,7 @@ import className from "classnames";
 
 function ArtShow() {
 
-    const modal = className("absolute inset-0 flex flex-col items-center justify-center");
+    const modal = className("fixed inset-0 flex flex-col items-center justify-center w-screen h-screen");
     const container = className("border-slate-300 border-solid border-4 bg-white");
     const imageContainer = className("flex justify-between relative");
     const image = className("max-w-2xl max-h-2xl");

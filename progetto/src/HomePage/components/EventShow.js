@@ -7,7 +7,7 @@ import className from "classnames";
 
 function EventShow() {
 
-    const modal = className("absolute inset-0 flex flex-col items-center justify-center");
+    const modal = className("fixed inset-0 flex flex-col items-center justify-center w-screen h-screen");
     const container = className("border-slate-300 border-solid border-4 bg-white");
     const imageContainer = className("flex justify-between relative");
     const image = className("max-w-2xl max-h-2xl");
@@ -33,11 +33,11 @@ function EventShow() {
         <div className={modal}>
             <div className={container}>
                 <div className={imageContainer}>
-                    <img className={image} key={array[index].id} src={array[index].image} alt={array[index].title} />
+                    <img className={image} key={array[index].id} src={array[index].image} alt={array[index].name} />
                     <IoIosClose className={close} onClick={handleClickClose} />
                 </div>
                 <div className={firstRow}>
-                    {array[index].name && <div>Title: {array[index].title}</div>}
+                    {array[index].name && <div>Title: {array[index].name}</div>}
                     {array[index].favorite ? (
                         <FaHeart className={favorite} onClick={handleClickHeart} />
                     ) : (

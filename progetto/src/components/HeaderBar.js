@@ -1,6 +1,11 @@
 import Link from "./Link";
+import className from "classnames";
 
 function HeaderBar() {
+
+    const sectionHeader = className("flex justify-center mt-10");
+    const sectionElement = className("border p-2.5");
+
     const links = [
         { label: "HomePage", path: "/" },
         { label: "EveryArtwork", path: "/everyArtwork" },
@@ -11,7 +16,7 @@ function HeaderBar() {
 
     const renderedLinks = links.map((link) => {
         return (
-            <div className="sectionElement">
+            <div className={sectionElement}>
                 <Link key={link.label} to={link.path}>
                     {link.label}
                 </Link>
@@ -20,7 +25,7 @@ function HeaderBar() {
     });
 
     return (
-        <div className="sectionHeader">
+        <div className={sectionHeader}>
             {renderedLinks}
         </div>
     );

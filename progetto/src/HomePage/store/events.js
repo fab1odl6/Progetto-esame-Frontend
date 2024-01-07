@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import eventImage from "../images/event.jpg";
+import eventImage from "..//../images/event.jpg";
 
 
 let eventArray = [];
-for (let i = 0; i < 5; i++) {
+for (let i = 1; i < 6; i++) {
     eventArray.push({
         id: i,
         name: "event " + i,

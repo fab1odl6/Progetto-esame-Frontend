@@ -39,8 +39,38 @@ function EventSlideShow() {
         dispatch(switchFullEvent())
     }
 
+
+    const altText = "image of " + array[index].image;
     return (
         <div>
+            <div className={eventText}>Eventi in evidenza</div>
+            <div className={eventDiv}>
+                <div className={eventContainer}>
+                    <FaChevronLeft className={chevron} onClick={handleClickChevronLeft} />
+                    <div className={eventElement}>
+                        <div onClick={handleClickEvent}>
+                            <img className={image} src={array[index].image} alt={altText} />
+                        </div>
+                        <div className={titleAndHeart}>
+                            <div className={title}>{array[index].name}</div>
+                            {array[index].favorite ? (
+                                <FaHeart className={favorite} onClick={handleClickHeart} />
+                            ) : (
+                                <FaRegHeart className={favorite} onClick={handleClickHeart} />
+                            )}
+                        </div>
+                    </div>
+                    <FaChevronRight className={chevron} onClick={handleClickChevronRight} />
+                </div>
+                {full && <EventShow />}
+            </div>
+        </div>
+    );
+}
+
+export default EventSlideShow;
+/*
+<div>
             <div className={eventText}>Opere in evidenza</div>
             <div className={eventDiv}>
                 <div className={eventContainer}>
@@ -63,7 +93,4 @@ function EventSlideShow() {
                 </div>
             </div>
         </div>
-    );
-}
-
-export default EventSlideShow;
+        */
