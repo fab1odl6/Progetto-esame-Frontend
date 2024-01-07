@@ -2,8 +2,20 @@ import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/
 import { useDispatch, useSelector } from "react-redux";
 import { swipeLeftEvent, swipeRightEvent, switchFavoriteEvent, switchFullEvent } from '../store';
 import EventShow from "./EventShow";
+import className from "classnames";
 
 function EventSlideShow() {
+
+    const eventText = className("");
+    const eventDiv = className("");
+    const eventContainer = className("flex flex-row place-content-center");
+    const eventElement = className("");
+    const image = className("w-full h-auto max-h-96");
+    const chevron = className("place-self-center text-2xl");
+    const titleAndHeart = className("flex");
+    const favorite = className("ml-auto text-2xl");
+    const title = className("text-lg place-content-center");
+
 
     const { array, index, full } = useSelector((state) => {
         return state.events;
@@ -29,25 +41,29 @@ function EventSlideShow() {
 
     return (
         <div>
-            <div className="highlightedEventText">Opere in evidenza</div>
-            <div className="highlightedEventDiv">
-                <div className="eventElement">
-                    <FaChevronLeft className="chevronLeft" onClick={handleClickChevronLeft} />
-                    <div onClick={handleClickEvent}>
-                        {array[index].name}
+            <div className={eventText}>Opere in evidenza</div>
+            <div className={eventDiv}>
+                <div className={eventContainer}>
+                    <FaChevronLeft className={chevron} onClick={handleClickChevronLeft} />
+                    <div className={eventElement}>
+                        <div className={image} onClick={handleClickEvent}>
+                            <img src={array[index].image} alt="image" />
+                        </div>
+                        <div className={titleAndHeart}>
+                            <div className={title} onClick={handleClickEvent}>{array[index].name}</div>
+                            {array[index].favorite ? (
+                                <FaHeart className={favorite} onClick={handleClickHeart} />
+                            ) : (
+                                <FaRegHeart className={favorite} onClick={handleClickHeart} />
+                            )}
+                        </div>
                     </div>
-                    {array[index].favorite ? (
-                        <FaHeart className="favorite" onClick={handleClickHeart} />
-                    ) : (
-                        <FaRegHeart className="favorite" onClick={handleClickHeart} />
-                    )}
-                    <FaChevronRight className="chevronRight" onClick={handleClickChevronRight} />
+                    <FaChevronRight className={chevron} onClick={handleClickChevronRight} />
                     {full && <EventShow />}
                 </div>
             </div>
         </div>
     );
-
 }
 
 export default EventSlideShow;

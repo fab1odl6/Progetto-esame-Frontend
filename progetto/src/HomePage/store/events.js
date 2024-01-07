@@ -1,34 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-let eventArray = [
-    {
-        name: "evento 1",
-        favorite: false,
-        full: false
-    },
-    {
-        name: "evento 2",
-        favorite: false,
-        full: false
-    },
-    {
-        name: "evento 3",
-        favorite: false,
-        full: false
-    },
-    {
-        name: "evento 4",
-        favorite: false,
-        full: false
-    },
-    {
-        name: "evento 5",
-        favorite: false,
-        full: false
-    }
-];
+import eventImage from "../images/event.jpg";
 
 
+let eventArray = [];
+for (let i = 0; i < 5; i++) {
+    eventArray.push({
+        id: i,
+        name: "event " + i,
+        image: eventImage,
+        place: "place " + i,
+        guests: "guests " + i,
+        timestamp: "timestamp " + i,
+        favorite: false,
+        full: false
+    })
+}
 
 const eventsSlice = createSlice({
     name: "events",
