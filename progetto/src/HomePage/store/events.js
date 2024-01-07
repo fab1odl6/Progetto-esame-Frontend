@@ -10,7 +10,7 @@ for (let i = 1; i < 6; i++) {
         image: eventImage,
         place: "place " + i,
         guests: "guests " + i,
-        timestamp: "timestamp " + i,
+        timestamp: "date " + i,
         favorite: false,
         full: false
     })

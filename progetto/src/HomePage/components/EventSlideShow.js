@@ -40,7 +40,7 @@ function EventSlideShow() {
     }
 
 
-    const altText = "image of " + array[index].image;
+    const altText = "image of " + array[index].name;
     return (
         <div>
             <div className={eventText}>Eventi in evidenza</div>
