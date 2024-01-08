@@ -8,12 +8,14 @@ import MuseumDetail from "./Museums/MuseumDetail";
 import EveryArtworkPage from "./pages/EveryArtworkPage";
 
 
-import { initializeApp } from "firebase/app";
+/*import { initializeApp } from "firebase/app";
+import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
+import { getDatabase, ref, get, child, set } from "firebase/database";
 import { firebaseConfig } from "./components/TestFirebase";
-import { getDatabase, ref, child, get, set } from "firebase/database";
 
 const app = initializeApp(firebaseConfig);
 const dbRef = ref(getDatabase());
+
 
 get(child(dbRef, '/users')).then((snapshot) => {
   if (snapshot.exists()) {
@@ -33,10 +35,10 @@ function writeUserData(userId, name) {
     name: name
   });
 }
-
+*/
 
 function App() {
-  writeUserData(3, "fsdfd");
+  // writeUserData(5, "fdedg");
   return (
 
     <NavigationProvider>
