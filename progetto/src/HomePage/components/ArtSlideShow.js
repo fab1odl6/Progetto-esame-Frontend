@@ -4,6 +4,7 @@ import { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt } from '.
 import ArtShow from "./ArtShow";
 import className from "classnames";
 
+
 function ArtSlideShow() {
 
     const artText = className("");
