@@ -12,7 +12,6 @@ const fetchData = async function () {
         const objectRequests = objectIDs.slice(1, 6).map(async (objectId) => {
             const resObj = await fetch(url + objectId);
             const dataObj = await resObj.json();
-            console.log(dataObj)
 
             if (dataObj.message !== "Not a valid object") {
                 if (artArray.length < 5) {
