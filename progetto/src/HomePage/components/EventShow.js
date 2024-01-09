@@ -7,7 +7,7 @@ import className from "classnames";
 
 function EventShow() {
 
-    const modal = className("fixed inset-0 flex flex-col items-center justify-center w-screen h-screen");
+    const modal = className("fixed inset-0 flex flex-col items-center justify-center w-screen h-screen bg-blue bg-auto");
     const container = className("border-slate-300 border-solid border-4 bg-white");
     const imageContainer = className("flex justify-between relative");
     const image = className("max-w-2xl max-h-2xl");
@@ -25,8 +25,8 @@ function EventShow() {
         dispatch(switchFullEvent());
     }
 
-    const handleClickHeart = function () {
-        dispatch(switchFavoriteEvent());
+    const handleClickHeart = function (event) {
+        dispatch(switchFavoriteEvent(event));
     }
 
     return (
@@ -39,9 +39,9 @@ function EventShow() {
                 <div className={firstRow}>
                     {array[index].name && <div>Title: {array[index].name}</div>}
                     {array[index].favorite ? (
-                        <FaHeart className={favorite} onClick={handleClickHeart} />
+                        <FaHeart className={favorite} onClick={() => handleClickHeart(array[index])} />
                     ) : (
-                        <FaRegHeart className={favorite} onClick={handleClickHeart} />
+                        <FaRegHeart className={favorite} onClick={() => handleClickHeart(array[index])} />
                     )}
                 </div>
                 {array[index].place && <div>Place: {array[index].place}</div>}

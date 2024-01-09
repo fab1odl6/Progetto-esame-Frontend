@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, get, child, set } from "firebase/database";
+import { getDatabase, ref, get, child, set, remove } from "firebase/database";
 import { firebaseConfig } from "..//../components/FirebaseConfig";
 
 
@@ -102,8 +102,8 @@ async function readData() {
                             state: dataObj.state,
                             country: dataObj.country,
                             classification: dataObj.classification,
-                            favorite: false,
-                            full: false
+                            favorite: dataObj.favorite,
+                            full: dataObj.full
                         });
                     }
                 }
@@ -117,6 +117,33 @@ async function readData() {
 }
 
 await readData();
+
+function updateFavorite(art) {
+    const db = getDatabase();
+
+    if (!art.favorite) {
+        set(ref(db, 'users/Fabio/artworks/' + art.title), {
+            id: art.id,
+            link: art.link,
+            authorName: art.authorName,
+            title: art.title,
+            image: art.image,
+            department: art.department,
+            culture: art.culture,
+            period: art.period,
+            date: art.date,
+            dimensions: art.dimensions,
+            city: art.city,
+            state: art.state,
+            country: art.country,
+            classification: art.classification,
+            favorite: true,
+            full: false
+        })
+    } else {
+        remove(ref(db, "users/Fabio/artworks/" + art.title));
+    }
+}
 
 const artworksSlice = createSlice({
     name: "artworks",
@@ -142,6 +169,7 @@ const artworksSlice = createSlice({
             const newArray = [...state.array];
             newArray[state.index] = { ...newArray[state.index], favorite: newFavorite };
 
+            updateFavorite(action.payload);
             return { ...state, array: newArray, favorite: newFavorite };
         },
 
