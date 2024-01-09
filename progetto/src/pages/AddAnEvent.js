@@ -1,5 +1,5 @@
-function addAnEvent() {
-    return (<div>a</div>)
+function AddAnEvent() {
+    return (<h1>aaaaaaaa</h1>)
 }
 
-export default addAnEvent;
+export default AddAnEvent;

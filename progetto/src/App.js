@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import MuseumDetail from "./Museums/MuseumDetail";
 import EveryArtworkPage from "./pages/EveryArtworkPage";
 import addAnEvent from "./pages/AddAnEvent";
+import AddAnEvent from "./pages/AddAnEvent";
 
 
 /*import { initializeApp } from "firebase/app";
@@ -61,8 +62,8 @@ function App() {
           <Route path="/myEvents">
             <Museums />
           </Route>
-          <Route>
-            <addAnEvent path="/addAnEvent" />
+          <Route path="/addAnEvent">
+            <AddAnEvent />
           </Route>
         </div>
       </div>
