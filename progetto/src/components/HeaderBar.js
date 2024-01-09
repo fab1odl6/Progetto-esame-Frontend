@@ -11,7 +11,7 @@ function HeaderBar() {
         { label: "Every Artwork", path: "/everyArtwork" },
         { label: "Museums", path: "/museums" },
         { label: "Personal Gallery", path: "/personalGallery" },
-        { label: "MyEvents", path: "/myEvents" },
+        { label: "My Events", path: "/myEvents" },
         { label: "Add an Event", path: "/addAnEvent" }
     ]
 
