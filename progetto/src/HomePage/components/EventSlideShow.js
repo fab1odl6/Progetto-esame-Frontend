@@ -6,6 +6,7 @@ import className from "classnames";
 
 function EventSlideShow() {
 
+    const container = className("overflow: auto");
     const eventText = className("");
     const eventDiv = className("");
     const eventContainer = className("flex flex-row place-content-center");
@@ -31,18 +32,17 @@ function EventSlideShow() {
         dispatch(swipeRightEvent());
     }
 
-    const handleClickHeart = function () {
-        dispatch(switchFavoriteEvent());
+    const handleClickHeart = function (event) {
+        dispatch(switchFavoriteEvent(event));
     }
 
     const handleClickEvent = function () {
         dispatch(switchFullEvent())
     }
 
-
     const altText = "Image of " + array[index].name;
     return (
-        <div>
+        <div className={container}>
             <div className={eventText}>Eventi in evidenza</div>
             <div className={eventDiv}>
                 <div className={eventContainer}>
@@ -54,9 +54,9 @@ function EventSlideShow() {
                         <div className={titleAndHeart}>
                             <div className={title} onClick={handleClickEvent}>{array[index].name}</div>
                             {array[index].favorite ? (
-                                <FaHeart className={favorite} onClick={handleClickHeart} />
+                                <FaHeart className={favorite} onClick={() => handleClickHeart(array[index])} />
                             ) : (
-                                <FaRegHeart className={favorite} onClick={handleClickHeart} />
+                                <FaRegHeart className={favorite} onClick={() => handleClickHeart(array[index])} />
                             )}
                         </div>
                     </div>

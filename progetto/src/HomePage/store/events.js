@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, get, child, set } from "firebase/database";
+import { getDatabase, ref, get, child, set, remove } from "firebase/database";
 import { firebaseConfig } from "..//../components/FirebaseConfig";
 
 
 let eventArray = [];
-const app = initializeApp(firebaseConfig);
 const dbRef = ref(getDatabase());
 
 async function readData() {
@@ -43,6 +42,25 @@ async function readData() {
 
 await readData();
 
+function updateFavorite(event) {
+    const db = getDatabase();
+
+    if (!event.favorite) {
+        set(ref(db, 'users/Fabio/events/' + event.name), {
+            id: event.id,
+            name: event.name,
+            image: event.image,
+            date: event.date,
+            place: event.place,
+            guests: event.guests,
+            favorite: true,
+            full: false
+        })
+    } else {
+        remove(ref(db, "users/Fabio/events/" + event.name));
+    }
+}
+
 const eventsSlice = createSlice({
     name: "events",
     initialState: {
@@ -67,6 +85,7 @@ const eventsSlice = createSlice({
             const newArray = [...state.array];
             newArray[state.index] = { ...newArray[state.index], favorite: newFavorite };
 
+            updateFavorite(action.payload);
             return { ...state, array: newArray, favorite: newFavorite };
         },
 

@@ -31,8 +31,8 @@ function ArtSlideShow() {
         dispatch(swipeRightArt());
     }
 
-    const handleClickHeart = function () {
-        dispatch(switchFavoriteArt());
+    const handleClickHeart = function (art) {
+        dispatch(switchFavoriteArt(art));
     }
 
     const handleClickArtwork = function () {
@@ -56,9 +56,9 @@ function ArtSlideShow() {
                                 <div>{array[index].title} - {array[index].authorName}</div>
                             </div>
                             {array[index].favorite ? (
-                                <FaHeart className={favorite} onClick={handleClickHeart} />
+                                <FaHeart className={favorite} onClick={() => handleClickHeart(array[index])} />
                             ) : (
-                                <FaRegHeart className={favorite} onClick={handleClickHeart} />
+                                <FaRegHeart className={favorite} onClick={() => handleClickHeart(array[index])} />
                             )}
                         </div>
                     </div>

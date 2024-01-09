@@ -7,9 +7,9 @@ import className from "classnames";
 function ArtShow() {
 
     const modal = className("fixed inset-0 flex flex-col items-center justify-center w-screen h-screen");
-    const container = className("border-slate-300 border-solid border-4 bg-white");
+    const container = className("border-slate-300 border-solid border-4 bg-white overflow-auto");
     const imageContainer = className("flex justify-between relative");
-    const image = className("max-w-2xl max-h-2xl");
+    const image = className("max-w-xl max-h-xl");
     const close = className("text-3xl absolute border-1 border-black top-2.5 right-2.5 bg-white place-self-center");
     const firstRow = className("flex justify-between");
     const favorite = className("ml-auto text-2xl");
@@ -24,8 +24,8 @@ function ArtShow() {
         dispatch(switchFullArt());
     }
 
-    const handleClickHeart = function () {
-        dispatch(switchFavoriteArt());
+    const handleClickHeart = function (art) {
+        dispatch(switchFavoriteArt(art));
     }
 
     return (
@@ -38,9 +38,9 @@ function ArtShow() {
                 <div className={firstRow}>
                     {array[index].title && <div>Title: {array[index].title}</div>}
                     {array[index].favorite ? (
-                        <FaHeart className={favorite} onClick={handleClickHeart} />
+                        <FaHeart className={favorite} onClick={() => handleClickHeart(array[index])} />
                     ) : (
-                        <FaRegHeart className={favorite} onClick={handleClickHeart} />
+                        <FaRegHeart className={favorite} onClick={() => handleClickHeart(array[index])} />
                     )}
                 </div>
                 {array[index].authorName && <div>Author: {array[index].authorName}</div>}
