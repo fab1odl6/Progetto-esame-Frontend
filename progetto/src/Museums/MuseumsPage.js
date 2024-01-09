@@ -68,7 +68,7 @@ function Museums() {
         backgroundPosition: 'center',
         minHeight: 'calc(100vh - 100px)',
       }}>
-        <h1 style={{ textAlign: 'center', paddingTop: '50px' }}>MUSEUMS</h1>
+        <h1 style={{ textAlign: 'center', paddingTop: '50px',  fontWeight: 'bold', fontSize: '2em' }}>MUSEUMS</h1>
         <Grid museums={museums} openModal={openModal} />
         <MuseumModal open={modalOpen} onClose={closeModal} museum={selectedMuseum} />
       </div>
