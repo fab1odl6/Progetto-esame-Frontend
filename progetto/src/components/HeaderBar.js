@@ -8,10 +8,11 @@ function HeaderBar() {
 
     const links = [
         { label: "HomePage", path: "/" },
-        { label: "EveryArtwork", path: "/everyArtwork" },
-        { label: "Musems", path: "/museums" },
-        { label: "PersonalGallery", path: "/personalGallery" },
-        { label: "MyEvents", path: "/myEvents" }
+        { label: "Every Artwork", path: "/everyArtwork" },
+        { label: "Museums", path: "/museums" },
+        { label: "Personal Gallery", path: "/personalGallery" },
+        { label: "MyEvents", path: "/myEvents" },
+        { label: "Add an Event", path: "/addAnEvent" }
     ]
 
     const renderedLinks = links.map((link) => {

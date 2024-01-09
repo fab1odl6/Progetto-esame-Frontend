@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import EventSlideShow from "./EventSlideShow";
 import ArtSlideShow from "./ArtSlideShow";
