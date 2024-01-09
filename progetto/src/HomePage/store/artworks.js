@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, get, child, set } from "firebase/database";
+import { firebaseConfig } from "..//../components/FirebaseConfig";
+
 
 const artArray = [];
+const app = initializeApp(firebaseConfig);
+const dbRef = ref(getDatabase());
 
-const fetchData = async function () {
+async function writeData() {
     try {
         const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
-        const searchRes = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/search?q=sky");
+        const searchRes = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/search?q=love");
         const searchData = await searchRes.json();
         const objectIDs = searchData.objectIDs;
 
@@ -13,8 +19,8 @@ const fetchData = async function () {
             const resObj = await fetch(url + objectId);
             const dataObj = await resObj.json();
 
-            if (dataObj.message !== "Not a valid object") {
-                if (artArray.length < 5) {
+            if (dataObj.message !== "Not a valid object" && dataObj.primaryImage !== "") {
+                if (artArray.length < 1) {
                     artArray.push({
                         id: dataObj.objectID,
                         link: dataObj.objectURL,
@@ -41,9 +47,76 @@ const fetchData = async function () {
     } catch (error) {
         console.error("Errore durante il recupero dei dati: ", error);
     }
+
+    const db = getDatabase();
+    artArray.map((dataObj) => {
+        console.log(dataObj.title)
+        set(ref(db, '/artworks/' + dataObj.title), {
+            id: dataObj.id,
+            link: dataObj.link,
+            authorName: dataObj.authorName,
+            title: dataObj.title,
+            image: dataObj.image,
+            department: dataObj.department,
+            culture: dataObj.culture,
+            period: dataObj.period,
+            date: dataObj.date,
+            dimensions: dataObj.dimensions,
+            city: dataObj.city,
+            state: dataObj.state,
+            country: dataObj.country,
+            classification: dataObj.classification,
+            favorite: false,
+            full: false
+        });
+    });
 };
 
-await fetchData();
+// await writeData();
+
+async function readData() {
+    const artworksRef = child(dbRef, 'artworks');
+
+    try {
+        const snapshot = await get(artworksRef);
+
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+
+            for (const key in data) {
+                if (data.hasOwnProperty(key)) {
+                    const dataObj = data[key];
+                    if (artArray.length < 5) {
+                        artArray.push({
+                            id: dataObj.id,
+                            link: dataObj.link,
+                            authorName: dataObj.authorName,
+                            title: dataObj.title,
+                            image: dataObj.image,
+                            department: dataObj.department,
+                            culture: dataObj.culture,
+                            period: dataObj.period,
+                            date: dataObj.date,
+                            dimensions: dataObj.dimensions,
+                            city: dataObj.city,
+                            state: dataObj.state,
+                            country: dataObj.country,
+                            classification: dataObj.classification,
+                            favorite: false,
+                            full: false
+                        });
+                    }
+                }
+            }
+        } else {
+            console.log("No data available");
+        }
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+await readData();
 
 const artworksSlice = createSlice({
     name: "artworks",
@@ -83,4 +156,3 @@ const artworksSlice = createSlice({
 });
 
 export default artworksSlice;
-export { fetchData };

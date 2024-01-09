@@ -40,7 +40,7 @@ function EventSlideShow() {
     }
 
 
-    const altText = "image of " + array[index].name;
+    const altText = "Image of " + array[index].name;
     return (
         <div>
             <div className={eventText}>Eventi in evidenza</div>
@@ -52,7 +52,7 @@ function EventSlideShow() {
                             <img className={image} src={array[index].image} alt={altText} />
                         </div>
                         <div className={titleAndHeart}>
-                            <div className={title}>{array[index].name}</div>
+                            <div className={title} onClick={handleClickEvent}>{array[index].name}</div>
                             {array[index].favorite ? (
                                 <FaHeart className={favorite} onClick={handleClickHeart} />
                             ) : (

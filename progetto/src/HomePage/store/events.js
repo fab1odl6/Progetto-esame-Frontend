@@ -1,20 +1,47 @@
 import { createSlice } from "@reduxjs/toolkit";
-import eventImage from "..//../images/event.jpg";
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, get, child, set } from "firebase/database";
+import { firebaseConfig } from "..//../components/FirebaseConfig";
 
 
 let eventArray = [];
-for (let i = 1; i < 6; i++) {
-    eventArray.push({
-        id: i,
-        name: "event " + i,
-        image: eventImage,
-        place: "place " + i,
-        guests: "guests " + i,
-        timestamp: "date " + i,
-        favorite: false,
-        full: false
-    })
+const app = initializeApp(firebaseConfig);
+const dbRef = ref(getDatabase());
+
+async function readData() {
+    const artworksRef = child(dbRef, 'events');
+
+    try {
+        const snapshot = await get(artworksRef);
+
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+
+            for (const key in data) {
+                if (data.hasOwnProperty(key)) {
+                    const dataObj = data[key];
+
+                    eventArray.push({
+                        id: dataObj.id,
+                        name: dataObj.name,
+                        image: dataObj.image,
+                        date: dataObj.date,
+                        place: dataObj.place,
+                        guests: dataObj.guests,
+                        favorite: false,
+                        full: false
+                    });
+                }
+            }
+        } else {
+            console.log("No data available");
+        }
+    } catch (e) {
+        console.error(e);
+    }
 }
+
+await readData();
 
 const eventsSlice = createSlice({
     name: "events",

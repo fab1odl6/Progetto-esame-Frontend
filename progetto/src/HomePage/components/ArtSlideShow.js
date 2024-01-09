@@ -15,7 +15,7 @@ function ArtSlideShow() {
     const chevron = className("place-self-center text-2xl");
     const titleAndHeart = className("flex");
     const favorite = className("ml-auto text-2xl");
-    const title = className("text-lg place-content-center");
+    const title = className("text-lg place-content-center flex justify-between");
 
     const { array, index, full } = useSelector((state) => {
         return state.artworks;
@@ -52,7 +52,9 @@ function ArtSlideShow() {
                             <img className={image} src={array[index].image} alt={altText} />
                         </div>
                         <div className={titleAndHeart}>
-                            <div className={title}>{array[index].title}</div>
+                            <div className={title}>
+                                <div>{array[index].title} - {array[index].authorName}</div>
+                            </div>
                             {array[index].favorite ? (
                                 <FaHeart className={favorite} onClick={handleClickHeart} />
                             ) : (

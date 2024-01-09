@@ -46,7 +46,7 @@ function EventShow() {
                 </div>
                 {array[index].place && <div>Place: {array[index].place}</div>}
                 {array[index].guests && <div>Guests: {array[index].guests}</div>}
-                {array[index].timestamp && <div>Date: {array[index].timestamp}</div>}
+                {array[index].date && <div>Date: {array[index].date}</div>}
             </div>
         </div>
     )
