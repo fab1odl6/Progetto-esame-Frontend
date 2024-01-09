@@ -77,11 +77,11 @@ function FilterList() {
     return (
         <div> 
             <div className="mt-4 justify-center align-center flex">
-                <Dropdown options={options1} value={selection1} onChange={(value) => handleSelect(value, 1)} />
-                <Dropdown options={options2} value={selection2} onChange={(value) => handleSelect(value, 2)} />
-                <Dropdown options={options3} value={selection3} onChange={(value) => handleSelect(value, 3)} />
-                <Dropdown options={options4} value={selection4} onChange={(value) => handleSelect(value, 4)} />
-                <Dropdown options={options5} value={selection5} onChange={(value) => handleSelect(value, 5)} />
+                <Dropdown options={options1} value={selection1} onChange={(value) => handleSelect(value, 1)} type={"input"} />
+                <Dropdown options={options2} value={selection2} onChange={(value) => handleSelect(value, 2)} type={"dropdown"}/>
+                <Dropdown options={options3} value={selection3} onChange={(value) => handleSelect(value, 3)} type={"dropdown"}/>
+                <Dropdown options={options4} value={selection4} onChange={(value) => handleSelect(value, 4)} type={"dropdown"}/>
+                <Dropdown options={options5} value={selection5} onChange={(value) => handleSelect(value, 5)} type={"dropdown"}/>
             </div>
         </div>
     )
