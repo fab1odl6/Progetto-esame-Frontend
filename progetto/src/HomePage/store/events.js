@@ -25,7 +25,7 @@ async function readData() {
                         name: dataObj.name,
                         image: dataObj.image,
                         date: dataObj.date,
-                        place: dataObj.place,
+                        department: dataObj.department,
                         guests: dataObj.guests,
                         favorite: false,
                         full: false
@@ -51,7 +51,7 @@ function updateFavorite(event) {
             name: event.name,
             image: event.image,
             date: event.date,
-            place: event.place,
+            department: event.department,
             guests: event.guests,
             favorite: true,
             full: false

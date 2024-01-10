@@ -44,7 +44,7 @@ function EventShow() {
                         <FaRegHeart className={favorite} onClick={() => handleClickHeart(array[index])} />
                     )}
                 </div>
-                {array[index].place && <div>Place: {array[index].place}</div>}
+                {array[index].department && <div>Department: {array[index].department}</div>}
                 {array[index].guests && <div>Guests: {array[index].guests}</div>}
                 {array[index].date && <div>Date: {array[index].date}</div>}
             </div>
