@@ -32,7 +32,10 @@ function Museums() {
             id: key,
             name: data[key].name,
             image: data[key].img,
+            description: data[key].description,
           }));
+
+          console.log(museumsFromFirebase);
 
           setMuseums(museumsFromFirebase);
           console.log(museumsFromFirebase);

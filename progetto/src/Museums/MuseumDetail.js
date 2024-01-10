@@ -6,7 +6,7 @@ function MuseumDetail({ museum }) {
   return (
     <div>
       <div>
-        <h1 style={{ textAlign: 'center' }}>{museum.displayName}</h1>
+        <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Dettagli Area Tematica</h1>
       </div>
       <div
         style={{
@@ -38,23 +38,33 @@ function MuseumDetail({ museum }) {
             zIndex: 1,
           }}
         >
-          <img
-            src={museum.image}
-            alt="Immagine del museo"
-            style={{ width: '100%', marginBottom: '20px', borderRadius: '8px' }}
-          />
           <div
             style={{
-              position: 'absolute',
-              bottom: '100px',
-              left: '20px',
-              color: '#000',
-              textShadow: '2px 2px 4px rgba(255, 255, 255, 0.8)',
-              zIndex: 2,
+              position: 'relative', // Importante per rendere la posizione dell'elemento figlio relativa all'immagine
+              maxWidth: '800px', // Larghezza massima dell'immagine, da personalizzare
+              margin: 'auto', // Per centrare l'immagine
             }}
           >
-            <h2>{museum.displayName}</h2>
+            <img
+              src={museum.image}
+              alt="Immagine del museo"
+              style={{ width: '100%', marginBottom: '20px', borderRadius: '8px' }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '5%', // Distanza dalla parte inferiore in percentuale
+                left: '5%',   // Distanza dalla parte sinistra in percentuale
+                color: '#fff', // Colore del testo
+                textShadow: '4px 4px 8px rgba(0, 0, 0, 0.7)', // Ombra del testo con valori aumentati
+                zIndex: 2,
+              }}
+            >
+              <h2 style={{ fontSize: '1.5em', fontWeight: 'bold' }}>{museum.name}</h2>
+            </div>
           </div>
+
+
           <div
             style={{
               padding: '20px',
@@ -64,7 +74,7 @@ function MuseumDetail({ museum }) {
               zIndex: 2,
             }}
           >
-            <p>Descrizione del museo e altre informazioni</p>
+            <p>{museum.description ?? "Descrizione non disponibile"}</p>
           </div>
         </div>
       </div>

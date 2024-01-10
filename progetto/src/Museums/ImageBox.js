@@ -1,9 +1,10 @@
+
 // ImageBox.js
 import React from 'react';
 
-const ImageBox = ({ imageUrl, department }) => {
+const ImageBox = ({ imageUrl, museum }) => {
   console.log('imageUrl:', imageUrl);
-  console.log('department:', department);
+  console.log('department:', museum);
 
   const containerStyle = {
     position: 'relative',
@@ -35,7 +36,7 @@ const ImageBox = ({ imageUrl, department }) => {
   return (
     <div className="box is-inline-block" style={containerStyle}>
       <img src={imageUrl} alt="Immagine" style={imageStyle} />
-      {department && <div style={descriptionStyle}>{department.displayName}</div>}
+      {museum && <div style={descriptionStyle}>{museum.name}</div>}
     </div>
   );
 };
