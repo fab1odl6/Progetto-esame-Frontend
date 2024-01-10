@@ -77,6 +77,7 @@ function Dropdown({ options, value, onChange, type }) {
   }
   */
 
+  /*
   if(type == "dropdown"){
     return(
       <div ref={divEl} className="w-48 relative">
@@ -101,9 +102,10 @@ function Dropdown({ options, value, onChange, type }) {
       </div>
       
     )
-  } 
+  }
+  */ 
 
-  /*
+  
   return (
     <div ref={divEl} className="w-48 relative">
       <Panel
@@ -116,7 +118,7 @@ function Dropdown({ options, value, onChange, type }) {
       {isOpen && <Panel className="absolute top-full">{renderedOptions}</Panel>}
     </div>
   );
-  */
+  
   
 
   /*

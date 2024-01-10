@@ -30,8 +30,8 @@ function ArtGrid() {
     */
 
     const renderCard = array.map((artwork) =>{
-        console.log("TITOLO")
-        console.log(artwork.title)
+        //console.log("TITOLO")
+        //console.log(artwork.title)
         return <ArtCard key={artwork.id} artwork={artwork} />
     })
 
