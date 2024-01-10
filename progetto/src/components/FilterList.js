@@ -1,42 +1,34 @@
 import { useState } from "react";
-import Dropdown from "../components/FilterDropdown";
+import FilterDropdown from "../components/FilterDropdown";
+import InputDropdown from "./InputDropdown";
+import SliderDropdown from "./SliderDropdown";
+import CheckboxDropdown from "./CheckboxDropdown";
 
 function FilterList() {
 
-    const [selection1, setSelection1] = useState(null);
-    const [selection2, setSelection2] = useState(null);
-    const [selection3, setSelection3] = useState(null);
-    const [selection4, setSelection4] = useState(null);
-    const [selection5, setSelection5] = useState(null);
+    const [selection1, setSelectionInput] = useState(null);
+    const [selection2, setSelection] = useState(null);
+    const [selection3, setSelectionSlider] = useState(null);
+    const [selection4, setSelectionCheckbox] = useState(null);
 
-    /*
+    const handleInputAuthor = (inputText) => {
+        setSelectionInput(inputText);
+        console.log("AUTORE INSERITO:", selection1);
+    }
+
     const handleSelect = (option) => {
         setSelection(option);
-    };
-    */
+        console.log("SCELTA:", selection2)
+    }
 
-    const handleSelect = (option, dropdownNumber) => {
-        // Agisci in base al numero del dropdown
-        switch (dropdownNumber) {
-            case 1:
-                setSelection1(option);
-                break;
-            case 2:
-                setSelection2(option);
-                break;
-            case 3:
-                setSelection3(option);
-                break;
-            case 4:
-                setSelection4(option);
-                break;
-            case 5:
-                setSelection5(option);
-                break;
-            default:
-                break;
-        }
-    };
+    const handleInputEndDate = (inputYear) => {
+        setSelectionSlider(inputYear);
+        console.log("ANNO:", selection3)
+    }
+
+    const handleCheckBox = (nationality) => {
+        setSelectionCheckbox(nationality);
+    } 
 
     const options1 = [
         { label: "Author", value: ""},
@@ -52,36 +44,27 @@ function FilterList() {
         { label: "Blue", value: "blue" },
     ];
 
-    const options3 = [
-        { label: "Era", value: ""},
-        { label: "Red", value: "red" },
-        { label: "Green", value: "green" },
-        { label: "Blue", value: "blue" },
-    ];
-
     const options4 = [
-        { label: "Completion date", value: ""},
+        { label: "End date", value: ""},
         { label: "Red", value: "red" },
         { label: "Green", value: "green" },
         { label: "Blue", value: "blue" },
     ];
 
     const options5 = [
-        { label: "Nationality", value: ""},
-        { label: "Reds", value: "red" },
-        { label: "Greens", value: "green" },
-        { label: "Blues", value: "blue" },
+        { label: "Reds", value: "red"},
+        { label: "Greens", value: "green"},
+        { label: "Blues", value: "blue"},
         { label: "Test", value: "test"}
     ];
 
     return (
         <div> 
             <div className="mt-4 justify-center align-center flex">
-                <Dropdown options={options1} value={selection1} onChange={(value) => handleSelect(value, 1)} />
-                <Dropdown options={options2} value={selection2} onChange={(value) => handleSelect(value, 2)} />
-                <Dropdown options={options3} value={selection3} onChange={(value) => handleSelect(value, 3)} />
-                <Dropdown options={options4} value={selection4} onChange={(value) => handleSelect(value, 4)} />
-                <Dropdown options={options5} value={selection5} onChange={(value) => handleSelect(value, 5)} />
+                <InputDropdown value={selection1} onChange={handleInputAuthor} title="Author"/>
+                <FilterDropdown options={options2} value={selection2} onChange={handleSelect} title="Historical Period"/>
+                <SliderDropdown value={selection3} onChange={handleInputEndDate} title="End Date"/>
+                <CheckboxDropdown options={options5} value={selection4} onChange={handleCheckBox} title="Nationality"/>
             </div>
         </div>
     )
