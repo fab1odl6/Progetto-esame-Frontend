@@ -8,7 +8,7 @@ import MuseumDetail from "./Museums/MuseumDetail";
 import EveryArtworkPage from "./pages/EveryArtworkPage";
 import addAnEvent from "./pages/AddAnEvent";
 import AddAnEvent from "./pages/AddAnEvent";
-
+import EventsPage from "./MyEvents/EventsPage";
 
 /*import { initializeApp } from "firebase/app";
 import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
@@ -60,7 +60,7 @@ function App() {
             <Museums />
           </Route>
           <Route path="/myEvents">
-            <Museums />
+            <EventsPage />
           </Route>
           <Route path="/addAnEvent">
             <AddAnEvent />
