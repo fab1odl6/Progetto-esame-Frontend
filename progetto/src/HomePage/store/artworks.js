@@ -30,14 +30,15 @@ async function writeData() {
                         department: dataObj.department,
                         culture: dataObj.culture,
                         period: dataObj.period,
-                        date: dataObj.objectDate,
+                        date: dataObj.objectEndDate,
                         dimensions: dataObj.dimensions,
                         city: dataObj.city,
                         state: dataObj.state,
-                        country: dataObj.country,
+                        country: dataObj.artistNationality,
                         classification: dataObj.classification,
                         favorite: false,
-                        full: false
+                        full: false,
+                        type: dataObj.objectName
                     });
                 }
             }
@@ -67,12 +68,13 @@ async function writeData() {
             country: dataObj.country,
             classification: dataObj.classification,
             favorite: false,
-            full: false
+            full: false,
+            type: dataObj.type
         });
     });
 };
 
-// await writeData();
+//await writeData();
 
 async function readData() {
     const artworksRef = child(dbRef, 'artworks');
@@ -103,7 +105,8 @@ async function readData() {
                             country: dataObj.country,
                             classification: dataObj.classification,
                             favorite: dataObj.favorite,
-                            full: dataObj.full
+                            full: dataObj.full,
+                            type: dataObj.type
                         });
                     }
                 }
@@ -138,7 +141,8 @@ function updateFavorite(art) {
             country: art.country,
             classification: art.classification,
             favorite: true,
-            full: false
+            full: false,
+            type: art.type
         })
     } else {
         remove(ref(db, "users/Fabio/artworks/" + art.title));
