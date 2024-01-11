@@ -3,7 +3,7 @@ import { GoChevronDown } from "react-icons/go";
 import Panel from "./FilterDropdownPanel";
 import InputDropdown from "./InputDropdownPanel";
 
-function Dropdown({ options, value, onChange, title }) {
+function Dropdown({ option, value, onChange, title }) {
   const [isOpen, setIsOpen] = useState(false);
   const divEl = useRef();
 
@@ -34,18 +34,16 @@ function Dropdown({ options, value, onChange, title }) {
     onChange(option);
   };
 
-  const renderedOptions = options.map((option, index) => {
-    if(index != 0){
-        return (
-            <div
-              className="hover:bg-sky-100 rounded cursor-pointer p-1"
-              onClick={() => handleOptionClick(option)}
-              key={option.value}
-            >
-              {option.label}
-            </div>
-          );
-    }
+  const renderedOptions = option.map((option, index) => {
+      return (
+          <div
+            className="hover:bg-sky-100 rounded cursor-pointer p-1"
+            onClick={() => handleOptionClick(option)}
+            key={option.value}
+          >
+            {option.label}
+          </div>
+        );
   });
   
   return (

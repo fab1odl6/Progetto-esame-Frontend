@@ -3,11 +3,13 @@ import testImage from "../images/test.jpeg";
 import { useDispatch, useSelector } from "react-redux";
 import { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt } from '../store';
 
-function ArtGrid() {
+function ArtGrid({ artworks }) {
 
+    /*
     const { array } = useSelector((state) => {
         return state.artworks;
     });
+    */
 
     /*
     console.log("RISULTATI")
@@ -15,6 +17,8 @@ function ArtGrid() {
     console.log(index)
     console.log(full)
     */
+
+    //console.log(artworks)
 
     /*
     const artworks = [
@@ -29,7 +33,7 @@ function ArtGrid() {
     ];
     */
 
-    const renderCard = array.map((artwork) =>{
+    const renderCard = artworks.map((artwork) =>{
         //console.log("TITOLO")
         //console.log(artwork.title)
         return <ArtCard key={artwork.id} artwork={artwork} />

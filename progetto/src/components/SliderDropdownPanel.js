@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 
 
-function SliderDropdownPanel({className, onChange }) {
+function SliderDropdownPanel({option,className, onChange }) {
 
-    const [text, setText] = useState(0);
-    const [value, setSliderValue]=useState(0);
+    const [text, setText] = useState(option.min);
+    const [value, setSliderValue]=useState(option.min);
 
     const handleChange = (event) => {
         setText(event.target.value)
         if(event.target.value == ""){
-            setSliderValue(0)
+            setSliderValue(option.min)
         } else {
             setSliderValue(event.target.value)
         }
@@ -20,8 +20,8 @@ function SliderDropdownPanel({className, onChange }) {
     const handleSubmit = (event) => {
         event.preventDefault();
         onChange(text);
-        setText(0)
-        setSliderValue(0)
+        setText(option.min)
+        setSliderValue(option.min)
     }
 
 
@@ -51,7 +51,7 @@ function SliderDropdownPanel({className, onChange }) {
                 <label className='p-2'>Insert end year</label>
                 <input type='number' className={finalClassNames} value={text} onChange={handleChange} />
                 <div className='p-2'>
-                    <input type="range" min="1" max="500" value={value}
+                    <input type="range" min={option.min} max={option.max} value={value}
                         onChange={handleSliderChange} 
                     />
                 </div>

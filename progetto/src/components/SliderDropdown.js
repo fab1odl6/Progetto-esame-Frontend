@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { GoChevronDown } from "react-icons/go";
 import SliderDropdownPanel from "./SliderDropdownPanel";
 
-function SliderDropdown({ value, onChange, title }) {
+function SliderDropdown({ option, value, onChange, title }) {
     const [isOpen, setIsOpen] = useState(false);
     const divEl = useRef();
 
@@ -25,7 +25,6 @@ function SliderDropdown({ value, onChange, title }) {
     }
 
     const handleSliderValue = (value) => {
-        //console.log("ANNO FINE:", value);
         onChange(value);
     }
 
@@ -37,7 +36,7 @@ function SliderDropdown({ value, onChange, title }) {
             </div>
             {isOpen && (
                 <div className="absolute top-full w-full">
-                   <SliderDropdownPanel className="flex justify-between items-center" onChange={handleSliderValue} /> 
+                   <SliderDropdownPanel option={option} className="flex justify-between items-center" onChange={handleSliderValue} /> 
                 </div>
             )}
         </div>
