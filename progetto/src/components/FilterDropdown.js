@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { GoChevronDown } from "react-icons/go";
 import Panel from "./FilterDropdownPanel";
-import InputDropdown from "./FilterDropdownInput";
+import InputDropdown from "./InputDropdownPanel";
 
-function Dropdown({ options, value, onChange, type }) {
+function Dropdown({ options, value, onChange, title }) {
   const [isOpen, setIsOpen] = useState(false);
   const divEl = useRef();
 
@@ -34,8 +34,6 @@ function Dropdown({ options, value, onChange, type }) {
     onChange(option);
   };
 
-  const filterTitle = options[0].label
-
   const renderedOptions = options.map((option, index) => {
     if(index != 0){
         return (
@@ -49,62 +47,6 @@ function Dropdown({ options, value, onChange, type }) {
           );
     }
   });
-
-  /*
-  const panelType = (type) => {
-    if(type == "dropdown"){
-      return(
-        <div>
-          <Panel
-            className="flex justify-between items-center cursor-pointer"
-            onClick={handleClick}
-          >
-            {value?.label || filterTitle}
-            <GoChevronDown className="text-lg" />
-          </Panel>
-          {isOpen && <Panel className="absolute top-full">{renderedOptions}</Panel>}
-        </div>
-      );
-    } else if(type == "input") {
-      return(
-        <div>
-          <InputDropdown />
-          {isOpen && <InputDropdown className="absolute top-full">{renderedOptions}</InputDropdown>}
-        </div>
-        
-      )
-    } 
-  }
-  */
-
-  /*
-  if(type == "dropdown"){
-    return(
-      <div ref={divEl} className="w-48 relative">
-        <Panel
-          className="flex justify-between items-center cursor-pointer"
-          onClick={handleClick}
-        >
-          {value?.label || filterTitle}
-          <GoChevronDown className="text-lg" />
-        </Panel>
-        {isOpen && <Panel className="absolute top-full">{renderedOptions}</Panel>}
-      </div>
-    );
-  } else if(type == "input") {
-    return(
-      <div ref={divEl} className="w-48 relative">
-        <InputDropdown className="flex justify-between items-center cursor-pointer" onClick={handleClick}>
-          {value?.label || filterTitle}
-          <GoChevronDown className="text-lg" />
-        </InputDropdown>
-        {isOpen && <InputDropdown className="absolute top-full" />}
-      </div>
-      
-    )
-  }
-  */ 
-
   
   return (
     <div ref={divEl} className="w-48 relative">
@@ -112,22 +54,12 @@ function Dropdown({ options, value, onChange, type }) {
         className="flex justify-between items-center cursor-pointer"
         onClick={handleClick}
       >
-        {value?.label || filterTitle}
+        {title}
         <GoChevronDown className="text-lg" />
       </Panel>
       {isOpen && <Panel className="absolute top-full">{renderedOptions}</Panel>}
     </div>
   );
-  
-  
-
-  /*
-  return(
-    <div ref={divEl} className="w-48 relative">
-      <div>{panelType}</div>
-    </div>
-  )
-  */
 
 }
 

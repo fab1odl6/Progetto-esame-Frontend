@@ -5,34 +5,41 @@ import Grid from './Grid';
 import { Link } from 'react-router-dom';
 import MuseumModal from './MuseumModal';
 import className from "classnames";
+import { firebaseConfig } from '../components/FirebaseConfig';
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, onValue } from 'firebase/database';
 
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const departmentsRef = ref(database, '/departments');
 
 function Museums() {
-
   const searchBarHeader = className("justify-center align-center flex");
   const searchBar = className("mt-5 border-1 h-1/6 w-5/6 text-gray-500 justify-between flex");
   const searchIcon = className("self-end mb-6");
-
 
   const [museums, setMuseums] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedMuseum, setSelectedMuseum] = useState(null);
 
   useEffect(() => {
-    // Fai la chiamata API qui e aggiorna lo stato dei musei
     const fetchData = async () => {
       try {
-        const response = await fetch('https://collectionapi.metmuseum.org/public/collection/v1/departments');
-        const data = await response.json();
+        onValue(departmentsRef, (snapshot) => {
+          const data = snapshot.val();
 
-        // Aggiungo la proprietà image a ciascun oggetto dell'array
-        const museumsWithImage = data.departments.map((department) => ({
-          ...department,
-          image: 'https://www.area-arch.it/wp-content/uploads/sites/6/2023/10/Keope-Plate_copper.jpg',
-        }));
+          const museumsFromFirebase = Object.keys(data).map((key) => ({
+            id: key,
+            name: data[key].name,
+            image: data[key].img,
+            description: data[key].description,
+          }));
 
-        setMuseums(museumsWithImage);
-        console.log(museumsWithImage);
+          console.log(museumsFromFirebase);
+
+          setMuseums(museumsFromFirebase);
+          console.log(museumsFromFirebase);
+        });
       } catch (error) {
         console.error('Error fetching museums:', error);
       }
@@ -51,9 +58,7 @@ function Museums() {
     setModalOpen(false);
   };
 
-
   return (
-
     <div>
       <div className={searchBarHeader}>
         <div className={searchBar}>
@@ -68,7 +73,7 @@ function Museums() {
         backgroundPosition: 'center',
         minHeight: 'calc(100vh - 100px)',
       }}>
-        <h1 style={{ textAlign: 'center', paddingTop: '50px',  fontWeight: 'bold', fontSize: '2em' }}>MUSEUMS</h1>
+        <h1 style={{ textAlign: 'center', paddingTop: '50px', fontWeight: 'bold', fontSize: '2em' }}>THEMATIC AREAS</h1>
         <Grid museums={museums} openModal={openModal} />
         <MuseumModal open={modalOpen} onClose={closeModal} museum={selectedMuseum} />
       </div>
