@@ -3,13 +3,28 @@ import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/
 import SearchIcon from '@mui/icons-material/Search';
 import EventContainer from './EventContainer';
 import EventCard from './EventCard';
+import { GoChevronDown, GoChevronLeft } from 'react-icons/go';
+import className from "classnames";
 
-const EventsPage = () => {
-  const searchBarHeader = "justify-center align-center flex";
-  const searchBar = "mt-5 border-1 h-1/6 w-5/6 text-gray-500 justify-between flex";
-  const searchIcon = "self-end mb-6";
 
-  const [expandedAccordion, setExpandedAccordion] = useState(null);
+function EventsPage() {
+  const searchBarHeader = className("justify-center align-center flex");
+  const searchBar = className("mt-5 border-1 h-1/6 w-5/6 text-gray-500 justify-between flex");
+  const searchIcon = className("self-end mb-6");
+  const titleContainer = className("flex");
+
+  const [expandedAccordion, setExpandedAccordion] = useState(false);
+
+  const handleToggle = function () {
+    setExpandedAccordion(!expandedAccordion);
+  }
+
+  let chevron = <GoChevronDown onToggle={handleToggle} />;
+  if (expandedAccordion) {
+    chevron = <GoChevronDown onToggle={handleToggle} />
+  } else {
+    chevron = <GoChevronLeft onToggle={handleToggle} />
+  }
 
   const events = [
     { id: 1, title: 'Eventi in programma', content: <EventCard future={true} /> },
@@ -45,10 +60,15 @@ const EventsPage = () => {
             onChange={() => handleAccordionToggle(event.id)}
           >
             <AccordionSummary>
-              <Typography>{event.title}</Typography>
+              <div className={titleContainer}>
+                <Typography>{event.title}</Typography>
+                {chevron}
+              </div>
             </AccordionSummary>
             <AccordionDetails>
-              <EventContainer {...{ future: event.id === 1 ? true : false }} />
+              <div>
+                <EventContainer {...{ future: event.id === 1 ? true : false }} />
+              </div>
             </AccordionDetails>
           </Accordion>
         ))}
