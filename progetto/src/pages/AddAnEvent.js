@@ -3,6 +3,8 @@ import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, child, set } from "firebase/database";
 import { firebaseConfig } from "../components/FirebaseConfig";
+import DatePicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 function AddAnEvent() {
@@ -18,7 +20,7 @@ function AddAnEvent() {
     const inputLabelClass = className("mb-1");
     const inputClass = className("border border-gray-300 rounded-md p-2");
     const buttonClass = className("bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600");
-
+    const daetPickerClass = className("w-full p-2 border rounded outline-none");
 
     /* if !user then ...  else: */
 
@@ -35,6 +37,11 @@ function AddAnEvent() {
 
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(null);
+
+    const handleChangeData = function (date) {
+        setSelectedDate(date);
+    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -125,13 +132,13 @@ function AddAnEvent() {
                     <label htmlFor="date" className={inputLabelClass}>
                         Date: <span className={mandatoryClass}>*</span>
                     </label>
-                    <input
-                        type="text"
+                    <DatePicker
                         id="date"
                         name="date"
-                        value={formData.date}
-                        onChange={handleChange}
-                        className={inputClass}
+                        selected={selectedDate}
+                        onChange={handleChangeData}
+                        dateFormat="dd/MM/yyyy"
+                        className={daetPickerClass}
                     />
                 </div>
                 <div className={inputContainerClass}>
