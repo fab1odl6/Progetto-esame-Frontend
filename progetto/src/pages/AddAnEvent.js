@@ -5,6 +5,7 @@ import { getDatabase, ref, get, child, set } from "firebase/database";
 import { firebaseConfig } from "../components/FirebaseConfig";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
+import { GoChevronDown } from "react-icons/go";
 
 
 function AddAnEvent() {
@@ -55,7 +56,7 @@ function AddAnEvent() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!formData.name || !formData.date || !formData.image || !formData.department) {
+        if (!formData.name || !formData.image || !formData.department) {
             setError("Fill the mandatory fields!");
             setSuccess(null);
             return;
@@ -129,17 +130,24 @@ function AddAnEvent() {
                     />
                 </div>
                 <div className={inputContainerClass}>
-                    <label htmlFor="date" className={inputLabelClass}>
+                    <label htmlFor="date" className={`${inputLabelClass} block text-gray-700 mb-2`}>
                         Date: <span className={mandatoryClass}>*</span>
                     </label>
-                    <DatePicker
-                        id="date"
-                        name="date"
-                        selected={selectedDate}
-                        onChange={handleChangeData}
-                        dateFormat="dd/MM/yyyy"
-                        className={daetPickerClass}
-                    />
+                    <div className="relative w-full">
+                        <DatePicker
+                            id="date"
+                            name="date"
+                            selected={selectedDate}
+                            onChange={handleChangeData}
+                            dateFormat="dd/MM/yyyy"
+                            className={`relative w-full p-2 border rounded outline-none `}
+                        />
+                        <div className="relative">
+                            <div className="absolute right-2 top-2">
+                                <GoChevronDown className="h-6 w-6 text-gray-500" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className={inputContainerClass}>
                     <label htmlFor="guests" className={inputLabelClass}>

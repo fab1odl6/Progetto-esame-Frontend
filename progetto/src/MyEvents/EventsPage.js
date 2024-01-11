@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import EventContainer from './EventContainer';
+import EventCard from './EventCard';
 
 const EventsPage = () => {
   const searchBarHeader = "justify-center align-center flex";
@@ -10,11 +12,11 @@ const EventsPage = () => {
   const [expandedAccordion, setExpandedAccordion] = useState(null);
 
   const events = [
-    { id: 1, title: 'Eventi in programma', content: '...' },
-    { id: 2, title: 'Eventi passati', content: '...' },
+    { id: 1, title: 'Eventi in programma', content: <EventCard future={true} /> },
+    { id: 2, title: 'Eventi passati', content: <EventCard future={false} /> },
   ];
 
-  
+
   const handleAccordionToggle = (index) => {
     setExpandedAccordion((prevIndex) => (prevIndex === index ? null : index));
   };
@@ -35,7 +37,7 @@ const EventsPage = () => {
         minHeight: 'calc(100vh - 100px)',
       }}>
         <h1 style={{ textAlign: 'center', paddingTop: '50px', fontWeight: 'bold', fontSize: '2em' }}>EVENTS</h1>
-        
+
         {events.map((event) => (
           <Accordion
             key={event.id}
@@ -46,9 +48,7 @@ const EventsPage = () => {
               <Typography>{event.title}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>
-                {event.content}
-              </Typography>
+              <EventContainer {...{ future: event.id === 1 ? true : false }} />
             </AccordionDetails>
           </Accordion>
         ))}
