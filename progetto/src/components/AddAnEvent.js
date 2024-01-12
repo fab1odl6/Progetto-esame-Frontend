@@ -1,15 +1,16 @@
 import className from "classnames";
 import { useState } from "react";
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get, child, set } from "firebase/database";
-import { firebaseConfig } from "../components/FirebaseConfig";
+import { getDatabase, ref, set } from "firebase/database";
+import { firebaseConfig } from "./FirebaseConfig";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
+import DepartmentDropdown from "./DepartmentDropdown";
 import { GoChevronDown } from "react-icons/go";
 
 
 function AddAnEvent() {
-    const containerClass = className("p-4 max-w-md mx-auto bg-white rounded-md shadow-md mt-4");
+    const containerClass = className("p-4 max-w-md bg-white rounded-md shadow-md mt-4");
     const errorDivClass = className("mt-4 p-4 bg-red-100 border border-red-400 text-red-700");
     const errorPClass = className("mb-1");
     const successDivClass = className("mt-4 p-4 bg-green-100 border border-green-400 text-green-700");
@@ -21,7 +22,11 @@ function AddAnEvent() {
     const inputLabelClass = className("mb-1");
     const inputClass = className("border border-gray-300 rounded-md p-2");
     const buttonClass = className("bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600");
-    const daetPickerClass = className("w-full p-2 border rounded outline-none");
+    const selectedOptionClass = className("mt-2 p-2 bg-blue-500 text-white rounded");
+    const datePickerContainerClass = className("flex relative items-center");
+    const datePickerClass = className("w-full p-2 border rounded outline-none");
+    const chevronClass = className("absolute right-0 ml-2 m-2");
+
 
     /* if !user then ...  else: */
 
@@ -39,8 +44,13 @@ function AddAnEvent() {
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedOption, setSelectedOption] = useState(null);
 
-    const handleChangeData = function (date) {
+    const handleOptionSelection = (option) => {
+        setSelectedOption(option);
+    }
+
+    const handleChangeDate = function (date) {
         setSelectedDate(date);
     }
 
@@ -51,12 +61,13 @@ function AddAnEvent() {
             ...prevFormData,
             [name]: value
         }));
+
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!formData.name || !formData.image || !formData.department) {
+        if (!formData.name || !selectedDate || !formData.image || !selectedOption) {
             setError("Fill the mandatory fields!");
             setSuccess(null);
             return;
@@ -64,14 +75,14 @@ function AddAnEvent() {
 
         const db = getDatabase();
         set(ref(db, 'events/' + formData.name), {
-            date: formData.date,
+            date: selectedDate.toDateString(),
             favorite: false,
             full: false,
             guests: formData.guests,
             id: 4,
             image: formData.image,
             name: formData.name,
-            department: formData.department
+            department: selectedOption
         });
 
         setFormData({
@@ -80,12 +91,13 @@ function AddAnEvent() {
             full: false,
             guests: "",
             image: "",
-            name: "",
-            department: ""
+            name: ""
         })
 
         setSuccess("Great! Your event has been uploaded correctly!");
         setError(null);
+        setSelectedDate(null);
+        setSelectedOption(null);
     }
 
 
@@ -103,6 +115,7 @@ function AddAnEvent() {
             )}
             <h3 className={titleClass}>Add an event!</h3>
             <form className={formClass} onSubmit={handleSubmit}>
+
                 <div className={inputContainerClass}>
                     <label htmlFor="name" className={inputLabelClass}>
                         Name: <span className={mandatoryClass}>*</span>
@@ -130,23 +143,33 @@ function AddAnEvent() {
                     />
                 </div>
                 <div className={inputContainerClass}>
-                    <label htmlFor="date" className={`${inputLabelClass} block text-gray-700 mb-2`}>
+                    <label htmlFor="date" className={inputLabelClass}>
                         Date: <span className={mandatoryClass}>*</span>
                     </label>
-                    <div className="relative w-full">
-                        <DatePicker
-                            id="date"
-                            name="date"
-                            selected={selectedDate}
-                            onChange={handleChangeData}
-                            dateFormat="dd/MM/yyyy"
-                            className={`relative w-full p-2 border rounded outline-none `}
-                        />
-                        <div className="relative">
-                            <div className="absolute right-2 top-2">
-                                <GoChevronDown className="h-6 w-6 text-gray-500" />
+                    <div>
+                        <div>
+                            <div className={datePickerContainerClass}>
+                                <DatePicker
+                                    id="date"
+                                    name="date"
+                                    value={selectedDate}
+                                    selected={selectedDate}
+                                    onChange={handleChangeDate}
+                                    dateFormat="dd/MM/yyyy"
+                                    className={datePickerClass}
+                                />
+                                <GoChevronDown className={chevronClass} />
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div className={inputContainerClass}>
+                    <div>
+                        <DepartmentDropdown onOptionSelect={handleOptionSelection} />
+                        <span className={mandatoryClass}>*</span>
+                        {selectedOption && (
+                            <p className={selectedOptionClass}>Selected option: {selectedOption}</p>
+                        )}
                     </div>
                 </div>
                 <div className={inputContainerClass}>
@@ -158,19 +181,6 @@ function AddAnEvent() {
                         id="guests"
                         name="guests"
                         value={formData.guests}
-                        onChange={handleChange}
-                        className={inputClass}
-                    />
-                </div>
-                <div className={inputContainerClass}>
-                    <label htmlFor="department" className={inputLabelClass}>
-                        Department: <span className={mandatoryClass}>*</span>
-                    </label>
-                    <input
-                        type="text"
-                        id="department"
-                        name="department"
-                        value={formData.department}
                         onChange={handleChange}
                         className={inputClass}
                     />
