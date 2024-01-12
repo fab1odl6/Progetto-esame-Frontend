@@ -6,35 +6,25 @@ import EventCard from './EventCard';
 import { GoChevronDown, GoChevronLeft } from 'react-icons/go';
 import className from "classnames";
 
-
 function EventsPage() {
   const searchBarHeader = className("justify-center align-center flex");
   const searchBar = className("mt-5 border-1 h-1/6 w-5/6 text-gray-500 justify-between flex");
   const searchIcon = className("self-end mb-6");
   const titleContainer = className("flex");
 
-  const [expandedAccordion, setExpandedAccordion] = useState(false);
+  const [expandedAccordion, setExpandedAccordion] = useState({
+    1: false,
+    2: false,
+  });
 
-  const handleToggle = function () {
-    setExpandedAccordion(!expandedAccordion);
-  }
-
-  let chevron = <GoChevronDown onToggle={handleToggle} />;
-  if (expandedAccordion) {
-    chevron = <GoChevronDown onToggle={handleToggle} />
-  } else {
-    chevron = <GoChevronLeft onToggle={handleToggle} />
+  const handleToggle = function (id) {
+    setExpandedAccordion((prev) => ({ ...prev, [id]: !prev[id] }));
   }
 
   const events = [
     { id: 1, title: 'Eventi in programma', content: <EventCard future={true} /> },
     { id: 2, title: 'Eventi passati', content: <EventCard future={false} /> },
   ];
-
-
-  const handleAccordionToggle = (index) => {
-    setExpandedAccordion((prevIndex) => (prevIndex === index ? null : index));
-  };
 
   return (
     <div>
@@ -50,19 +40,21 @@ function EventsPage() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         minHeight: 'calc(100vh - 100px)',
+        padding: '20px', // Adjust padding for content spacing
       }}>
-        <h1 style={{ textAlign: 'center', paddingTop: '50px', fontWeight: 'bold', fontSize: '2em' }}>EVENTS</h1>
+        <h1 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '2em', margin: '20px 0' }}>EVENTS</h1>
 
         {events.map((event) => (
           <Accordion
             key={event.id}
-            expanded={expandedAccordion === event.id}
-            onChange={() => handleAccordionToggle(event.id)}
+            expanded={expandedAccordion[event.id]}
+            onChange={() => handleToggle(event.id)}
+            style={{ marginBottom: '20px' }} // Adjust margin for accordion spacing
           >
             <AccordionSummary>
               <div className={titleContainer}>
-                <Typography>{event.title}</Typography>
-                {chevron}
+                <Typography variant="h6" style={{ fontWeight: 'bold' }}>{event.title}</Typography>
+                {expandedAccordion[event.id] ? <GoChevronDown /> : <GoChevronLeft />}
               </div>
             </AccordionSummary>
             <AccordionDetails>
