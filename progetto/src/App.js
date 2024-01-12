@@ -6,9 +6,8 @@ import { NavigationProvider } from "./context/navigation";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MuseumDetail from "./Museums/MuseumDetail";
 import EveryArtworkPage from "./pages/EveryArtworkPage";
-import addAnEvent from "./pages/AddAnEvent";
-import AddAnEvent from "./pages/AddAnEvent";
 import EventsPage from "./MyEvents/EventsPage";
+import HandleEventsPage from "./pages/HandleEventsPage";
 
 /*import { initializeApp } from "firebase/app";
 import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
@@ -62,8 +61,8 @@ function App() {
           <Route path="/myEvents">
             <EventsPage />
           </Route>
-          <Route path="/addAnEvent">
-            <AddAnEvent />
+          <Route path="/handleEvents">
+            <HandleEventsPage />
           </Route>
         </div>
       </div>

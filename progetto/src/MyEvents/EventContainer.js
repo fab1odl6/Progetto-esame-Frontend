@@ -24,7 +24,6 @@ async function readData() {
         for (const key in events) {
             eventsArray.push(events[key]);
         }
-        console.log(eventsArray);
     } catch (e) {
         console.error(e);
     }
