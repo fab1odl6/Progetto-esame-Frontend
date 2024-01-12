@@ -40,7 +40,8 @@ async function readData() {
                             country: dataObj.country,
                             classification: dataObj.classification,
                             favorite: dataObj.favorite,
-                            full: dataObj.full
+                            full: dataObj.full,
+                            type: dataObj.type
                         });
                     }
                 }

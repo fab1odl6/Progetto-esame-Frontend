@@ -31,7 +31,7 @@ function Dropdown({ option, value, onChange, title }) {
 
   const handleOptionClick = (option) => {
     setIsOpen(false);
-    onChange(option);
+    onChange(option.label);
   };
 
   const renderedOptions = option.map((option, index) => {

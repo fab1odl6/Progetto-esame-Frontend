@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import classNames from 'classnames';
 
-function CheckboxDropdownPanel({className,options,onCheckboxChange}){
+function CheckboxDropdownPanel({className,options,onCheckboxChange,onCheckboxChangeReverse}){
 
     const [checkedItems, setCheckedItems] = useState({});
 
+    /*
     const handleCheckboxChange = (option) => {
         const newCheckedItems = { ...checkedItems, [option.value]: !checkedItems[option.value] };
         setCheckedItems(newCheckedItems);
@@ -13,6 +14,25 @@ function CheckboxDropdownPanel({className,options,onCheckboxChange}){
           onCheckboxChange(newCheckedItems);
         }
       };
+    */
+
+    const handleCheckboxChange = (option) => {
+      const newCheckedItems = { ...checkedItems, [option.value]: !checkedItems[option.value] };
+      setCheckedItems(newCheckedItems);
+
+      if (onCheckboxChange) {
+        onCheckboxChange(option.value);
+      }
+    }
+
+    const handleCheckboxRemoval= (option) => {
+      const newCheckedItems = { ...checkedItems, [option.value]: !checkedItems[option.value] };
+      setCheckedItems(newCheckedItems);
+
+      if (onCheckboxChangeReverse) {
+        onCheckboxChangeReverse(option.value);
+      }      
+    }
 
     const finalClassNames = classNames(
         'border rounded p-3 shadow bg-white w-full',
@@ -27,7 +47,15 @@ function CheckboxDropdownPanel({className,options,onCheckboxChange}){
                         <input
                             type="checkbox"
                             checked={checkedItems[option.value] || false}
-                            onChange={() => handleCheckboxChange(option)}
+                            onChange={() => {
+                              if (checkedItems[option.value]) {
+                                  // Se la casella di controllo è già selezionata, esegui la funzione di rimozione
+                                  handleCheckboxRemoval(option);
+                              } else {
+                                  // Altrimenti, la casella di controllo viene selezionata, esegui handleCheckboxChangeTwo
+                                  handleCheckboxChange(option);
+                              }
+                            }}
                             className='mr-2'
                         />
                             {option.label}

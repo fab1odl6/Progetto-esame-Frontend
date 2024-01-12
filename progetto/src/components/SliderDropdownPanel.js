@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 function SliderDropdownPanel({option,className, onChange }) {
 
-    const [text, setText] = useState(option.min);
+    const [text, setText] = useState(option.min.toString());
     const [value, setSliderValue]=useState(option.min);
 
     const handleChange = (event) => {
@@ -20,7 +20,7 @@ function SliderDropdownPanel({option,className, onChange }) {
     const handleSubmit = (event) => {
         event.preventDefault();
         onChange(text);
-        setText(option.min)
+        setText(option.min.toString())
         setSliderValue(option.min)
     }
 
@@ -31,15 +31,6 @@ function SliderDropdownPanel({option,className, onChange }) {
         //console.log("Valore rilasciato dello slider:", value);
     }
 
-    /*
-    const handleSliderRelease = () => {
-        console.log("Valore FINE dello slider:", value);
-        // Puoi eseguire l'azione desiderata qui
-    }
-
-    EVENTO onMouseUp={handleSliderRelease}
-    */
-
     const finalClassNames = classNames(
         'border rounded p-2 shadow bg-white w-full',
         className
@@ -49,7 +40,7 @@ function SliderDropdownPanel({option,className, onChange }) {
         <div className={finalClassNames}>
             <form onSubmit={handleSubmit}>
                 <label className='p-2'>Insert end year</label>
-                <input type='number' className={finalClassNames} value={text} onChange={handleChange} />
+                <input type='number' className={finalClassNames} value={text} onChange={handleChange} min={option.min} max={option.max} />
                 <div className='p-2'>
                     <input type="range" min={option.min} max={option.max} value={value}
                         onChange={handleSliderChange} 

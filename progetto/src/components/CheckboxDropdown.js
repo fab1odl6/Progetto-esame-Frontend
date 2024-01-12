@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { GoChevronDown } from "react-icons/go";
 import CheckboxDropdownPanel from "./CheckboxDropdownPanel";
 
-function CheckboxDropdown({options,value,onChange,title}){
+function CheckboxDropdown({options,value,onChange,onDelete,title}){
 
     const [isOpen, setIsOpen] = useState(false);
     const divEl = useRef();
@@ -30,40 +30,18 @@ function CheckboxDropdown({options,value,onChange,title}){
         onChange(value);
     }
 
-    /*
-    const renderedOptions = options.map((option, index) => {
-        if(index != 0){
-            return (
-                <div
-                  className="hover:bg-sky-100 rounded cursor-pointer p-1"
-                  onClick={() => handleOptionClick(option)}
-                  key={option.value}
-                >
-                    {option.label}
-                </div>
-              );
-        }
-      });
-    */
+    const handleOptionClickRemove = (value) => {
+        console.log("RIMOSSA:", value);
+        onDelete(value);
+    }
 
-    /*  
-    return(
-        <div ref={divEl} className="w-48 relative">
-            <div className="flex justify-between items-center cursor-pointer border rounded p-3 shadow bg-white w-full" onClick={handleClick}>
-                {value?.label || "Nationality"}
-                <GoChevronDown className="text-lg" />
-            </div>
-            {isOpen && <CheckboxDropdownPanel className="absolute top-full">{renderedOptions}</CheckboxDropdownPanel>}
-        </div>
-    );
-    */
     return(
         <div ref={divEl} className="w-48 relative">
             <div className="flex justify-between items-center cursor-pointer border rounded p-3 shadow bg-white w-full" onClick={handleClick}>
                 {title}
                 <GoChevronDown className="text-lg" />
             </div>
-            {isOpen && <CheckboxDropdownPanel className="absolute top-full" options={options} onCheckboxChange={handleOptionClick}/>}
+            {isOpen && <CheckboxDropdownPanel className="absolute top-full" options={options} onCheckboxChange={handleOptionClick} onCheckboxChangeReverse={handleOptionClickRemove}/>}
         </div>
     );
 
