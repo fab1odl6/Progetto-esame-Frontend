@@ -25,7 +25,7 @@ function SliderDropdown({ option, value, onChange, title }) {
     }
 
     const handleSliderValue = (value) => {
-        onChange(value);
+        onChange(value,'filterSlider');
     }
 
     return(

@@ -28,7 +28,7 @@ function InputDropdown({ option, value, onChange, title }) {
     }
 
     const filterValue = (value) => {
-        onChange(value);
+        onChange(value,'filterInput');
     }
 
     return(

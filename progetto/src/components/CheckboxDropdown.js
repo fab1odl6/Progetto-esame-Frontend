@@ -27,7 +27,7 @@ function CheckboxDropdown({options,value,onChange,onDelete,title}){
 
     const handleOptionClick = (value) => {
         console.log("NAZIONALITA':", value);
-        onChange(value);
+        onChange(value,'filterCheckbox');
     }
 
     const handleOptionClickRemove = (value) => {

@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { GoChevronDown } from "react-icons/go";
 import Panel from "./FilterDropdownPanel";
-import InputDropdown from "./InputDropdownPanel";
 
 function Dropdown({ option, value, onChange, title }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +30,7 @@ function Dropdown({ option, value, onChange, title }) {
 
   const handleOptionClick = (option) => {
     setIsOpen(false);
-    onChange(option.label);
+    onChange(option.label,'filterSelection');
   };
 
   const renderedOptions = option.map((option, index) => {
