@@ -1,20 +1,12 @@
 import { useState } from 'react';
 import classNames from 'classnames';
 
-function CheckboxDropdownPanel({className,options,onCheckboxChange,onCheckboxChangeReverse}){
+function CheckboxDropdownPanel({className,options,onCheckboxChange,onCheckboxChangeReverse,state}){
 
-    const [checkedItems, setCheckedItems] = useState({});
+    //const [checkedItems, setCheckedItems] = useState({});
+    const [checkedItems, setCheckedItems] = useState(state);
 
-    /*
-    const handleCheckboxChange = (option) => {
-        const newCheckedItems = { ...checkedItems, [option.value]: !checkedItems[option.value] };
-        setCheckedItems(newCheckedItems);
-    
-        if (onCheckboxChange) {
-          onCheckboxChange(newCheckedItems);
-        }
-      };
-    */
+    console.log(checkedItems)
 
     const handleCheckboxChange = (option) => {
       const newCheckedItems = { ...checkedItems, [option.value]: !checkedItems[option.value] };
@@ -52,7 +44,7 @@ function CheckboxDropdownPanel({className,options,onCheckboxChange,onCheckboxCha
                                   // Se la casella di controllo è già selezionata, esegui la funzione di rimozione
                                   handleCheckboxRemoval(option);
                               } else {
-                                  // Altrimenti, la casella di controllo viene selezionata, esegui handleCheckboxChangeTwo
+                                  // Altrimenti, la casella di controllo viene selezionata, esegui handleCheckboxChange
                                   handleCheckboxChange(option);
                               }
                             }}

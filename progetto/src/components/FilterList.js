@@ -74,6 +74,7 @@ function FilterList({ artworks }) {
         });
     }
 
+    /*
     const removalHandleCheckbox = (elementToRemove) => {
         setFilters((prevFilters) => {
             // Filtra gli elementi diversi da elementToRemove
@@ -87,10 +88,25 @@ function FilterList({ artworks }) {
             };
         });
     };
+    */
 
     useEffect(() => {
         console.log("CHECKBOX:", filters.filterCheckbox);
       }, [filters.filterCheckbox]);
+
+    const removalHandle = (elementToRemove,filterName) => {
+        setFilters((prevFilters) => {
+            // Filtra gli elementi diversi da elementToRemove
+            const updatedFilter = prevFilters[filterName].filter(
+                (element) => element !== elementToRemove
+            );
+    
+            return {
+                ...prevFilters,
+                [filterName]: updatedFilter,
+            };
+        });
+    };
 
     //NOMI ARTISTI DA ASSEGNARE AL FILTRO
     const artworkAuthors = artworks.reduce((uniqueAuthors, artwork) => {
@@ -165,50 +181,6 @@ function FilterList({ artworks }) {
     });
 
     console.log("ALL",combinedFilters)
-    
-
-    /*
-    const renderFilters = () => {
-        const createFilterComponents = (filterArray, filterName) => {
-            let displayName = "";
-            switch (filterName) {
-                case "Filter Input":
-                    displayName = "Author";
-                break;
-                case "Filter Selection":
-                    displayName = "Type";
-                break;
-                case "Filter Slider":
-                    displayName = "End Year";
-                break;
-                case "Filter Checkbox":
-                    displayName = "Nation";
-                break;
-                default:
-                    displayName = "Unknown Filter";
-            }
-            return filterArray.map((value, index) => (
-                <div key={`${filterName}-${index}`}>
-                    <p>{`${displayName}: ${value}`}</p>
-                </div>
-            ));
-        };
-      
-        return (
-            <div>
-            <h2>Filter Components</h2>
-            {filters.filterInput.length > 0 && createFilterComponents(filters.filterInput, 'Filter Input')}
-            {filters.filterSelection.length > 0 && createFilterComponents(filters.filterSelection, 'Filter Selection')}
-            {filters.filterSlider.length > 0 && createFilterComponents(filters.filterSlider, 'Filter Slider')}
-            {filters.filterCheckbox && (
-              <div>
-                <p>{`Nation: ${filters.filterCheckbox}`}</p>
-              </div>
-            )}
-          </div>
-        );
-      };
-      */
 
     return (
         <div> 
@@ -216,9 +188,13 @@ function FilterList({ artworks }) {
                 <InputDropdown option={artworkAuthors} value={filters.filterInput} onChange={handleInputAuthor} title="Author"/>
                 <FilterDropdown option={artworkType} value={filters.filterSelection} onChange={handleSelect} title="Artwork type"/>
                 <SliderDropdown option={intervalYears} value={filters.filterSlider} onChange={handleInputEndDate} title="End Date"/>
-                <CheckboxDropdown options={nations} value={filters.filterCheckbox} onChange={handleCheckBox} onDelete={removalHandleCheckbox} title="Nationality"/>
+                <CheckboxDropdown options={nations} value={filters.filterCheckbox} onChange={handleCheckBox} onDelete={removalHandle} title="Nationality"/>
             </div>
-            <SelectedFilters/>
+            <div>
+                {combinedFilters.length > 0 && (
+                    <SelectedFilters filters={combinedFilters} onRemove={removalHandle}/>
+                )}
+            </div>
         </div>
     )
 }

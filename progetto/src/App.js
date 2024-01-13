@@ -8,6 +8,7 @@ import MuseumDetail from "./Museums/MuseumDetail";
 import EveryArtworkPage from "./pages/EveryArtworkPage";
 import EventsPage from "./MyEvents/EventsPage";
 import HandleEventsPage from "./pages/HandleEventsPage";
+import PersonalGalleryPage from "./pages/PersonalGalleryPage";
 
 /*import { initializeApp } from "firebase/app";
 import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
@@ -56,7 +57,7 @@ function App() {
             <Museums />
           </Route>
           <Route path="/personalGallery">
-            <Museums />
+            <PersonalGalleryPage />
           </Route>
           <Route path="/myEvents">
             <EventsPage />

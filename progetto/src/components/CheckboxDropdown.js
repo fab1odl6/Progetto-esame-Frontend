@@ -32,7 +32,7 @@ function CheckboxDropdown({options,value,onChange,onDelete,title}){
 
     const handleOptionClickRemove = (value) => {
         console.log("RIMOSSA:", value);
-        onDelete(value);
+        onDelete(value,'filterCheckbox');
     }
 
     return(
@@ -41,7 +41,13 @@ function CheckboxDropdown({options,value,onChange,onDelete,title}){
                 {title}
                 <GoChevronDown className="text-lg" />
             </div>
-            {isOpen && <CheckboxDropdownPanel className="absolute top-full" options={options} onCheckboxChange={handleOptionClick} onCheckboxChangeReverse={handleOptionClickRemove}/>}
+            {isOpen && <CheckboxDropdownPanel className="absolute top-full" 
+                            options={options} 
+                            onCheckboxChange={handleOptionClick} 
+                            onCheckboxChangeReverse={handleOptionClickRemove}
+                            state={value}
+                        />
+            }
         </div>
     );
 
