@@ -58,11 +58,13 @@ function EveryArtworkPage() {
 
     return(      
         <div>
-            <SearchBar />
-            <div className="filterOptions z-10 relative">
+            <div className='z-10'>
+                <SearchBar />
+            </div>
+            <div className="filterOptions z-9 relative">
                 <FilterList artworks={array} filters={filters} handleInput={handleInput} removalHandle={removalHandle}/>
             </div>
-            <div className="artGrid z-9 relative">
+            <div className="artGrid z-8 relative">
                 <ArtGrid artworks={filteredArray} />
             </div>
         </div> 
