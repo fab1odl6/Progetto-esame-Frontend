@@ -9,6 +9,7 @@ import EveryArtworkPage from "./pages/EveryArtworkPage";
 import EventsPage from "./MyEvents/EventsPage";
 import HandleEventsPage from "./pages/HandleEventsPage";
 import PersonalGalleryPage from "./pages/PersonalGalleryPage";
+import { useState, useEffect } from 'react';
 
 /*import { initializeApp } from "firebase/app";
 import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
@@ -40,6 +41,22 @@ function writeUserData(userId, name) {
 */
 
 function App() {
+
+  const [search, setSearch] = useState("");
+
+  const handleSearch = (text) => {
+    console.log("INSERITO: ",text)
+    setSearch(text);
+  }
+
+  const handleResetSearch = () => {
+    console.log("Ricerca Effettuata")
+    setSearch("")
+  }
+
+  useEffect(() => {
+    console.log("Ricerca:", search);
+  }, [search]);
   // writeUserData(5, "fdedg");
   return (
 
@@ -51,7 +68,7 @@ function App() {
             <HomePage />
           </Route>
           <Route path="/everyArtwork">
-            <EveryArtworkPage />
+            <EveryArtworkPage onSearch={handleSearch} onReset={handleResetSearch} search={search}/>
           </Route>
           <Route path="/museums">
             <Museums />

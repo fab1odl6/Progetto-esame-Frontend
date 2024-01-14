@@ -5,11 +5,11 @@ import { useSelector } from "react-redux";
 import { NavigationProvider } from "../context/navigation";
 import Route from "./Route";
 import Link from './Link';
-import EveryArtworkPage from '../pages/EveryArtworkPage';
 
 
-function SearchBar() {
+function SearchBar({onSearch}) {
 
+    //const navigate = useNavigate();
     const [text, setText] = useState("");
     const [matchedValues, setMatchedValues] = useState([]);
 
@@ -47,7 +47,10 @@ function SearchBar() {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(text)
+        onSearch(text)
         setText("");
+        
+        
     }
 
     const handleSelect = (selectedValue) => {
@@ -55,22 +58,16 @@ function SearchBar() {
         setMatchedValues([]);
     }
 
-    const renderedLinks = links.map((link) => {
-        return (
-            <div>
-                <Link key={link.label} to={link.path}>
-                    <SearchIcon className={searchIcon} onClick={handleSubmit}/>
-                </Link>
-            </div>
-        );
-    });
-
     return (
         <div className={searchBarHeader}>
             <div className={searchBar}>
                 <form onSubmit={handleSubmit}>
                     <input className={finalClassNames} value={text} onChange={handleChange} placeholder='Cerca...' />
-                    {renderedLinks}
+                    <div>
+                        <Link key="SearchArtwork" to="/everyArtwork">
+                            <SearchIcon className={searchIcon} onClick={handleSubmit}/>
+                        </Link>
+                    </div>
                     {text && matchedValues.length > 0 && (
                         <div className="matched-panel absolute top-full left-0 w-full bg-white border rounded shadow mt-1 z-10">
                             {matchedValues.slice(0,3).map((value, index) => (

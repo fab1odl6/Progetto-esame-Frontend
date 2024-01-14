@@ -5,7 +5,7 @@ import SearchBar from '../components/SearchBar';
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
-function EveryArtworkPage() {
+function EveryArtworkPage({ onSearch, onReset, search }) {
 
     const [filters, setFilters] = useState({
         filterInput: [],
@@ -19,12 +19,17 @@ function EveryArtworkPage() {
     });
 
     const filteredArray = array.filter((element) => {
+
+        const matchesTitle = !search || element.title.includes(search);
+        if(!search){onReset();}
+        console.log(matchesTitle)
+
         // Logica di filtro...
         const matchesAuthor = filters.filterInput.length === 0 || filters.filterInput.some(input => element.authorName.includes(input));
         const matchesType = filters.filterSelection.length === 0 || filters.filterSelection.some(input => element.type.includes(input));
         const matchesDate = filters.filterSlider.length === 0 || filters.filterSlider.some(input => element.date.toString() === input);
         const matchesNationality = filters.filterCheckbox.length === 0 || filters.filterCheckbox.some(input => element.country.includes(input));
-        return matchesAuthor && matchesType && matchesNationality && matchesDate
+        return matchesAuthor && matchesType && matchesNationality && matchesDate && matchesTitle
     });
 
     useEffect(() => {
@@ -59,7 +64,7 @@ function EveryArtworkPage() {
     return(      
         <div>
             <div className='z-10'>
-                <SearchBar />
+                <SearchBar onSearch={onSearch}/>
             </div>
             <div className="filterOptions z-9 relative">
                 <FilterList artworks={array} filters={filters} handleInput={handleInput} removalHandle={removalHandle}/>
