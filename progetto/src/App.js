@@ -9,38 +9,10 @@ import EveryArtworkPage from "./pages/EveryArtworkPage";
 import EventsPage from "./MyEvents/EventsPage";
 import HandleEventsPage from "./pages/HandleEventsPage";
 import PersonalGalleryPage from "./pages/PersonalGalleryPage";
+import ArtworkDetails from "./components/ArtworkDetails";
 
-/*import { initializeApp } from "firebase/app";
-import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
-import { getDatabase, ref, get, child, set } from "firebase/database";
-import { firebaseConfig } from "./components/TestFirebase";
-
-const app = initializeApp(firebaseConfig);
-const dbRef = ref(getDatabase());
-
-
-get(child(dbRef, '/users')).then((snapshot) => {
-  if (snapshot.exists()) {
-    console.log(snapshot.val());
-  } else {
-    console.log("No data available");
-  }
-}).catch((error) => {
-  console.error(error);
-});
-
-
-function writeUserData(userId, name) {
-  const db = getDatabase();
-  set(ref(db, 'users/user ' + userId), {
-    id: userId,
-    name: name
-  });
-}
-*/
 
 function App() {
-  // writeUserData(5, "fdedg");
   return (
 
     <NavigationProvider>
@@ -64,6 +36,9 @@ function App() {
           </Route>
           <Route path="/handleEvents">
             <HandleEventsPage />
+          </Route>
+          <Route path="/artworkDetails">
+            <ArtworkDetails />
           </Route>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
 import { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt } from '../store';
-import ArtShow from "./ArtShow";
+import ArtFullShow from "./ArtShow";
 import className from "classnames";
 
 
@@ -40,6 +40,7 @@ function ArtSlideShow() {
     }
 
 
+
     const altText = "Image of " + array[index].title;
     return (
         <div>
@@ -64,7 +65,7 @@ function ArtSlideShow() {
                     </div>
                     <FaChevronRight className={chevron} onClick={handleClickChevronRight} />
                 </div>
-                {full && <ArtShow />}
+                {full && <ArtFullShow />}
             </div>
         </div>
     );
