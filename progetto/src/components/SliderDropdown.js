@@ -4,11 +4,11 @@ import SliderDropdownPanel from "./SliderDropdownPanel";
 
 function SliderDropdown({ option, value, onChange, title }) {
     const [isOpen, setIsOpen] = useState(false);
-    const divEl = useRef();
+    const divEl = useRef(null);
 
     useEffect(() => {
         const handler = (event) => {
-            if(!divEl.current.contains(event.target)) {
+            if(divEl.current && !divEl.current.contains(event.target)) {
                 setIsOpen(false);
             }
         };
@@ -18,14 +18,14 @@ function SliderDropdown({ option, value, onChange, title }) {
         return () => {
             document.removeEventListener("click", handler);
         };
-    }, []);
+    }, [divEl.current]);
 
     const handleClick = () => {
         setIsOpen(!isOpen);
     }
 
     const handleSliderValue = (value) => {
-        onChange(value);
+        onChange(value,'filterSlider');
     }
 
     return(

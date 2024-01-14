@@ -6,7 +6,7 @@ function MuseumDetail({ museum }) {
   return (
     <div>
       <div>
-        <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Dettagli Area Tematica</h1>
+        <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>THEMATIC AREA DETAILS</h1>
       </div>
       <div
         style={{

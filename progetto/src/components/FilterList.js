@@ -5,92 +5,25 @@ import SliderDropdown from "./SliderDropdown";
 import CheckboxDropdown from "./CheckboxDropdown";
 import SelectedFilters from "./SelectedFilters";
 
-function FilterList({ artworks }) {
-
-    const [filters, setFilters] = useState({
-        filterInput: [],
-        filterSelection: [],
-        filterSlider: [],
-        filterCheckbox: [],
-      });
-
-    const handleInputAuthor = (inputText) => {
-        setFilters((prevFilters) => {
-            if (!prevFilters.filterInput.includes(inputText)) {
-                return {
-                    ...prevFilters,
-                    filterInput: [...prevFilters.filterInput, inputText],
-                };
-            }
-            return prevFilters;
-        });
-    };
+function FilterList({ artworks, filters, handleInput, removalHandle }) {
     
+    /*
     useEffect(() => {
         console.log("AUTORE INSERITO:", filters.filterInput);
     }, [filters.filterInput]);
-
-    const handleSelect = (option) => {
-        setFilters((prevFilters) => {
-            if (!prevFilters.filterSelection.includes(option)) {
-                return {
-                    ...prevFilters,
-                    filterSelection: [...prevFilters.filterSelection, option],
-                };
-            }
-            return prevFilters;
-        });
-    }
 
     useEffect(() => {
         console.log("SCELTA:", filters.filterSelection);
     }, [filters.filterSelection]);
 
-    const handleInputEndDate = (inputYear) => {
-        setFilters((prevFilters) => {
-            if (!prevFilters.filterSlider.includes(inputYear)) {
-                return {
-                    ...prevFilters,
-                    filterSlider: [...prevFilters.filterSlider, inputYear],
-                };
-            }
-            return prevFilters;
-        });
-    }
-
     useEffect(() => {
         console.log("ANNO:", filters.filterSlider);
-      }, [filters.filterSlider]);
-
-    const handleCheckBox = (nationality) => {
-        setFilters((prevFilters) => {
-            if (!prevFilters.filterCheckbox.includes(nationality)) {
-                return {
-                    ...prevFilters,
-                    filterCheckbox: [...prevFilters.filterCheckbox, nationality],
-                };
-            }
-            return prevFilters;
-        });
-    }
-
-    const removalHandleCheckbox = (elementToRemove) => {
-        setFilters((prevFilters) => {
-            // Filtra gli elementi diversi da elementToRemove
-            const updatedFilterCheckbox = prevFilters.filterCheckbox.filter(
-                (element) => element !== elementToRemove
-            );
-    
-            return {
-                ...prevFilters,
-                filterCheckbox: updatedFilterCheckbox,
-            };
-        });
-    };
+    }, [filters.filterSlider]);
 
     useEffect(() => {
         console.log("CHECKBOX:", filters.filterCheckbox);
-      }, [filters.filterCheckbox]);
+    }, [filters.filterCheckbox]);
+    */
 
     //NOMI ARTISTI DA ASSEGNARE AL FILTRO
     const artworkAuthors = artworks.reduce((uniqueAuthors, artwork) => {
@@ -165,60 +98,20 @@ function FilterList({ artworks }) {
     });
 
     console.log("ALL",combinedFilters)
-    
-
-    /*
-    const renderFilters = () => {
-        const createFilterComponents = (filterArray, filterName) => {
-            let displayName = "";
-            switch (filterName) {
-                case "Filter Input":
-                    displayName = "Author";
-                break;
-                case "Filter Selection":
-                    displayName = "Type";
-                break;
-                case "Filter Slider":
-                    displayName = "End Year";
-                break;
-                case "Filter Checkbox":
-                    displayName = "Nation";
-                break;
-                default:
-                    displayName = "Unknown Filter";
-            }
-            return filterArray.map((value, index) => (
-                <div key={`${filterName}-${index}`}>
-                    <p>{`${displayName}: ${value}`}</p>
-                </div>
-            ));
-        };
-      
-        return (
-            <div>
-            <h2>Filter Components</h2>
-            {filters.filterInput.length > 0 && createFilterComponents(filters.filterInput, 'Filter Input')}
-            {filters.filterSelection.length > 0 && createFilterComponents(filters.filterSelection, 'Filter Selection')}
-            {filters.filterSlider.length > 0 && createFilterComponents(filters.filterSlider, 'Filter Slider')}
-            {filters.filterCheckbox && (
-              <div>
-                <p>{`Nation: ${filters.filterCheckbox}`}</p>
-              </div>
-            )}
-          </div>
-        );
-      };
-      */
 
     return (
-        <div> 
-            <div className="mt-4 justify-center align-center flex">
-                <InputDropdown option={artworkAuthors} value={filters.filterInput} onChange={handleInputAuthor} title="Author"/>
-                <FilterDropdown option={artworkType} value={filters.filterSelection} onChange={handleSelect} title="Artwork type"/>
-                <SliderDropdown option={intervalYears} value={filters.filterSlider} onChange={handleInputEndDate} title="End Date"/>
-                <CheckboxDropdown options={nations} value={filters.filterCheckbox} onChange={handleCheckBox} onDelete={removalHandleCheckbox} title="Nationality"/>
+        <div className="z-9"> 
+            <div className="mt-4 justify-center align-center flex z-9">
+                <InputDropdown option={artworkAuthors} value={filters.filterInput} onChange={handleInput} title="Author"/>
+                <FilterDropdown option={artworkType} value={filters.filterSelection} onChange={handleInput} title="Artwork type"/>
+                <SliderDropdown option={intervalYears} value={filters.filterSlider} onChange={handleInput} title="End Date"/>
+                <CheckboxDropdown options={nations} value={filters.filterCheckbox} onChange={handleInput} onDelete={removalHandle} title="Nationality"/>
             </div>
-            <SelectedFilters/>
+            <div>
+                {combinedFilters.length > 0 && (
+                    <SelectedFilters filters={combinedFilters} onRemove={removalHandle}/>
+                )}
+            </div>
         </div>
     )
 }

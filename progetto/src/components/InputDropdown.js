@@ -4,14 +4,14 @@ import InputDropdownPanel from "./InputDropdownPanel";
 
 function InputDropdown({ option, value, onChange, title }) {
     const [isOpen, setIsOpen] = useState(false);
-    const divEl = useRef();
+    const divEl = useRef(null);
 
     const labelOptions = option.map(op => op.label)
     //console.log(labelOptions)
 
     useEffect(() => {
         const handler = (event) => {
-            if(!divEl.current.contains(event.target)) {
+            if(divEl.current && !divEl.current.contains(event.target)) {
                 setIsOpen(false);
             }
         };
@@ -21,14 +21,14 @@ function InputDropdown({ option, value, onChange, title }) {
         return () => {
             document.removeEventListener("click", handler);
         };
-    }, []);
+    }, [divEl.current]);
 
     const handleClick = () => {
         setIsOpen(!isOpen);
     }
 
     const filterValue = (value) => {
-        onChange(value);
+        onChange(value,'filterInput');
     }
 
     return(

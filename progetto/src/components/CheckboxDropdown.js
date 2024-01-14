@@ -5,11 +5,11 @@ import CheckboxDropdownPanel from "./CheckboxDropdownPanel";
 function CheckboxDropdown({options,value,onChange,onDelete,title}){
 
     const [isOpen, setIsOpen] = useState(false);
-    const divEl = useRef();
+    const divEl = useRef(null);
 
     useEffect(() => {
         const handler = (event) => {
-            if(!divEl.current.contains(event.target)) {
+            if(divEl.current && !divEl.current.contains(event.target)) {
                 setIsOpen(false);
             }
         };
@@ -19,7 +19,7 @@ function CheckboxDropdown({options,value,onChange,onDelete,title}){
         return () => {
             document.removeEventListener("click", handler);
         };
-    }, []);
+    }, [divEl.current]);
 
     const handleClick = () => {
         setIsOpen(!isOpen);
@@ -27,12 +27,12 @@ function CheckboxDropdown({options,value,onChange,onDelete,title}){
 
     const handleOptionClick = (value) => {
         console.log("NAZIONALITA':", value);
-        onChange(value);
+        onChange(value,'filterCheckbox');
     }
 
     const handleOptionClickRemove = (value) => {
         console.log("RIMOSSA:", value);
-        onDelete(value);
+        onDelete(value,'filterCheckbox');
     }
 
     return(
@@ -41,7 +41,13 @@ function CheckboxDropdown({options,value,onChange,onDelete,title}){
                 {title}
                 <GoChevronDown className="text-lg" />
             </div>
-            {isOpen && <CheckboxDropdownPanel className="absolute top-full" options={options} onCheckboxChange={handleOptionClick} onCheckboxChangeReverse={handleOptionClickRemove}/>}
+            {isOpen && <CheckboxDropdownPanel className="absolute top-full" 
+                            options={options} 
+                            onCheckboxChange={handleOptionClick} 
+                            onCheckboxChangeReverse={handleOptionClickRemove}
+                            state={value}
+                        />
+            }
         </div>
     );
 
