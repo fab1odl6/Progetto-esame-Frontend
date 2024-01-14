@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
 import className from "classnames";
-import FavoriteEventShow from "../components/FavoriteEventShow";
-import { switchFullSavedEvent, switchFavoriteSavedEvent } from "../HomePage/store";
+import FavoriteEventShow from "./FavoriteEventShow";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "../components/FirebaseConfig";
+import { getDatabase, ref, set, remove } from "firebase/database";
+
+
+function updateFavorite(event, favorite) {
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase();
+
+  if (!favorite) {
+    set(ref(db, 'users/Fabio/events/' + event.name), {
+      id: event.id,
+      name: event.name,
+      image: event.image,
+      date: event.date,
+      department: event.department,
+      guests: event.guests,
+      favorite: true,
+      full: false
+    })
+  } else {
+    remove(ref(db, "users/Fabio/events/" + event.name));
+  }
+}
 
 
 function EventCard({ event }) {
@@ -13,37 +35,35 @@ function EventCard({ event }) {
   const titleAndHeart = className("flex p-4");
 
 
-  const { array, index } = useSelector((state) => {
-    return state.favoriteEvents;
-  })
+  const [favorite, setFavorite] = useState(true);
+  const [full, setFull] = useState(false);
 
-  const dispatch = useDispatch();
-
-  const handleClickHeart = function (event) {
-    dispatch(switchFavoriteSavedEvent(event));
+  const handleClickHeart = function () {
+    setFavorite(!favorite);
+    updateFavorite(event, favorite);
   };
 
   const handleClickShow = function () {
-    dispatch(switchFullSavedEvent());
+    setFull(!full);
   }
 
   return (
     <div>
-      {array[index].favorite &&
+      {favorite &&
         (<div className={containerClass}>
-          <div>
+          <div onClick={handleClickShow}>
             <img src={event.image} className={imageClass} alt={event.name} onClick={handleClickShow} />
             <div className={titleAndHeart}>
-              <div onClick={handleClickShow}>{event.name}</div>
+              <div>{event.name}</div>
               {event.favorite ? (
-                <FaHeart className={favoriteClass} onClick={() => handleClickHeart(event)} />
+                <FaHeart className={favoriteClass} onClick={(e) => { e.stopPropagation(); handleClickHeart(); }} />
               ) : (
-                <FaRegHeart className={favoriteClass} onClick={() => handleClickHeart(event)} />
+                <FaRegHeart className={favoriteClass} onClick={(e) => { e.stopPropagation(); handleClickHeart(); }} />
               )}
             </div>
           </div>
         </div>)}
-      {array[index].full && <FavoriteEventShow key={array[index].name} onClick={(e1) => handleClickHeart(e1)} />}
+      {full && <FavoriteEventShow event={event} key={event.name} onClickClose={handleClickShow} onClickHeart={handleClickHeart} />}
     </div>
   );
 }

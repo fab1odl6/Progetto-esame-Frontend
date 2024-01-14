@@ -31,7 +31,6 @@ function AddAnEvent() {
     /* if !user then ...  else: */
 
     const app = initializeApp(firebaseConfig);
-    const dbRef = ref(getDatabase());
 
     const [formData, setFormData] = useState({
         date: "",
@@ -75,6 +74,17 @@ function AddAnEvent() {
 
         const db = getDatabase();
         set(ref(db, 'events/' + formData.name), {
+            date: selectedDate.toDateString(),
+            favorite: false,
+            full: false,
+            guests: formData.guests,
+            id: 4,
+            image: formData.image,
+            name: formData.name,
+            department: selectedOption
+        });
+
+        set(ref(db, 'users/Fabio/customEvents/' + formData.name), {
             date: selectedDate.toDateString(),
             favorite: false,
             full: false,

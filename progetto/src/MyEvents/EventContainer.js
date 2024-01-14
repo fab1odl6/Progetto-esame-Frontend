@@ -31,41 +31,31 @@ await readData();
 
 
 function EventContainer({ future }) {
-    let render = [];
     const today = new Date();
 
+    const filteredEvents = future
+        ? eventsArray.filter((event) => new Date(event.date) >= today)
+        : eventsArray.filter((event) => new Date(event.date) < today);
 
-
-    if (future) {
-        render = eventsArray.map((event) => {
-            const eventDate = new Date(event.date);
-
-            if (eventDate >= today) {
-                return (
-                    <EventCard event={event} />
-                )
-            }
-        })
-    } else {
-        render = eventsArray.map((event) => {
-            const eventDate = new Date(event.date);
-
-            if (eventDate < today) {
-                return (
-                    <div>
-                        <EventCard key={event.name} event={event} />
-                    </div>
-                )
-            }
-        });
-    }
-
+    const renderedEvents = filteredEvents.map((event) => (
+        <EventCard key={event.id} event={event} />
+    ));
 
     return (
         <div>
-            {render}
+            {filteredEvents.length > 0 ? (
+                <div>
+                    {renderedEvents}
+                </div>
+            ) : (
+                future ? (
+                    <p>No future events to display</p>
+                ) : (
+                    <p>No past events to display.</p>
+                )
+            )}
         </div>
-    )
+    );
 }
 
 
