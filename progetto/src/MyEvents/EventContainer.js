@@ -2,8 +2,6 @@ import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../components/FirebaseConfig";
 import { get, child, ref, getDatabase } from "firebase/database";
 import EventCard from "./EventCard";
-import { GoChevronDown, GoChevronRight } from "react-icons/go";
-import { useState } from "react";
 
 
 const app = initializeApp(firebaseConfig);
@@ -54,7 +52,9 @@ function EventContainer({ future }) {
 
             if (eventDate < today) {
                 return (
-                    <EventCard event={event} />
+                    <div>
+                        <EventCard key={event.name} event={event} />
+                    </div>
                 )
             }
         });

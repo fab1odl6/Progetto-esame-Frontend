@@ -8,7 +8,7 @@ let eventArray = [];
 const dbRef = ref(getDatabase());
 
 async function readData() {
-    const artworksRef = child(dbRef, 'events');
+    const artworksRef = child(dbRef, 'users/Fabio/events');
 
     try {
         const snapshot = await get(artworksRef);
@@ -27,7 +27,7 @@ async function readData() {
                         date: dataObj.date,
                         department: dataObj.department,
                         guests: dataObj.guests,
-                        favorite: false,
+                        favorite: true,
                         full: false
                     });
                 }
@@ -61,26 +61,16 @@ function updateFavorite(event) {
     }
 }
 
-const eventsSlice = createSlice({
+const favoriteEventsSlice = createSlice({
     name: "events",
     initialState: {
         array: eventArray,
         index: 0,
-        favorite: false,
+        favorite: true,
         full: false
     },
     reducers: {
-        swipeRightEvent(state, action) {
-            const newIndex = (state.index + 1) % state.array.length;
-            return { ...state, index: newIndex };
-        },
-
-        swipeLeftEvent(state, action) {
-            const newIndex = (state.index - 1 + state.array.length) % state.array.length;
-            return { ...state, index: newIndex };
-        },
-
-        switchFavoriteEvent(state, action) {
+        switchFavoriteSavedEvent(state, action) {
             const newFavorite = !state.array[state.index].favorite;
             const newArray = [...state.array];
             newArray[state.index] = { ...newArray[state.index], favorite: newFavorite };
@@ -89,7 +79,7 @@ const eventsSlice = createSlice({
             return { ...state, array: newArray, favorite: newFavorite };
         },
 
-        switchFullEvent(state, action) {
+        switchFullSavedEvent(state, action) {
             const newFull = !state.array[state.index].full;
             const newArray = [...state.array];
             newArray[state.index] = { ...newArray[state.index], full: newFull };
@@ -99,4 +89,4 @@ const eventsSlice = createSlice({
     },
 });
 
-export default eventsSlice;
+export default favoriteEventsSlice;

@@ -11,9 +11,13 @@ function EventsPage() {
   const searchBar = className("mt-5 border-1 h-1/6 w-5/6 text-gray-500 justify-between flex");
   const searchIcon = className("self-end mb-6");
   const titleContainer = className("flex");
+  const mainContent = className("bg-gradient-to-b from-opacity-80 to-opacity-80 via-white bg-cover bg-center min-h-screen-100px background-image: url('background-image-url'); padding: 20px;");
+  const title = className("text-center font-bold text-4xl my-20");
+  const accordion = className("mb-20");
+  const typography = className("font-bold");
 
   const [expandedAccordion, setExpandedAccordion] = useState({
-    1: false,
+    1: true,
     2: false,
   });
 
@@ -34,26 +38,19 @@ function EventsPage() {
           <SearchIcon className={searchIcon} />
         </div>
       </div>
-      <div className="mainContent" style={{
-        background: 'linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url("background-image-url")',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        minHeight: 'calc(100vh - 100px)',
-        padding: '20px', // Adjust padding for content spacing
-      }}>
-        <h1 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '2em', margin: '20px 0' }}>EVENTS</h1>
+      <div className={mainContent}>
+        <h1 className={title}>EVENTS</h1>
 
         {events.map((event) => (
           <Accordion
             key={event.id}
             expanded={expandedAccordion[event.id]}
             onChange={() => handleToggle(event.id)}
-            style={{ marginBottom: '20px' }} // Adjust margin for accordion spacing
+            className={accordion}
           >
             <AccordionSummary>
               <div className={titleContainer}>
-                <Typography variant="h6" style={{ fontWeight: 'bold' }}>{event.title}</Typography>
+                <Typography variant="h6" className={typography}>{event.title}</Typography>
                 {expandedAccordion[event.id] ? <GoChevronDown /> : <GoChevronLeft />}
               </div>
             </AccordionSummary>

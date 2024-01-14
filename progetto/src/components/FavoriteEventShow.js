@@ -1,13 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { switchFullEvent, switchFavoriteEvent } from "../store";
+import { switchFullSavedEvent, switchFavoriteSavedEvent } from "../HomePage/store/index";
 import { IoIosClose } from "react-icons/io";
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import className from "classnames";
 
 
-function EventShow() {
-
-    const modal = className("fixed inset-0 flex flex-col items-center justify-center w-screen h-screen bg-blue bg-auto");
+function FavoriteEventShow() {
+    const modal = className("fixed inset-0 flex flex-col items-center justify-center w-screen h-screen bg-blue bg-auto z-10");
     const container = className("border-slate-300 border-solid border-4 bg-white");
     const imageContainer = className("flex justify-between relative");
     const image = className("max-w-lg max-h-lg");
@@ -16,17 +15,17 @@ function EventShow() {
     const favorite = className("ml-auto text-2xl");
 
     const { array, index } = useSelector((state) => {
-        return state.events;
+        return state.favoriteEvents;
     })
 
     const dispatch = useDispatch();
 
     const handleClickClose = function () {
-        dispatch(switchFullEvent());
+        dispatch(switchFullSavedEvent());
     }
 
     const handleClickHeart = function (event) {
-        dispatch(switchFavoriteEvent(event));
+        dispatch(switchFavoriteSavedEvent(event));
     }
 
     return (
@@ -52,4 +51,4 @@ function EventShow() {
     )
 }
 
-export default EventShow;
+export default FavoriteEventShow;
