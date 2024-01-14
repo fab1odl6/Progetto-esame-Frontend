@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import useNavigation from '../hooks/use-navigation';
 
+//function Link({ to, children, state }) {
 function Link({ to, children }) {
     const { navigate } = useNavigation();
     
@@ -11,7 +12,6 @@ function Link({ to, children }) {
             return;
         }
         event.preventDefault();
-
         navigate(to);
     }
 

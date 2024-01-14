@@ -23,7 +23,7 @@ function App() {
             <HomePage />
           </Route>
           <Route path="/everyArtwork">
-            <EveryArtworkPage />
+            <EveryArtworkPage onSearch={handleSearch} onReset={handleResetSearch} search={search} />
           </Route>
           <Route path="/museums">
             <Museums />
