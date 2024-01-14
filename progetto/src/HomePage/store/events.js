@@ -90,7 +90,6 @@ const eventsSlice = createSlice({
         },
 
         switchFullEvent(state, action) {
-            console.log("a")
             const newFull = !state.array[state.index].full;
             const newArray = [...state.array];
             newArray[state.index] = { ...newArray[state.index], full: newFull };

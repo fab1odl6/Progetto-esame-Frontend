@@ -2,8 +2,6 @@ import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../components/FirebaseConfig";
 import { get, child, ref, getDatabase } from "firebase/database";
 import EventCard from "./EventCard";
-import { GoChevronDown, GoChevronRight } from "react-icons/go";
-import { useState } from "react";
 
 
 const app = initializeApp(firebaseConfig);
@@ -33,39 +31,31 @@ await readData();
 
 
 function EventContainer({ future }) {
-    let render = [];
     const today = new Date();
 
+    const filteredEvents = future
+        ? eventsArray.filter((event) => new Date(event.date) >= today)
+        : eventsArray.filter((event) => new Date(event.date) < today);
 
-
-    if (future) {
-        render = eventsArray.map((event) => {
-            const eventDate = new Date(event.date);
-
-            if (eventDate >= today) {
-                return (
-                    <EventCard event={event} />
-                )
-            }
-        })
-    } else {
-        render = eventsArray.map((event) => {
-            const eventDate = new Date(event.date);
-
-            if (eventDate < today) {
-                return (
-                    <EventCard event={event} />
-                )
-            }
-        });
-    }
-
+    const renderedEvents = filteredEvents.map((event) => (
+        <EventCard key={event.id} event={event} />
+    ));
 
     return (
         <div>
-            {render}
+            {filteredEvents.length > 0 ? (
+                <div>
+                    {renderedEvents}
+                </div>
+            ) : (
+                future ? (
+                    <p>No future events to display</p>
+                ) : (
+                    <p>No past events to display.</p>
+                )
+            )}
         </div>
-    )
+    );
 }
 
 
