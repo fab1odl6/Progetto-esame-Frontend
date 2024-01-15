@@ -17,7 +17,6 @@ import DepartmentDropdown from "./DepartmentDropdown";
 async function writeData() {
     const app = initializeApp(firebaseConfig);
     const db = getDatabase();
-    const dbRef = ref(db);
 
     try {
         for (let i = 0; i < 4; i++) {
@@ -46,26 +45,27 @@ function HandleEventCard({ event }) {
     const app = initializeApp(firebaseConfig);
     const db = getDatabase();
 
-    const fullContainerClass = className("flex")
-    const containerClass = className("border-2 mb-2 p-4 max-w-md bg-white rounded-md shadow-md mt-4");
-    const favoriteClass = className("ml-auto text-2xl");
-    const imageClass = className("max-w-96 max-h-96");
-    const titleAndHeart = className("flex");
-    const iconsContainerClass = className("");
-    const trashIconClass = className("w-5 h-5 mb-2");
-    const editIconClass = className("w-5 h-5");
+    const fullContainerClass = "bg-gray-200 p-4";
+    const containerClass = "flex items-center justify-between bg-white p-4 shadow-md";
+    const imageContainerClass = "mr-4";
+    const imageClass = "w-16 h-16 object-cover";
+    const titleAndHeart = "flex items-center";
+    const favoriteClass = "text-red-500 cursor-pointer ml-2";
+    const iconsContainerClass = "flex items-center";
+    const trashIconClass = "text-gray-500 cursor-pointer mr-2";
+    const editIconClass = "text-gray-500 cursor-pointer";
 
-    const formContainerClass = className("border mb-2 mt-0");
-    const successDivClass = className("mt-4 p-4 bg-green-100 border border-green-400 text-green-700");
-    const successPClass = className("mb-1");
-    const inputContainerClass = className("flex flex-col");
-    const inputLabelClass = className("mb-1");
-    const inputClass = className("border border-gray-300 rounded-md p-2");
-    const buttonClass = className("bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600");
-    const selectedOptionClass = className("mt-2 p-2 bg-blue-500 text-white rounded");
-    const datePickerContainerClass = className("flex relative items-center");
-    const datePickerClass = className("w-full p-2 border rounded outline-none");
-    const chevronClass = className("absolute right-0 ml-2 m-2");
+    const successDivClass = "bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative";
+    const successPClass = "font-bold";
+    const formContainerClass = "max-w-md mx-auto p-4 bg-white shadow-md";
+    const inputContainerClass = "mb-4";
+    const inputLabelClass = "block text-gray-700 text-sm font-bold mb-2";
+    const inputClass = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
+    const datePickerContainerClass = "relative";
+    const datePickerClass = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
+    const chevronClass = "absolute right-0 top-0 h-full flex items-center p-2 pointer-events-none";
+    const selectedOptionClass = "text-gray-700 text-sm mt-2";
+    const buttonClass = "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded";
 
     const dispatch = useDispatch();
 
@@ -74,6 +74,7 @@ function HandleEventCard({ event }) {
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedOption, setSelectedOption] = useState(null);
     const [success, setSuccess] = useState(null);
+    const [favorite, setFavorite] = useState(event.favorite);
     const [formData, setFormData] = useState({
         name: event.name,
         date: event.date,
@@ -93,25 +94,33 @@ function HandleEventCard({ event }) {
     }
 
     const handleClickHeart = function (event) {
+        setFavorite(!favorite);
+        event.favorite = favorite;
         dispatch(switchFavoriteEvent(event));
+        update(ref(db, "users/Fabio/customEvents/" + formData.name), {
+            favorite: !favorite
+        })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        handleClickDelete();
 
-        const eventRef = ref(db, "users/Fabio/customEvents/" + event.name);
-
-        update(eventRef, {
+        const eventRef = ref(db, "users/Fabio/customEvents/" + formData.name);
+        set(eventRef, {
             name: formData.name,
             date: selectedDate,
             department: selectedOption,
             guests: formData.guests,
-            image: formData.image
+            image: formData.image,
+            favorite: favorite,
+            full: event.full,
+            id: event.id
         })
 
         setSuccess(true);
-
         setEditState(false);
+        setDeleteState(false)
     }
 
     const handleChange = (e) => {
@@ -137,10 +146,10 @@ function HandleEventCard({ event }) {
                 <div className={fullContainerClass}>
                     <div className={containerClass}>
                         <div>
-                            <img src={event.image} className={imageClass} />
+                            <div className={imageContainerClass}><img src={event.image} className={imageClass} /></div>
                             <div className={titleAndHeart}>
-                                <div>{event.name}</div>
-                                {event.favorite ? (
+                                <div>{formData.name}</div>
+                                {favorite ? (
                                     <FaHeart className={favoriteClass} onClick={() => handleClickHeart(event)} />
                                 ) : (
                                     <FaRegHeart className={favoriteClass} onClick={() => handleClickHeart(event)} />
@@ -156,7 +165,7 @@ function HandleEventCard({ event }) {
             )}
             {success && (
                 <div className={successDivClass}>
-                    <p className={successPClass}><strong>Success:</strong> {success}</p>
+                    <p className={successPClass}><strong>Success</strong> {success}</p>
                 </div>
             )}
             {editState && (

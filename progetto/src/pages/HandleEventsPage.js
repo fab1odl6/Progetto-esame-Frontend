@@ -5,12 +5,13 @@ import HandleEvents from "../components/HandleEvents";
 
 function HandleEventsPage() {
 
-    const containerClass = className("flex justify-between items-center");
+    const containerClass = className("flex justify-center h-min");
 
     return (
         <div className={containerClass}>
-            <AddAnEvent className="" />
-            <HandleEvents className="" />
+            <AddAnEvent />
+            <div className="m-4"></div>
+            <HandleEvents className="mt-4" />
         </div>
     )
 }
