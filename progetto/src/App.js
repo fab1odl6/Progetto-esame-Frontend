@@ -10,6 +10,7 @@ import EventsPage from "./MyEvents/EventsPage";
 import HandleEventsPage from "./pages/HandleEventsPage";
 import PersonalGalleryPage from "./pages/PersonalGalleryPage";
 import ArtworkDetails from "./components/ArtworkDetails";
+import { useState, useEffect } from "react";
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
   const [search, setSearch] = useState("");
 
   const handleSearch = (text) => {
-    console.log("INSERITO: ",text)
+    console.log("INSERITO: ", text)
     setSearch(text);
   }
 
