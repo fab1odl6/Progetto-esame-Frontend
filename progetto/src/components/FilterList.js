@@ -100,8 +100,8 @@ function FilterList({ artworks, filters, handleInput, removalHandle }) {
     console.log("ALL",combinedFilters)
 
     return (
-        <div className="z-9"> 
-            <div className="mt-4 justify-center align-center flex z-9">
+        <div className="z-8"> 
+            <div className="mt-4 justify-center align-center flex z-8">
                 <InputDropdown option={artworkAuthors} value={filters.filterInput} onChange={handleInput} title="Author"/>
                 <FilterDropdown option={artworkType} value={filters.filterSelection} onChange={handleInput} title="Artwork type"/>
                 <SliderDropdown option={intervalYears} value={filters.filterSlider} onChange={handleInput} title="End Date"/>

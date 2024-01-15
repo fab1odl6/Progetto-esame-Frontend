@@ -16,7 +16,7 @@ function SearchBar({onSearch}) {
         return state.artworks;
     });
 
-    const searchBarHeader = className("justify-center align-center flex relative z-10");
+    const searchBarHeader = className("justify-center align-center flex relative z-300");
     const searchBar = className("mt-5 h-1/6 w-5/6 text-gray-500 relative"); 
     const searchIcon = className("absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer");
     const finalClassNames = className("border rounded p-2 shadow bg-white w-full pl-8 relative"); 
@@ -35,7 +35,8 @@ function SearchBar({onSearch}) {
         event.preventDefault();
         console.log(text)
         onSearch(text)
-        setText("");    
+        setText("");   
+        
     }
 
     const handleSelect = (selectedValue) => {
@@ -58,7 +59,7 @@ function SearchBar({onSearch}) {
                     
                     
                     {text && matchedValues.length > 0 && (
-                        <div className="matched-panel absolute top-full left-0 w-full bg-white border rounded shadow mt-1 z-10">
+                        <div className="matched-panel absolute top-full left-0 w-full bg-white border rounded shadow mt-1 z-300">
                             {matchedValues.slice(0,3).map((value, index) => (
                                 <div className={`cursor-pointer ${finalClassNames}`} key={index} onClick={() => handleSelect(value)}>
                                     {value.title}

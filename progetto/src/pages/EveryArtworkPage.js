@@ -63,13 +63,13 @@ function EveryArtworkPage({ onSearch, onReset, search }) {
 
     return(      
         <div>
-            <div className='z-10'>
+            <div className='z-100'>
                 <SearchBar onSearch={onSearch}/>
             </div>
-            <div className="filterOptions z-9 relative">
+            <div className="z-50 relative">
                 <FilterList artworks={array} filters={filters} handleInput={handleInput} removalHandle={removalHandle}/>
             </div>
-            <div className="artGrid z-8 relative">
+            <div className="z-40 relative">
                 <ArtGrid artworks={filteredArray} />
             </div>
         </div> 

@@ -38,7 +38,7 @@ function App() {
         <HeaderBar />
         <div>
           <Route path="/">
-            <HomePage />
+            <HomePage onSearch={handleSearch} />
           </Route>
           <Route path="/everyArtwork">
             <EveryArtworkPage onSearch={handleSearch} onReset={handleResetSearch} search={search} />
