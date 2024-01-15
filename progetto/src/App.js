@@ -50,7 +50,7 @@ function App() {
   }
 
   const handleResetSearch = () => {
-    console.log("Ricerca Effettuata")
+    console.log("Ricerca Effettuata!")
     setSearch("")
   }
 
