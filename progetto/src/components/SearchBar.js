@@ -1,6 +1,6 @@
 import SearchIcon from '@mui/icons-material/Search';
 import className from "classnames";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import { NavigationProvider } from "../context/navigation";
 import Route from "./Route";
@@ -9,7 +9,6 @@ import Link from './Link';
 
 function SearchBar({onSearch}) {
 
-    //const navigate = useNavigate();
     const [text, setText] = useState("");
     const [matchedValues, setMatchedValues] = useState([]);
 
@@ -21,18 +20,6 @@ function SearchBar({onSearch}) {
     const searchBar = className("mt-5 h-1/6 w-5/6 text-gray-500 relative"); 
     const searchIcon = className("absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer");
     const finalClassNames = className("border rounded p-2 shadow bg-white w-full pl-8 relative"); 
-
-    const links = [
-        { label: "SearchArtwork", path: "/everyArtwork" },
-        //{ label: "Every Artwork", path: "/everyArtwork" },
-        //{ label: "Museums", path: "/museums" },
-        //{ label: "Personal Gallery", path: "/personalGallery" },
-        //{ label: "My Events", path: "/myEvents" },
-        //{ label: "Handle Events", path: "/handleEvents" }
-    ]
-
-    
-
 
     const handleChange = (event) => {
         const inputValue = event.target?.value;
@@ -48,9 +35,7 @@ function SearchBar({onSearch}) {
         event.preventDefault();
         console.log(text)
         onSearch(text)
-        setText("");
-        
-        
+        setText("");    
     }
 
     const handleSelect = (selectedValue) => {
@@ -61,13 +46,17 @@ function SearchBar({onSearch}) {
     return (
         <div className={searchBarHeader}>
             <div className={searchBar}>
-                <form onSubmit={handleSubmit}>
-                    <input className={finalClassNames} value={text} onChange={handleChange} placeholder='Cerca...' />
-                    <div>
-                        <Link key="SearchArtwork" to="/everyArtwork">
-                            <SearchIcon className={searchIcon} onClick={handleSubmit}/>
-                        </Link>
+                <form onSubmit={handleSubmit} className="flex items-center">
+                    <div className='relative flex items-center w-full'>
+                        <input className={finalClassNames}  value={text} onChange={handleChange} placeholder='Cerca...' />
+                        <div className='ml-2'>
+                            <Link key="SearchArtwork" to="/everyArtwork">
+                                <SearchIcon className={searchIcon} onClick={handleSubmit}/>
+                            </Link>
+                        </div>
                     </div>
+                    
+                    
                     {text && matchedValues.length > 0 && (
                         <div className="matched-panel absolute top-full left-0 w-full bg-white border rounded shadow mt-1 z-10">
                             {matchedValues.slice(0,3).map((value, index) => (
