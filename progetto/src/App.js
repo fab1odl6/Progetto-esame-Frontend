@@ -11,6 +11,7 @@ import HandleEventsPage from "./pages/HandleEventsPage";
 import PersonalGalleryPage from "./pages/PersonalGalleryPage";
 import ArtworkDetails from "./components/ArtworkDetails";
 import { useState, useEffect } from "react";
+import LoginPage from "./pages/Login";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
 
     <NavigationProvider>
       <div>
+        <LoginPage/>
         <HeaderBar />
         <div>
           <Route path="/">
