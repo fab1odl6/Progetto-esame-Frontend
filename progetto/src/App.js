@@ -12,6 +12,7 @@ import PersonalGalleryPage from "./pages/PersonalGalleryPage";
 import ArtworkDetails from "./components/ArtworkDetails";
 import { useState, useEffect } from "react";
 import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/Login"
 
 
 function App() {
