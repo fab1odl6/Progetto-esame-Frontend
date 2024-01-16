@@ -12,6 +12,7 @@ import PersonalGalleryPage from "./pages/PersonalGalleryPage";
 import ArtworkDetails from "./components/ArtworkDetails";
 import { useState, useEffect } from "react";
 import RegisterPage from "./pages/RegisterPage";
+import { useSelector } from "react-redux";
 
 
 function App() {
@@ -22,6 +23,10 @@ function App() {
     console.log("INSERITO: ", text)
     setSearch(text);
   }
+
+  const { user, logged } = useSelector((state) => {
+    return state.users;
+  })
 
   const handleResetSearch = () => {
     console.log("Ricerca Effettuata!")
@@ -36,7 +41,7 @@ function App() {
 
     <NavigationProvider>
       <div>
-        <LoginPage/>
+        <LoginPage />
         <HeaderBar />
         <div>
           <Route path="/">
