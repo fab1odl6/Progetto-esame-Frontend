@@ -42,7 +42,6 @@ function App() {
 
     <NavigationProvider>
       <div>
-        <LoginPage />
         <HeaderBar />
         <div>
           <Route path="/">

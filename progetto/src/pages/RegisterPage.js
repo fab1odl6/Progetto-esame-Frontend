@@ -7,7 +7,7 @@ import className from "classnames";
 
 function RegisterPage() {
 
-    const containerClass = className("p-4 max-w-md bg-white rounded-md shadow-md mt-4 mx-auto");
+    const containerClass = className("p-4 max-w-md bg-white rounded-md shadow-md mt-4 mx-auto items-center");
     const mandatoryClass = className("text-red-500");
     const successDivClass = className("mt-4 p-4 bg-green-100 border border-green-400 text-green-700");
     const successPClass = className("mb-1");
@@ -63,6 +63,7 @@ function RegisterPage() {
                     <p className={successPClass}><strong>Success:</strong> You have registered correctly!</p>
                 </div>
             )}
+            <div className="font-bold text-center text-2xl">Register</div>
             <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-8 mt-10 shadow-md">
                 <div className="mb-4">
                     <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
