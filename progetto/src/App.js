@@ -29,7 +29,7 @@ function App() {
   }
 
   useEffect(() => {
-    console.log("Ricerca:", search);
+    console.log("Ricerca: ", search);
   }, [search]);
   // writeUserData(5, "fdedg");
   return (
@@ -39,7 +39,7 @@ function App() {
         <HeaderBar />
         <div>
           <Route path="/">
-            <HomePage onSearch={handleSearch} />
+            <HomePage onSearch={handleSearch} onReset={handleResetSearch} />
           </Route>
           <Route path="/everyArtwork">
             <EveryArtworkPage onSearch={handleSearch} onReset={handleResetSearch} search={search} />

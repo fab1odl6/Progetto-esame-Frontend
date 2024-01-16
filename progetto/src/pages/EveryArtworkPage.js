@@ -20,15 +20,16 @@ function EveryArtworkPage({ onSearch, onReset, search }) {
 
     const filteredArray = array.filter((element) => {
 
-        const matchesTitle = !search || element.title.includes(search);
+        const matchesTitle = !search || element.title.toLowerCase().includes(search.toLowerCase());
         if(!search){onReset();}
-        console.log(matchesTitle)
+        console.log("UGUALE:",matchesTitle)
 
         // Logica di filtro...
         const matchesAuthor = filters.filterInput.length === 0 || filters.filterInput.some(input => element.authorName.includes(input));
         const matchesType = filters.filterSelection.length === 0 || filters.filterSelection.some(input => element.type.includes(input));
         const matchesDate = filters.filterSlider.length === 0 || filters.filterSlider.some(input => element.date.toString() === input);
         const matchesNationality = filters.filterCheckbox.length === 0 || filters.filterCheckbox.some(input => element.country.includes(input));
+        
         return matchesAuthor && matchesType && matchesNationality && matchesDate && matchesTitle
     });
 
@@ -61,13 +62,16 @@ function EveryArtworkPage({ onSearch, onReset, search }) {
         });
     };
 
+    //onReset();
+    //console.log("RICERCA: ", search)
+
     return(      
         <div>
             <div className='z-40 relative'>
                 <SearchBar onSearch={onSearch}/>
             </div>
             <div className="z-30 relative">
-                <FilterList artworks={array} filters={filters} handleInput={handleInput} removalHandle={removalHandle}/>
+                <FilterList artworks={filteredArray} filters={filters} handleInput={handleInput} removalHandle={removalHandle}/>
             </div>
             <div className="z-20 relative">
                 <ArtGrid artworks={filteredArray} />
