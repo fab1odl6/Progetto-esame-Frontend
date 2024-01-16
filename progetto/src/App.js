@@ -10,6 +10,7 @@ import EventsPage from "./MyEvents/EventsPage";
 import HandleEventsPage from "./pages/HandleEventsPage";
 import PersonalGalleryPage from "./pages/PersonalGalleryPage";
 import ArtworkDetails from "./components/ArtworkDetails";
+import RegisterPage from "./pages/RegisterPage";
 import { useState, useEffect } from "react";
 
 
@@ -36,6 +37,7 @@ function App() {
     <NavigationProvider>
       <div>
         <HeaderBar />
+        <RegisterPage />
         <div>
           <Route path="/">
             <HomePage onSearch={handleSearch} />

@@ -11,5 +11,5 @@ const store = configureStore({
 });
 
 export { store };
-export const { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt } = artworksSlice.actions;
+export const { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt, setArtworks } = artworksSlice.actions;
 export const { setUser, setLogged } = userSlice.actions;
