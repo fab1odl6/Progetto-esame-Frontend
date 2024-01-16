@@ -10,8 +10,8 @@ import EventsPage from "./MyEvents/EventsPage";
 import HandleEventsPage from "./pages/HandleEventsPage";
 import PersonalGalleryPage from "./pages/PersonalGalleryPage";
 import ArtworkDetails from "./components/ArtworkDetails";
-import RegisterPage from "./pages/RegisterPage";
 import { useState, useEffect } from "react";
+import RegisterPage from "./pages/RegisterPage";
 
 
 function App() {
@@ -37,7 +37,6 @@ function App() {
     <NavigationProvider>
       <div>
         <HeaderBar />
-        <RegisterPage />
         <div>
           <Route path="/">
             <HomePage onSearch={handleSearch} />
@@ -59,6 +58,9 @@ function App() {
           </Route>
           <Route path="/artworkDetails">
             <ArtworkDetails />
+          </Route>
+          <Route path="/register">
+            <RegisterPage />
           </Route>
         </div>
       </div>

@@ -5,12 +5,12 @@ import { firebaseConfig } from "../components/FirebaseConfig";
 
 
 const userSlice = createSlice({
-    name: "user",
+    name: "users",
     initialState: {
         user: {},
-        logged: false
+        logged: null
     },
-    reducer: {
+    reducers: {
         setUser(state, action) {
             return ({
                 ...state,
@@ -23,7 +23,7 @@ const userSlice = createSlice({
                 logged: !state.logged
             })
         }
-    }
+    },
 });
 
 export default userSlice;
