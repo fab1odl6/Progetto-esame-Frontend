@@ -17,7 +17,7 @@ function HomePage({ onSearch, onReset }) {
     return (
         <div>
             <div className='z-10'>
-                <SearchBar onSearch={ onSearch }/>
+                <SearchBar onSearch={onSearch} />
             </div>
             <EventSlideShow />
             <ArtSlideShow />

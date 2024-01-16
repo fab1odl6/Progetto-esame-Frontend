@@ -18,7 +18,6 @@ function ArtworkDetail() {
     })
 
     const dispatch = useDispatch();
-
     const handleClickHeart = function () {
         dispatch(onClickHeart(art));
     }
