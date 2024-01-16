@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "../components/FirebaseConfig";
+import { firebaseConfig } from "../../components/FirebaseConfig";
 import { getDatabase, set, ref } from "firebase/database";
 
 
