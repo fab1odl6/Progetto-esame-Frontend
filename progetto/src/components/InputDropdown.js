@@ -32,14 +32,14 @@ function InputDropdown({ option, value, onChange, title }) {
     }
 
     return(
-        <div ref={divEl} className="w-48 relative">
+        <div ref={divEl} className="w-48 relative z-8">
             <div className="flex justify-between items-center cursor-pointer border rounded p-3 shadow bg-white w-full" onClick={handleClick}>
                 {title}
                 <GoChevronDown className="text-lg" />
             </div>
             {isOpen && (
                 <div className="absolute top-full w-full">
-                   <InputDropdownPanel className="flex justify-between items-center" onChange={filterValue} options={labelOptions} /> 
+                   <InputDropdownPanel className="flex justify-between items-center z-8" onChange={filterValue} options={labelOptions} /> 
                 </div>
             )}
         </div>
