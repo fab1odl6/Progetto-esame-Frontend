@@ -11,7 +11,7 @@ import HandleEventsPage from "./pages/HandleEventsPage";
 import PersonalGalleryPage from "./pages/PersonalGalleryPage";
 import ArtworkDetails from "./components/ArtworkDetails";
 import { useState, useEffect } from "react";
-import LoginPage from "./pages/Login";
+import RegisterPage from "./pages/RegisterPage";
 
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
   }
 
   useEffect(() => {
-    console.log("Ricerca:", search);
+    console.log("Ricerca: ", search);
   }, [search]);
   // writeUserData(5, "fdedg");
   return (
@@ -40,7 +40,7 @@ function App() {
         <HeaderBar />
         <div>
           <Route path="/">
-            <HomePage onSearch={handleSearch} />
+            <HomePage onSearch={handleSearch} onReset={handleResetSearch} />
           </Route>
           <Route path="/everyArtwork">
             <EveryArtworkPage onSearch={handleSearch} onReset={handleResetSearch} search={search} />
@@ -59,6 +59,9 @@ function App() {
           </Route>
           <Route path="/artworkDetails">
             <ArtworkDetails />
+          </Route>
+          <Route path="/register">
+            <RegisterPage />
           </Route>
         </div>
       </div>

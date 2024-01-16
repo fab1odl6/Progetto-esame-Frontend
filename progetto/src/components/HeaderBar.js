@@ -12,7 +12,8 @@ function HeaderBar() {
         { label: "Museums", path: "/museums" },
         { label: "Personal Gallery", path: "/personalGallery" },
         { label: "My Events", path: "/myEvents" },
-        { label: "Handle Events", path: "/handleEvents" }
+        { label: "Handle Events", path: "/handleEvents" },
+        { label: "Register", path: "/register" }
     ]
 
     const renderedLinks = links.map((link) => {

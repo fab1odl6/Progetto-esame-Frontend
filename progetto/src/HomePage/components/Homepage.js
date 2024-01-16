@@ -6,11 +6,13 @@ import className from "classnames";
 import SearchBar from "../../components/SearchBar";
 
 
-function HomePage({ onSearch }) {
+function HomePage({ onSearch, onReset }) {
 
     const searchBarHeader = className("justify-center align-center flex");
     const searchBar = className("mt-5 border-1 h-1/6 w-5/6 text-gray-500 justify-between flex");
     const searchIcon = className("self-end mb-6");
+
+    onReset();
 
     return (
         <div>
