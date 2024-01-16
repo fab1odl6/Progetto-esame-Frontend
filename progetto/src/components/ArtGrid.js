@@ -33,6 +33,7 @@ function ArtGrid({ artworks }) {
     ];
     */
 
+    
     const renderCard = artworks.map((artwork) =>{
         //console.log("TITOLO")
         //console.log(artwork.title)

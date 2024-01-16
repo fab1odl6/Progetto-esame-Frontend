@@ -118,7 +118,18 @@ const artworksSlice = createSlice({
 
             return { ...state, array: newArray, full: newFull };
         },
+        setArtworks(state, action) {
+            console.log("Action payload in setArtworks:", action.payload);
+            const artworksArray = Array.isArray(action.payload) ? action.payload : [action.payload];
+            return { ...state, array: artworksArray };
+        },
+        
     },
 });
 
+export const setArtworks = (artworks) => ({
+    type: 'SET_ARTWORKS',
+    payload: artworks,
+  });
+  
 export default artworksSlice;
