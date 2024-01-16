@@ -5,6 +5,7 @@ import { getDatabase, ref, get } from 'firebase/database';
 import { firebaseConfig } from '../components/FirebaseConfig';
 import ArtGrid from '../components/ArtGrid';
 import { setArtworks } from '../store/index';
+import LoginPage from './Login';
 
 function PersonalGalleryPage() {
     const dispatch = useDispatch();
@@ -47,10 +48,19 @@ function PersonalGalleryPage() {
 
     console.log("Artworks in Redux store:", artworksRedux.array); // Log gli artworks nello stato Redux
 
+    const { logged } = useSelector((state) => {
+        return state.users;
+    })
+
     return (
         <div>
-            <h1>Personal Gallery</h1>
-            <ArtGrid artworks={artworksLocal} />
+            {logged ? (<div>
+                <h1>Personal Gallery</h1>
+                <ArtGrid artworks={artworksLocal} />
+            </div>
+            ) : (
+                <LoginPage />
+            )}
         </div>
     );
 }

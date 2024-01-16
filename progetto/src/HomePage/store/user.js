@@ -9,7 +9,7 @@ const updateData = function (user) {
     const app = initializeApp(firebaseConfig);
     const db = getDatabase();
 
-    set(ref(db, "/users/" + user.name), {
+    set(ref(db, "/users/" + user.name + "/personalData"), {
         name: user.name,
         surname: user.surname,
         password: user.password,
