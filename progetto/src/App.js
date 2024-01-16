@@ -13,6 +13,7 @@ import ArtworkDetails from "./components/ArtworkDetails";
 import { useState, useEffect } from "react";
 import RegisterPage from "./pages/RegisterPage";
 import { useSelector } from "react-redux";
+import LoginPage from "./pages/Login"
 
 
 function App() {
