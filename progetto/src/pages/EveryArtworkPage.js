@@ -21,6 +21,14 @@ function EveryArtworkPage({ onSearch, onReset, search }) {
         return matchesAuthor && matchesType && matchesNationality && matchesDate && matchesTitle
     });
 
+    /*
+    const FilterSelectionHandler = () => {
+        const filtersState = useSelector((state) => state.search);
+        console.log("Stato corrente:", filtersState);
+        return null;
+    };
+    */
+
     return(      
         <div>
             <div className='z-40 relative'>
