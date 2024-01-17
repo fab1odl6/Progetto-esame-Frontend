@@ -5,13 +5,13 @@ import HandleEvents from "../components/HandleEvents";
 
 function HandleEventsPage() {
 
-    const containerClass = className("flex justify-center h-min");
+    const containerClass = className("flex justify-center h-[80vh]");
 
     return (
         <div className={containerClass}>
-            <AddAnEvent />
+            <AddAnEvent className="h-full" />
             <div className="m-4"></div>
-            <HandleEvents className="mt-4" />
+            <HandleEvents className="mt-10 h-full" />
         </div>
     )
 }

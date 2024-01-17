@@ -5,6 +5,8 @@ import EventContainer from './EventContainer';
 import EventCard from './EventCard';
 import { GoChevronDown, GoChevronLeft } from 'react-icons/go';
 import className from "classnames";
+import { useSelector } from 'react-redux';
+import LoginPage from '../pages/Login';
 
 function EventsPage() {
   const searchBarHeader = className("justify-center align-center flex");
@@ -30,38 +32,47 @@ function EventsPage() {
     { id: 2, title: 'Eventi passati', content: <EventCard future={false} /> },
   ];
 
+  const { logged } = useSelector((state) => {
+    return state.users;
+  })
+
   return (
     <div>
-      <div className={searchBarHeader}>
-        <div className={searchBar}>
-          Cerca ...
-          <SearchIcon className={searchIcon} />
+      {logged ? (<div>
+        <div className={searchBarHeader}>
+          <div className={searchBar}>
+            Cerca ...
+            <SearchIcon className={searchIcon} />
+          </div>
+        </div>
+        <div className={mainContent}>
+          <h1 className={title}>EVENTS</h1>
+
+          {events.map((event) => (
+            <Accordion
+              key={event.id}
+              expanded={expandedAccordion[event.id]}
+              onChange={() => handleToggle(event.id)}
+              className={accordion}
+            >
+              <AccordionSummary>
+                <div className={titleContainer}>
+                  <Typography variant="h6" className={typography}>{event.title}</Typography>
+                  {expandedAccordion[event.id] ? <GoChevronDown /> : <GoChevronLeft />}
+                </div>
+              </AccordionSummary>
+              <AccordionDetails>
+                <div>
+                  <EventContainer {...{ future: event.id === 1 ? true : false }} />
+                </div>
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </div>
       </div>
-      <div className={mainContent}>
-        <h1 className={title}>EVENTS</h1>
-
-        {events.map((event) => (
-          <Accordion
-            key={event.id}
-            expanded={expandedAccordion[event.id]}
-            onChange={() => handleToggle(event.id)}
-            className={accordion}
-          >
-            <AccordionSummary>
-              <div className={titleContainer}>
-                <Typography variant="h6" className={typography}>{event.title}</Typography>
-                {expandedAccordion[event.id] ? <GoChevronDown /> : <GoChevronLeft />}
-              </div>
-            </AccordionSummary>
-            <AccordionDetails>
-              <div>
-                <EventContainer {...{ future: event.id === 1 ? true : false }} />
-              </div>
-            </AccordionDetails>
-          </Accordion>
-        ))}
-      </div>
+      ) : (
+        <LoginPage />
+      )}
     </div>
   );
 };

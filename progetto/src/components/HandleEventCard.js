@@ -51,7 +51,7 @@ function HandleEventCard({ event }) {
     const imageClass = "w-16 h-16 object-cover";
     const titleAndHeart = "flex items-center";
     const favoriteClass = "text-red-500 cursor-pointer ml-2";
-    const iconsContainerClass = "flex items-center";
+    const iconsContainerClass = "flex mt-1 items-center";
     const trashIconClass = "text-gray-500 cursor-pointer mr-2";
     const editIconClass = "text-gray-500 cursor-pointer";
 

@@ -28,7 +28,7 @@ await readData();
 
 function HandleEvents() {
 
-    const containerClass = className("w-max h-full overflow-y-auto");
+    const containerClass = className("w-max h-full p-4 mt-4 shadow overflow-y-auto");
 
     const render = events.map((event) => {
         return (
