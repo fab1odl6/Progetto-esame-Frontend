@@ -36,6 +36,7 @@ function EventsPage() {
     return state.users;
   })
 
+
   return (
     <div>
       {logged ? (<div>
