@@ -1,36 +1,35 @@
 import { useState, useEffect } from 'react';
 import classNames from 'classnames';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFilterItem, removeFilterItem } from '../HomePage/store';
 
-function CheckboxDropdownPanel({className,options,onCheckboxChange,onCheckboxChangeReverse,state}){
+function CheckboxDropdownPanel({className,options}){
 
   const [checkedItems, setCheckedItems] = useState({});
+  const dispatch = useDispatch();
+  const filterState = useSelector((state) => state.filters.filterCheckbox);
 
   const finalClassNames = classNames('border rounded p-3 shadow bg-white w-full', className);
 
   useEffect(() => {
     // Inizializza checkedItems in base allo stato iniziale state
-    const initialState = state.reduce((acc, value) => {
-      acc[value] = true; // Imposta a true se vuoi che la checkbox sia selezionata inizialmente
+    const initialState = filterState.reduce((acc, value) => {
+      acc[value] = true; // Checkbox selezionata inizialmente
       return acc;
     }, {});
-
     setCheckedItems(initialState);
-  }, [state]);
+  }, [filterState]);
 
   const handleCheckboxChange = (option) => {
     const newCheckedItems = { ...checkedItems, [option.value]: !checkedItems[option.value] };
     setCheckedItems(newCheckedItems);
-    if (onCheckboxChange) {
-      onCheckboxChange(option.value);
-    }
+    dispatch(addFilterItem({ filterName: "filterCheckbox", valueToAdd: option.value }));
   }
 
   const handleCheckboxRemoval= (option) => {
     const newCheckedItems = { ...checkedItems, [option.value]: !checkedItems[option.value] };
     setCheckedItems(newCheckedItems);
-    if (onCheckboxChangeReverse) {
-      onCheckboxChangeReverse(option.value);
-    }      
+    dispatch(removeFilterItem({ filterName: "filterCheckbox", valueToRemove: option.value }))
   }
       
   return (

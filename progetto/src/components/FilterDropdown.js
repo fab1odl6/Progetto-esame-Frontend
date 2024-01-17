@@ -1,24 +1,24 @@
 import { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import { GoChevronDown } from "react-icons/go";
 import Panel from "./FilterDropdownPanel";
+import { addFilterItem } from "../HomePage/store";
 
-function Dropdown({ option, value, onChange, title }) {
+function Dropdown({ option, title }) {
   const [isOpen, setIsOpen] = useState(false);
   const divEl = useRef();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handler = (event) => {
       if (!divEl.current) {
         return;
       }
-
       if (!divEl.current.contains(event.target)) {
         setIsOpen(false);
       }
     };
-
     document.addEventListener("click", handler, true);
-
     return () => {
       document.removeEventListener("click", handler);
     };
@@ -30,10 +30,10 @@ function Dropdown({ option, value, onChange, title }) {
 
   const handleOptionClick = (option) => {
     setIsOpen(false);
-    onChange(option.label,'filterSelection');
+    dispatch(addFilterItem({ filterName: "filterSelection", valueToAdd: option.label }));
   };
 
-  const renderedOptions = option.map((option, index) => {
+  const renderedOptions = option.map((option) => {
       return (
           <div
             className="hover:bg-sky-100 rounded cursor-pointer p-1"

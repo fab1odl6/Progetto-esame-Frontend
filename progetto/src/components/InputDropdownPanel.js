@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import classNames from 'classnames';
+import { useDispatch } from 'react-redux';
+import { addFilterItem } from '../HomePage/store';
 
 
-function InputDropdownPanel({className, onChange, options }) {
+function InputDropdownPanel({className, options }) {
 
   const [text, setText] = useState("");
   const [matchedValues, setMatchedValues] = useState([]);
+  const dispatch = useDispatch();
+
+  const finalClassNames = classNames('border rounded p-2 shadow bg-white w-full', className);
 
   const handleChange = (event) => {
     const inputValue = event.target?.value;
@@ -13,8 +18,6 @@ function InputDropdownPanel({className, onChange, options }) {
     // Filtra i valori corrispondenti
     const matches = options.filter(value => value.toLowerCase().includes(inputValue.toLowerCase()));
     setMatchedValues(matches);
-
-    //console.log(matches)
   }
 
   const handleSelect = (selectedValue) => {
@@ -24,14 +27,9 @@ function InputDropdownPanel({className, onChange, options }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onChange(text);
+    dispatch(addFilterItem({ filterName: "filterInput", valueToAdd: text }));
     setText("");
   }
-
-  const finalClassNames = classNames(
-      'border rounded p-2 shadow bg-white w-full',
-      className
-    );
 
   return (
     <div className={finalClassNames}>

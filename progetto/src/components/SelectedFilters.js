@@ -1,15 +1,16 @@
 import FilterButton from "./FilterButton";
-import classNames from 'classnames';
+import { useDispatch } from "react-redux";
+import { removeFilterItem } from "../HomePage/store";
 
-function SelectedFilters({filters, onRemove}){
+function SelectedFilters({filters}){
+
+    const dispatch = useDispatch();
 
     const handleFilterRemove = (filter) => {
-        // Aggiungi qui la logica per gestire il clic del filtro se necessario
-        console.log("Filtro cliccato:", filter);
-        onRemove(filter.filterValue,filter.filterName)
+        dispatch(removeFilterItem({ filterName: filter.filterName, valueToRemove: filter.filterValue }))
     };
 
-    const renderedFilters = filters.map((filter, index) => {
+    const renderedFilters = filters.map((filter) => {
         let labelText = '';
 
         switch (filter.filterName) {
