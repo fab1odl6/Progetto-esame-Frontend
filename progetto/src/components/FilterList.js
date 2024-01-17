@@ -1,62 +1,33 @@
-import { useState, useEffect } from "react";
 import FilterDropdown from "../components/FilterDropdown";
 import InputDropdown from "./InputDropdown";
 import SliderDropdown from "./SliderDropdown";
 import CheckboxDropdown from "./CheckboxDropdown";
 import SelectedFilters from "./SelectedFilters";
+import { useSelector } from "react-redux";
 
-function FilterList({ artworks, filters, handleInput, removalHandle }) {
-    
-    /*
-    useEffect(() => {
-        console.log("AUTORE INSERITO:", filters.filterInput);
-    }, [filters.filterInput]);
+function FilterList({ artworks }) {
 
-    useEffect(() => {
-        console.log("SCELTA:", filters.filterSelection);
-    }, [filters.filterSelection]);
+    const filtersState = useSelector((state) => state.filters);
 
-    useEffect(() => {
-        console.log("ANNO:", filters.filterSlider);
-    }, [filters.filterSlider]);
-
-    useEffect(() => {
-        console.log("CHECKBOX:", filters.filterCheckbox);
-    }, [filters.filterCheckbox]);
-    */
-
-    //NOMI ARTISTI DA ASSEGNARE AL FILTRO
-    const artworkAuthors = artworks.reduce((uniqueAuthors, artwork) => {
-        // Verifica se l'artista è già presente nelle opzioni
-        const isDuplicate = uniqueAuthors.some(author => author.value === artwork.authorName);
-        // Se è un duplicato, salta l'aggiunta
-        if (isDuplicate) {
-            return uniqueAuthors;
-        }
-        // Altrimenti, aggiungi l'artista alle opzioni
-        return [
-            ...uniqueAuthors,
-            {
-                label: artwork.authorName,
-                value: artwork.authorName,
+    const extractUnique = (artworks, fieldName) => {
+        return artworks.reduce((uniqueValue, artwork) => {
+            const fieldValue = artwork[fieldName];
+            const isDuplicate = uniqueValue.some(author => author.value === fieldValue);
+            if (isDuplicate) {
+                return uniqueValue;
             }
-        ];
-    }, []);
+            return [
+                ...uniqueValue,
+                {
+                    label: fieldValue,
+                    value: fieldValue,
+                }
+            ];
+        }, []);
+    }
 
-    //CATEGORIE DI ARTWORKS FILTRO
-    const artworkType = artworks.reduce((uniqueTypes, artwork) => {
-        const isDuplicate = uniqueTypes.some(type => type.value === artwork.type);
-        if (isDuplicate) {
-            return uniqueTypes;
-        }
-        return [
-            ...uniqueTypes,
-            {
-                label: artwork.type,
-                value: artwork.type,
-            }
-        ];
-    }, []);
+    const artworkAuthors = extractUnique(artworks, 'authorName');
+    const artworkType = extractUnique(artworks, 'type');
 
 
     //CALCOLO ANNO MAX E MIN PER FILTRO
@@ -64,7 +35,7 @@ function FilterList({ artworks, filters, handleInput, removalHandle }) {
         return parseInt(artwork.date,10)
     })
 
-    function findMinMax(numbers) {
+    const findMinMax = (numbers) => {
         const filteredNumbers = numbers.filter(num => !isNaN(num));
         const max = Math.max(...filteredNumbers);
         const min = Math.min(...filteredNumbers);      
@@ -90,26 +61,24 @@ function FilterList({ artworks, filters, handleInput, removalHandle }) {
         ];
     }, []);
 
-    const combinedFilters = Object.entries(filters).flatMap(([filterName, filterValues]) => {
+    const combinedFilters = Object.entries(filtersState).flatMap(([filterName, filterValues]) => {
         return filterValues.map(filterValue => ({
             filterName,
             filterValue,
         }));
     });
 
-    console.log("ALL",combinedFilters)
-
     return (
         <div className="z-8"> 
             <div className="mt-4 justify-center align-center flex z-8">
-                <InputDropdown option={artworkAuthors} value={filters.filterInput} onChange={handleInput} title="Author"/>
-                <FilterDropdown option={artworkType} value={filters.filterSelection} onChange={handleInput} title="Artwork type"/>
-                <SliderDropdown option={intervalYears} value={filters.filterSlider} onChange={handleInput} title="End Date"/>
-                <CheckboxDropdown options={nations} value={filters.filterCheckbox} onChange={handleInput} onDelete={removalHandle} title="Nationality"/>
+                <InputDropdown option={artworkAuthors} title="Author"/>
+                <FilterDropdown option={artworkType} title="Artwork type"/>
+                <SliderDropdown option={intervalYears} title="End Date"/>
+                <CheckboxDropdown options={nations} title="Nationality"/>
             </div>
             <div>
                 {combinedFilters.length > 0 && (
-                    <SelectedFilters filters={combinedFilters} onRemove={removalHandle}/>
+                    <SelectedFilters filters={combinedFilters}/>
                 )}
             </div>
         </div>

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { GoChevronDown } from "react-icons/go";
 import SliderDropdownPanel from "./SliderDropdownPanel";
 
-function SliderDropdown({ option, value, onChange, title }) {
+function SliderDropdown({ option, title }) {
     const [isOpen, setIsOpen] = useState(false);
     const divEl = useRef(null);
 
@@ -12,9 +12,7 @@ function SliderDropdown({ option, value, onChange, title }) {
                 setIsOpen(false);
             }
         };
-
         document.addEventListener("click",handler,true);
-
         return () => {
             document.removeEventListener("click", handler);
         };
@@ -22,10 +20,6 @@ function SliderDropdown({ option, value, onChange, title }) {
 
     const handleClick = () => {
         setIsOpen(!isOpen);
-    }
-
-    const handleSliderValue = (value) => {
-        onChange(value,'filterSlider');
     }
 
     return(
@@ -36,7 +30,7 @@ function SliderDropdown({ option, value, onChange, title }) {
             </div>
             {isOpen && (
                 <div className="absolute top-full w-full">
-                   <SliderDropdownPanel option={option} className="flex justify-between items-center" onChange={handleSliderValue} /> 
+                   <SliderDropdownPanel option={option} className="flex justify-between items-center" /> 
                 </div>
             )}
         </div>

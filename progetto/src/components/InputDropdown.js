@@ -2,12 +2,11 @@ import { useEffect, useState, useRef } from "react";
 import { GoChevronDown } from "react-icons/go";
 import InputDropdownPanel from "./InputDropdownPanel";
 
-function InputDropdown({ option, value, onChange, title }) {
+function InputDropdown({ option, title }) {
     const [isOpen, setIsOpen] = useState(false);
     const divEl = useRef(null);
 
     const labelOptions = option.map(op => op.label)
-    //console.log(labelOptions)
 
     useEffect(() => {
         const handler = (event) => {
@@ -15,9 +14,7 @@ function InputDropdown({ option, value, onChange, title }) {
                 setIsOpen(false);
             }
         };
-
         document.addEventListener("click",handler,true);
-
         return () => {
             document.removeEventListener("click", handler);
         };
@@ -25,10 +22,6 @@ function InputDropdown({ option, value, onChange, title }) {
 
     const handleClick = () => {
         setIsOpen(!isOpen);
-    }
-
-    const filterValue = (value) => {
-        onChange(value,'filterInput');
     }
 
     return(
@@ -39,7 +32,7 @@ function InputDropdown({ option, value, onChange, title }) {
             </div>
             {isOpen && (
                 <div className="absolute top-full w-full">
-                   <InputDropdownPanel className="flex justify-between items-center z-8" onChange={filterValue} options={labelOptions} /> 
+                   <InputDropdownPanel className="flex justify-between items-center z-8" options={labelOptions} /> 
                 </div>
             )}
         </div>

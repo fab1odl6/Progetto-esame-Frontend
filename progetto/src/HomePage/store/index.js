@@ -3,6 +3,7 @@ import artworksSlice from "./artworks";
 import eventsSlice from "./events";
 import artDetailSlice from "./artDetails";
 import usersSlice from "./user";
+import filtersSlice from "../../store/filters";
 
 
 const store = configureStore({
@@ -10,7 +11,8 @@ const store = configureStore({
         artworks: artworksSlice.reducer,
         events: eventsSlice.reducer,
         artDetails: artDetailSlice.reducer,
-        users: usersSlice.reducer
+        users: usersSlice.reducer,
+        filters: filtersSlice.reducer
     }
 });
 
@@ -19,4 +21,6 @@ export const { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt } =
 export const { swipeLeftEvent, swipeRightEvent, switchFavoriteEvent, switchFullEvent } = eventsSlice.actions;
 export const { setArt, onClickHeart } = artDetailSlice.actions;
 export const { setUser, setLogged, setArtworks } = usersSlice.actions;
+export const { removeFilterItem, addFilterItem } = filtersSlice.actions;
+
 
