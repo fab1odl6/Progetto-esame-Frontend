@@ -2,6 +2,9 @@ import React, { useState, useContext } from 'react';
 import HomePage from '../HomePage/components/Homepage';
 import NavigationContext from '../context/navigation';
 import { getDatabase, ref, get, child } from 'firebase/database';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../store/user';
+
 
 
 
@@ -9,7 +12,10 @@ const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setLoggedIn] = useState(false); 
+  const [error, setError] = useState(null); 
   const { navigate } = useContext(NavigationContext);
+
+  const dispatch = useDispatch();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,12 +30,14 @@ const LoginPage = () => {
       const matchedUser = Object.values(users).find(user => user.username === username && user.password === password);
 
       if (matchedUser) {
+
+        dispatch(setUser(matchedUser));
+        console.log('Utente loggato:', matchedUser);
         setLoggedIn(true);
         navigate('/');
       } else {
 
-        console.error('Username o Password Errati, riprovare');
-
+        setError('Username o Password Errati, riprovare');
         setUsername('');
         setPassword('');
       }
@@ -37,6 +45,8 @@ const LoginPage = () => {
       // Gestisci l'errore, ad esempio, loggando l'errore sulla console
       console.error('Errore durante la verifica dell\'utente:', error);
     }
+
+    console.log('Fine della funzione handleLogin');
   };
 
   return (
@@ -65,12 +75,20 @@ const LoginPage = () => {
           />
         </div>
 
+        {error && (
+        <div style={{ ...styles.error, display: 'block' }} onClick={() => console.log('Clicked on error:', error)}>
+            {error}
+        </div>
+        )}
+
+
         <button type="submit" style={styles.button}>
           Login
         </button>
       </form>
     </div>
   );
+  
 };
 
 const styles = {
@@ -111,16 +129,25 @@ const styles = {
         border: 'none',
         cursor: 'pointer',
       },
+
+      error: {
+        color: 'red',
+        display: 'block',
+        zIndex: 1000,  
+        position: 'relative',
+        backgroundColor: 'lightpink',
+      },
     };
 
     const ConditionalHomePage = () => {
         const [isLoggedIn, setLoggedIn] = useState(false);
+        console.log('isLoggedIn:', isLoggedIn);
       
         if (isLoggedIn) {
           return <HomePage />;
         }
       
-        return null; // Puoi anche renderizzare altro (ad esempio, un messaggio di benvenuto)
+        return "Benvenuto!"; // Puoi anche renderizzare altro (ad esempio, un messaggio di benvenuto)
       };
       
     export default LoginPage;

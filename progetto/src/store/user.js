@@ -21,14 +21,15 @@ const usersSlice = createSlice({
     name: "usersSlice",
     initialState: {
         user: {},
-        logged: null
+        logged: false
     },
     reducers: {
         setUser(state, action) {
             updateData(action.payload);
             return ({
                 ...state,
-                user: action.payload
+                user: action.payload,
+                logged: true
             })
         },
         setLogged(state, action) {
@@ -40,4 +41,5 @@ const usersSlice = createSlice({
     },
 });
 
+export const { setUser, setLogged } = usersSlice.actions;
 export default usersSlice;
