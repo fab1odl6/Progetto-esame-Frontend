@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { switchFullEvent, switchFavoriteEvent } from "../store";
+import { switchFullEvent } from "../store";
 import { IoIosClose } from "react-icons/io";
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import className from "classnames";
+import { useEffect } from "react";
 
 
-function EventShow() {
+function EventShow({ favoriteState, onClickHeart, setFavoriteState }) {
 
     const modal = className("fixed inset-0 flex flex-col items-center justify-center w-screen h-screen bg-blue bg-auto z-10");
     const container = className("border-slate-300 border-solid border-4 bg-white");
@@ -19,6 +20,10 @@ function EventShow() {
         return state.events;
     })
 
+    const { events, logged } = useSelector((state) => {
+        return state.users;
+    })
+
     const dispatch = useDispatch();
 
     const handleClickClose = function () {
@@ -26,8 +31,18 @@ function EventShow() {
     }
 
     const handleClickHeart = function (event) {
-        dispatch(switchFavoriteEvent(event));
+        onClickHeart(event);
     }
+
+    useEffect(() => {
+        if (logged) {
+            if (events.find((item) => item.name === array[index].name)) {
+                setFavoriteState(true);
+            } else {
+                setFavoriteState(false);
+            }
+        }
+    }, [index, logged]);
 
     return (
         <div className={modal}>
@@ -38,7 +53,7 @@ function EventShow() {
                 </div>
                 <div className={firstRow}>
                     {array[index].name && <div>Title: {array[index].name}</div>}
-                    {array[index].favorite ? (
+                    {favoriteState ? (
                         <FaHeart className={favorite} onClick={() => handleClickHeart(array[index])} />
                     ) : (
                         <FaRegHeart className={favorite} onClick={() => handleClickHeart(array[index])} />

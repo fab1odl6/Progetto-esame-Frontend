@@ -47,6 +47,7 @@ async function getArts(user) {
   } catch (e) {
     console.error(e);
   }
+  artArray.map(art => console.log(art))
   return artArray;
 }
 

@@ -23,7 +23,7 @@ function EventSlideShow() {
         return state.events;
     });
 
-    const { user, logged, events } = useSelector((state) => {
+    const { logged, events } = useSelector((state) => {
         return state.users;
     })
     const [favoriteState, setFavoriteState] = useState(false);
@@ -40,7 +40,6 @@ function EventSlideShow() {
 
     const handleClickHeart = function (event) {
         dispatch(updateEvent(event));
-        dispatch(switchFavoriteEvent({ event, user }));
         setFavoriteState(!favoriteState);
     }
 
@@ -57,6 +56,7 @@ function EventSlideShow() {
             }
         }
     }, [index, logged]);
+
 
     const altText = "Image of " + array[index].name;
     return (
@@ -80,7 +80,7 @@ function EventSlideShow() {
                     </div>
                     <FaChevronRight className={chevron} onClick={handleClickChevronRight} />
                 </div>
-                {full && <EventShow />}
+                {full && <EventShow favoriteState={favoriteState} onClickHeart={handleClickHeart} setFavoriteState={setFavoriteState} />}
             </div>
         </div>
     );

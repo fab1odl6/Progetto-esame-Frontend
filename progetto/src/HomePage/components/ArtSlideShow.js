@@ -1,14 +1,12 @@
 import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
-import { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt, updateArt, setFavorite } from '../store';
+import { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt, updateArt, setFavorite, onClickHeart } from '../store';
 import ArtFullShow from "./ArtShow";
 import className from "classnames";
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../../components/FirebaseConfig';
 import { getDatabase } from 'firebase/database';
 import { useEffect, useState } from 'react';
-
-
 
 
 function ArtSlideShow() {
@@ -38,27 +36,6 @@ function ArtSlideShow() {
     })
     const [favoriteState, setFavoriteState] = useState(false);
 
-    const getEl = function () {
-        const i = artworks.findIndex((e) => {
-            return e.title === array[index].title;
-        });
-        console.log("i: " + i)
-        let el;
-        if (i === -1) {
-            el = array[index];
-        } else {
-            el = artworks[i];
-        }
-        console.log("el[i]: " + el.title);
-        console.log("El: " + el.favorite);
-        return el;
-    }
-    const [el, setEl] = useState(null);
-    console.log(artworks.length)
-    useEffect(() => {
-        setEl(getEl());
-    }, [favoriteState])
-
     const handleClickChevronLeft = function () {
         dispatch(swipeLeftArt());
     }
@@ -69,7 +46,6 @@ function ArtSlideShow() {
 
     const handleClickHeart = function (art) {
         dispatch(updateArt(art));
-        dispatch(switchFavoriteArt({ art, user }));
         setFavoriteState(!favoriteState);
     }
 
@@ -88,7 +64,6 @@ function ArtSlideShow() {
     }, [index, logged]);
 
 
-
     const altText = "Image of " + array[index].title;
     return (
         <div>
@@ -105,15 +80,15 @@ function ArtSlideShow() {
                                 <div className='pr-1'>{array[index].title} </div> {array[index].authorName && <div> - {array[index].authorName}</div>}
                             </div>
                             {favoriteState ? (
-                                <FaHeart className={favoriteClass} onClick={() => handleClickHeart(el)} />
+                                <FaHeart className={favoriteClass} onClick={() => handleClickHeart(array[index])} />
                             ) : (
-                                <FaRegHeart className={favoriteClass} onClick={() => handleClickHeart(el)} />
+                                <FaRegHeart className={favoriteClass} onClick={() => handleClickHeart(array[index])} />
                             )}
                         </div>
                     </div>
                     <FaChevronRight className={chevron} onClick={handleClickChevronRight} />
                 </div>
-                {full && <ArtFullShow />}
+                {full && <ArtFullShow favoriteState={favoriteState} onClickHeart={handleClickHeart} setFavoriteState={setFavoriteState} />}
             </div>
         </div>
     );
