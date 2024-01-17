@@ -17,67 +17,56 @@ const updateData = function (user) {
 }
 
 
-async function getArt(user) {
-    const artArray = [];
-    const artRef = child(dbRef, "/users/" + user.name + "/artworks");
-
-    try {
-        const snapshot = await get(artRef);
-        if (snapshot.exists()) {
-            const data = snapshot.val();
-            for (const key in data) {
-                const dataObj = data[key];
-                artArray.push({
-                    id: dataObj.id,
-                    link: dataObj.link,
-                    authorName: dataObj.authorName,
-                    title: dataObj.title,
-                    image: dataObj.image,
-                    department: dataObj.department,
-                    culture: dataObj.culture,
-                    period: dataObj.period,
-                    date: dataObj.date,
-                    dimensions: dataObj.dimensions,
-                    city: dataObj.city,
-                    state: dataObj.state,
-                    country: dataObj.country,
-                    classification: dataObj.classification,
-                    favorite: dataObj.favorite,
-                    full: dataObj.full,
-                    type: dataObj.type
-                });
-            }
-        }
-    } catch (e) {
-        console.error(e);
-    }
-    console.log(artArray)
-    return artArray;
-}
-
-
 const usersSlice = createSlice({
     name: "usersSlice",
     initialState: {
         user: {},
-        logged: null,
-        artworks: []
+        logged: false,
+        artworks: [],
+        events: []
     },
     reducers: {
         setUser(state, action) {
-            updateData(action.payload);
-            const newArtworks = getArt(action.payload);
+            updateData(action.payload.matchedUser);
             return ({
                 ...state,
-                artworks: newArtworks,
-                user: action.payload
-            })
+                user: action.payload.matchedUser,
+                artworks: action.payload.artworks,
+                events: action.payload.events
+            });
         },
         setLogged(state, action) {
             return ({
                 ...state,
                 logged: !state.logged
-            })
+            });
+        },
+        updateArt(state, action) {
+            if (!state.artworks.find((item) => item.id === action.payload.id)) {
+                return ({
+                    ...state,
+                    artworks: state.artworks.concat([action.payload])
+                });
+            } else {
+                return ({
+                    ...state,
+                    artworks: state.artworks.filter(artwork => artwork !== action.payload)
+                });
+            }
+        },
+
+        updateEvent(state, action) {
+            if (!state.events.includes(action.payload)) {
+                return ({
+                    ...state,
+                    events: state.events.concat([action.payload])
+                });
+            } else {
+                return ({
+                    ...state,
+                    events: state.events.pop(action.payload)
+                });
+            }
         }
     }
 });

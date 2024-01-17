@@ -1,8 +1,9 @@
 import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
-import { swipeLeftEvent, swipeRightEvent, switchFavoriteEvent, switchFullEvent } from '../store';
+import { swipeLeftEvent, swipeRightEvent, switchFavoriteEvent, switchFullEvent, updateEvent } from '../store';
 import EventShow from "./EventShow";
 import className from "classnames";
+import { useState, useEffect } from 'react';
 
 function EventSlideShow() {
 
@@ -22,6 +23,11 @@ function EventSlideShow() {
         return state.events;
     });
 
+    const { user, logged, events } = useSelector((state) => {
+        return state.users;
+    })
+    const [favoriteState, setFavoriteState] = useState(false);
+
     const dispatch = useDispatch();
 
     const handleClickChevronLeft = function () {
@@ -33,12 +39,24 @@ function EventSlideShow() {
     }
 
     const handleClickHeart = function (event) {
-        dispatch(switchFavoriteEvent(event));
+        dispatch(updateEvent(event));
+        dispatch(switchFavoriteEvent({ event, user }));
+        setFavoriteState(!favoriteState);
     }
 
     const handleClickEvent = function () {
         dispatch(switchFullEvent())
     }
+
+    useEffect(() => {
+        if (logged) {
+            if (events.find((item) => item.name === array[index].name)) {
+                setFavoriteState(true);
+            } else {
+                setFavoriteState(false);
+            }
+        }
+    }, [index, logged]);
 
     const altText = "Image of " + array[index].name;
     return (
@@ -53,7 +71,7 @@ function EventSlideShow() {
                         </div>
                         <div className={titleAndHeart}>
                             <div className={title} onClick={handleClickEvent}>{array[index].name}</div>
-                            {array[index].favorite ? (
+                            {favoriteState ? (
                                 <FaHeart className={favorite} onClick={() => handleClickHeart(array[index])} />
                             ) : (
                                 <FaRegHeart className={favorite} onClick={() => handleClickHeart(array[index])} />

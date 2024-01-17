@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, get, child, set, remove } from "firebase/database";
+import { getDatabase, ref, get, child, set, remove, update } from "firebase/database";
 import { firebaseConfig } from "..//../components/FirebaseConfig";
 
 
@@ -18,17 +18,17 @@ async function readData() {
 
             for (const key in data) {
                 if (data.hasOwnProperty(key)) {
-                    const dataObj = data[key];
+                    const event = data[key];
 
                     eventArray.push({
-                        id: dataObj.id,
-                        name: dataObj.name,
-                        image: dataObj.image,
-                        date: dataObj.date,
-                        department: dataObj.department,
-                        guests: dataObj.guests,
-                        favorite: false,
-                        full: false
+                        id: event.id,
+                        name: event.name,
+                        image: event.image,
+                        date: event.date,
+                        department: event.department,
+                        guests: event.guests,
+                        favorite: event.favorite,
+                        full: event.full
                     });
                 }
             }
@@ -42,11 +42,11 @@ async function readData() {
 
 await readData();
 
-function updateFavorite(event) {
+function updateFavorite(event, user) {
     const db = getDatabase();
 
     if (!event.favorite) {
-        set(ref(db, 'users/Fabio/events/' + event.name), {
+        set(ref(db, 'users/' + user.name + '/events/' + event.name), {
             id: event.id,
             name: event.name,
             image: event.image,
@@ -55,9 +55,17 @@ function updateFavorite(event) {
             guests: event.guests,
             favorite: true,
             full: false
-        })
+        });
+
+        update(ref(db, "events/" + event.name), {
+            favorite: true
+        });
     } else {
-        remove(ref(db, "users/Fabio/events/" + event.name));
+        remove(ref(db, 'users/' + user.name + '/events/' + event.name));
+
+        update(ref(db, "events/" + event.name), {
+            favorite: false
+        });
     }
 }
 
@@ -85,7 +93,7 @@ const eventsSlice = createSlice({
             const newArray = [...state.array];
             newArray[state.index] = { ...newArray[state.index], favorite: newFavorite };
 
-            updateFavorite(action.payload);
+            updateFavorite(action.payload.event, action.payload.user);
             return { ...state, array: newArray, favorite: newFavorite };
         },
 

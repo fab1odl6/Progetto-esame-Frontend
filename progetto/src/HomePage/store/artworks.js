@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, get, child, set, remove } from "firebase/database";
+import { getDatabase, ref, get, child, set, remove, update } from "firebase/database";
 import { firebaseConfig } from "..//../components/FirebaseConfig";
+import { useSelector } from "react-redux";
 
 
 const artArray = [];
@@ -87,26 +88,26 @@ async function readData() {
 
             for (const key in data) {
                 if (data.hasOwnProperty(key)) {
-                    const dataObj = data[key];
+                    const art = data[key];
                     if (artArray.length < 5) {
                         artArray.push({
-                            id: dataObj.id,
-                            link: dataObj.link,
-                            authorName: dataObj.authorName,
-                            title: dataObj.title,
-                            image: dataObj.image,
-                            department: dataObj.department,
-                            culture: dataObj.culture,
-                            period: dataObj.period,
-                            date: dataObj.date,
-                            dimensions: dataObj.dimensions,
-                            city: dataObj.city,
-                            state: dataObj.state,
-                            country: dataObj.country,
-                            classification: dataObj.classification,
-                            favorite: dataObj.favorite,
-                            full: dataObj.full,
-                            type: dataObj.type
+                            id: art.id,
+                            link: art.link,
+                            authorName: art.authorName,
+                            title: art.title,
+                            image: art.image,
+                            department: art.department,
+                            culture: art.culture,
+                            period: art.period,
+                            date: art.date,
+                            dimensions: art.dimensions,
+                            city: art.city,
+                            state: art.state,
+                            country: art.country,
+                            classification: art.classification,
+                            favorite: art.favorite,
+                            full: art.full,
+                            type: art.type
                         });
                     }
                 }
@@ -121,11 +122,12 @@ async function readData() {
 
 await readData();
 
-function updateFavorite(art) {
+function updateFavorite(art, user) {
+    console.log(art)
     const db = getDatabase();
-
+    console.log("FAVORITE: " + art.favorite)
     if (!art.favorite) {
-        set(ref(db, 'users/Fabio/artworks/' + art.title), {
+        set(ref(db, 'users/' + user.name + '/artworks/' + art.title), {
             id: art.id,
             link: art.link,
             authorName: art.authorName,
@@ -143,9 +145,9 @@ function updateFavorite(art) {
             favorite: true,
             full: false,
             type: art.type
-        })
+        });
     } else {
-        remove(ref(db, "users/Fabio/artworks/" + art.title));
+        remove(ref(db, "users/" + user.name + "/artworks/" + art.title));
     }
 }
 
@@ -173,7 +175,8 @@ const artworksSlice = createSlice({
             const newArray = [...state.array];
             newArray[state.index] = { ...newArray[state.index], favorite: newFavorite };
 
-            updateFavorite(action.payload);
+            console.log("switch: " + action.payload.art.favorite)
+            updateFavorite(action.payload.art, action.payload.user);
             return { ...state, array: newArray, favorite: newFavorite };
         },
 
