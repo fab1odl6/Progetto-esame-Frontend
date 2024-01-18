@@ -1,18 +1,21 @@
 import ArtGrid from "../components/ArtGrid"
 import FilterList from "../components/FilterList";
 import SearchBar from '../components/SearchBar';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearText } from "../HomePage/store";
+import { useEffect } from "react";
 
-function EveryArtworkPage({ onSearch, onReset, search }) {
+function EveryArtworkPage() {
 
     const { array } = useSelector((state) => {
         return state.artworks;
     });
+    const dispatch = useDispatch();
     const filtersState = useSelector((state) => state.filters);
+    const searchState = useSelector((state) => state.search.text);
 
     const filteredArray = array.filter((element) => {
-        const matchesTitle = !search || element.title.toLowerCase().includes(search.toLowerCase());
-        if(!search){onReset();}
+        const matchesTitle = !searchState || element.title.toLowerCase().includes(searchState.toLowerCase());
         const matchesAuthor = filtersState.filterInput.length === 0 || filtersState.filterInput.some(input => element.authorName.includes(input));
         const matchesType = filtersState.filterSelection.length === 0 || filtersState.filterSelection.some(input => element.type.includes(input));
         const matchesDate = filtersState.filterSlider.length === 0 || filtersState.filterSlider.some(input => element.date.toString() === input);
@@ -21,25 +24,23 @@ function EveryArtworkPage({ onSearch, onReset, search }) {
         return matchesAuthor && matchesType && matchesNationality && matchesDate && matchesTitle
     });
 
-    /*
-    const FilterSelectionHandler = () => {
-        const filtersState = useSelector((state) => state.search);
-        console.log("Stato corrente:", filtersState);
-        return null;
-    };
-    */
+    useEffect(() => {
+        if (!searchState) {
+            dispatch(clearText());
+        }
+    }, []);
 
     return(      
         <div>
             <div className='z-40 relative'>
-                <SearchBar onSearch={onSearch}/>
+                <SearchBar/>
             </div>
             <div className="z-30 relative">
                 <FilterList artworks={array} />
             </div>
-            {search && search.trim() !== '' && (
+            {searchState && searchState.trim() !== '' && (
                 <div className="z-20 relative">
-                    <p className="text-lg font-bold mt-4">Results for: {search}</p>
+                    <p className="text-lg font-bold mt-4">Results for: {searchState}</p>
                 </div>
             )}
             <div className="z-20 relative">

@@ -1,15 +1,12 @@
 import SearchIcon from '@mui/icons-material/Search';
 import className from "classnames";
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { NavigationProvider } from "../context/navigation";
-import Route from "./Route";
-import Link from './Link';
 import NavigationContext from '../context/navigation';
 import { updateText } from '../HomePage/store';
 
 
-function SearchBar({onSearch}) {
+function SearchBar() {
 
     const { navigate } = useContext(NavigationContext);
     const dispatch = useDispatch();
@@ -30,15 +27,11 @@ function SearchBar({onSearch}) {
         // Filtra i valori corrispondenti
         const matches = array.filter(value => value.title.toLowerCase().includes(inputValue.toLowerCase()));
         setMatchedValues(matches);
-
-        //console.log("MATCH: ",matches)
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        //console.log(text)
-        //ELIMINARE ONSEARCH
-        onSearch(text);
+        //onSearch(text);
         dispatch(updateText(text));
         setText(""); 
         navigate('/everyArtwork');
