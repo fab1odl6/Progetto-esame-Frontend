@@ -48,7 +48,6 @@ async function getArts(user) {
   } catch (e) {
     console.error(e);
   }
-  artArray.map(art => console.log(art))
   return artArray;
 }
 
@@ -95,14 +94,9 @@ const LoginPage = () => {
         e.preventDefault();
       
         console.log(`Username: ${username}, Password: ${password}`);
-
-        if (!user || !user.name) {
-            console.error("User or user.name is undefined");
-            // Gestisci l'errore o esci dalla funzione
-            return;
-          }
+        
       
-        const usersRef = ref(db, "/users/" + user.name + "/personalData"); // Utilizza user.name qui
+        const usersRef = ref(db, "/users/" + user.name + "/personalData"); 
         
         try {
           const snapshot = await get(usersRef);
