@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { switchFullArt, switchFavoriteArt, setArt } from "../store";
+import { switchFullArt } from "../store";
 import { IoIosClose } from "react-icons/io";
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import className from "classnames";
 import Link from "../../components/Link";
+import { useEffect } from "react";
 
 
-function ArtShow() {
+function ArtShow({ favoriteState, onClickHeart, setFavoriteState }) {
 
     const modal = className("fixed inset-0 flex flex-col items-center justify-center w-screen h-screen z-10");
     const container = className("border-slate-300 border-solid border-4 bg-white overflow-auto");
@@ -22,6 +23,9 @@ function ArtShow() {
         return state.artworks;
     })
 
+    const { artworks, logged } = useSelector((state) => {
+        return state.users;
+    })
 
     const dispatch = useDispatch();
 
@@ -30,10 +34,19 @@ function ArtShow() {
     }
 
     const handleClickHeart = function (art) {
-        dispatch(switchFavoriteArt(art));
+        onClickHeart(art);
     }
 
-    dispatch(setArt(array[index]));
+
+    useEffect(() => {
+        if (logged) {
+            if (artworks.find((item) => item.id === array[index].id)) {
+                setFavoriteState(true);
+            } else {
+                setFavoriteState(false);
+            }
+        }
+    }, [index, logged]);
 
     return (
         <div className={modal}>
@@ -44,7 +57,7 @@ function ArtShow() {
                 </div>
                 <div className={firstRow}>
                     {array[index].title && <div>Title: {array[index].title}</div>}
-                    {array[index].favorite ? (
+                    {favoriteState ? (
                         <FaHeart className={favorite} onClick={() => handleClickHeart(array[index])} />
                     ) : (
                         <FaRegHeart className={favorite} onClick={() => handleClickHeart(array[index])} />

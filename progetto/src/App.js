@@ -18,25 +18,10 @@ import LoginPage from "./pages/Login"
 
 function App() {
 
-  const [search, setSearch] = useState("");
-
-  const handleSearch = (text) => {
-    console.log("INSERITO: ", text)
-    setSearch(text);
-  }
-
   const { user, logged } = useSelector((state) => {
     return state.users;
   })
 
-  const handleResetSearch = () => {
-    console.log("Ricerca Effettuata!")
-    setSearch("")
-  }
-
-  useEffect(() => {
-    console.log("Ricerca: ", search);
-  }, [search]);
   // writeUserData(5, "fdedg");
   return (
 
@@ -45,10 +30,10 @@ function App() {
         <HeaderBar />
         <div>
           <Route path="/">
-            <HomePage onSearch={handleSearch} onReset={handleResetSearch} />
+            <HomePage/>
           </Route>
           <Route path="/everyArtwork">
-            <EveryArtworkPage onSearch={handleSearch} onReset={handleResetSearch} search={search} />
+            <EveryArtworkPage/>
           </Route>
           <Route path="/museums">
             <Museums />

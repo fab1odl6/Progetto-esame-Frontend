@@ -14,17 +14,6 @@ function FilterButton({ children, onRemove }) {
         </div>
     );
 
-    /*
-    return (
-        <div
-            className="hover:bg-sky-100 rounded cursor-pointer p-2 text-sm border bg-white inline-block m-1"
-            onClick={onClick}
-        >
-            {children}
-        </div>
-    );
-    */
-
 }
 
 export default FilterButton;
