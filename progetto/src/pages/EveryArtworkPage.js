@@ -4,6 +4,7 @@ import SearchBar from '../components/SearchBar';
 import { useSelector, useDispatch } from "react-redux";
 import { clearText } from "../HomePage/store";
 import { useEffect } from "react";
+import { FaTimes } from 'react-icons/fa';
 
 function EveryArtworkPage() {
 
@@ -30,6 +31,10 @@ function EveryArtworkPage() {
         }
     }, []);
 
+    const handleRemove = () => {
+        dispatch(clearText());
+    }
+
     return(      
         <div>
             <div className='z-40 relative'>
@@ -39,8 +44,12 @@ function EveryArtworkPage() {
                 <FilterList artworks={array} />
             </div>
             {searchState && searchState.trim() !== '' && (
-                <div className="z-20 relative">
-                    <p className="text-lg font-bold mt-4">Results for: {searchState}</p>
+                <div className="z-20 relative flex items-center mt-4">
+                    <p className="text-lg font-bold">Results for: {searchState}</p>
+                    <button className="flex items-center px-2 py-1 bg-gray-300 rounded cursor-pointer ml-3" onClick={handleRemove}>
+                        <FaTimes className="ml-1" />
+                        Clear
+                    </button>
                 </div>
             )}
             <div className="z-20 relative">
