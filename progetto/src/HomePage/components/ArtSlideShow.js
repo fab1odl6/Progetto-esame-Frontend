@@ -1,6 +1,6 @@
 import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
-import { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt, updateArt, setFavorite, onClickHeart } from '../store';
+import { swipeLeftArt, swipeRightArt, switchFullArt, updateArt } from '../store';
 import ArtFullShow from "./ArtShow";
 import className from "classnames";
 import { initializeApp } from 'firebase/app';
@@ -48,8 +48,7 @@ function ArtSlideShow() {
         dispatch(swipeRightArt());
     }
 
-    const handleClickHeart = function (e, art) {
-        e.stopPropagation();
+    const handleClickHeart = function (art) {
         if (logged) {
             dispatch(updateArt(art));
             setFavoriteState(!favoriteState);
@@ -108,9 +107,9 @@ function ArtSlideShow() {
                                 <div className='pr-1'>{array[index].title} </div> {array[index].authorName && <div> - {array[index].authorName}</div>}
                             </div>
                             {favoriteState ? (
-                                <FaHeart className={favoriteClass} onClick={(e) => handleClickHeart(e, array[index])} />
+                                <FaHeart className={favoriteClass} onClick={() => handleClickHeart(array[index])} />
                             ) : (
-                                <FaRegHeart className={favoriteClass} onClick={(e) => handleClickHeart(e, array[index])} />
+                                <FaRegHeart className={favoriteClass} onClick={() => handleClickHeart(array[index])} />
                             )}
                         </div>
                     </div>

@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { switchFullArt } from "../store";
+import { setArt, switchFullArt } from "../store";
 import { IoIosClose } from "react-icons/io";
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import className from "classnames";
-import Link from "../../components/Link";
 import { useEffect, useState, useContext } from "react";
 import NavigationContext from "../../context/navigation";
 
@@ -64,6 +63,11 @@ function ArtShow({ favoriteState, onClickHeart, setFavoriteState }) {
         setModal(false);
     }
 
+    const handleClickButtonDetails = function () {
+        dispatch(setArt(array[index]));
+        navigate("/artworkDetails");
+    }
+
     return (
         <div className={modalClass}>
             {modal && (
@@ -97,11 +101,9 @@ function ArtShow({ favoriteState, onClickHeart, setFavoriteState }) {
                 {array[index].date && <div>Date: {array[index].date}</div>}
                 {array[index].classification && <div>Classification: {array[index].classification}</div>}
                 <div>
-                    <Link to="/artworkDetails" key="Details">
-                        <button className={buttonClass}>
-                            See details
-                        </button>
-                    </Link>
+                    <button className={buttonClass} onClick={handleClickButtonDetails}>
+                        See details
+                    </button>
                 </div>
             </div>
         </div>
@@ -109,8 +111,3 @@ function ArtShow({ favoriteState, onClickHeart, setFavoriteState }) {
 }
 
 export default ArtShow;
-
-/* 
-    Ho messo gli '&&' per fare in modo che se un campo è vuoto, non viene proprio mostrato anche se probabilmente 
-    la maggior parte delle volte, soprattutto per i primi, quell' 'and' andrà a buon fine.
-*/

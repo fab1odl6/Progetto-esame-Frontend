@@ -3,7 +3,7 @@ import HomePage from '../HomePage/components/Homepage';
 import NavigationContext from '../context/navigation';
 import { getDatabase, ref, get, child } from 'firebase/database';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../store/user';
+import { setUser } from '../HomePage/store';
 import { setLogged } from '../HomePage/store';
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from '../components/FirebaseConfig';

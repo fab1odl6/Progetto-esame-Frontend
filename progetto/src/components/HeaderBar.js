@@ -9,7 +9,7 @@ function HeaderBar() {
     const links = [
         { label: "HomePage", path: "/" },
         { label: "Every Artwork", path: "/everyArtwork" },
-        { label: "Museums", path: "/museums" },
+        { label: "Thematic Areas", path: "/museums" },
         { label: "Personal Gallery", path: "/personalGallery" },
         { label: "My Events", path: "/myEvents" },
         { label: "Handle Events", path: "/handleEvents" },
