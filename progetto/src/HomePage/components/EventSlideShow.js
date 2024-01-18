@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { swipeLeftEvent, swipeRightEvent, switchFavoriteEvent, switchFullEvent, updateEvent } from '../store';
 import EventShow from "./EventShow";
 import className from "classnames";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import NavigationContext from '../../context/navigation';
+import { IoIosClose } from 'react-icons/io';
+
 
 function EventSlideShow() {
 
@@ -18,6 +21,7 @@ function EventSlideShow() {
     const favorite = className("ml-auto text-2xl");
     const title = className("text-lg place-content-center");
 
+    const { navigate } = useContext(NavigationContext);
 
     const { array, index, full } = useSelector((state) => {
         return state.events;
@@ -27,6 +31,7 @@ function EventSlideShow() {
         return state.users;
     })
     const [favoriteState, setFavoriteState] = useState(false);
+    const [modal, setModal] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -39,8 +44,12 @@ function EventSlideShow() {
     }
 
     const handleClickHeart = function (event) {
-        dispatch(updateEvent(event));
-        setFavoriteState(!favoriteState);
+        if (logged) {
+            dispatch(updateEvent(event));
+            setFavoriteState(!favoriteState);
+        } else {
+            setModal(true);
+        }
     }
 
     const handleClickEvent = function () {
@@ -57,10 +66,29 @@ function EventSlideShow() {
         }
     }, [index, logged]);
 
+    const handleClickButton = function () {
+        navigate("/login");
+    }
+
+    const handleClickClose = function () {
+        setModal(false);
+    }
+
 
     const altText = "Image of " + array[index].name;
     return (
         <div className={container}>
+            {modal && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-8 max-w-md rounded shadow-lg relative">
+                        <div className="mb-4">You must login to save an artwork/event!</div>
+                        <button onClick={handleClickButton} className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">
+                            Login
+                        </button>
+                        <IoIosClose onClick={handleClickClose} className="absolute top-2 right-2 text-gray-700 cursor-pointer text-lg" />
+                    </div>
+                </div>
+            )}
             <div className={eventText}>Eventi in evidenza</div>
             <div className={eventDiv}>
                 <div className={eventContainer}>

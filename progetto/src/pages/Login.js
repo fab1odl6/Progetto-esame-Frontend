@@ -80,60 +80,61 @@ async function getEvents(user) {
 }
 
 const LoginPage = () => {
-    const { user, logged } = useSelector((state) => state.users);
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [isLoggedIn, setLoggedIn] = useState(false);
-    const [error, setError] = useState(null);
-    const { navigate } = useContext(NavigationContext);
-    
+  const { user, logged } = useSelector((state) => state.users);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [error, setError] = useState(null);
+  const { navigate } = useContext(NavigationContext);
 
-    const dispatch = useDispatch();
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-      
-        console.log(`Username: ${username}, Password: ${password}`);
-        
-      
-        const usersRef = ref(db, "/users/" + user.name + "/personalData"); 
-        
-        try {
-          const snapshot = await get(usersRef);
-          console.log('Snapshot:', snapshot.val());
-          
-          const userData = snapshot.val();
-          console.log('User Data:', userData);
-          
-          if (userData && typeof userData === 'object') {
-            const matchedUser = Object.values(user).find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password);
-            console.log('Matched User:', matchedUser);
-        
-            if (matchedUser) {
-              console.log('Utente loggato:', matchedUser);
-              const artworks = await getArts(matchedUser);
-              const events = await getEvents(matchedUser);
-              dispatch(setUser({ matchedUser, artworks, events }));
-              setLoggedIn(true);
-              dispatch(setLogged());
-              console.log('isLoggedIn dopo il login:', isLoggedIn);
-              navigate('/');
-            } else {
-              setError('Username o Password Errati, riprovare');
-              setUsername('');
-              setPassword('');
-            }
+  const dispatch = useDispatch();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    console.log(`Username: ${username}, Password: ${password}`);
+
+    const usersRef = ref(db, "users/");
+
+    try {
+      const snapshot = await get(usersRef);
+
+      if (snapshot.exists()) {
+        const users = snapshot.val();
+        console.log(users);
+
+        if (users) {
+          const matchedUser = Object.values(users).find(u =>
+            u.personalData.username.toLowerCase() === username.toLowerCase() && u.personalData.password === password
+          );
+
+          if (matchedUser) {
+            console.log('Utente loggato:', matchedUser);
+            const artworks = await getArts(matchedUser.personalData);
+            const events = await getEvents(matchedUser.personalData);
+            dispatch(setUser({ matchedUser, artworks, events }));
+            setLoggedIn(true);
+            dispatch(setLogged());
+            console.log('isLoggedIn dopo il login:', isLoggedIn);
+            navigate('/');
           } else {
-            setError('Dati utente non validi');
+            setError('Username o Password Errati, riprovare');
+            setUsername('');
+            setPassword('');
           }
-        } catch (error) {
-          console.error('Errore durante la verifica dell\'utente:', error);
-          setError('Si è verificato un errore durante la verifica dell\'utente');
+        } else {
+          setError('Dati utente non validi');
         }
-      
-        console.log('Fine della funzione handleLogin');
-      };
-  
+      }
+    } catch (error) {
+      console.error('Errore durante la verifica dell\'utente:', error);
+      setError('Si è verificato un errore durante la verifica dell\'utente');
+    }
+
+    console.log('Fine della funzione handleLogin');
+  };
+
   return (
     <div style={styles.container}>
       <h2 style={styles.title}>Login</h2>

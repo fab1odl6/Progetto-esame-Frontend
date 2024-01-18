@@ -5,7 +5,7 @@ import { getDatabase, set, ref } from "firebase/database";
 
 
 const updateData = function (user) {
-    console.log(user)
+    console.log("user: " + user)
     const app = initializeApp(firebaseConfig);
     const db = getDatabase();
 

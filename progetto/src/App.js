@@ -30,10 +30,10 @@ function App() {
         <HeaderBar />
         <div>
           <Route path="/">
-            <HomePage/>
+            <HomePage />
           </Route>
           <Route path="/everyArtwork">
-            <EveryArtworkPage/>
+            <EveryArtworkPage />
           </Route>
           <Route path="/museums">
             <Museums />
@@ -52,6 +52,9 @@ function App() {
           </Route>
           <Route path="/register">
             <RegisterPage />
+          </Route>
+          <Route path="/login">
+            <LoginPage />
           </Route>
         </div>
       </div>
