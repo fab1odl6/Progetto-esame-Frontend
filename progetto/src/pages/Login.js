@@ -7,6 +7,7 @@ import { setUser } from '../store/user';
 import { setLogged } from '../HomePage/store';
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from '../components/FirebaseConfig';
+import { useSelector } from "react-redux";
 
 
 const app = initializeApp(firebaseConfig);
@@ -79,48 +80,65 @@ async function getEvents(user) {
 }
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const [error, setError] = useState(null);
-  const { navigate } = useContext(NavigationContext);
+    const { user, logged } = useSelector((state) => state.users);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [isLoggedIn, setLoggedIn] = useState(false);
+    const [error, setError] = useState(null);
+    const { navigate } = useContext(NavigationContext);
+    
 
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    console.log(`Username: ${username}, Password: ${password}`);
-    const database = getDatabase();
-    const usersRef = ref(database, 'users');
+    const handleLogin = async (e) => {
+        e.preventDefault();
+      
+        console.log(`Username: ${username}, Password: ${password}`);
 
-    try {
-      const snapshot = await get(usersRef);
-      const users = snapshot.val();
-
-      const matchedUser = Object.values(users).find(user => user.username === username && user.password === password);
-
-      if (matchedUser) {
-        const artworks = await getArts(matchedUser);
-        const events = await getEvents(matchedUser);
-        dispatch(setUser({ matchedUser, artworks, events }));
-        console.log('Utente loggato:', matchedUser);
-        setLoggedIn(true);
-        dispatch(setLogged());
-        navigate('/');
-      } else {
-
-        setError('Username o Password Errati, riprovare');
-        setUsername('');
-        setPassword('');
-      }
-    } catch (error) {
-      // Gestisci l'errore, ad esempio, loggando l'errore sulla console
-      console.error('Errore durante la verifica dell\'utente:', error);
-    }
-
-    console.log('Fine della funzione handleLogin');
-  };
-
+        if (!user || !user.name) {
+            console.error("User or user.name is undefined");
+            // Gestisci l'errore o esci dalla funzione
+            return;
+          }
+      
+        const usersRef = ref(db, "/users/" + user.name + "/personalData"); // Utilizza user.name qui
+        
+        try {
+          const snapshot = await get(usersRef);
+          console.log('Snapshot:', snapshot.val());
+          
+          const userData = snapshot.val();
+          console.log('User Data:', userData);
+          
+          if (userData && typeof userData === 'object') {
+            const matchedUser = Object.values(user).find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password);
+            console.log('Matched User:', matchedUser);
+        
+            if (matchedUser) {
+              console.log('Utente loggato:', matchedUser);
+              const artworks = await getArts(matchedUser);
+              const events = await getEvents(matchedUser);
+              dispatch(setUser({ matchedUser, artworks, events }));
+              setLoggedIn(true);
+              dispatch(setLogged());
+              console.log('isLoggedIn dopo il login:', isLoggedIn);
+              navigate('/');
+            } else {
+              setError('Username o Password Errati, riprovare');
+              setUsername('');
+              setPassword('');
+            }
+          } else {
+            setError('Dati utente non validi');
+          }
+        } catch (error) {
+          console.error('Errore durante la verifica dell\'utente:', error);
+          setError('Si è verificato un errore durante la verifica dell\'utente');
+        }
+      
+        console.log('Fine della funzione handleLogin');
+      };
+  
   return (
     <div style={styles.container}>
       <h2 style={styles.title}>Login</h2>
