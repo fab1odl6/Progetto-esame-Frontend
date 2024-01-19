@@ -14,6 +14,7 @@ import { useState, useEffect } from "react";
 import RegisterPage from "./pages/RegisterPage";
 import { useSelector } from "react-redux";
 import LoginPage from "./pages/Login"
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
             <RegisterPage />
           </Route>
         </div>
+        <Footer/>
       </div>
     </NavigationProvider>
 
