@@ -22,7 +22,7 @@ const store = configureStore({
 export { store };
 export const { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt } = artworksSlice.actions;
 export const { swipeLeftEvent, swipeRightEvent, switchFavoriteEvent, switchFullEvent } = eventsSlice.actions;
-export const { setArt } = artDetailSlice.actions;
+export const { setArt, setFavorite } = artDetailSlice.actions;
 export const { registerUser, setUser, setLogged, updateArt, updateEvent } = usersSlice.actions;
 export const { removeFilterItem, addFilterItem } = filtersSlice.actions;
 export const { updateText, clearText } = searchSlice.actions;

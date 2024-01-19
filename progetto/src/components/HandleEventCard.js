@@ -1,4 +1,4 @@
-import className from "classnames";
+
 import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { MdModeEdit, MdOutlineEditOff } from "react-icons/md";
@@ -49,7 +49,7 @@ function HandleEventCard({ event }) {
     const containerClass = "flex items-center justify-between bg-white p-4 shadow-md";
     const imageContainerClass = "mr-4";
     const imageClass = "w-16 h-16 object-cover";
-    const titleAndHeart = "flex items-center";
+    const titleAndHeartClass = "flex items-center";
     const favoriteClass = "text-red-500 cursor-pointer ml-2";
     const iconsContainerClass = "flex mt-1 items-center";
     const trashIconClass = "text-gray-500 cursor-pointer mr-2";
@@ -147,7 +147,7 @@ function HandleEventCard({ event }) {
                     <div className={containerClass}>
                         <div>
                             <div className={imageContainerClass}><img src={event.image} className={imageClass} /></div>
-                            <div className={titleAndHeart}>
+                            <div className={titleAndHeartClass}>
                                 <div>{formData.name}</div>
                                 {favorite ? (
                                     <FaHeart className={favoriteClass} onClick={() => handleClickHeart(event)} />

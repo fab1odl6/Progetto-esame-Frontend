@@ -5,6 +5,14 @@ import Panel from "./FilterDropdownPanel";
 import { addFilterItem } from "../HomePage/store";
 
 function Dropdown({ option, title }) {
+
+  const optionClass = "hover:bg-sky-100 rounded cursor-pointer p-1";
+  const containerClass = "w-48 relative";
+  const panelClass = "flex justify-between items-center cursor-pointer";
+  const chevronClass = "text-lg";
+  const openedPanelClass = "absolute top-full";
+
+
   const [isOpen, setIsOpen] = useState(false);
   const divEl = useRef();
   const dispatch = useDispatch();
@@ -34,27 +42,27 @@ function Dropdown({ option, title }) {
   };
 
   const renderedOptions = option.map((option) => {
-      return (
-          <div
-            className="hover:bg-sky-100 rounded cursor-pointer p-1"
-            onClick={() => handleOptionClick(option)}
-            key={option.value}
-          >
-            {option.label}
-          </div>
-        );
+    return (
+      <div
+        className={optionClass}
+        onClick={() => handleOptionClick(option)}
+        key={option.value}
+      >
+        {option.label}
+      </div>
+    );
   });
-  
+
   return (
-    <div ref={divEl} className="w-48 relative">
+    <div ref={divEl} className={containerClass}>
       <Panel
-        className="flex justify-between items-center cursor-pointer"
+        className={panelClass}
         onClick={handleClick}
       >
         {title}
-        <GoChevronDown className="text-lg" />
+        <GoChevronDown className={chevronClass} />
       </Panel>
-      {isOpen && <Panel className="absolute top-full">{renderedOptions}</Panel>}
+      {isOpen && <Panel className={openedPanelClass}>{renderedOptions}</Panel>}
     </div>
   );
 

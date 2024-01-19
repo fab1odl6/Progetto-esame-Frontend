@@ -1,8 +1,8 @@
-// MuseumDetail.js
 import React from 'react';
-import SearchIcon from '@mui/icons-material/Search';
+
 
 function MuseumDetail({ museum }) {
+
   return (
     <div>
       <div>
@@ -79,7 +79,7 @@ function MuseumDetail({ museum }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default MuseumDetail;

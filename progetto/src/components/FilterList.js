@@ -7,6 +7,10 @@ import { useSelector } from "react-redux";
 
 function FilterList({ artworks }) {
 
+    const containerClass = "z-8";
+    const dropdownContainerClass = "mt-4 justify-center align-center flex z-8";
+
+
     const filtersState = useSelector((state) => state.filters);
 
     const extractUnique = (artworks, fieldName) => {
@@ -32,13 +36,13 @@ function FilterList({ artworks }) {
 
     //CALCOLO ANNO MAX E MIN PER FILTRO
     const artworkYears = artworks.map((artwork) => {
-        return parseInt(artwork.date,10)
+        return parseInt(artwork.date, 10)
     })
 
     const findMinMax = (numbers) => {
         const filteredNumbers = numbers.filter(num => !isNaN(num));
         const max = Math.max(...filteredNumbers);
-        const min = Math.min(...filteredNumbers);      
+        const min = Math.min(...filteredNumbers);
         return { max, min };
     }
 
@@ -69,16 +73,16 @@ function FilterList({ artworks }) {
     });
 
     return (
-        <div className="z-8"> 
-            <div className="mt-4 justify-center align-center flex z-8">
-                <InputDropdown option={artworkAuthors} title="Author"/>
-                <FilterDropdown option={artworkType} title="Artwork type"/>
-                <SliderDropdown option={intervalYears} title="End Date"/>
-                <CheckboxDropdown options={nations} title="Nationality"/>
+        <div className={containerClass}>
+            <div className={dropdownContainerClass}>
+                <InputDropdown option={artworkAuthors} title="Author" />
+                <FilterDropdown option={artworkType} title="Artwork type" />
+                <SliderDropdown option={intervalYears} title="End Date" />
+                <CheckboxDropdown options={nations} title="Nationality" />
             </div>
             <div>
                 {combinedFilters.length > 0 && (
-                    <SelectedFilters filters={combinedFilters}/>
+                    <SelectedFilters filters={combinedFilters} />
                 )}
             </div>
         </div>

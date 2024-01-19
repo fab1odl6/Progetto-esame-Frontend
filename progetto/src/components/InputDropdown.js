@@ -2,7 +2,16 @@ import { useEffect, useState, useRef } from "react";
 import { GoChevronDown } from "react-icons/go";
 import InputDropdownPanel from "./InputDropdownPanel";
 
+
 function InputDropdown({ option, title }) {
+
+    const containerClass = "w-48 relative z-8";
+    const inputClass = "flex justify-between items-center cursor-pointer border rounded p-3 shadow bg-white w-full";
+    const chevronClass = "text-lg";
+    const openedContainerClass = "absolute top-full w-full";
+    const InputDropdownPanelClass = "flex justify-between items-center z-8";
+
+
     const [isOpen, setIsOpen] = useState(false);
     const divEl = useRef(null);
 
@@ -10,11 +19,11 @@ function InputDropdown({ option, title }) {
 
     useEffect(() => {
         const handler = (event) => {
-            if(divEl.current && !divEl.current.contains(event.target)) {
+            if (divEl.current && !divEl.current.contains(event.target)) {
                 setIsOpen(false);
             }
         };
-        document.addEventListener("click",handler,true);
+        document.addEventListener("click", handler, true);
         return () => {
             document.removeEventListener("click", handler);
         };
@@ -24,15 +33,15 @@ function InputDropdown({ option, title }) {
         setIsOpen(!isOpen);
     }
 
-    return(
-        <div ref={divEl} className="w-48 relative z-8">
-            <div className="flex justify-between items-center cursor-pointer border rounded p-3 shadow bg-white w-full" onClick={handleClick}>
+    return (
+        <div ref={divEl} className={containerClass}>
+            <div className={inputClass} onClick={handleClick}>
                 {title}
-                <GoChevronDown className="text-lg" />
+                <GoChevronDown className={chevronClass} />
             </div>
             {isOpen && (
-                <div className="absolute top-full w-full">
-                   <InputDropdownPanel className="flex justify-between items-center z-8" options={labelOptions} /> 
+                <div className={openedContainerClass}>
+                    <InputDropdownPanel className={InputDropdownPanelClass} options={labelOptions} />
                 </div>
             )}
         </div>

@@ -13,6 +13,11 @@ import { IoIosClose } from 'react-icons/io';
 
 function ArtSlideShow() {
 
+    const modalContainerClass = "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50";
+    const modalDivClass = "bg-white p-8 max-w-md rounded shadow-lg relative";
+    const textContainerClass = "mb-4";
+    const buttonClass = "bg-blue-500 text-white px-4 py-2 rounded cursor-pointer";
+    const closeButtonClass = "absolute top-2 right-2 text-gray-700 cursor-pointer text-lg";
     const artText = className("");
     const artDiv = className("");
     const artContainer = className("flex flex-row place-content-center");
@@ -23,9 +28,10 @@ function ArtSlideShow() {
     const favoriteClass = className("ml-auto text-2xl");
     const title = className("text-lg place-content-center flex justify-between");
 
+
     const { navigate } = useContext(NavigationContext);
 
-    const { array, index, full } = useSelector((state) => {
+    const { array, index } = useSelector((state) => {
         return state.artworks;
     });
 
@@ -39,6 +45,7 @@ function ArtSlideShow() {
     })
     const [favoriteState, setFavoriteState] = useState(false);
     const [modal, setModal] = useState(false);
+    const [full, setFull] = useState(false);
 
     const handleClickChevronLeft = function () {
         dispatch(swipeLeftArt());
@@ -59,7 +66,7 @@ function ArtSlideShow() {
     }
 
     const handleClickArtwork = function () {
-        dispatch(switchFullArt());
+        setFull(!full);
     }
 
     useEffect(() => {
@@ -76,7 +83,7 @@ function ArtSlideShow() {
         navigate("/login");
     }
 
-    const handleClickClose = function () {
+    const handleClickCloseLog = function () {
         setModal(false);
     }
 
@@ -84,17 +91,17 @@ function ArtSlideShow() {
     return (
         <div>
             {modal && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white p-8 max-w-md rounded shadow-lg relative">
-                        <div className="mb-4">You must login to save an artwork/event!</div>
-                        <button onClick={handleClickButton} className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">
+                <div className={modalContainerClass}>
+                    <div className={modalDivClass}>
+                        <div className={textContainerClass}>You must login to save an artwork/event!</div>
+                        <button onClick={handleClickButton} className={buttonClass}>
                             Login
                         </button>
-                        <IoIosClose onClick={handleClickClose} className="absolute top-2 right-2 text-gray-700 cursor-pointer text-lg" />
+                        <IoIosClose onClick={handleClickCloseLog} className={closeButtonClass} />
                     </div>
                 </div>
             )}
-            <div className={artText}>Opere in evidenza</div>
+            <div className={artText}>Highlighted Artworks</div>
             <div className={artDiv}>
                 <div className={artContainer}>
                     <FaChevronLeft className={chevron} onClick={handleClickChevronLeft} />
@@ -115,7 +122,13 @@ function ArtSlideShow() {
                     </div>
                     <FaChevronRight className={chevron} onClick={handleClickChevronRight} />
                 </div>
-                {full && <ArtFullShow favoriteState={favoriteState} onClickHeart={handleClickHeart} setFavoriteState={setFavoriteState} />}
+                {full && <ArtFullShow
+                    artwork={array[index]}
+                    favoriteState={favoriteState}
+                    onClickHeart={handleClickHeart}
+                    setFavoriteState={setFavoriteState}
+                    setFull={handleClickArtwork}
+                />}
             </div>
         </div>
     );

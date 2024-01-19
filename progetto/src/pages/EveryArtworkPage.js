@@ -6,7 +6,17 @@ import { clearText } from "../HomePage/store";
 import { useEffect } from "react";
 import { FaTimes } from 'react-icons/fa';
 
+
 function EveryArtworkPage() {
+
+    const searchBarClass = 'z-40 relative';
+    const filterListClass = "z-30 relative";
+    const containerStateClass = "z-50 relative flex items-center mt-4";
+    const resultTextClass = "text-lg font-bold";
+    const buttonClass = "flex items-center px-2 py-1 bg-gray-300 rounded cursor-pointer ml-3";
+    const iconClass = "ml-1";
+    const artGridClass = "z-auto relative";
+
 
     const { array } = useSelector((state) => {
         return state.artworks;
@@ -41,22 +51,22 @@ function EveryArtworkPage() {
 
     return (
         <div>
-            <div className='z-40 relative'>
+            <div className={searchBarClass}>
                 <SearchBar />
             </div>
-            <div className="z-30 relative">
+            <div className={filterListClass}>
                 <FilterList artworks={array} />
             </div>
             {searchState && searchState.trim() !== '' && (
-                <div className="z-20 relative flex items-center mt-4">
-                    <p className="text-lg font-bold">Results for: {searchState}</p>
-                    <button className="flex items-center px-2 py-1 bg-gray-300 rounded cursor-pointer ml-3" onClick={handleRemove}>
-                        <FaTimes className="ml-1" />
+                <div className={containerStateClass}>
+                    <p className={resultTextClass}>Results for: {searchState}</p>
+                    <button className={buttonClass} onClick={handleRemove}>
+                        <FaTimes className={iconClass} />
                         Clear
                     </button>
                 </div>
             )}
-            <div className="z-20 relative">
+            <div className={artGridClass}>
                 <ArtGrid artworks={filteredArray} />
             </div>
         </div>

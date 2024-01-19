@@ -4,13 +4,19 @@ import { useDispatch } from 'react-redux';
 import { addFilterItem } from '../HomePage/store';
 
 
-function InputDropdownPanel({className, options }) {
+function InputDropdownPanel({ className, options }) {
+
+  const finalClassNames = classNames("border rounded p-2 shadow bg-white w-full", className);
+  const labelClass = "p-2";
+  const matchedPanelClass = "matched-panel";
+  const valueClass = classNames("cursor-pointer", finalClassNames);
+
 
   const [text, setText] = useState("");
   const [matchedValues, setMatchedValues] = useState([]);
   const dispatch = useDispatch();
 
-  const finalClassNames = classNames('border rounded p-2 shadow bg-white w-full', className);
+
 
   const handleChange = (event) => {
     const inputValue = event.target?.value;
@@ -34,12 +40,12 @@ function InputDropdownPanel({className, options }) {
   return (
     <div className={finalClassNames}>
       <form onSubmit={handleSubmit}>
-        <label className='p-2'>Insert author name</label>
+        <label className={labelClass}>Insert author name</label>
         <input className={finalClassNames} value={text} onChange={handleChange} />
         {text && matchedValues.length > 0 && (
-          <div className="matched-panel">
-            {matchedValues.slice(0,3).map((value, index) => (
-              <div className={`cursor-pointer ${finalClassNames}`} key={index} onClick={() => handleSelect(value)}>
+          <div className={matchedPanelClass}>
+            {matchedValues.slice(0, 3).map((value, index) => (
+              <div className={valueClass} key={index} onClick={() => handleSelect(value)}>
                 {value}
               </div>
             ))}
@@ -47,7 +53,7 @@ function InputDropdownPanel({className, options }) {
         )}
       </form>
     </div>
-   ) 
+  )
 }
 
 export default InputDropdownPanel;

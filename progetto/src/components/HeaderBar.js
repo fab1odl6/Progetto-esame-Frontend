@@ -1,10 +1,10 @@
 import Link from "./Link";
-import className from "classnames";
+
 
 function HeaderBar() {
 
-    const sectionHeader = className("flex justify-center mt-10");
-    const sectionElement = className("border p-2.5");
+    const sectionHeader = "flex justify-center mt-10";
+    const sectionElement = "border p-2.5";
 
     const links = [
         { label: "HomePage", path: "/" },

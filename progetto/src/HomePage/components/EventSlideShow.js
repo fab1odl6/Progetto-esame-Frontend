@@ -1,8 +1,7 @@
 import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
-import { swipeLeftEvent, swipeRightEvent, switchFavoriteEvent, switchFullEvent, updateEvent } from '../store';
+import { swipeLeftEvent, swipeRightEvent, switchFullEvent, updateEvent } from '../store';
 import EventShow from "./EventShow";
-import className from "classnames";
 import { useState, useEffect, useContext } from 'react';
 import NavigationContext from '../../context/navigation';
 import { IoIosClose } from 'react-icons/io';
@@ -10,16 +9,22 @@ import { IoIosClose } from 'react-icons/io';
 
 function EventSlideShow() {
 
-    const container = className("overflow: auto");
-    const eventText = className("");
-    const eventDiv = className("");
-    const eventContainer = className("flex flex-row place-content-center");
-    const eventElement = className("");
-    const image = className("w-full h-auto max-h-96");
-    const chevron = className("place-self-center text-2xl");
-    const titleAndHeart = className("flex");
-    const favorite = className("ml-auto text-2xl");
-    const title = className("text-lg place-content-center");
+    const containerClass = "overflow: auto";
+    const modalContainerClass = "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50";
+    const modalDivClass = "bg-white p-8 max-w-md rounded shadow-lg relative";
+    const textContainerClass = "mb-4";
+    const buttonClass = "bg-blue-500 text-white px-4 py-2 rounded cursor-pointer";
+    const closeButtonClass = "absolute top-2 right-2 text-gray-700 cursor-pointer text-lg";
+    const eventTextClass = "";
+    const eventDivClass = "";
+    const eventContainerClass = "flex flex-row place-content-center";
+    const eventElementClass = "";
+    const imageClass = "w-full h-auto max-h-96";
+    const chevronClass = "place-self-center text-2xl";
+    const titleAndHeartClass = "flex";
+    const favoriteClass = "ml-auto text-2xl";
+    const titleClass = "text-lg place-content-center";
+
 
     const { navigate } = useContext(NavigationContext);
 
@@ -70,43 +75,43 @@ function EventSlideShow() {
         navigate("/login");
     }
 
-    const handleClickClose = function () {
+    const handleClickCloseLog = function () {
         setModal(false);
     }
 
 
     const altText = "Image of " + array[index].name;
     return (
-        <div className={container}>
+        <div className={containerClass}>
             {modal && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white p-8 max-w-md rounded shadow-lg relative">
-                        <div className="mb-4">You must login to save an artwork/event!</div>
-                        <button onClick={handleClickButton} className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">
+                <div className={modalContainerClass}>
+                    <div className={modalDivClass}>
+                        <div className={textContainerClass}>You must login to save an artwork/event!</div>
+                        <button onClick={handleClickButton} className={buttonClass}>
                             Login
                         </button>
-                        <IoIosClose onClick={handleClickClose} className="absolute top-2 right-2 text-gray-700 cursor-pointer text-lg" />
+                        <IoIosClose onClick={handleClickCloseLog} className={closeButtonClass} />
                     </div>
                 </div>
             )}
-            <div className={eventText}>Eventi in evidenza</div>
-            <div className={eventDiv}>
-                <div className={eventContainer}>
-                    <FaChevronLeft className={chevron} onClick={handleClickChevronLeft} />
-                    <div className={eventElement}>
+            <div className={eventTextClass}>Highlighted Events</div>
+            <div className={eventDivClass}>
+                <div className={eventContainerClass}>
+                    <FaChevronLeft className={chevronClass} onClick={handleClickChevronLeft} />
+                    <div className={eventElementClass}>
                         <div onClick={handleClickEvent}>
-                            <img className={image} src={array[index].image} alt={altText} />
+                            <img className={imageClass} src={array[index].image} alt={altText} />
                         </div>
-                        <div className={titleAndHeart}>
-                            <div className={title} onClick={handleClickEvent}>{array[index].name}</div>
+                        <div className={titleAndHeartClass}>
+                            <div className={titleClass} onClick={handleClickEvent}>{array[index].name}</div>
                             {favoriteState ? (
-                                <FaHeart className={favorite} onClick={() => handleClickHeart(array[index])} />
+                                <FaHeart className={favoriteClass} onClick={() => handleClickHeart(array[index])} />
                             ) : (
-                                <FaRegHeart className={favorite} onClick={() => handleClickHeart(array[index])} />
+                                <FaRegHeart className={favoriteClass} onClick={() => handleClickHeart(array[index])} />
                             )}
                         </div>
                     </div>
-                    <FaChevronRight className={chevron} onClick={handleClickChevronRight} />
+                    <FaChevronRight className={chevronClass} onClick={handleClickChevronRight} />
                 </div>
                 {full && <EventShow favoriteState={favoriteState} onClickHeart={handleClickHeart} setFavoriteState={setFavoriteState} />}
             </div>
@@ -115,28 +120,3 @@ function EventSlideShow() {
 }
 
 export default EventSlideShow;
-/*
-<div>
-            <div className={eventText}>Opere in evidenza</div>
-            <div className={eventDiv}>
-                <div className={eventContainer}>
-                    <FaChevronLeft className={chevron} onClick={handleClickChevronLeft} />
-                    <div className={eventElement}>
-                        <div className={image} onClick={handleClickEvent}>
-                            <img src={array[index].image} alt="image" />
-                        </div>
-                        <div className={titleAndHeart}>
-                            <div className={title} onClick={handleClickEvent}>{array[index].name}</div>
-                            {array[index].favorite ? (
-                                <FaHeart className={favorite} onClick={handleClickHeart} />
-                            ) : (
-                                <FaRegHeart className={favorite} onClick={handleClickHeart} />
-                            )}
-                        </div>
-                    </div>
-                    <FaChevronRight className={chevron} onClick={handleClickChevronRight} />
-                    {full && <EventShow />}
-                </div>
-            </div>
-        </div>
-        */

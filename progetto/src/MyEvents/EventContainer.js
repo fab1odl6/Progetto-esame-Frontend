@@ -31,6 +31,7 @@ await readData();
 
 
 function EventContainer({ future }) {
+
     const today = new Date();
 
     const filteredEvents = future

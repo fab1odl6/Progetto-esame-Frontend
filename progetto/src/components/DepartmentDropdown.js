@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { firebaseConfig } from './FirebaseConfig';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, get, child } from "firebase/database";
-import className from "classnames";
-import { useEffect } from 'react';
 import { GoChevronDown, GoChevronLeft } from "react-icons/go";
 
 
@@ -32,14 +30,12 @@ await readData();
 
 function Dropdown({ onOptionSelect }) {
 
-    const dropdownContainerClass = className("relative inline-block text-left");
-    const triggerClass = className("flex items-center cursor-pointer");
-    const spanClass = className("mr-2");
-    const mandatoryClass = className("text-red-500");
-    const chevronIconClass = className("text-xl");
-    const optionsListClass = className("z-10 absolute left-0 mt-2 bg-white border rounded shadow-md overflow-y-auto max-h-60");
-    const optionItemClass = className("cursor-pointer px-4 py-2 hover:bg-gray-100 border");
-    const selectedOptionClass = className("mt-2 p-2 bg-blue-500 text-white rounded");
+    const dropdownContainerClass = "relative inline-block text-left";
+    const triggerClass = "flex items-center cursor-pointer";
+    const spanClass = "mr-2";
+    const chevronIconClass = "text-xl";
+    const optionsListClass = "z-10 absolute left-0 mt-2 bg-white border rounded shadow-md overflow-y-auto max-h-60";
+    const optionItemClass = "cursor-pointer px-4 py-2 hover:bg-gray-100 border";
 
     const [expanded, setExpanded] = useState(false);
     const [selected, setSelected] = useState(null);

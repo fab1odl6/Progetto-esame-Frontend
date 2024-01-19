@@ -1,4 +1,3 @@
-import className from "classnames";
 import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set } from "firebase/database";
@@ -6,26 +5,24 @@ import { firebaseConfig } from "./FirebaseConfig";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import DepartmentDropdown from "./DepartmentDropdown";
-import { GoChevronDown } from "react-icons/go";
 
 
 function AddAnEvent() {
-    const containerClass = className("p-4 max-w-md bg-white rounded-md shadow-md mt-4 h-full");
-    const errorDivClass = className("mt-4 p-4 bg-red-100 border border-red-400 text-red-700");
-    const errorPClass = className("mb-1");
-    const successDivClass = className("mt-4 p-4 bg-green-100 border border-green-400 text-green-700");
-    const successPClass = className("mb-1");
-    const mandatoryClass = className("text-red-500");
-    const titleClass = className("text-lg font-bold mb-4 mt-2");
-    const formClass = className("space-y-4");
-    const inputContainerClass = className("flex flex-col");
-    const inputLabelClass = className("mb-1");
-    const inputClass = className("border border-gray-300 rounded-md p-2");
-    const buttonClass = className("bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600");
-    const selectedOptionClass = className("mt-2 p-2 bg-blue-500 text-white rounded");
-    const datePickerContainerClass = className("flex relative items-center");
-    const datePickerClass = className("w-full p-2 border rounded outline-none");
-    const chevronClass = className("absolute right-0 ml-2 m-2");
+    const containerClass = "p-4 max-w-md bg-white rounded-md shadow-md mt-4 h-full";
+    const errorDivClass = "mt-4 p-4 bg-red-100 border border-red-400 text-red-700";
+    const errorPClass = "mb-1";
+    const successDivClass = "mt-4 p-4 bg-green-100 border border-green-400 text-green-700";
+    const successPClass = "mb-1";
+    const mandatoryClass = "text-red-500";
+    const titleClass = "text-lg font-bold mb-4 mt-2";
+    const formClass = "space-y-4";
+    const inputContainerClass = "flex flex-col";
+    const inputLabelClass = "mb-1";
+    const inputClass = "border border-gray-300 rounded-md p-2";
+    const buttonClass = "bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600";
+    const selectedOptionClass = "mt-2 p-2 bg-blue-500 text-white rounded";
+    const datePickerContainerClass = "flex relative items-center";
+    const datePickerClass = "w-full p-2 border rounded outline-none";
 
 
     const app = initializeApp(firebaseConfig);

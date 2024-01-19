@@ -1,17 +1,33 @@
 import AddAnEvent from "../components/AddAnEvent";
-import className from "classnames";
 import HandleEvents from "../components/HandleEvents";
+import { useSelector } from "react-redux";
+import LoginPage from "../pages/Login";
 
 
 function HandleEventsPage() {
 
-    const containerClass = className("flex justify-center h-[80vh]");
+    const containerClass = "flex justify-center h-[80vh]";
+    const addClass = "h-full";
+    const separatorClass = "m-4";
+    const handleClass = "mt-10 h-full";
+
+
+    const { logged } = useSelector((state) => {
+        return state.users;
+    })
 
     return (
-        <div className={containerClass}>
-            <AddAnEvent className="h-full" />
-            <div className="m-4"></div>
-            <HandleEvents className="mt-10 h-full" />
+        <div>
+            {logged ? (
+                <div className={containerClass}>
+                    <AddAnEvent className={addClass} />
+                    <div className={separatorClass}></div>
+                    <HandleEvents className={handleClass} />
+                </div>
+            ) : (
+                <LoginPage />
+            )
+            }
         </div>
     )
 }

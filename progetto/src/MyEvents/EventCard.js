@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import className from "classnames";
 import FavoriteEventShow from "./FavoriteEventShow";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../components/FirebaseConfig";
@@ -29,10 +28,11 @@ function updateFavorite(event, favorite) {
 
 
 function EventCard({ event }) {
-  const containerClass = className("border-2 mb-2 rounded-lg overflow-hidden");
-  const favoriteClass = className("ml-auto text-2xl");
-  const imageClass = className("w-full h-40 object-cover");
-  const titleAndHeart = className("flex p-4");
+
+  const containerClass = "border-2 mb-2 rounded-lg overflow-hidden";
+  const favoriteClass = "ml-auto text-2xl";
+  const imageClass = "w-full h-40 object-cover";
+  const titleAndHeartClass = "flex p-4";
 
 
   const [favorite, setFavorite] = useState(true);
@@ -53,7 +53,7 @@ function EventCard({ event }) {
         (<div className={containerClass}>
           <div onClick={handleClickShow}>
             <img src={event.image} className={imageClass} alt={event.name} onClick={handleClickShow} />
-            <div className={titleAndHeart}>
+            <div className={titleAndHeartClass}>
               <div>{event.name}</div>
               {event.favorite ? (
                 <FaHeart className={favoriteClass} onClick={(e) => { e.stopPropagation(); handleClickHeart(); }} />

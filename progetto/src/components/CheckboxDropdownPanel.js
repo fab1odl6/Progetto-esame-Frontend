@@ -3,7 +3,10 @@ import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFilterItem, removeFilterItem } from '../HomePage/store';
 
-function CheckboxDropdownPanel({className,options}){
+function CheckboxDropdownPanel({ className, options }) {
+
+  const labelClass = "hover:bg-sky-100 rounded cursor-pointer p-1 w-full";
+  const inputClass = "mr-2";
 
   const [checkedItems, setCheckedItems] = useState({});
   const dispatch = useDispatch();
@@ -26,17 +29,17 @@ function CheckboxDropdownPanel({className,options}){
     dispatch(addFilterItem({ filterName: "filterCheckbox", valueToAdd: option.value }));
   }
 
-  const handleCheckboxRemoval= (option) => {
+  const handleCheckboxRemoval = (option) => {
     const newCheckedItems = { ...checkedItems, [option.value]: !checkedItems[option.value] };
     setCheckedItems(newCheckedItems);
     dispatch(removeFilterItem({ filterName: "filterCheckbox", valueToRemove: option.value }))
   }
-      
+
   return (
     <div className={finalClassNames}>
       {options.map(option => (
-        <div key={option.value}>        
-          <label className="hover:bg-sky-100 rounded cursor-pointer p-1 w-full" key={option.value}>
+        <div key={option.value}>
+          <label className={labelClass} key={option.value}>
             <input
               type="checkbox"
               checked={checkedItems[option.value] || false}
@@ -47,7 +50,7 @@ function CheckboxDropdownPanel({className,options}){
                   handleCheckboxChange(option);
                 }
               }}
-              className='mr-2'
+              className={inputClass}
             />
             {option.label}
           </label>

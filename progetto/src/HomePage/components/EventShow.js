@@ -2,20 +2,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { switchFullEvent } from "../store";
 import { IoIosClose } from "react-icons/io";
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
-import className from "classnames";
 import { useContext, useEffect, useState } from "react";
 import NavigationContext from "../../context/navigation";
 
 
 function EventShow({ favoriteState, onClickHeart, setFavoriteState }) {
 
-    const modalClass = className("fixed inset-0 flex flex-col items-center justify-center w-screen h-screen bg-blue bg-auto z-10");
-    const container = className("border-slate-300 border-solid border-4 bg-white");
-    const imageContainer = className("flex justify-between relative");
-    const image = className("max-w-lg max-h-lg");
-    const close = className("text-3xl absolute border-1 border-black top-2.5 right-2.5 bg-white place-self-center");
-    const firstRow = className("flex justify-between");
-    const favorite = className("ml-auto text-2xl");
+    const modalClass = "fixed inset-0 flex flex-col items-center justify-center w-screen h-screen bg-blue bg-auto z-10";
+    const modalContainerClass = "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50";
+    const modalDivClass = "bg-white p-8 max-w-md rounded shadow-lg relative";
+    const textContainerClass = "mb-4";
+    const buttonClass = "bg-blue-500 text-white px-4 py-2 rounded cursor-pointer";
+    const closeButtonClass = "absolute top-2 right-2 text-gray-700 cursor-pointer text-lg";
+    const containerClass = "border-slate-300 border-solid border-4 bg-white";
+    const imageContainerClass = "flex justify-between relative";
+    const imageClass = "max-w-lg max-h-lg";
+    const closeIconClass = "text-3xl absolute border-1 border-black top-2.5 right-2.5 bg-white place-self-center";
+    const firstRowClass = "flex justify-between";
+    const favoriteClass = "ml-auto text-2xl";
+
 
     const { navigate } = useContext(NavigationContext);
 
@@ -64,27 +69,27 @@ function EventShow({ favoriteState, onClickHeart, setFavoriteState }) {
     return (
         <div className={modalClass}>
             {modal && (
-                <div className="z-20 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white p-8 max-w-md rounded shadow-lg relative">
-                        <div className="mb-4">You must login to save an artwork/event!</div>
-                        <button onClick={handleClickButton} className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">
+                <div className={modalContainerClass}>
+                    <div className={modalDivClass}>
+                        <div className={textContainerClass}>You must login to save an artwork/event!</div>
+                        <button onClick={handleClickButton} className={buttonClass}>
                             Login
                         </button>
-                        <IoIosClose onClick={handleClickCloseLog} className="absolute top-2 right-2 text-gray-700 cursor-pointer text-lg" />
+                        <IoIosClose onClick={handleClickCloseLog} className={closeButtonClass} />
                     </div>
                 </div>
             )}
-            <div className={container}>
-                <div className={imageContainer}>
-                    <img className={image} key={array[index].id} src={array[index].image} alt={array[index].name} />
-                    <IoIosClose className={close} onClick={handleClickClose} />
+            <div className={containerClass}>
+                <div className={imageContainerClass}>
+                    <img className={imageClass} key={array[index].id} src={array[index].image} alt={array[index].name} />
+                    <IoIosClose className={closeIconClass} onClick={handleClickClose} />
                 </div>
-                <div className={firstRow}>
+                <div className={firstRowClass}>
                     {array[index].name && <div>Title: {array[index].name}</div>}
                     {favoriteState ? (
-                        <FaHeart className={favorite} onClick={() => handleClickHeart(array[index])} />
+                        <FaHeart className={favoriteClass} onClick={() => handleClickHeart(array[index])} />
                     ) : (
-                        <FaRegHeart className={favorite} onClick={() => handleClickHeart(array[index])} />
+                        <FaRegHeart className={favoriteClass} onClick={() => handleClickHeart(array[index])} />
                     )}
                 </div>
                 {array[index].department && <div>Department: {array[index].department}</div>}

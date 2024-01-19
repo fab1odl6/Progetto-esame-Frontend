@@ -1,32 +1,37 @@
 import { useDispatch, useSelector } from "react-redux";
-import className from "classnames";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { onClickHeart, updateArt } from "../HomePage/store";
+import { updateArt } from "../HomePage/store";
 import { useContext, useState, useEffect } from "react";
 import { IoIosClose } from "react-icons/io";
 import NavigationContext from "../context/navigation";
+import { setFavorite } from "../HomePage/store";
 
 
 function ArtworkDetail() {
 
-    const container = className("items-center bg-white overflow-auto p-4"); // Aggiunto il padding
-    const imageContainer = className("flex justify-center items-center relative"); // Centrato l'elemento all'interno
-    const image = className("max-w-xl max-h-xl rounded"); // Aggiunto il border-radius
-    const firstRow = className("flex justify-between items-center p-2"); // Aggiunto il padding e centrato verticalmente
-    const favoriteClass = className("text-2xl cursor-pointer"); // Rimossa la margin-left e cambiato il cursore
-    const linkClass = className("text-blue-500 hover:underline");
+    const containerClass = "items-center bg-white overflow-auto p-4";
+    const modalContainerClass = "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50";
+    const modalDivClass = "bg-white p-8 max-w-md rounded shadow-lg relative";
+    const textContainerClass = "mb-4";
+    const buttonClass = "bg-blue-500 text-white px-4 py-2 rounded cursor-pointer";
+    const closeButtonClass = "absolute top-2 right-2 text-gray-700 cursor-pointer text-lg";
+    const imageContainerClass = "flex justify-center items-center relative";
+    const titleClass = "text-lg font-semibold";
+    const imageClass = "max-w-xl max-h-xl rounded";
+    const firstRowClass = "flex justify-between items-center p-2";
+    const favoriteClass = "text-2xl cursor-pointer";
+    const linkClass = "text-blue-500 hover:underline";
 
     const { navigate } = useContext(NavigationContext);
 
-    const { art } = useSelector((state) => {
+    const { art, favoriteState } = useSelector((state) => {
         return state.artDetails;
     })
 
-    const { user, logged, artworks } = useSelector((state) => {
+    const { logged, artworks } = useSelector((state) => {
         return state.users;
     })
     const [modal, setModal] = useState(false);
-    const [favoriteState, setFavoriteState] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -35,7 +40,7 @@ function ArtworkDetail() {
         if (logged) {
             dispatch(updateArt(art));
             setModal(false);
-            setFavoriteState(!favoriteState);
+            dispatch(setFavorite(!favoriteState));
         } else {
             setModal(true);
         }
@@ -52,32 +57,32 @@ function ArtworkDetail() {
     useEffect(() => {
         if (logged) {
             if (artworks.find((item) => item.id === art.id)) {
-                setFavoriteState(true);
+                dispatch(setFavorite(true));
             } else {
-                setFavoriteState(false);
+                dispatch(setFavorite(false));
             }
         }
     }, [logged]);
 
     console.log("Art in ArtworkDetails: " + art.image)
     return (
-        <div className={container}>
+        <div className={containerClass}>
             {modal && (
-                <div className="z-20 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white p-8 max-w-md rounded shadow-lg relative">
-                        <div className="mb-4">You must login to save an artwork/event!</div>
-                        <button onClick={handleClickButton} className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">
+                <div className={modalContainerClass}>
+                    <div className={modalDivClass}>
+                        <div className={textContainerClass}>You must login to save an artwork/event!</div>
+                        <button onClick={handleClickButton} className={buttonClass}>
                             Login
                         </button>
-                        <IoIosClose onClick={handleClickCloseLog} className="absolute top-2 right-2 text-gray-700 cursor-pointer text-lg" />
+                        <IoIosClose onClick={handleClickCloseLog} className={closeButtonClass} />
                     </div>
                 </div>
             )}
-            <div className={imageContainer}>
-                <img className={image} key={art.id} src={art.image} alt={art.title} />
+            <div className={imageContainerClass}>
+                <img className={imageClass} key={art.id} src={art.image} alt={art.title} />
             </div>
-            <div className={firstRow}>
-                {art.title && <div className="text-lg font-semibold">Title: {art.title}</div>}
+            <div className={firstRowClass}>
+                {art.title && <div className={titleClass}>Title: {art.title}</div>}
                 {favoriteState ? (
                     <FaHeart className={favoriteClass} onClick={handleClickHeart} />
                 ) : (

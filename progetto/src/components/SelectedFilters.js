@@ -2,7 +2,11 @@ import FilterButton from "./FilterButton";
 import { useDispatch } from "react-redux";
 import { removeFilterItem } from "../HomePage/store";
 
-function SelectedFilters({filters}){
+
+function SelectedFilters({ filters }) {
+
+    const containerClass = "w-full mt-2 p-4 bg-gray-200";
+
 
     const dispatch = useDispatch();
 
@@ -39,7 +43,7 @@ function SelectedFilters({filters}){
     });
 
     return (
-        <div className="w-full mt-2 p-4 bg-gray-200">
+        <div className={containerClass}>
             {renderedFilters}
         </div>
     );

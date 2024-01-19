@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./FirebaseConfig";
 import { get, child, ref, getDatabase } from "firebase/database";
 import HandleEventCard from "./HandleEventCard";
-import className from "classnames";
+
 
 const events = [];
 async function readData() {
@@ -28,7 +28,7 @@ await readData();
 
 function HandleEvents() {
 
-    const containerClass = className("w-max h-full p-4 mt-4 shadow overflow-y-auto");
+    const containerClass = "w-max h-full p-4 mt-4 shadow overflow-y-auto";
 
     const render = events.map((event) => {
         return (

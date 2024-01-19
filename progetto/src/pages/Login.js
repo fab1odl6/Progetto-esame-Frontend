@@ -7,7 +7,6 @@ import { setUser } from '../HomePage/store';
 import { setLogged } from '../HomePage/store';
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from '../components/FirebaseConfig';
-import { useSelector } from "react-redux";
 
 
 const app = initializeApp(firebaseConfig);
@@ -79,8 +78,20 @@ async function getEvents(user) {
   return eventArray;
 }
 
-const LoginPage = () => {
-  const { user, logged } = useSelector((state) => state.users);
+function LoginPage() {
+
+  const containerClass = "flex flex-col items-center justify-center h-screen border-1 border-solid border-gray-300 rounded-10 shadow-md";
+  const titleClass = "font-bold";
+  const formClass = "flex flex-col w-300 m-20";
+  const formGroupClass = "mb-15";
+  const labelClass = "mb-5";
+  const inputClass = "p-8 text-16";
+  const buttonClass = "p-10 text-16 bg-yellow-600 text-white border-none cursor-pointer";
+  const errorClass = "error block text-red-500 bg-lightpink";
+  const registerLinkClass = "mt-10 text-center";
+  const registerTextClass = "text-blue-500 underline cursor-pointer";
+
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -173,7 +184,7 @@ const LoginPage = () => {
         </button>
 
         <div style={styles.registerLink}>
-            Do not have an account? <a href="http://localhost:3000/register" style={styles.registerText}>Sign in</a>
+          Do not have an account? <a href="http://localhost:3000/register" style={styles.registerText}>Sign in</a>
         </div>
       </form>
     </div>

@@ -8,6 +8,17 @@ import { updateText } from '../HomePage/store';
 
 function SearchBar() {
 
+    const searchBarHeaderClass = className("justify-center align-center flex relative z-40");
+    const searchBarClass = className("mt-5 h-1/6 w-5/6 text-gray-500 relative");
+    const formClass = "flex items-center";
+    const searchDivClass = 'relative flex items-center w-full';
+    const searchIconClass = className("absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer text-blue-500");
+    const finalClassNamesClass = className("border rounded p-2 shadow bg-white w-full pl-8 relative");
+    const ml2Class = 'ml-2';
+    const matchedPanelClass = "matched-panel absolute top-full left-0 w-full bg-white border rounded shadow mt-1 z-300";
+    const valueClass = className("cursor-pointer", finalClassNamesClass);
+
+
     const { navigate } = useContext(NavigationContext);
     const dispatch = useDispatch();
     const [text, setText] = useState("");
@@ -16,10 +27,7 @@ function SearchBar() {
         return state.artworks;
     });
 
-    const searchBarHeader = className("justify-center align-center flex relative z-40");
-    const searchBar = className("mt-5 h-1/6 w-5/6 text-gray-500 relative");
-    const searchIcon = className("absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer text-blue-500");
-    const finalClassNames = className("border rounded p-2 shadow bg-white w-full pl-8 relative");
+
 
     const handleChange = (event) => {
         const inputValue = event.target?.value;
@@ -43,19 +51,19 @@ function SearchBar() {
     }
 
     return (
-        <div className={searchBarHeader}>
-            <div className={searchBar}>
-                <form onSubmit={handleSubmit} className="flex items-center">
-                    <div className='relative flex items-center w-full'>
-                        <input className={finalClassNames} value={text} onChange={handleChange} placeholder='Cerca...' />
-                        <div className='ml-2'>
-                            <SearchIcon className={searchIcon} onClick={handleSubmit} />
+        <div className={searchBarHeaderClass}>
+            <div className={searchBarClass}>
+                <form onSubmit={handleSubmit} className={formClass}>
+                    <div className={searchDivClass}>
+                        <input className={finalClassNamesClass} value={text} onChange={handleChange} placeholder='Search...' />
+                        <div className={ml2Class}>
+                            <SearchIcon className={searchIconClass} onClick={handleSubmit} />
                         </div>
                     </div>
                     {text && matchedValues.length > 0 && (
-                        <div className="matched-panel absolute top-full left-0 w-full bg-white border rounded shadow mt-1 z-300">
+                        <div className={matchedPanelClass}>
                             {matchedValues.slice(0, 3).map((value, index) => (
-                                <div className={`cursor-pointer ${finalClassNames}`} key={index} onClick={() => handleSelect(value)}>
+                                <div className={valueClass} key={index} onClick={() => handleSelect(value)}>
                                     {value.title}
                                 </div>
                             ))}

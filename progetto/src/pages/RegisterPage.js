@@ -2,15 +2,21 @@ import { useDispatch } from "react-redux";
 import { registerUser, setLogged } from "../HomePage/store";
 import { useState, useContext } from "react";
 import NavigationContext from "../context/navigation";
-import className from "classnames";
 
 
 function RegisterPage() {
 
-    const containerClass = className("p-4 max-w-md bg-white rounded-md shadow-md mt-4 mx-auto items-center");
-    const mandatoryClass = className("text-red-500");
-    const successDivClass = className("mt-4 p-4 bg-green-100 border border-green-400 text-green-700");
-    const successPClass = className("mb-1");
+    const containerClass = "p-4 max-w-md bg-white rounded-md shadow-md mt-4 mx-auto items-center";
+    const mandatoryClass = "text-red-500";
+    const successDivClass = "mt-4 p-4 bg-green-100 border border-green-400 text-green-700";
+    const successPClass = "mb-1";
+    const titleClass = "font-bold text-center text-2xl";
+    const formClass = "max-w-md mx-auto bg-white p-8 mt-10 shadow-md";
+    const labelClass = "block text-gray-700 text-sm font-bold mb-2";
+    const divClass = "mb-4";
+    const inputClass = "w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500";
+    const buttonClass = "w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue";
+
 
     const { navigate } = useContext(NavigationContext);
 
@@ -63,11 +69,11 @@ function RegisterPage() {
                     <p className={successPClass}><strong>Success:</strong> You have registered correctly!</p>
                 </div>
             )}
-            <div className="font-bold text-center text-2xl">Register</div>
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-8 mt-10 shadow-md">
-                <div className="mb-4">
-                    <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
-                        Nome: <span className={mandatoryClass}>*</span>
+            <div className={titleClass}>Register</div>
+            <form onSubmit={handleSubmit} className={formClass}>
+                <div className={divClass}>
+                    <label htmlFor="name" className={labelClass}>
+                        Name: <span className={mandatoryClass}>*</span>
                     </label>
                     <input
                         type="text"
@@ -75,13 +81,13 @@ function RegisterPage() {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                        className={inputClass}
                         required
                     />
                 </div>
-                <div className="mb-4">
-                    <label htmlFor="surname" className="block text-gray-700 text-sm font-bold mb-2">
-                        Cognome: <span className={mandatoryClass}>*</span>
+                <div className={divClass}>
+                    <label htmlFor="surname" className={labelClass}>
+                        Surname: <span className={mandatoryClass}>*</span>
                     </label>
                     <input
                         type="text"
@@ -89,13 +95,13 @@ function RegisterPage() {
                         name="surname"
                         value={formData.surname}
                         onChange={handleChange}
-                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                        className={inputClass}
                         required
                     />
                 </div>
-                <div className="mb-4">
-                    <label htmlFor="username" className="block text-gray-700 text-sm font-bold mb-2">
-                        Nome utente: <span className={mandatoryClass}>*</span>
+                <div className={divClass}>
+                    <label htmlFor="username" className={labelClass}>
+                        Username: <span className={mandatoryClass}>*</span>
                     </label>
                     <input
                         type="text"
@@ -103,12 +109,12 @@ function RegisterPage() {
                         name="username"
                         value={formData.username}
                         onChange={handleChange}
-                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                        className={inputClass}
                         required
                     />
                 </div>
-                <div className="mb-4">
-                    <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
+                <div className={divClass}>
+                    <label htmlFor="password" className={labelClass}>
                         Password: <span className={mandatoryClass}>*</span>
                     </label>
                     <input
@@ -117,20 +123,19 @@ function RegisterPage() {
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
-                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                        className={inputClass}
                         required
                     />
                 </div>
                 <button
                     type="submit"
-                    className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
+                    className={buttonClass}
                 >
-                    Registrati
+                    Register
                 </button>
             </form>
         </div>
     );
 };
-
 
 export default RegisterPage;
