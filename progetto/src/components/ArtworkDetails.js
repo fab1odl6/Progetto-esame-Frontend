@@ -1,7 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import className from "classnames";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { onClickHeart } from "../HomePage/store";
+import { onClickHeart, updateArt } from "../HomePage/store";
+import { useContext, useState, useEffect } from "react";
+import { IoIosClose } from "react-icons/io";
+import NavigationContext from "../context/navigation";
 
 
 function ArtworkDetail() {
@@ -13,24 +16,69 @@ function ArtworkDetail() {
     const favoriteClass = className("text-2xl cursor-pointer"); // Rimossa la margin-left e cambiato il cursore
     const linkClass = className("text-blue-500 hover:underline");
 
+    const { navigate } = useContext(NavigationContext);
+
     const { art } = useSelector((state) => {
         return state.artDetails;
     })
 
+    const { user, logged, artworks } = useSelector((state) => {
+        return state.users;
+    })
+    const [modal, setModal] = useState(false);
+    const [favoriteState, setFavoriteState] = useState(false);
+
     const dispatch = useDispatch();
+
     const handleClickHeart = function () {
-        dispatch(onClickHeart(art));
+        console.log("Logged: " + logged)
+        if (logged) {
+            dispatch(updateArt(art));
+            setModal(false);
+            setFavoriteState(!favoriteState);
+        } else {
+            setModal(true);
+        }
     }
 
+    const handleClickButton = function () {
+        navigate("/login");
+    }
 
+    const handleClickCloseLog = function () {
+        setModal(false);
+    }
+
+    useEffect(() => {
+        if (logged) {
+            if (artworks.find((item) => item.id === art.id)) {
+                setFavoriteState(true);
+            } else {
+                setFavoriteState(false);
+            }
+        }
+    }, [logged]);
+
+    console.log("Art in ArtworkDetails: " + art.image)
     return (
         <div className={container}>
+            {modal && (
+                <div className="z-20 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-8 max-w-md rounded shadow-lg relative">
+                        <div className="mb-4">You must login to save an artwork/event!</div>
+                        <button onClick={handleClickButton} className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">
+                            Login
+                        </button>
+                        <IoIosClose onClick={handleClickCloseLog} className="absolute top-2 right-2 text-gray-700 cursor-pointer text-lg" />
+                    </div>
+                </div>
+            )}
             <div className={imageContainer}>
                 <img className={image} key={art.id} src={art.image} alt={art.title} />
             </div>
             <div className={firstRow}>
                 {art.title && <div className="text-lg font-semibold">Title: {art.title}</div>}
-                {art.favorite ? (
+                {favoriteState ? (
                     <FaHeart className={favoriteClass} onClick={handleClickHeart} />
                 ) : (
                     <FaRegHeart className={favoriteClass} onClick={handleClickHeart} />

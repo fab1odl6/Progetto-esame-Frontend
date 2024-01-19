@@ -81,8 +81,16 @@ const usersSlice = createSlice({
         events: []
     },
     reducers: {
+        registerUser(state, action) {
+            updateData(action.payload);
+            return ({
+                ...state,
+                user: action.payload,
+                artworks: action.payload.artworks,
+                events: action.payload.events
+            })
+        },
         setUser(state, action) {
-            updateData(action.payload.matchedUser);
             return ({
                 ...state,
                 user: action.payload.matchedUser,
@@ -97,7 +105,7 @@ const usersSlice = createSlice({
             });
         },
         updateArt(state, action) {
-            const updatedArtworks = updateFavoriteArt(state.artworks, action.payload, state.user);
+            const updatedArtworks = updateFavoriteArt(state.artworks, action.payload, state.user.personalData);
 
             return {
                 ...state,
@@ -106,7 +114,7 @@ const usersSlice = createSlice({
         },
 
         updateEvent(state, action) {
-            const updatedEvents = updateFavoriteEvent(state.events, action.payload, state.user);
+            const updatedEvents = updateFavoriteEvent(state.events, action.payload, state.user.personalData);
 
             return {
                 ...state,

@@ -8,9 +8,11 @@ import { FaTimes } from 'react-icons/fa';
 
 function EveryArtworkPage() {
 
-    const { array } = useSelector((state) => {
+    const { array, index } = useSelector((state) => {
         return state.artworks;
     });
+
+
     const dispatch = useDispatch();
     const filtersState = useSelector((state) => state.filters);
     const searchState = useSelector((state) => state.search.text);
@@ -35,10 +37,11 @@ function EveryArtworkPage() {
         dispatch(clearText());
     }
 
-    return(      
+
+    return (
         <div>
             <div className='z-40 relative'>
-                <SearchBar/>
+                <SearchBar />
             </div>
             <div className="z-30 relative">
                 <FilterList artworks={array} />
@@ -55,7 +58,7 @@ function EveryArtworkPage() {
             <div className="z-20 relative">
                 <ArtGrid artworks={filteredArray} />
             </div>
-        </div> 
+        </div>
     )
 }
 

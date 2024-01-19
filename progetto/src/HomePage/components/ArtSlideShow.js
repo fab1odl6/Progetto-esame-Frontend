@@ -1,16 +1,17 @@
 import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
-import { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt, updateArt, setFavorite, onClickHeart } from '../store';
+import { swipeLeftArt, swipeRightArt, switchFullArt, updateArt } from '../store';
 import ArtFullShow from "./ArtShow";
 import className from "classnames";
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../../components/FirebaseConfig';
 import { getDatabase } from 'firebase/database';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import NavigationContext from '../../context/navigation';
+import { IoIosClose } from 'react-icons/io';
 
 
 function ArtSlideShow() {
-
 
     const artText = className("");
     const artDiv = className("");
@@ -22,6 +23,8 @@ function ArtSlideShow() {
     const favoriteClass = className("ml-auto text-2xl");
     const title = className("text-lg place-content-center flex justify-between");
 
+    const { navigate } = useContext(NavigationContext);
+
     const { array, index, full } = useSelector((state) => {
         return state.artworks;
     });
@@ -31,10 +34,11 @@ function ArtSlideShow() {
 
     const dispatch = useDispatch();
 
-    const { user, logged, artworks } = useSelector((state) => {
+    const { logged, artworks } = useSelector((state) => {
         return state.users;
     })
     const [favoriteState, setFavoriteState] = useState(false);
+    const [modal, setModal] = useState(false);
 
     const handleClickChevronLeft = function () {
         dispatch(swipeLeftArt());
@@ -45,8 +49,13 @@ function ArtSlideShow() {
     }
 
     const handleClickHeart = function (art) {
-        dispatch(updateArt(art));
-        setFavoriteState(!favoriteState);
+        if (logged) {
+            dispatch(updateArt(art));
+            setFavoriteState(!favoriteState);
+            setModal(false);
+        } else {
+            setModal(true);
+        }
     }
 
     const handleClickArtwork = function () {
@@ -63,10 +72,28 @@ function ArtSlideShow() {
         }
     }, [index, logged]);
 
+    const handleClickButton = function () {
+        navigate("/login");
+    }
+
+    const handleClickClose = function () {
+        setModal(false);
+    }
 
     const altText = "Image of " + array[index].title;
     return (
         <div>
+            {modal && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-8 max-w-md rounded shadow-lg relative">
+                        <div className="mb-4">You must login to save an artwork/event!</div>
+                        <button onClick={handleClickButton} className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">
+                            Login
+                        </button>
+                        <IoIosClose onClick={handleClickClose} className="absolute top-2 right-2 text-gray-700 cursor-pointer text-lg" />
+                    </div>
+                </div>
+            )}
             <div className={artText}>Opere in evidenza</div>
             <div className={artDiv}>
                 <div className={artContainer}>

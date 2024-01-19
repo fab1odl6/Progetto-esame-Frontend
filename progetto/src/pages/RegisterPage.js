@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { setUser, setLogged } from "../store";
+import { registerUser, setLogged } from "../HomePage/store";
 import { useState, useContext } from "react";
 import NavigationContext from "../context/navigation";
 import className from "classnames";
@@ -37,7 +37,7 @@ function RegisterPage() {
             return;
         }
 
-        dispatch(setUser({
+        dispatch(registerUser({
             name: formData.name,
             surname: formData.surname,
             username: formData.username,
@@ -52,7 +52,7 @@ function RegisterPage() {
             password: ""
         });
 
-        // navigate("/");
+        navigate("/");
         setSuccess(true);
     };
 

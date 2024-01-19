@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import { switchFullArt } from "../store";
+import { setArt, switchFullArt } from "../store";
 import { IoIosClose } from "react-icons/io";
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import className from "classnames";
-import Link from "../../components/Link";
-import { useEffect } from "react";
+import { useEffect, useState, useContext } from "react";
+import NavigationContext from "../../context/navigation";
 
 
 function ArtShow({ favoriteState, onClickHeart, setFavoriteState }) {
 
-    const modal = className("fixed inset-0 flex flex-col items-center justify-center w-screen h-screen z-10");
+    const modalClass = className("fixed inset-0 flex flex-col items-center justify-center w-screen h-screen z-10");
     const container = className("border-slate-300 border-solid border-4 bg-white overflow-auto");
     const imageContainer = className("flex justify-between relative");
     const image = className("max-w-xl max-h-xl");
@@ -19,6 +19,8 @@ function ArtShow({ favoriteState, onClickHeart, setFavoriteState }) {
     const linkClass = className("text-blue-500 hover:underline");
     const buttonClass = className("bg-blue-500 text-white font-bold py-2 px-4 rounded");
 
+    const { navigate } = useContext(NavigationContext);
+
     const { array, index } = useSelector((state) => {
         return state.artworks;
     })
@@ -26,6 +28,7 @@ function ArtShow({ favoriteState, onClickHeart, setFavoriteState }) {
     const { artworks, logged } = useSelector((state) => {
         return state.users;
     })
+    const [modal, setModal] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -34,7 +37,11 @@ function ArtShow({ favoriteState, onClickHeart, setFavoriteState }) {
     }
 
     const handleClickHeart = function (art) {
-        onClickHeart(art);
+        if (logged) {
+            onClickHeart(art);
+        } else {
+            setModal(true);
+        }
     }
 
 
@@ -48,8 +55,32 @@ function ArtShow({ favoriteState, onClickHeart, setFavoriteState }) {
         }
     }, [index, logged]);
 
+    const handleClickButton = function () {
+        navigate("/login");
+    }
+
+    const handleClickCloseLog = function () {
+        setModal(false);
+    }
+
+    const handleClickButtonDetails = function () {
+        dispatch(setArt(array[index]));
+        navigate("/artworkDetails");
+    }
+
     return (
-        <div className={modal}>
+        <div className={modalClass}>
+            {modal && (
+                <div className="z-20 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-8 max-w-md rounded shadow-lg relative">
+                        <div className="mb-4">You must login to save an artwork/event!</div>
+                        <button onClick={handleClickButton} className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">
+                            Login
+                        </button>
+                        <IoIosClose onClick={handleClickCloseLog} className="absolute top-2 right-2 text-gray-700 cursor-pointer text-lg" />
+                    </div>
+                </div>
+            )}
             <div className={container}>
                 <div className={imageContainer}>
                     <img className={image} key={array[index].id} src={array[index].image} alt={array[index].title} />
@@ -70,11 +101,9 @@ function ArtShow({ favoriteState, onClickHeart, setFavoriteState }) {
                 {array[index].date && <div>Date: {array[index].date}</div>}
                 {array[index].classification && <div>Classification: {array[index].classification}</div>}
                 <div>
-                    <Link to="/artworkDetails" key="Details">
-                        <button className={buttonClass}>
-                            See details
-                        </button>
-                    </Link>
+                    <button className={buttonClass} onClick={handleClickButtonDetails}>
+                        See details
+                    </button>
                 </div>
             </div>
         </div>
@@ -82,8 +111,3 @@ function ArtShow({ favoriteState, onClickHeart, setFavoriteState }) {
 }
 
 export default ArtShow;
-
-/* 
-    Ho messo gli '&&' per fare in modo che se un campo è vuoto, non viene proprio mostrato anche se probabilmente 
-    la maggior parte delle volte, soprattutto per i primi, quell' 'and' andrà a buon fine.
-*/
