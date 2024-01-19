@@ -8,10 +8,11 @@ import { FaTimes } from 'react-icons/fa';
 
 function EveryArtworkPage() {
 
-    const { array, index } = useSelector((state) => {
+    const { array } = useSelector((state) => {
         return state.artworks;
     });
 
+    console.log(array)
 
     const dispatch = useDispatch();
     const filtersState = useSelector((state) => state.filters);

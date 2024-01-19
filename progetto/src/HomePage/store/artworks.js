@@ -123,10 +123,12 @@ async function readData() {
 await readData();
 
 async function updateFavorite(art, user) {
-    console.log(art)
+    console.log("Art: " + art.favorite)
     const db = getDatabase();
-    console.log("FAVORITE: " + art.favorite)
+    console.log("User: " + user.name)
+
     if (!art.favorite) {
+        console.log("false")
         await set(ref(db, 'users/' + user.name + '/artworks/' + art.title), {
             id: art.id,
             link: art.link,
@@ -146,7 +148,9 @@ async function updateFavorite(art, user) {
             full: false,
             type: art.type
         });
+        console.log("Ok")
     } else {
+        console.log("true")
         await remove(ref(db, "users/" + user.name + "/artworks/" + art.title));
     }
 }
@@ -175,7 +179,6 @@ const artworksSlice = createSlice({
             const newArray = [...state.array];
             newArray[state.index] = { ...newArray[state.index], favorite: newFavorite };
 
-            console.log("switch: " + action.payload.art.favorite)
             await updateFavorite(action.payload.art, action.payload.user);
             return { ...state, array: newArray, favorite: newFavorite };
         },
