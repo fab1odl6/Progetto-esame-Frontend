@@ -9,6 +9,8 @@ import { clearText } from "../store";
 function HomePage() {
 
     const zIndexClass = 'z-10';
+    const zIndexEvent = 'z -20';
+    const zIndexArt = 'z-20';
 
     const dispatch = useDispatch();
     dispatch(clearText());
@@ -18,8 +20,12 @@ function HomePage() {
             <div className={zIndexClass}>
                 <SearchBar />
             </div>
-            <EventSlideShow />
-            <ArtSlideShow />
+            <div className={zIndexEvent}>
+                <EventSlideShow />
+            </div>
+            <div className={zIndexArt}>
+                <ArtSlideShow />
+            </div>
         </div>
     )
 }

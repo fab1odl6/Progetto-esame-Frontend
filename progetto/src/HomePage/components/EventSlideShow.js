@@ -9,7 +9,7 @@ import { IoIosClose } from 'react-icons/io';
 
 function EventSlideShow() {
 
-    const containerClass = "overflow: auto";
+    const containerClass = "overflow: auto z-50";
     const modalContainerClass = "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50";
     const modalDivClass = "bg-white p-8 max-w-md rounded shadow-lg relative";
     const textContainerClass = "mb-4";
