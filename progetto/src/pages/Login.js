@@ -171,6 +171,10 @@ const LoginPage = () => {
         <button type="submit" style={styles.button}>
           Login
         </button>
+
+        <div style={styles.registerLink}>
+            Do not have an account? <a href="http://localhost:3000/register" style={styles.registerText}>Sign in</a>
+        </div>
       </form>
     </div>
   );
@@ -222,6 +226,15 @@ const styles = {
     zIndex: 1000,
     position: 'relative',
     backgroundColor: 'lightpink',
+  },
+  registerLink: {
+    marginTop: '10px',
+    textAlign: 'center',
+  },
+  registerText: {
+    color: 'blue',
+    textDecoration: 'underline',
+    cursor: 'pointer',
   },
 };
 
