@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
 import EventContainer from './EventContainer';
 import EventCard from './EventCard';
 import { GoChevronDown, GoChevronLeft } from 'react-icons/go';
@@ -11,9 +10,6 @@ import LoginPage from '../pages/Login';
 
 function EventsPage() {
 
-  const searchBarHeaderClass = className("justify-center align-center flex");
-  const searchBarClass = className("mt-5 border-1 h-1/6 w-5/6 text-gray-500 justify-between flex");
-  const searchIconClass = className("self-end mb-6");
   const titleContainerClass = className("flex");
   const mainContentClass = className("bg-gradient-to-b from-opacity-80 to-opacity-80 via-white bg-cover bg-center min-h-screen-100px background-image: url('background-image-url'); padding: 20px;");
   const titleClass = className("text-center font-bold text-4xl my-20");
@@ -36,6 +32,7 @@ function EventsPage() {
   ];
 
   const { logged } = useSelector((state) => {
+    //console.log("STATO:",state.users)
     return state.users;
   })
 
@@ -43,12 +40,6 @@ function EventsPage() {
   return (
     <div>
       {logged ? (<div>
-        <div className={searchBarHeaderClass}>
-          <div className={searchBarClass}>
-            Search ...
-            <SearchIcon className={searchIconClass} />
-          </div>
-        </div>
         <div className={mainContentClass}>
           <h1 className={titleClass}>EVENTS</h1>
 

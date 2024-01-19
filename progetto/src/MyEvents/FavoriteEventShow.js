@@ -14,7 +14,7 @@ function FavoriteEventShow({ event, onClickClose, onClickHeart }) {
     const favoriteClass = "ml-auto text-2xl";
 
 
-    const [favorite, setFavorite] = useState(true);
+    //const [favorite, setFavorite] = useState(true);
 
     const handleClickClose = function () {
         onClickClose();
@@ -22,8 +22,17 @@ function FavoriteEventShow({ event, onClickClose, onClickHeart }) {
 
     const handleClickHeart = function () {
         onClickHeart();
-        setFavorite(!favorite);
+        onClickClose();
+        //setFavorite(!favorite);
     }
+
+    /*
+    {favorite ? (
+        <FaHeart className={favoriteClass} onClick={handleClickHeart} />
+    ) : (
+        <FaRegHeart className={favoriteClass} onClick={handleClickHeart} />
+    )}
+    */
 
     return (
         <div className={modal}>
@@ -34,11 +43,7 @@ function FavoriteEventShow({ event, onClickClose, onClickHeart }) {
                 </div>
                 <div className={firstRow}>
                     {event.name && <div>Title: {event.name}</div>}
-                    {favorite ? (
-                        <FaHeart className={favoriteClass} onClick={handleClickHeart} />
-                    ) : (
-                        <FaRegHeart className={favoriteClass} onClick={handleClickHeart} />
-                    )}
+                    <FaHeart className={favoriteClass} onClick={handleClickHeart} />
                 </div>
                 {event.department && <div>Department: {event.department}</div>}
                 {event.guests && <div>Guests: {event.guests}</div>}

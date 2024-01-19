@@ -4,8 +4,10 @@ import FavoriteEventShow from "./FavoriteEventShow";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../components/FirebaseConfig";
 import { getDatabase, ref, set, remove } from "firebase/database";
+import { useSelector, useDispatch } from "react-redux";
+import { updateEvent } from "../HomePage/store";
 
-
+/*
 function updateFavorite(event, favorite) {
   const app = initializeApp(firebaseConfig);
   const db = getDatabase();
@@ -25,44 +27,55 @@ function updateFavorite(event, favorite) {
     remove(ref(db, "users/Fabio/events/" + event.name));
   }
 }
-
+*/
 
 function EventCard({ event }) {
 
+  /*
+  const events  = useSelector((state) => {
+    console.log("STATO:",state.users.events)
+    return state.users.events;
+  })
+  console.log("Events:", events)
+  */
+
   const containerClass = "border-2 mb-2 rounded-lg overflow-hidden";
   const favoriteClass = "ml-auto text-2xl";
-  const imageClass = "w-full h-40 object-cover";
+  const imageClass = "w-full h-40 object-cover cursor-pointer";
   const titleAndHeartClass = "flex p-4";
 
-
-  const [favorite, setFavorite] = useState(true);
+  const dispatch = useDispatch();
+  //const [favorite, setFavorite] = useState(true);
   const [full, setFull] = useState(false);
 
   const handleClickHeart = function () {
-    setFavorite(!favorite);
-    updateFavorite(event, favorite);
+    //setFavorite(!favorite);
+    //updateFavorite(event, favorite);
+    dispatch(updateEvent(event));
+    //setFavorite(!favorite);
   };
 
   const handleClickShow = function () {
     setFull(!full);
   }
 
-  return (
-    <div>
-      {favorite &&
-        (<div className={containerClass}>
-          <div onClick={handleClickShow}>
-            <img src={event.image} className={imageClass} alt={event.name} onClick={handleClickShow} />
-            <div className={titleAndHeartClass}>
-              <div>{event.name}</div>
-              {event.favorite ? (
+  /*
+  {event.favorite ? (
                 <FaHeart className={favoriteClass} onClick={(e) => { e.stopPropagation(); handleClickHeart(); }} />
               ) : (
                 <FaRegHeart className={favoriteClass} onClick={(e) => { e.stopPropagation(); handleClickHeart(); }} />
               )}
-            </div>
-          </div>
-        </div>)}
+  */
+
+  return (
+    <div>
+      <div className={containerClass}>
+        <img src={event.image} className={imageClass} alt={event.name} onClick={handleClickShow} />
+        <div className={titleAndHeartClass}>
+          <div className="cursor-pointer" onClick={handleClickShow}>{event.name}</div>
+          <FaHeart className={favoriteClass} onClick={handleClickHeart} />
+        </div>
+      </div>
       {full && <FavoriteEventShow event={event} key={event.name} onClickClose={handleClickShow} onClickHeart={handleClickHeart} />}
     </div>
   );
