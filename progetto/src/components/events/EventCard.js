@@ -36,9 +36,9 @@ function EventCard({ event }) {
   console.log("Events:", events)
   */
 
-  const containerClass = "border-2 mb-2 rounded-lg overflow-hidden";
+  const containerClass = "border-2 mb-2 rounded-lg overflow-hidden z-50";
   const favoriteClass = "ml-auto text-2xl";
-  const imageClass = "w-full h-40 object-cover cursor-pointer";
+  const imageClass = "w-full h-96 object-cover cursor-pointer";
   const titleAndHeartClass = "flex p-4";
 
   const dispatch = useDispatch();

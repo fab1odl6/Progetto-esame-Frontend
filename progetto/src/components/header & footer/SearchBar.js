@@ -8,7 +8,7 @@ import { updateText } from '../../store';
 
 function SearchBar() {
 
-    const searchBarHeaderClass = className("justify-center align-center flex relative z-40");
+    const searchBarHeaderClass = className("justify-center align-center flex relative z-10");
     const searchBarClass = className("mt-5 h-1/6 w-5/6 text-gray-500 relative");
     const formClass = "flex items-center";
     const searchDivClass = 'relative flex items-center w-full';
