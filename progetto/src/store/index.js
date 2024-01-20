@@ -24,4 +24,4 @@ export const { registerUser, setUser, setLogged, updateArt, updateEvent } = user
 export const { setArt, setFavorite } = artDetailSlice.actions;
 export const { addFilterItem, removeFilterItem } = filtersSlice.actions;
 export const { updateText, clearText } = searchSlice.actions;
-export const { swipeLeftEvent, swipeRightEvent, switchFavoriteEvent, switchFullEvent } = usersSlice.actions;
+export const { swipeLeftEvent, swipeRightEvent, switchFavoriteEvent, switchFullEvent } = eventsSlice.actions;

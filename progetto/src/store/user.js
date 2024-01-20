@@ -91,6 +91,7 @@ const usersSlice = createSlice({
                 events: action.payload.events
             })
         },
+
         setUser(state, action) {
             return ({
                 ...state,
@@ -99,12 +100,14 @@ const usersSlice = createSlice({
                 events: action.payload.events
             });
         },
+
         setLogged(state, action) {
             return ({
                 ...state,
                 logged: !state.logged
             });
         },
+
         updateArt(state, action) {
             const updatedArtworks = updateFavoriteArt(state.artworks, action.payload, state.user.personalData);
 

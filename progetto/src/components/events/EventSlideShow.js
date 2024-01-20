@@ -15,9 +15,10 @@ function EventSlideShow() {
     const textContainerClass = "mb-4";
     const buttonClass = "bg-blue-500 text-white px-4 py-2 rounded cursor-pointer";
     const closeButtonClass = "absolute top-2 right-2 text-gray-700 cursor-pointer text-lg";
+
     const eventTextClass = "";
     const eventDivClass = "";
-    const eventContainerClass = "flex flex-row place-content-center";
+    const eventContainerClass = "flex justify-center flex-row place-content-center";
     const eventElementClass = "";
     const imageClass = "w-full h-auto max-h-96";
     const chevronClass = "place-self-center text-2xl";
@@ -96,12 +97,12 @@ function EventSlideShow() {
                 </div>
             )}
             <div className={eventTextClass}>Highlighted Events</div>
-            <div className={eventDivClass}>
-                <div className={eventContainerClass}>
+            <div className={eventDivClass + "relative w-full"}>
+                <div className={eventContainerClass + "relative h-56 overflow-hidden rounded-lg md:h-96"}>
                     <FaChevronLeft className={chevronClass} onClick={handleClickChevronLeft} />
                     <div className={eventElementClass}>
-                        <div onClick={handleClickEvent}>
-                            <img className={imageClass} src={array[index].image} alt={altText} />
+                        <div onClick={handleClickEvent} className="justify-center duration-700 ease-in-out items-center">
+                            <img className="absolute block w-auto h-auto max-h-96 -translate-x-1/2 -translate-y-1/2" src={array[index].image} alt={altText} />
                         </div>
                         <div className={titleAndHeartClass}>
                             <div className={titleClass} onClick={handleClickEvent}>{array[index].name}</div>
