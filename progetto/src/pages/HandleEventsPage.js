@@ -1,5 +1,5 @@
-import AddAnEvent from "../components/AddAnEvent";
-import HandleEvents from "../components/HandleEvents";
+import AddAnEvent from "../components/events/AddAnEvent";
+import HandleEvents from "../components/events/HandleEvents";
 import { useSelector } from "react-redux";
 import LoginPage from "../pages/Login";
 

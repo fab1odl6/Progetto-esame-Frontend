@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { registerUser, setLogged } from "../HomePage/store";
+import { registerUser, setLogged } from "../store";
 import { useState, useContext } from "react";
 import NavigationContext from "../context/navigation";
 

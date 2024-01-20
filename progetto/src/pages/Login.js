@@ -1,12 +1,11 @@
 import React, { useState, useContext } from 'react';
-import HomePage from '../HomePage/components/Homepage';
+import HomePage from "../pages/Homepage"
 import NavigationContext from '../context/navigation';
 import { getDatabase, ref, get, child } from 'firebase/database';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../HomePage/store';
-import { setLogged } from '../HomePage/store';
+import { setUser, setLogged } from '../store';
 import { initializeApp } from "firebase/app";
-import { firebaseConfig } from '../components/FirebaseConfig';
+import { firebaseConfig } from '../components/firebase/FirebaseConfig';
 
 
 const app = initializeApp(firebaseConfig);

@@ -1,8 +1,8 @@
-import ArtGrid from "../components/ArtGrid"
-import FilterList from "../components/FilterList";
-import SearchBar from '../components/SearchBar';
+import ArtGrid from "../components/artworks/ArtGrid"
+import FilterList from "../components/filters/FilterList";
+import SearchBar from '../components/header & footer/SearchBar';
 import { useSelector, useDispatch } from "react-redux";
-import { clearText } from "../HomePage/store";
+import { clearText } from "../store";
 import { useEffect } from "react";
 import { FaTimes } from 'react-icons/fa';
 

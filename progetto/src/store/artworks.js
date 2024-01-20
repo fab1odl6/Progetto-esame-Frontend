@@ -1,15 +1,80 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, get, child, set, remove } from "firebase/database";
-import { firebaseConfig } from "../components/FirebaseConfig";
+import { getDatabase, ref, get, child, set, remove, update } from "firebase/database";
+import { firebaseConfig } from "../components/firebase/FirebaseConfig";
+
 
 const artArray = [];
 const app = initializeApp(firebaseConfig);
 const dbRef = ref(getDatabase());
 
-/*
-INSERIRE FUNZIONE PER CARICAMENTO DATI
-*/
+async function writeData() {
+    try {
+        const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
+        const searchRes = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/search?q=love");
+        const searchData = await searchRes.json();
+        const objectIDs = searchData.objectIDs;
+
+        const objectRequests = objectIDs.slice(1, 6).map(async (objectId) => {
+            const resObj = await fetch(url + objectId);
+            const dataObj = await resObj.json();
+
+            if (dataObj.message !== "Not a valid object" && dataObj.primaryImage !== "") {
+                if (artArray.length < 1) {
+                    artArray.push({
+                        id: dataObj.objectID,
+                        link: dataObj.objectURL,
+                        authorName: dataObj.artistDisplayName,
+                        title: dataObj.title,
+                        image: dataObj.primaryImage,
+                        department: dataObj.department,
+                        culture: dataObj.culture,
+                        period: dataObj.period,
+                        date: dataObj.objectEndDate,
+                        dimensions: dataObj.dimensions,
+                        city: dataObj.city,
+                        state: dataObj.state,
+                        country: dataObj.artistNationality,
+                        classification: dataObj.classification,
+                        favorite: false,
+                        full: false,
+                        type: dataObj.objectName
+                    });
+                }
+            }
+        });
+
+        await Promise.all(objectRequests);
+    } catch (error) {
+        console.error("Errore durante il recupero dei dati: ", error);
+    }
+
+    const db = getDatabase();
+    artArray.map((dataObj) => {
+        console.log(dataObj.title)
+        set(ref(db, '/artworks/' + dataObj.title), {
+            id: dataObj.id,
+            link: dataObj.link,
+            authorName: dataObj.authorName,
+            title: dataObj.title,
+            image: dataObj.image,
+            department: dataObj.department,
+            culture: dataObj.culture,
+            period: dataObj.period,
+            date: dataObj.date,
+            dimensions: dataObj.dimensions,
+            city: dataObj.city,
+            state: dataObj.state,
+            country: dataObj.country,
+            classification: dataObj.classification,
+            favorite: false,
+            full: false,
+            type: dataObj.type
+        });
+    });
+};
+
+//await writeData();
 
 async function readData() {
     const artworksRef = child(dbRef, 'artworks');
@@ -22,26 +87,26 @@ async function readData() {
 
             for (const key in data) {
                 if (data.hasOwnProperty(key)) {
-                    const dataObj = data[key];
+                    const art = data[key];
                     if (artArray.length < 5) {
                         artArray.push({
-                            id: dataObj.id,
-                            link: dataObj.link,
-                            authorName: dataObj.authorName,
-                            title: dataObj.title,
-                            image: dataObj.image,
-                            department: dataObj.department,
-                            culture: dataObj.culture,
-                            period: dataObj.period,
-                            date: dataObj.date,
-                            dimensions: dataObj.dimensions,
-                            city: dataObj.city,
-                            state: dataObj.state,
-                            country: dataObj.country,
-                            classification: dataObj.classification,
-                            favorite: dataObj.favorite,
-                            full: dataObj.full,
-                            type: dataObj.type
+                            id: art.id,
+                            link: art.link,
+                            authorName: art.authorName,
+                            title: art.title,
+                            image: art.image,
+                            department: art.department,
+                            culture: art.culture,
+                            period: art.period,
+                            date: art.date,
+                            dimensions: art.dimensions,
+                            city: art.city,
+                            state: art.state,
+                            country: art.country,
+                            classification: art.classification,
+                            favorite: art.favorite,
+                            full: art.full,
+                            type: art.type
                         });
                     }
                 }
@@ -56,11 +121,14 @@ async function readData() {
 
 await readData();
 
-function updateFavorite(art) {
+async function updateFavorite(art, user) {
+    console.log("Art: " + art.favorite)
     const db = getDatabase();
+    console.log("User: " + user.name)
 
     if (!art.favorite) {
-        set(ref(db, 'users/Fabio/artworks/' + art.title), {
+        console.log("false")
+        await set(ref(db, 'users/' + user.name + '/artworks/' + art.title), {
             id: art.id,
             link: art.link,
             authorName: art.authorName,
@@ -76,10 +144,13 @@ function updateFavorite(art) {
             country: art.country,
             classification: art.classification,
             favorite: true,
-            full: false
-        })
+            full: false,
+            type: art.type
+        });
+        console.log("Ok")
     } else {
-        remove(ref(db, "users/Fabio/artworks/" + art.title));
+        console.log("true")
+        await remove(ref(db, "users/" + user.name + "/artworks/" + art.title));
     }
 }
 
@@ -102,12 +173,12 @@ const artworksSlice = createSlice({
             return { ...state, index: newIndex };
         },
 
-        switchFavoriteArt(state, action) {
+        async switchFavoriteArt(state, action) {
             const newFavorite = !state.array[state.index].favorite;
             const newArray = [...state.array];
             newArray[state.index] = { ...newArray[state.index], favorite: newFavorite };
 
-            updateFavorite(action.payload);
+            await updateFavorite(action.payload.art, action.payload.user);
             return { ...state, array: newArray, favorite: newFavorite };
         },
 
@@ -118,12 +189,6 @@ const artworksSlice = createSlice({
 
             return { ...state, array: newArray, full: newFull };
         },
-        setArtworks(state, action) {
-            console.log("Action payload in setArtworks:", action.payload);
-            const artworksArray = Array.isArray(action.payload) ? action.payload : [action.payload];
-            return { ...state, array: artworksArray };
-        },
-
     },
 });
 

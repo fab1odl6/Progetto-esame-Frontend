@@ -1,20 +1,18 @@
-import HomePage from "./HomePage/components/Homepage";
-import Museums from "./Museums/MuseumsPage";
-import Route from "./components/Route";
-import HeaderBar from "./components/HeaderBar";
+import HomePage from "../src/pages/Homepage";
+import Museums from "../src/pages/MuseumsPage";
+import Route from "./components/navigation/Route";
+import HeaderBar from "../src/components/header & footer/HeaderBar";
 import { NavigationProvider } from "./context/navigation";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MuseumDetail from "./Museums/MuseumDetail";
 import EveryArtworkPage from "./pages/EveryArtworkPage";
-import EventsPage from "./MyEvents/EventsPage";
+import EventsPage from "../src/pages/EventsPage";
 import HandleEventsPage from "./pages/HandleEventsPage";
 import PersonalGalleryPage from "./pages/PersonalGalleryPage";
-import ArtworkDetails from "./components/ArtworkDetails";
-import { useState, useEffect } from "react";
+import ArtworksDetailsPage from "./pages/ArtworkDetailsPage";
 import RegisterPage from "./pages/RegisterPage";
 import { useSelector } from "react-redux";
 import LoginPage from "./pages/Login"
-import Footer from "./components/Footer";
+import Footer from "./components/header & footer/Footer";
 
 
 function App() {
@@ -49,7 +47,7 @@ function App() {
             <HandleEventsPage />
           </Route>
           <Route path="/artworkDetails">
-            <ArtworkDetails />
+            <ArtworksDetailsPage />
           </Route>
           <Route path="/register">
             <RegisterPage />
@@ -58,7 +56,7 @@ function App() {
             <LoginPage />
           </Route>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     </NavigationProvider>
 

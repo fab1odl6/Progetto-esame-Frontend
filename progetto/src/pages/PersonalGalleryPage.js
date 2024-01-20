@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, get } from 'firebase/database';
-import { firebaseConfig } from '../components/FirebaseConfig';
-import ArtGrid from '../components/ArtGrid';
-import { setArtworks } from '../store/index';
+import { firebaseConfig } from '../components/firebase/FirebaseConfig';
+import ArtGrid from '../components/artworks/ArtGrid';
+import { setArtworks } from '../store';
 import LoginPage from './Login';
+
 
 function PersonalGalleryPage() {
     const dispatch = useDispatch();
