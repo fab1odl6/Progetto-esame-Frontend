@@ -1,11 +1,14 @@
-import React, { useState, useContext } from 'react';
-import HomePage from "../pages/Homepage"
+import React, { useState, useContext , useEffect} from 'react';
+import HomePage from './Homepage';
 import NavigationContext from '../context/navigation';
 import { getDatabase, ref, get, child } from 'firebase/database';
 import { useDispatch } from 'react-redux';
-import { setUser, setLogged } from '../store';
+import { setUser } from '../store';
+import { setLogged } from '../store';
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from '../components/firebase/FirebaseConfig';
+import { useSelector } from "react-redux";
+import { logoutUser } from '../store/user';
 
 
 const app = initializeApp(firebaseConfig);
@@ -77,20 +80,8 @@ async function getEvents(user) {
   return eventArray;
 }
 
-function LoginPage() {
-
-  const containerClass = "flex flex-col items-center justify-center h-screen border-1 border-solid border-gray-300 rounded-10 shadow-md";
-  const titleClass = "font-bold";
-  const formClass = "flex flex-col w-300 m-20";
-  const formGroupClass = "mb-15";
-  const labelClass = "mb-5";
-  const inputClass = "p-8 text-16";
-  const buttonClass = "p-10 text-16 bg-yellow-600 text-white border-none cursor-pointer";
-  const errorClass = "error block text-red-500 bg-lightpink";
-  const registerLinkClass = "mt-10 text-center";
-  const registerTextClass = "text-blue-500 underline cursor-pointer";
-
-
+const LoginPage = () => {
+  const { user, logged } = useSelector((state) => state.users);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -99,6 +90,12 @@ function LoginPage() {
 
 
   const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    // Dispatch l'azione di logout
+    dispatch(logoutUser());
+    navigate('/login'); 
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -124,14 +121,15 @@ function LoginPage() {
             const artworks = await getArts(matchedUser.personalData);
             const events = await getEvents(matchedUser.personalData);
             dispatch(setUser({ matchedUser, artworks, events }));
-            setLoggedIn(true);
             dispatch(setLogged());
-            console.log('isLoggedIn dopo il login:', isLoggedIn);
+            setLoggedIn(true);
+            console.log('isLoggedIn dopo il login:', true);
             navigate('/');
           } else {
             setError('Username o Password Errati, riprovare');
             setUsername('');
             setPassword('');
+            setLoggedIn(false); // Imposta isLoggedIn a false in caso di login non riuscito
           }
         } else {
           setError('Dati utente non validi');
@@ -144,6 +142,10 @@ function LoginPage() {
 
     console.log('Fine della funzione handleLogin');
   };
+
+  useEffect(() => {
+    console.log('isLoggedIn dopo il login:', isLoggedIn);
+  }, [isLoggedIn]);
 
   return (
     <div style={styles.container}>
@@ -183,7 +185,7 @@ function LoginPage() {
         </button>
 
         <div style={styles.registerLink}>
-          Do not have an account? <a href="http://localhost:3000/register" style={styles.registerText}>Sign in</a>
+            Do not have an account? <a href="http://localhost:3000/register" style={styles.registerText}>Sign in</a>
         </div>
       </form>
     </div>
