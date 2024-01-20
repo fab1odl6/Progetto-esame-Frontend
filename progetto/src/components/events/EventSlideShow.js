@@ -28,7 +28,7 @@ function EventSlideShow() {
 
     const { navigate } = useContext(NavigationContext);
 
-    const { array, index, full } = useSelector((state) => {
+    const { array, index } = useSelector((state) => {
         return state.events;
     });
 
@@ -37,6 +37,7 @@ function EventSlideShow() {
     })
     const [favoriteState, setFavoriteState] = useState(false);
     const [modal, setModal] = useState(false);
+    const [full, setFull] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -58,7 +59,7 @@ function EventSlideShow() {
     }
 
     const handleClickEvent = function () {
-        dispatch(switchFullEvent())
+        setFull(!full);
     }
 
     useEffect(() => {
@@ -113,7 +114,12 @@ function EventSlideShow() {
                     </div>
                     <FaChevronRight className={chevronClass} onClick={handleClickChevronRight} />
                 </div>
-                {full && <EventShow favoriteState={favoriteState} onClickHeart={handleClickHeart} setFavoriteState={setFavoriteState} />}
+                {full && <EventShow
+                    favoriteState={favoriteState}
+                    onClickHeart={handleClickHeart}
+                    setFavoriteState={setFavoriteState}
+                    setFull={setFull}
+                />}
             </div>
         </div>
     );

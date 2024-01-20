@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import NavigationContext from "../../context/navigation";
 
 
-function EventShow({ favoriteState, onClickHeart, setFavoriteState }) {
+function EventShow({ favoriteState, onClickHeart, setFavoriteState, setFull }) {
 
     const modalClass = "fixed inset-0 flex flex-col items-center justify-center w-screen h-screen bg-blue bg-auto z-10";
     const modalContainerClass = "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50";
@@ -36,7 +36,7 @@ function EventShow({ favoriteState, onClickHeart, setFavoriteState }) {
     const dispatch = useDispatch();
 
     const handleClickClose = function () {
-        dispatch(switchFullEvent());
+        setFull();
     }
 
     const handleClickHeart = function (event) {
