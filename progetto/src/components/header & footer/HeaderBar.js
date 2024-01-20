@@ -37,7 +37,7 @@ function HeaderBar() {
 
   const handleLogout = () => {
     dispatch(logoutUser());
-    navigate('/login'); // o navigate('/');
+    navigate('/login'); 
   };
 
   return (
@@ -48,7 +48,6 @@ function HeaderBar() {
           <Link to="/" className="block text-teal-600">
             <span className="sr-only">Home</span>
             <svg className="h-8" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {/* Inserisci il tuo percorso per l'icona */}
             </svg>
           </Link>
         </div>
