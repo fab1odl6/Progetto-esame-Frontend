@@ -9,6 +9,7 @@ import { getDatabase } from 'firebase/database';
 import { useEffect, useState, useContext } from 'react';
 import NavigationContext from '../../context/navigation';
 import { IoIosClose } from 'react-icons/io';
+import { Dialog, DialogContent } from '@mui/material';
 
 
 function ArtSlideShow() {
@@ -87,6 +88,14 @@ function ArtSlideShow() {
         setModal(false);
     }
 
+    const openModal = function () {
+        setFull(true);
+    }
+
+    const closeModal = function () {
+        setFull(false)
+    }
+
     const altText = "Image of " + array[index].title;
     return (
         <div>
@@ -122,13 +131,16 @@ function ArtSlideShow() {
                     </div>
                     <FaChevronRight className={chevron} onClick={handleClickChevronRight} />
                 </div>
-                {full && <ArtShow
-                    artwork={array[index]}
-                    favoriteState={favoriteState}
-                    onClickHeart={handleClickHeart}
-                    setFavoriteState={setFavoriteState}
-                    setFull={handleClickArtwork}
-                />}
+                {full &&
+                    <ArtShow
+                        artwork={array[index]}
+                        favoriteState={favoriteState}
+                        onClickHeart={handleClickHeart}
+                        setFavoriteState={setFavoriteState}
+                        open={openModal}
+                        onClose={closeModal}
+                    />
+                }
             </div>
         </div>
     );

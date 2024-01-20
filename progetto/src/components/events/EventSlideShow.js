@@ -1,10 +1,11 @@
 import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
-import { swipeLeftEvent, swipeRightEvent, switchFullEvent, updateEvent } from "../../store";
+import { swipeLeftEvent, swipeRightEvent, updateEvent } from "../../store";
 import EventShow from "./EventShow";
 import { useState, useEffect, useContext } from 'react';
 import NavigationContext from '../../context/navigation';
 import { IoIosClose } from 'react-icons/io';
+import { Dialog, DialogContent } from '@mui/material';
 
 
 function EventSlideShow() {
@@ -17,7 +18,7 @@ function EventSlideShow() {
     const closeButtonClass = "absolute top-2 right-2 text-gray-700 cursor-pointer text-lg";
 
     const eventTextClass = "";
-    const eventDivClass = "";
+    const eventDivClass = "relative w-full";
     const eventContainerClass = "flex justify-center flex-row place-content-center";
     const eventElementClass = "";
     const imageClass = "w-full h-auto max-h-96";
@@ -81,6 +82,13 @@ function EventSlideShow() {
         setModal(false);
     }
 
+    const openModal = function () {
+        setFull(true);
+    }
+
+    const closeModal = function () {
+        setFull(false)
+    }
 
     const altText = "Image of " + array[index].name;
     return (
@@ -97,12 +105,12 @@ function EventSlideShow() {
                 </div>
             )}
             <div className={eventTextClass}>Highlighted Events</div>
-            <div className={eventDivClass + "relative w-full"}>
-                <div className={eventContainerClass + "relative h-56 overflow-hidden rounded-lg md:h-96"}>
+            <div className={eventDivClass}>
+                <div className={eventContainerClass}>
                     <FaChevronLeft className={chevronClass} onClick={handleClickChevronLeft} />
                     <div className={eventElementClass}>
-                        <div onClick={handleClickEvent} className="justify-center duration-700 ease-in-out items-center">
-                            <img className="absolute block w-auto h-auto max-h-96 -translate-x-1/2 -translate-y-1/2" src={array[index].image} alt={altText} />
+                        <div onClick={handleClickEvent}>
+                            <img className={imageClass} src={array[index].image} alt={altText} />
                         </div>
                         <div className={titleAndHeartClass}>
                             <div className={titleClass} onClick={handleClickEvent}>{array[index].name}</div>
@@ -115,12 +123,15 @@ function EventSlideShow() {
                     </div>
                     <FaChevronRight className={chevronClass} onClick={handleClickChevronRight} />
                 </div>
-                {full && <EventShow
-                    favoriteState={favoriteState}
-                    onClickHeart={handleClickHeart}
-                    setFavoriteState={setFavoriteState}
-                    setFull={setFull}
-                />}
+                {full &&
+                    <EventShow
+                        favoriteState={favoriteState}
+                        onClickHeart={handleClickHeart}
+                        setFavoriteState={setFavoriteState}
+                        open={openModal}
+                        onClose={closeModal}
+                    />
+                }
             </div>
         </div>
     );

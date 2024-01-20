@@ -4,9 +4,10 @@ import { IoIosClose } from "react-icons/io";
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useEffect, useState, useContext } from "react";
 import NavigationContext from "../../context/navigation";
+import { Dialog, DialogContent } from "@mui/material";
 
 
-function ArtShow({ artwork, favoriteState, onClickHeart, setFavoriteState, setFull }) {
+function ArtShow({ artwork, favoriteState, onClickHeart, setFavoriteState, open, onClose }) {
 
     const modalClass = "fixed inset-0 flex flex-col items-center justify-center w-screen h-screen z-50";
     const modalContainerClass = "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50";
@@ -32,10 +33,6 @@ function ArtShow({ artwork, favoriteState, onClickHeart, setFavoriteState, setFu
     const [modal, setModal] = useState(false);
 
     const dispatch = useDispatch();
-
-    const handleClickClose = function () {
-        setFull();
-    }
 
     const handleClickHeart = function (art) {
         if (logged) {
@@ -83,31 +80,34 @@ function ArtShow({ artwork, favoriteState, onClickHeart, setFavoriteState, setFu
                     </div>
                 </div>
             )}
-            <div className={containerClass}>
-                <div className={imageContainerClass}>
-                    <img className={imageClass} key={artwork.id} src={artwork.image} alt={artwork.title} />
-                    <IoIosClose className={closeIconClass} onClick={handleClickClose} />
-                </div>
-                <div className={firstRowClass}>
-                    {artwork.title && <div>Title: {artwork.title}</div>}
-                    {favoriteState ? (
-                        <FaHeart className={favoriteClass} onClick={() => handleClickHeart(artwork)} />
-                    ) : (
-                        <FaRegHeart className={favoriteClass} onClick={() => handleClickHeart(artwork)} />
-                    )}
-                </div>
-                {artwork.authorName && <div>Author: {artwork.authorName}</div>}
-                {artwork.link && <div>Source Link: <a className={linkClass} href={artwork.link}>{artwork.title}</a></div>}
-                {artwork.department && <div>Department: {artwork.department}</div>}
-                {artwork.culture && <div>Culture: {artwork.culture}</div>}
-                {artwork.date && <div>Date: {artwork.date}</div>}
-                {artwork.classification && <div>Classification: {artwork.classification}</div>}
-                <div>
-                    <button className={buttonDetailsClass} onClick={handleClickButtonDetails}>
-                        See details
-                    </button>
-                </div>
-            </div>
+            <Dialog open={open} onClose={onClose}>
+                <DialogContent>
+                    <div className={containerClass}>
+                        <div className={imageContainerClass}>
+                            <img className={imageClass} key={artwork.id} src={artwork.image} alt={artwork.title} />
+                        </div>
+                        <div className={firstRowClass}>
+                            {artwork.title && <div>Title: {artwork.title}</div>}
+                            {favoriteState ? (
+                                <FaHeart className={favoriteClass} onClick={() => handleClickHeart(artwork)} />
+                            ) : (
+                                <FaRegHeart className={favoriteClass} onClick={() => handleClickHeart(artwork)} />
+                            )}
+                        </div>
+                        {artwork.authorName && <div>Author: {artwork.authorName}</div>}
+                        {artwork.link && <div>Source Link: <a className={linkClass} href={artwork.link}>{artwork.title}</a></div>}
+                        {artwork.department && <div>Department: {artwork.department}</div>}
+                        {artwork.culture && <div>Culture: {artwork.culture}</div>}
+                        {artwork.date && <div>Date: {artwork.date}</div>}
+                        {artwork.classification && <div>Classification: {artwork.classification}</div>}
+                        <div>
+                            <button className={buttonDetailsClass} onClick={handleClickButtonDetails}>
+                                See details
+                            </button>
+                        </div>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }
