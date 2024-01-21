@@ -1,12 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
-import { switchFullEvent } from "../../store";
+import { useSelector } from "react-redux";
 import { IoIosClose } from "react-icons/io";
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useContext, useEffect, useState } from "react";
 import NavigationContext from "../../context/navigation";
+import { Dialog, DialogContent } from "@mui/material";
 
 
-function EventShow({ favoriteState, onClickHeart, setFavoriteState, setFull }) {
+
+function EventShow({ favoriteState, onClickHeart, setFavoriteState, open, onClose }) {
 
     const modalClass = "fixed inset-0 flex flex-col items-center justify-center w-screen h-screen bg-blue bg-auto z-10";
     const modalContainerClass = "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50";
@@ -33,11 +34,6 @@ function EventShow({ favoriteState, onClickHeart, setFavoriteState, setFull }) {
     })
     const [modal, setModal] = useState(false);
 
-    const dispatch = useDispatch();
-
-    const handleClickClose = function () {
-        setFull();
-    }
 
     const handleClickHeart = function (event) {
         if (logged) {
@@ -79,23 +75,26 @@ function EventShow({ favoriteState, onClickHeart, setFavoriteState, setFull }) {
                     </div>
                 </div>
             )}
-            <div className={containerClass}>
-                <div className={imageContainerClass}>
-                    <img className={imageClass} key={array[index].id} src={array[index].image} alt={array[index].name} />
-                    <IoIosClose className={closeIconClass} onClick={handleClickClose} />
-                </div>
-                <div className={firstRowClass}>
-                    {array[index].name && <div>Title: {array[index].name}</div>}
-                    {favoriteState ? (
-                        <FaHeart className={favoriteClass} onClick={() => handleClickHeart(array[index])} />
-                    ) : (
-                        <FaRegHeart className={favoriteClass} onClick={() => handleClickHeart(array[index])} />
-                    )}
-                </div>
-                {array[index].department && <div>Department: {array[index].department}</div>}
-                {array[index].guests && <div>Guests: {array[index].guests}</div>}
-                {array[index].date && <div>Date: {array[index].date}</div>}
-            </div>
+            <Dialog open={open} onClose={onClose}>
+                <DialogContent>
+                    <div className={containerClass}>
+                        <div className={imageContainerClass}>
+                            <img className={imageClass} key={array[index].id} src={array[index].image} alt={array[index].name} />
+                        </div>
+                        <div className={firstRowClass}>
+                            {array[index].name && <div>Title: {array[index].name}</div>}
+                            {favoriteState ? (
+                                <FaHeart className={favoriteClass} onClick={() => handleClickHeart(array[index])} />
+                            ) : (
+                                <FaRegHeart className={favoriteClass} onClick={() => handleClickHeart(array[index])} />
+                            )}
+                        </div>
+                        {array[index].department && <div>Department: {array[index].department}</div>}
+                        {array[index].guests && <div>Guests: {array[index].guests}</div>}
+                        {array[index].date && <div>Date: {array[index].date}</div>}
+                    </div>
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }

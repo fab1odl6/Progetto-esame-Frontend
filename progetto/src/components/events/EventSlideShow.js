@@ -1,10 +1,11 @@
 import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
-import { swipeLeftEvent, swipeRightEvent, switchFullEvent, updateEvent } from "../../store";
+import { swipeLeftEvent, swipeRightEvent, updateEvent } from "../../store";
 import EventShow from "./EventShow";
 import { useState, useEffect, useContext } from 'react';
 import NavigationContext from '../../context/navigation';
 import { IoIosClose } from 'react-icons/io';
+import { Dialog, DialogContent } from '@mui/material';
 
 
 function EventSlideShow() {
@@ -15,9 +16,10 @@ function EventSlideShow() {
     const textContainerClass = "mb-4";
     const buttonClass = "bg-blue-500 text-white px-4 py-2 rounded cursor-pointer";
     const closeButtonClass = "absolute top-2 right-2 text-gray-700 cursor-pointer text-lg";
+
     const eventTextClass = "";
-    const eventDivClass = "";
-    const eventContainerClass = "flex flex-row place-content-center";
+    const eventDivClass = "relative w-full";
+    const eventContainerClass = "flex justify-center flex-row place-content-center";
     const eventElementClass = "";
     const imageClass = "w-full h-auto max-h-96";
     const chevronClass = "place-self-center text-2xl";
@@ -80,6 +82,13 @@ function EventSlideShow() {
         setModal(false);
     }
 
+    const openModal = function () {
+        setFull(true);
+    }
+
+    const closeModal = function () {
+        setFull(false)
+    }
 
     const altText = "Image of " + array[index].name;
     return (
@@ -114,12 +123,15 @@ function EventSlideShow() {
                     </div>
                     <FaChevronRight className={chevronClass} onClick={handleClickChevronRight} />
                 </div>
-                {full && <EventShow
-                    favoriteState={favoriteState}
-                    onClickHeart={handleClickHeart}
-                    setFavoriteState={setFavoriteState}
-                    setFull={setFull}
-                />}
+                {full &&
+                    <EventShow
+                        favoriteState={favoriteState}
+                        onClickHeart={handleClickHeart}
+                        setFavoriteState={setFavoriteState}
+                        open={openModal}
+                        onClose={closeModal}
+                    />
+                }
             </div>
         </div>
     );

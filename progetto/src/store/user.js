@@ -73,7 +73,13 @@ const updateFavoriteEvent = function (events, event, user) {
     }
 }
 
-const usersSlice = createSlice({
+export const logoutUser = () => {
+    return {
+      type: "usersSlice/logoutUser",
+    };
+  };
+
+  const usersSlice = createSlice({
     name: "usersSlice",
     initialState: {
         user: {},
@@ -84,27 +90,30 @@ const usersSlice = createSlice({
     reducers: {
         registerUser(state, action) {
             updateData(action.payload);
-            return ({
+            return {
                 ...state,
                 user: action.payload,
                 artworks: action.payload.artworks,
                 events: action.payload.events
-            })
+            };
         },
+
         setUser(state, action) {
-            return ({
+            return {
                 ...state,
                 user: action.payload.matchedUser,
                 artworks: action.payload.artworks,
                 events: action.payload.events
-            });
+            };
         },
+
         setLogged(state, action) {
-            return ({
+            return {
                 ...state,
                 logged: !state.logged
-            });
+            };
         },
+
         updateArt(state, action) {
             const updatedArtworks = updateFavoriteArt(state.artworks, action.payload, state.user.personalData);
 
@@ -121,7 +130,16 @@ const usersSlice = createSlice({
                 ...state,
                 events: updatedEvents
             };
-        }
+        },
+        logoutUser(state) {
+            return {
+                ...state,
+                user: {},
+                logged: false,
+                artworks: [],
+                events: [],
+            };
+        },
     }
 });
 

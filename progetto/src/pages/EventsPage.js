@@ -31,7 +31,6 @@ function EventsPage() {
   ];
 
   const { logged } = useSelector((state) => {
-    //console.log("STATO:",state.users)
     return state.users;
   })
 
