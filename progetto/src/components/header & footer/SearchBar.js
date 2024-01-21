@@ -86,6 +86,7 @@ import { useState, useContext } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import NavigationContext from '../../context/navigation';
 import { updateText } from '../../store';
+import React from "react";
 
 function SearchBar() {
     const searchBarHeaderClass = classNames("flex justify-center items-center relative z-10");
@@ -95,7 +96,7 @@ function SearchBar() {
    // const searchIconClass = classNames("absolute top-1/2 left-3 transform -translate-y-1/2 cursor-pointer text-blue-500");
     const finalClassNamesClass = classNames("border rounded p-2 shadow bg-white w-full pl-8 relative");
     const ml2Class = 'ml-2';
-    const matchedPanelClass = "matched-panel absolute top-full left-0 w-full bg-white border rounded shadow mt-1 z-300";
+    const matchedPanelClass = "matched-panel absolute top-full left-0 w-full bg-white border rounded shadow mt-1 z-300 p-2 overflow-y-auto max-h-40";
     const valueClass = classNames("cursor-pointer", finalClassNamesClass);
     const searchButtonClass = classNames(`${ml2Class} text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 absolute right-0 top-1/2 transform -translate-y-1/2 h-full`);
 
@@ -151,9 +152,14 @@ function SearchBar() {
                         {text && matchedValues.length > 0 && (
                             <div className={matchedPanelClass}>
                                 {matchedValues.slice(0, 3).map((value, index) => (
-                                    <div className={valueClass} key={index} onClick={() => handleSelect(value)}>
-                                        {value.title}
-                                    </div>
+                                    <React.Fragment key={index}>
+                                        <div className="cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => handleSelect(value)}>
+                                            {value.title}
+                                        </div>
+                                        {index < matchedValues.length - 1 && (
+                                            <div className="border-b border-blue-200"></div>
+                                        )}
+                                    </React.Fragment>
                                 ))}
                             </div>
                         )}
