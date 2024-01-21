@@ -2,8 +2,8 @@ import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { MdModeEdit, MdOutlineEditOff } from "react-icons/md";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { switchFavoriteEvent } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { switchFavoriteEvent, updateEvent } from "../../store";
 import { remove, ref, getDatabase, set, update } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebase/FirebaseConfig";
@@ -39,7 +39,7 @@ async function writeData() {
 
 // await writeData();
 
-function HandleEventCard({ event }) {
+function HandleEventCard({ event, submit, setSubmit }) {
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase();
@@ -68,6 +68,10 @@ function HandleEventCard({ event }) {
 
     const dispatch = useDispatch();
 
+    const { user } = useSelector((state) => {
+        return state.users;
+    })
+
     const [editState, setEditState] = useState(false);
     const [deleteState, setDeleteState] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
@@ -83,29 +87,27 @@ function HandleEventCard({ event }) {
     });
 
     const handleClickDelete = function () {
-        remove(ref(db, 'users/Fabio/customEvents/' + event.name));
+        remove(ref(db, "users/" + user.personalData.name + "/customEvents/" + event.name));
         setDeleteState(!deleteState);
+        setSubmit(!submit);
     }
 
     const handleClickEdit = function () {
         setSuccess(null);
         setEditState(!editState);
+        setSubmit(!submit);
     }
 
-    const handleClickHeart = function (event) {
+    const handleClickHeart = function () {
         setFavorite(!favorite);
-        event.favorite = favorite;
-        dispatch(switchFavoriteEvent(event));
-        update(ref(db, "users/Fabio/customEvents/" + formData.name), {
-            favorite: !favorite
-        })
+        dispatch(updateEvent(event));
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         handleClickDelete();
 
-        const eventRef = ref(db, "users/Fabio/customEvents/" + formData.name);
+        const eventRef = ref(db, "users/" + user.personalData.name + "/customEvents/" + formData.name);
         set(eventRef, {
             name: formData.name,
             date: selectedDate,
@@ -115,11 +117,12 @@ function HandleEventCard({ event }) {
             favorite: favorite,
             full: event.full,
             id: event.id
-        })
+        });
 
         setSuccess(true);
         setEditState(false);
-        setDeleteState(false)
+        setDeleteState(false);
+        setSubmit(!submit);
     }
 
     const handleChange = (e) => {

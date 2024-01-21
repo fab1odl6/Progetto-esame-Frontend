@@ -73,19 +73,38 @@ const updateFavoriteEvent = function (events, event, user) {
     }
 }
 
-export const logoutUser = () => {
-    return {
-      type: "usersSlice/logoutUser",
-    };
-  };
+const updatePersonalCustomEvents = function (events, event, user) {
+    const eventIndex = events.findIndex(item => item.name === event.name);
 
-  const usersSlice = createSlice({
+    if (eventIndex !== -1) {
+        const updatedEvents = [...events];
+        updatedEvents.splice(eventIndex, 1);
+        remove(ref(db, `users/${user.name}/events/${event.name}`));
+        return updatedEvents;
+    } else {
+        set(ref(db, `users/${user.name}/events/${event.name}`), {
+            id: event.id,
+            name: event.name,
+            image: event.image,
+            date: event.date,
+            department: event.department,
+            guests: event.guests,
+            favorite: true,
+            full: false
+        });
+
+        return [...events, event];
+    }
+}
+
+const usersSlice = createSlice({
     name: "usersSlice",
     initialState: {
         user: {},
         logged: false,
         artworks: [],
-        events: []
+        events: [],
+        customEvents: []
     },
     reducers: {
         registerUser(state, action) {
@@ -103,7 +122,8 @@ export const logoutUser = () => {
                 ...state,
                 user: action.payload.matchedUser,
                 artworks: action.payload.artworks,
-                events: action.payload.events
+                events: action.payload.events,
+                customEvents: action.payload.customEvents
             };
         },
 
@@ -131,7 +151,17 @@ export const logoutUser = () => {
                 events: updatedEvents
             };
         },
-        logoutUser(state) {
+
+        updateCustomEvents(state, action) {
+            const updatedCustomEvents = updatePersonalCustomEvents(state.customEvents, action.payload, state.user.personalData);
+
+            return ({
+                ...state,
+                customEvents: updatedCustomEvents
+            });
+        },
+
+        logoutUser(state, action) {
             return {
                 ...state,
                 user: {},
@@ -140,6 +170,20 @@ export const logoutUser = () => {
                 events: [],
             };
         },
+
+        setArtworks(state, action) {
+            return ({
+                ...state,
+                artworks: action.payload
+            })
+        },
+
+        setEvents(state, action) {
+            return ({
+                ...state,
+                events: action.payload
+            })
+        }
     }
 });
 

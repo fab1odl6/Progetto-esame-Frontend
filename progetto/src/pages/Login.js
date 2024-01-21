@@ -1,14 +1,12 @@
-import React, { useState, useContext , useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import HomePage from './Homepage';
 import NavigationContext from '../context/navigation';
 import { getDatabase, ref, get, child } from 'firebase/database';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../store';
-import { setLogged } from '../store';
+import { setUser, setLogged, logoutUser } from '../store';
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from '../components/firebase/FirebaseConfig';
 import { useSelector } from "react-redux";
-import { logoutUser } from '../store/user';
 
 
 const app = initializeApp(firebaseConfig);
@@ -80,8 +78,37 @@ async function getEvents(user) {
   return eventArray;
 }
 
-const LoginPage = () => {
-  const { user, logged } = useSelector((state) => state.users);
+async function getCustomEvents(user) {
+  const eventArray = [];
+  const eventRef = child(dbRef, "/users/" + user.name + "/customEvents");
+
+  try {
+    const snapshot = await get(eventRef);
+
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      for (const key in data) {
+        const event = data[key];
+        eventArray.push({
+          id: event.id,
+          name: event.name,
+          image: event.image,
+          date: event.date,
+          department: event.department,
+          guests: event.guests,
+          favorite: false,
+          full: false
+        });
+      }
+    }
+  } catch (e) {
+    console.error(e);
+  }
+  return eventArray;
+}
+
+
+const LoginPage = function () {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -94,7 +121,7 @@ const LoginPage = () => {
   const handleLogout = () => {
     // Dispatch l'azione di logout
     dispatch(logoutUser());
-    navigate('/login'); 
+    navigate('/login');
   };
 
   const handleLogin = async (e) => {
@@ -120,11 +147,12 @@ const LoginPage = () => {
             console.log('Utente loggato:', matchedUser);
             const artworks = await getArts(matchedUser.personalData);
             const events = await getEvents(matchedUser.personalData);
-            dispatch(setUser({ matchedUser, artworks, events }));
+            const customEvents = await getCustomEvents(matchedUser.personalData);
+            dispatch(setUser({ matchedUser, artworks, events, customEvents }));
             dispatch(setLogged());
             setLoggedIn(true);
             console.log('isLoggedIn dopo il login:', true);
-            navigate('/');
+            // navigate('/');
           } else {
             setError('Username o Password Errati, riprovare');
             setUsername('');
@@ -185,7 +213,7 @@ const LoginPage = () => {
         </button>
 
         <div style={styles.registerLink}>
-            Do not have an account? <a href="http://localhost:3000/register" style={styles.registerText}>Sign in</a>
+          Do not have an account? <a href="http://localhost:3000/register" style={styles.registerText}>Sign in</a>
         </div>
       </form>
     </div>

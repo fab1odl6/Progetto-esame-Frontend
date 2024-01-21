@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, child, get } from "firebase/database";
 import { firebaseConfig } from "../firebase/FirebaseConfig";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import DepartmentDropdown from "../dropdowns/DepartmentDropdown";
+import { useDispatch, useSelector } from "react-redux";
+import { setEvents } from "../../store";
 
 
 function AddAnEvent() {
@@ -26,6 +28,10 @@ function AddAnEvent() {
 
 
     const app = initializeApp(firebaseConfig);
+    const db = getDatabase();
+    const dbRef = ref(db);
+
+    const dispatch = useDispatch();
 
     const [formData, setFormData] = useState({
         date: "",
@@ -35,10 +41,31 @@ function AddAnEvent() {
         department: ""
     });
 
+    const { user, customEvents } = useSelector((state) => {
+        return state.users;
+    })
+
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedOption, setSelectedOption] = useState(null);
+    const [eventsLocal, setEventsLocal] = useState(customEvents);
+
+    const updateLocal = async function () {
+        const eventsRef = child(dbRef, "/users/" + user.personalData.name + "/customEvents/")
+
+        try {
+            const snapshot = await get(eventsRef);
+
+            if (snapshot.exists()) {
+                const eventData = Object.values(snapshot.val());
+                dispatch(setEvents(eventData));
+                setEventsLocal(eventData);
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
 
     const handleOptionSelection = (option) => {
         setSelectedOption(option);
@@ -55,10 +82,9 @@ function AddAnEvent() {
             ...prevFormData,
             [name]: value
         }));
-
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!formData.name || !selectedDate || !formData.image || !selectedOption) {
@@ -103,7 +129,14 @@ function AddAnEvent() {
         setError(null);
         setSelectedDate(null);
         setSelectedOption(null);
+
+        await updateLocal();
     }
+
+    useEffect(() => {
+        console.log("A")
+        updateLocal();
+    }, [customEvents]);
 
 
     return (
@@ -132,6 +165,8 @@ function AddAnEvent() {
                         value={formData.name}
                         onChange={handleChange}
                         className={inputClass}
+                        required
+                        autoComplete="off"
                     />
                 </div>
                 <div className={inputContainerClass}>
@@ -145,6 +180,8 @@ function AddAnEvent() {
                         value={formData.image}
                         onChange={handleChange}
                         className={inputClass}
+                        required
+                        autoComplete="off"
                     />
                 </div>
                 <div className={inputContainerClass}>
@@ -162,6 +199,8 @@ function AddAnEvent() {
                                     onChange={handleChangeDate}
                                     dateFormat="dd/MM/yyyy"
                                     className={datePickerClass}
+                                    required
+                                    autoComplete="off"
                                 />
                             </div>
                         </div>
@@ -169,10 +208,10 @@ function AddAnEvent() {
                 </div>
                 <div className={inputContainerClass}>
                     <div>
-                        <DepartmentDropdown onOptionSelect={handleOptionSelection} />
+                        <DepartmentDropdown onOptionSelect={handleOptionSelection} autoComplete="off" />
                         <span className={mandatoryClass}>*</span>
                         {selectedOption && (
-                            <p className={selectedOptionClass}>Selected option: {selectedOption}</p>
+                            <p className={selectedOptionClass} >Selected option: {selectedOption}</p>
                         )}
                     </div>
                 </div>
@@ -187,6 +226,8 @@ function AddAnEvent() {
                         value={formData.guests}
                         onChange={handleChange}
                         className={inputClass}
+
+                        autoComplete="off"
                     />
                 </div>
                 <button type="submit" className={buttonClass}>

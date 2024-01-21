@@ -1,6 +1,6 @@
 import Link from "../navigation/Link";
 import { useSelector } from "react-redux";
-import { logoutUser } from "../../store/user";
+import { logoutUser } from "../../store";
 import { useDispatch } from 'react-redux';
 import NavigationContext from "../../context/navigation";
 import { useContext } from "react";
@@ -37,14 +37,14 @@ function HeaderBar() {
 
   const handleLogout = () => {
     dispatch(logoutUser());
-    navigate('/login'); 
+    navigate('/login');
   };
 
   return (
     <header className={sectionHeader}>
       <div className={sectionElement}>
         <div className="md:flex md:items-center md:gap-12">
-        <img src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png" alt="Icona" className="h-8 w-8 mr-2" />
+          <img src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png" alt="Icona" className="h-8 w-8 mr-2" />
           <Link to="/" className="block text-teal-600">
             <span className="sr-only">Home</span>
             <svg className="h-8" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,29 +57,29 @@ function HeaderBar() {
         </nav>
 
         <div className="flex items-center gap-4">
-        <div className="sm:flex sm:gap-4">
+          <div className="sm:flex sm:gap-4">
             {user && user.personalData ? (
-            <>
+              <>
                 <a className={loginButton} href="#">
-                {user.personalData.username}
+                  {user.personalData.username}
                 </a>
                 <a className={registerButton} onClick={handleLogout} href="#">
-                Logout
+                  Logout
                 </a>
-            </>
+              </>
             ) : (
-            <>
+              <>
                 <a className={loginButton} href="http://localhost:3000/login">
-                Login
+                  Login
                 </a>
                 <div className="hidden sm:flex">
-                <a className={registerButton} href="http://localhost:3000/register">
+                  <a className={registerButton} href="http://localhost:3000/register">
                     Register
-                </a>
+                  </a>
                 </div>
-            </>
+              </>
             )}
-        </div>
+          </div>
 
           <div className="block md:hidden">
             <button className={mobileMenuButton}>
