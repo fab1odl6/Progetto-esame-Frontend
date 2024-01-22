@@ -28,8 +28,16 @@ function HeaderBar() {
   ];
 
   const user = useSelector((state) => state.users.user);
+<<<<<<< HEAD
   const page = useSelector((state) => state.activePage.page);
   console.log(page)
+=======
+
+  const handleLogoClick = () => {
+    navigate('/');
+  };
+
+>>>>>>> 4346e60bf90d1606592802f6aaf86e86a5bc78c2
 
   const renderedLinks = links.map((link) => (
     <Link
@@ -49,7 +57,7 @@ function HeaderBar() {
   return (
     <header className={sectionHeader}>
       <div className={sectionElement}>
-        <div className="md:flex md:items-center md:gap-12">
+        <div className="md:flex md:items-center md:gap-12" onClick={() => navigate('/')}>
           <img src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png" alt="Icona" className="h-8 w-8 mr-2" />
           <Link to="/" className="block text-teal-600">
             <span className="sr-only">Home</span>
