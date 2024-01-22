@@ -13,6 +13,8 @@ import RegisterPage from "./pages/RegisterPage";
 import { useSelector } from "react-redux";
 import LoginPage from "./pages/Login"
 import Footer from "./components/header & footer/Footer";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./store";
 
 
 function App() {
@@ -26,6 +28,7 @@ function App() {
   return (
 
     <NavigationProvider>
+      <PersistGate loading={null} persistor={persistor}>
       <div>
         <HeaderBar />
         <div>
@@ -59,6 +62,7 @@ function App() {
         </div>
         <Footer />
       </div>
+     </PersistGate>
     </NavigationProvider>
 
   );

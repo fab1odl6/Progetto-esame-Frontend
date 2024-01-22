@@ -152,7 +152,7 @@ const LoginPage = function () {
             dispatch(setLogged());
             setLoggedIn(true);
             console.log('isLoggedIn dopo il login:', true);
-            // navigate('/');
+            navigate('/');
           } else {
             setError('Username o Password Errati, riprovare');
             setUsername('');
