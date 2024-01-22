@@ -112,9 +112,7 @@ const usersSlice = createSlice({
             updateData(action.payload);
             return {
                 ...state,
-                user: action.payload,
-                artworks: action.payload.artworks,
-                events: action.payload.events
+                user: action.payload
             };
         },
 
@@ -131,7 +129,7 @@ const usersSlice = createSlice({
         setLogged(state, action) {
             return {
                 ...state,
-                logged: !state.logged
+                logged: action.payload
             };
         },
 

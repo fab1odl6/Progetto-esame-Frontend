@@ -49,7 +49,7 @@ function RegisterPage() {
             username: formData.username,
             password: formData.password
         }));
-        dispatch(setLogged());
+        dispatch(setLogged(true));
 
         setFormData({
             name: "",
