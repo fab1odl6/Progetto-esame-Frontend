@@ -2,14 +2,12 @@ import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/
 import { useDispatch, useSelector } from "react-redux";
 import { swipeLeftArt, swipeRightArt, updateArt } from "../../store";
 import ArtShow from "./ArtShow";
-import className from "classnames";
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from "../firebase/FirebaseConfig";
 import { getDatabase } from 'firebase/database';
 import { useEffect, useState, useContext } from 'react';
 import NavigationContext from '../../context/navigation';
 import { IoIosClose } from 'react-icons/io';
-import { Dialog, DialogContent } from '@mui/material';
 
 
 function ArtSlideShow() {
@@ -19,15 +17,16 @@ function ArtSlideShow() {
     const textContainerClass = "mb-4";
     const buttonClass = "bg-blue-500 text-white px-4 py-2 rounded cursor-pointer";
     const closeButtonClass = "absolute top-2 right-2 text-gray-700 cursor-pointer text-lg";
-    const artText = className("");
-    const artDiv = className("");
-    const artContainer = className("flex flex-row place-content-center");
-    const artElement = className("");
-    const image = className("w-full h-auto max-h-96");
-    const chevron = className("place-self-center text-2xl");
-    const titleAndHeart = className("flex");
-    const favoriteClass = className("ml-auto text-2xl");
-    const title = className("text-lg place-content-center flex justify-between");
+    const artTextClass = "";
+    const artDivClass = "";
+    const artContainerClass = "mx-auto flex flex-row place-content-center max-w-sm h-96 p-6 bg-yellow-100 border-yellow-200 rounded-lg shadow hover:bg-yellow-800 dark:bg-yellow-800 dark:border-yellow-700 dark:hover:bg-yellow-700";
+    const artElementClass = "items-center justify-center mx-auto";
+    const imageClass = "max-h-72 cursor-pointer place-self-center";
+    const chevronClass = "place-self-center text-2xl";
+    const titleAndHeartClass = "flex mt-2";
+    const favoriteClass = "ml-auto text-2xl";
+    const titleContainerClass = "text-lg";
+    const titleClass = "font-bold cursor-pointer";
 
 
     const { navigate } = useContext(NavigationContext);
@@ -110,17 +109,22 @@ function ArtSlideShow() {
                     </div>
                 </div>
             )}
-            <div className={artText}>Highlighted Artworks</div>
-            <div className={artDiv}>
-                <div className={artContainer}>
-                    <FaChevronLeft className={chevron} onClick={handleClickChevronLeft} />
-                    <div className={artElement}>
+            <div className={artTextClass}>Highlighted Artworks</div>
+            <div className={artDivClass}>
+                <div className={artContainerClass}>
+                    <FaChevronLeft className={chevronClass + " mr-2"} onClick={handleClickChevronLeft} />
+                    <div className={artElementClass}>
                         <div onClick={handleClickArtwork}>
-                            <img className={image} src={array[index].image} alt={altText} />
+                            <img className={imageClass} src={array[index].image} alt={altText} />
                         </div>
-                        <div className={titleAndHeart}>
-                            <div className={title}>
-                                <div className='pr-1'>{array[index].title} </div> {array[index].authorName && <div> - {array[index].authorName}</div>}
+                        <div className={titleAndHeartClass}>
+                            <div className={titleContainerClass}>
+                                <div className={titleClass}>{array[index].title} </div>
+                                {array[index].authorName ? (
+                                    <div> {array[index].authorName}</div>
+                                ) : (
+                                    <div>Unknown Author</div>
+                                )}
                             </div>
                             {favoriteState ? (
                                 <FaHeart className={favoriteClass} onClick={() => handleClickHeart(array[index])} />
@@ -129,7 +133,7 @@ function ArtSlideShow() {
                             )}
                         </div>
                     </div>
-                    <FaChevronRight className={chevron} onClick={handleClickChevronRight} />
+                    <FaChevronRight className={chevronClass + " ml-2"} onClick={handleClickChevronRight} />
                 </div>
                 {full &&
                     <ArtShow

@@ -54,7 +54,7 @@ function EventCard({ event }) {
               <button data-modal-hide="popup-modal" type="button" onClick={deleteFavorite} className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
                 Yes, I'm sure
               </button>
-              <button onClick={undoDelete} data-modal-hide="popup-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
+              <button onClick={undoDelete} data-modal-hide="popup-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@ function EventCard({ event }) {
       <div className={containerClass}>
         <img src={event.image} className={imageClass} alt={event.name} onClick={handleClickShow} />
         <div className={`${titleAndHeartClass}`}>
-          <div className="cursor-pointer" onClick={handleClickShow}>{event.name}</div>
+          <div className="cursor-pointer font-bold" onClick={handleClickShow}>{event.name}</div>
           <FaHeart className={`${favoriteClass}`} onClick={handleClickHeart} />
         </div>
         {full && <FavoriteEventShow event={event} key={event.name} onClickClose={handleClickShow} onClickHeart={handleClickHeart} />}

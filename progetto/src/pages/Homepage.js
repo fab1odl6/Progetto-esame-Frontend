@@ -9,8 +9,8 @@ import { clearText } from "../store";
 function HomePage() {
 
     const zIndexClass = 'z-10';
-    const zIndexEvent = 'z-50';
-    const zIndexArt = 'z-50';
+    const zIndexEvent = 'z-50 mb-3 mt-3';
+    const zIndexArt = 'z-50 mt-3';
 
     const dispatch = useDispatch();
     dispatch(clearText());

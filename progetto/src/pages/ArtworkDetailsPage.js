@@ -63,6 +63,7 @@ function ArtworkDetailsPage() {
         }
     }, [logged, artworks]);
 
+
     console.log("Art in ArtworkDetails: " + art.image)
     return (
         <div className={containerClass}>

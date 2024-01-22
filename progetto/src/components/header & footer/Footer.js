@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 
 function Footer() {
-  const footerStyle = "bg-gray-800 text-white py-20";
+  const footerStyle = "bg-gray-800 text-white py-20 mt-5";
   const containerStyle = "max-w-7xl mx-auto flex justify-between flex-wrap";
   const sectionStyle = "flex-1 mb-10";
   const marginRightStyle = "mr-10";
@@ -18,10 +18,11 @@ function Footer() {
   const socialIconsContainerClass = "list-none p-0 flex";
   const liClass = "mr-4";
   const iconLinkClass = "text-white text-3xl";
+  const footerContainerStyle = "mt-10";
 
 
   return (
-    <footer className={footerStyle}>
+    <footer className={`${footerStyle} ${footerContainerStyle}`}>
       <div className={containerStyle}>
         <div className={`${sectionStyle} ${marginRightStyle}`}>
           <h2 className={textClass}>WELCOME TO OUR VIRTUAL MUSEUM</h2>
@@ -41,7 +42,7 @@ function Footer() {
         </div>
 
         <div className={`${sectionStyle} ${borderRightStyle}`}>
-          <h3 className={h3Class}>WHERE WE ARE</h3>
+          <h3 className={h3Class}>CONTACT US</h3>
           <p className={mb4Class}><strong>Musuem Address:</strong></p>
           <p className={mb8Class}>info@artreasures.it</p>
           <p className={mb4Class}><strong>Phone Number:</strong></p>

@@ -1,17 +1,20 @@
 import Link from "../navigation/Link";
-import { useSelector } from "react-redux";
-import { logoutUser } from "../../store";
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser, setPage } from "../../store";
 import NavigationContext from "../../context/navigation";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 function HeaderBar() {
+
   const sectionHeader = "bg-white";
   const sectionElement = "mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between";
   const navLinks = "hidden md:flex items-center gap-6 text-sm";
   const mobileMenuButton = "block md:hidden rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75";
   const loginButton = "rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow";
   const registerButton = "hidden sm:flex rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600";
+
+
+  const dispatch = useDispatch();
 
   const { navigate } = useContext(NavigationContext);
 
@@ -24,26 +27,33 @@ function HeaderBar() {
     { label: "Handle Events", path: "/handleEvents" },
   ];
 
-  const user = useSelector((state) => state.users.user);
+  const { user, logged } = useSelector((state) => state.users);
+
+  const handleLogoClick = () => {
+    navigate('/');
+  };
 
 
   const renderedLinks = links.map((link) => (
-    <Link key={link.label} to={link.path} className="text-teal-600">
+    <Link
+      key={link.label}
+      to={link.path}
+      singlePage={link.label}
+    >
       {link.label}
-    </Link>
+    </Link >
   ));
-
-  const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(logoutUser());
     navigate('/login');
   };
 
+
   return (
     <header className={sectionHeader}>
       <div className={sectionElement}>
-        <div className="md:flex md:items-center md:gap-12">
+        <div className="md:flex md:items-center md:gap-12" onClick={() => navigate('/')}>
           <img src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png" alt="Icona" className="h-8 w-8 mr-2" />
           <Link to="/" className="block text-teal-600">
             <span className="sr-only">Home</span>

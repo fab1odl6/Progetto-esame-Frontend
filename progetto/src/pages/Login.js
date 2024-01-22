@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { setUser, setLogged, logoutUser } from '../store';
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from '../components/firebase/FirebaseConfig';
-import { useSelector } from "react-redux";
 
 
 const app = initializeApp(firebaseConfig);
@@ -149,10 +148,10 @@ const LoginPage = function () {
             const events = await getEvents(matchedUser.personalData);
             const customEvents = await getCustomEvents(matchedUser.personalData);
             dispatch(setUser({ matchedUser, artworks, events, customEvents }));
-            dispatch(setLogged());
+            dispatch(setLogged(true));
             setLoggedIn(true);
             console.log('isLoggedIn dopo il login:', true);
-            // navigate('/');
+            navigate('/');
           } else {
             setError('Username o Password Errati, riprovare');
             setUsername('');
