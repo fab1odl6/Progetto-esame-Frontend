@@ -18,7 +18,6 @@ function ArtShow({ artwork, favoriteState, onClickHeart, setFavoriteState, open,
     const containerClass = "border-slate-300 border-solid border-4 bg-white overflow-auto";
     const imageContainerClass = "flex justify-between relative";
     const imageClass = "max-w-xl max-h-xl";
-    const closeIconClass = "text-3xl absolute border-1 border-black top-2.5 right-2.5 bg-white place-self-center";
     const firstRowClass = "flex justify-between";
     const favoriteClass = "ml-auto text-2xl";
     const linkClass = "text-blue-500 hover:underline";

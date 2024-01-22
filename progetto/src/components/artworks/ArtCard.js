@@ -66,6 +66,14 @@ function ArtCard({ artwork }) {
         setFull(!full);
     }
 
+    const openModal = function () {
+        setFull(true);
+    }
+
+    const closeModal = function () {
+        setFull(false);
+    }
+
     return (
         <div className={containerClass}>
             {modal && (
@@ -97,7 +105,8 @@ function ArtCard({ artwork }) {
                 favoriteState={favoriteState}
                 onClickHeart={handleClickHeart}
                 setFavoriteState={setFavoriteState}
-                setFull={handleClickArtwork}
+                open={openModal}
+                onClose={closeModal}
                 className="z-50"
             />}
         </div>
