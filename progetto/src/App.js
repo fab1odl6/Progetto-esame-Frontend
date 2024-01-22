@@ -23,13 +23,15 @@ function App() {
   const { user, logged } = useSelector((state) => {
     return state.users;
   })
+  const mainContainerStyle = "mt-10";
+
 
   // writeUserData(5, "fdedg");
   return (
 
     <NavigationProvider>
       <PersistGate loading={null} persistor={persistor}>
-      <div>
+      <div className={mainContainerStyle}>
         <HeaderBar />
         <div>
           <Route path="/">
