@@ -56,6 +56,7 @@ const updateFavoriteEvent = function (events, event, user) {
         const updatedEvents = [...events];
         updatedEvents.splice(eventIndex, 1);
         remove(ref(db, `users/${user.name}/events/${event.name}`));
+
         return updatedEvents;
     } else {
         set(ref(db, `users/${user.name}/events/${event.name}`), {
