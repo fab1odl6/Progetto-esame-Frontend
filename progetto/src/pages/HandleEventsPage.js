@@ -1,7 +1,8 @@
 import AddAnEvent from "../components/events/AddAnEvent";
 import HandleEvents from "../components/events/HandleEvents";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import LoginPage from "../pages/Login";
+import { clearText } from "../store";
 
 
 function HandleEventsPage() {
@@ -10,6 +11,9 @@ function HandleEventsPage() {
     const addClass = "h-full";
     const separatorClass = "m-4";
     const handleClass = "mt-10 h-full";
+
+    const dispatch = useDispatch();
+    dispatch(clearText());
 
 
     const { logged } = useSelector((state) => {

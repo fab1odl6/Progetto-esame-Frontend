@@ -4,6 +4,8 @@ import MuseumModal from '../components/thematic areas/MuseumModal';
 import { firebaseConfig } from '../components/firebase/FirebaseConfig';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, onValue } from 'firebase/database';
+import { useDispatch } from 'react-redux';
+import { clearText } from '../store';
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
@@ -18,6 +20,9 @@ function Museums() {
   const [museums, setMuseums] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedMuseum, setSelectedMuseum] = useState(null);
+
+  const dispatch = useDispatch();
+  dispatch(clearText());
 
   useEffect(() => {
     const fetchData = async () => {

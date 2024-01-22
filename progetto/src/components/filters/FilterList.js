@@ -78,7 +78,7 @@ function FilterList({ artworks }) {
             <div className={dropdownContainerClass}>
                 <InputDropdown option={artworkAuthors} title="Author" />
                 <FilterDropdown option={artworkType} title="Artwork type" />
-                <SliderDropdown option={intervalYears} title="End Date" />
+                <SliderDropdown option={intervalYears} title="End Year" />
                 <CheckboxDropdown options={nations} title="Nationality" />
             </div>
             <div>

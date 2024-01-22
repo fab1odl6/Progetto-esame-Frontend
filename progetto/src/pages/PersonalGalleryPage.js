@@ -4,7 +4,7 @@ import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, get, child } from 'firebase/database';
 import { firebaseConfig } from '../components/firebase/FirebaseConfig';
 import ArtGrid from '../components/artworks/ArtGrid';
-import { setArtworks } from '../store';
+import { setArtworks, clearText } from '../store';
 import LoginPage from './Login';
 
 
@@ -21,6 +21,8 @@ function PersonalGalleryPage() {
     const { user, logged } = useSelector((state) => {
         return state.users;
     })
+
+    dispatch(clearText());
 
 
     const localUpdate = async () => {

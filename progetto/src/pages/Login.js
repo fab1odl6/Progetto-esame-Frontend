@@ -3,7 +3,7 @@ import HomePage from './Homepage';
 import NavigationContext from '../context/navigation';
 import { getDatabase, ref, get, child } from 'firebase/database';
 import { useDispatch } from 'react-redux';
-import { setUser, setLogged, logoutUser } from '../store';
+import { setUser, setLogged, logoutUser, clearText } from '../store';
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from '../components/firebase/FirebaseConfig';
 
@@ -116,6 +116,8 @@ const LoginPage = function () {
 
 
   const dispatch = useDispatch();
+
+  dispatch(clearText());
 
   const handleLogout = () => {
     // Dispatch l'azione di logout

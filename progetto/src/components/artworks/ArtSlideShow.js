@@ -1,6 +1,6 @@
 import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
-import { swipeLeftArt, swipeRightArt, updateArt } from "../../store";
+import { swipeLeftArt, swipeRightArt, updateArt, setArt } from "../../store";
 import ArtShow from "./ArtShow";
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from "../firebase/FirebaseConfig";
@@ -8,6 +8,7 @@ import { getDatabase } from 'firebase/database';
 import { useEffect, useState, useContext } from 'react';
 import NavigationContext from '../../context/navigation';
 import { IoIosClose } from 'react-icons/io';
+import LoginModals from '../modals/loginModals';
 
 
 function ArtSlideShow() {
@@ -35,8 +36,8 @@ function ArtSlideShow() {
         return state.artworks;
     });
 
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase();
+    //const app = initializeApp(firebaseConfig);
+    //const db = getDatabase();
 
     const dispatch = useDispatch();
 
@@ -45,7 +46,7 @@ function ArtSlideShow() {
     })
     const [favoriteState, setFavoriteState] = useState(false);
     const [modal, setModal] = useState(false);
-    const [full, setFull] = useState(false);
+    //const [full, setFull] = useState(false);
 
     const handleClickChevronLeft = function () {
         dispatch(swipeLeftArt());
@@ -65,9 +66,11 @@ function ArtSlideShow() {
         }
     }
 
+    /*
     const handleClickArtwork = function () {
         setFull(!full);
     }
+    */
 
     useEffect(() => {
         if (logged) {
@@ -87,6 +90,7 @@ function ArtSlideShow() {
         setModal(false);
     }
 
+    /*
     const openModal = function () {
         setFull(true);
     }
@@ -94,11 +98,20 @@ function ArtSlideShow() {
     const closeModal = function () {
         setFull(false)
     }
+    */
 
-    const altText = "Image of " + array[index].title;
-    return (
-        <div>
-            {modal && (
+    /*
+    {full &&
+                    <ArtShow
+                        artwork={array[index]}
+                        favoriteState={favoriteState}
+                        onClickHeart={handleClickHeart}
+                        setFavoriteState={setFavoriteState}
+                        open={openModal}
+                        onClose={closeModal}
+                    />
+                }
+
                 <div className={modalContainerClass}>
                     <div className={modalDivClass}>
                         <div className={textContainerClass}>You must login to save an artwork/event!</div>
@@ -108,18 +121,29 @@ function ArtSlideShow() {
                         <IoIosClose onClick={handleClickCloseLog} className={closeButtonClass} />
                     </div>
                 </div>
+
+    */
+
+    const handleClickDetails = function (artwork) {
+        dispatch(setArt(artwork));
+        navigate("/artworkDetails");
+    }
+
+    const altText = "Image of " + array[index].title;
+    return (
+        <div>
+            {modal && (
+                <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} />
             )}
             <div className={artTextClass}>Highlighted Artworks</div>
             <div className={artDivClass}>
                 <div className={artContainerClass}>
-                    <FaChevronLeft className={chevronClass + " mr-2"} onClick={handleClickChevronLeft} />
+                    <FaChevronLeft className={chevronClass + " mr-2 cursor-pointer"} onClick={handleClickChevronLeft} />
                     <div className={artElementClass}>
-                        <div onClick={handleClickArtwork}>
-                            <img className={imageClass} src={array[index].image} alt={altText} />
-                        </div>
+                        <img className={imageClass} src={array[index].image} alt={altText} onClick={() => handleClickDetails(array[index])} />
                         <div className={titleAndHeartClass}>
                             <div className={titleContainerClass}>
-                                <div className={titleClass}>{array[index].title} </div>
+                                <div className={titleClass} onClick={() => handleClickDetails(array[index])}>{array[index].title} </div>
                                 {array[index].authorName ? (
                                     <div> {array[index].authorName}</div>
                                 ) : (
@@ -133,18 +157,8 @@ function ArtSlideShow() {
                             )}
                         </div>
                     </div>
-                    <FaChevronRight className={chevronClass + " ml-2"} onClick={handleClickChevronRight} />
+                    <FaChevronRight className={chevronClass + " ml-2 cursor-pointer"} onClick={handleClickChevronRight} />
                 </div>
-                {full &&
-                    <ArtShow
-                        artwork={array[index]}
-                        favoriteState={favoriteState}
-                        onClickHeart={handleClickHeart}
-                        setFavoriteState={setFavoriteState}
-                        open={openModal}
-                        onClose={closeModal}
-                    />
-                }
             </div>
         </div>
     );

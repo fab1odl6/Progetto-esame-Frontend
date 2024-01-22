@@ -45,6 +45,7 @@ function AddAnEvent() {
         return state.users;
     })
 
+
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
@@ -105,7 +106,7 @@ function AddAnEvent() {
             department: selectedOption
         });
 
-        set(ref(db, 'users/Fabio/customEvents/' + formData.name), {
+        set(ref(db, 'users/' + user.personalData.name + '/customEvents/' + formData.name), {
             date: selectedDate.toDateString(),
             favorite: false,
             full: false,

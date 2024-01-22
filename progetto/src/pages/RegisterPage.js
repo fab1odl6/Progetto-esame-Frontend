@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { registerUser, setLogged, setUser } from "../store";
+import { registerUser, setLogged, setUser, clearText } from "../store";
 import { useState, useContext } from "react";
 import NavigationContext from "../context/navigation";
 
@@ -29,6 +29,8 @@ function RegisterPage() {
     });
 
     const dispatch = useDispatch();
+
+    dispatch(clearText());
 
     const handleChange = (e) => {
         const { name, value } = e.target;

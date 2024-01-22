@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { setEvents } from "../../store";
 
 
+/*
 const events = [];
 async function readData(user) {
     const app = initializeApp(firebaseConfig);
@@ -25,6 +26,7 @@ async function readData(user) {
         console.error(e);
     }
 }
+*/
 
 //await readData();
 
@@ -40,6 +42,7 @@ function HandleEvents() {
     const { user, customEvents } = useSelector((state) => {
         return state.users;
     });
+    
     const [eventsLocal, setEventsLocal] = useState(customEvents);
     const [submit, setSubmit] = useState(false);
 

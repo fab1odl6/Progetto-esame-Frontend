@@ -5,6 +5,7 @@ import EventShow from "./EventShow";
 import { useState, useEffect, useContext } from 'react';
 import NavigationContext from '../../context/navigation';
 import { IoIosClose } from 'react-icons/io';
+import LoginModals from '../modals/loginModals';
 
 
 function EventSlideShow() {
@@ -91,10 +92,9 @@ function EventSlideShow() {
     }
 
     const altText = "Image of " + array[index].name;
-    return (
-        <div className={containerClass}>
-            {modal && (
-                <div className={modalContainerClass}>
+
+    /*
+    <div className={modalContainerClass}>
                     <div className={modalDivClass}>
                         <div className={textContainerClass}>You must login to save an artwork/event!</div>
                         <button onClick={handleClickButton} className={buttonClass}>
@@ -103,12 +103,18 @@ function EventSlideShow() {
                         <IoIosClose onClick={handleClickCloseLog} className={closeButtonClass} />
                     </div>
                 </div>
+    */
+
+    return (
+        <div className={containerClass}>
+            {modal && (
+                <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog}/>
             )}
             <div className={eventTextClass}>Highlighted Events</div>
             <div className={eventDivClass}>
                 <div className={eventContainerClass}>
                     <div className={chevronContainerClass}>
-                        <FaChevronLeft className={chevronClass + " mr-2"} onClick={handleClickChevronLeft} />
+                        <FaChevronLeft className={chevronClass + " mr-2 cursor-pointer"} onClick={handleClickChevronLeft} />
                     </div>
                     <div className={eventElementClass}>
                         <div onClick={handleClickEvent}>
@@ -124,7 +130,7 @@ function EventSlideShow() {
                         </div>
                     </div>
                     <div className={chevronContainerClass}>
-                        <FaChevronRight className={chevronClass + " ml-2"} onClick={handleClickChevronRight} />
+                        <FaChevronRight className={chevronClass + " ml-2 cursor-pointer"} onClick={handleClickChevronRight} />
                     </div>
                 </div>
                 {full &&

@@ -3,8 +3,9 @@ import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/
 import EventContainer from "../components/events/EventContainer";
 import EventCard from '../components/events/EventCard';
 import { GoChevronDown, GoChevronLeft } from 'react-icons/go';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import LoginPage from './Login';
+import { clearText } from '../store';
 
 
 function EventsPage() {
@@ -14,6 +15,9 @@ function EventsPage() {
   const titleClass = "text-center font-bold text-4xl my-20";
   const accordionClass = "mb-20";
   const typographyClass = "font-bold";
+
+  const dispatch = useDispatch();
+  dispatch(clearText());
 
 
   const [expandedAccordion, setExpandedAccordion] = useState({

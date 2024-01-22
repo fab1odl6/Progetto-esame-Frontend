@@ -143,7 +143,6 @@ function SearchBar() {
                                 value={text}
                                 onChange={handleChange}
                                 placeholder='Search Artworks..'
-                                required
                             />
                             <button type="submit" className={searchButtonClass}>
                                 Search

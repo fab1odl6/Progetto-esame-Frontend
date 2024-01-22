@@ -54,7 +54,7 @@ function HeaderBar() {
     <header className={sectionHeader}>
       <div className={sectionElement}>
         <div className="md:flex md:items-center md:gap-12" onClick={() => navigate('/')}>
-          <img src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png" alt="Icona" className="h-8 w-8 mr-2" />
+          <img src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png" onClick={handleLogoClick} alt="Icona" className="h-8 w-8 mr-2 cursor-pointer" />
           <Link to="/" className="block text-teal-600">
             <span className="sr-only">Home</span>
             <svg className="h-8" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
