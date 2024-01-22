@@ -5,7 +5,6 @@ import EventShow from "./EventShow";
 import { useState, useEffect, useContext } from 'react';
 import NavigationContext from '../../context/navigation';
 import { IoIosClose } from 'react-icons/io';
-import { Dialog, DialogContent } from '@mui/material';
 
 
 function EventSlideShow() {
@@ -20,12 +19,13 @@ function EventSlideShow() {
     const eventTextClass = "";
     const eventDivClass = "relative w-full";
     const eventContainerClass = "flex justify-center mx-auto flex-row place-content-center border-2 mb-2 rounded-lg overflow-hidden z-50 max-w-sm p-6 bg-yellow-100 border-yellow-200 rounded-lg shadow hover:bg-yellow-800 dark:bg-yellow-800 dark:border-yellow-700 dark:hover:bg-yellow-700";
+    const chevronContainerClass = "flex items-center justify-center";
     const eventElementClass = "";
-    const imageClass = "w-full h-auto max-h-96";
+    const imageClass = "w-full h-full cursor-pointer object-cover";
     const chevronClass = "place-self-center text-2xl";
     const titleAndHeartClass = "flex";
     const favoriteClass = "ml-auto text-2xl";
-    const titleClass = "text-lg place-content-center";
+    const titleClass = "text-lg place-content-center cursor-pointer";
 
 
     const { navigate } = useContext(NavigationContext);
@@ -107,7 +107,9 @@ function EventSlideShow() {
             <div className={eventTextClass}>Highlighted Events</div>
             <div className={eventDivClass}>
                 <div className={eventContainerClass}>
-                    <FaChevronLeft className={chevronClass} onClick={handleClickChevronLeft} />
+                    <div className={chevronContainerClass}>
+                        <FaChevronLeft className={chevronClass + " mr-2"} onClick={handleClickChevronLeft} />
+                    </div>
                     <div className={eventElementClass}>
                         <div onClick={handleClickEvent}>
                             <img className={imageClass} src={array[index].image} alt={altText} />
@@ -121,7 +123,9 @@ function EventSlideShow() {
                             )}
                         </div>
                     </div>
-                    <FaChevronRight className={chevronClass} onClick={handleClickChevronRight} />
+                    <div className={chevronContainerClass}>
+                        <FaChevronRight className={chevronClass + " ml-2"} onClick={handleClickChevronRight} />
+                    </div>
                 </div>
                 {full &&
                     <EventShow
