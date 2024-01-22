@@ -8,7 +8,7 @@ import { updateEvent } from "../../store";
 function EventCard({ event }) {
 
   const containerClass = "border-2 mb-2 rounded-lg overflow-hidden z-50 max-w-sm p-6 bg-white-100 border-yellow-200 rounded-lg shadow hover:bg-yellow-800 dark:bg-yellow-800 dark:border-yellow-700 dark:hover:bg-yellow-700";
-  const favoriteClass = "ml-auto text-2xl";
+  const favoriteClass = "ml-auto text-2xl cursor-pointer";
   const imageClass = "w-full h-96 object-cover cursor-pointer";
   const titleAndHeartClass = "flex p-4";
 
