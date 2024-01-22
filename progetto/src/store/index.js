@@ -5,6 +5,7 @@ import filtersSlice from "./filters";
 import artDetailSlice from "./artDetails";
 import searchSlice from "./search";
 import eventsSlice from "./events";
+import detailsSlice from "./deatils";
 
 
 const store = configureStore({
@@ -14,7 +15,8 @@ const store = configureStore({
         filters: filtersSlice.reducer,
         artDetails: artDetailSlice.reducer,
         search: searchSlice.reducer,
-        events: eventsSlice.reducer
+        events: eventsSlice.reducer,
+        details: detailsSlice.reducer
     }
 });
 
@@ -25,3 +27,4 @@ export const { setArt, setFavorite } = artDetailSlice.actions;
 export const { addFilterItem, removeFilterItem } = filtersSlice.actions;
 export const { updateText, clearText } = searchSlice.actions;
 export const { swipeLeftEvent, swipeRightEvent, switchFavoriteEvent, switchFullEvent } = eventsSlice.actions;
+export const { setDetailArtwork } = detailsSlice.actions;

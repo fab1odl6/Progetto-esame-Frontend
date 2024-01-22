@@ -6,6 +6,7 @@ import NavigationContext from "../../context/navigation";
 import { IoIosClose } from 'react-icons/io';
 import ArtShow from "./ArtShow";
 import { updateArt } from "../../store";
+import { setArt } from '../../store';
 
 
 function ArtCard({ artwork }) {
@@ -29,7 +30,7 @@ function ArtCard({ artwork }) {
 
     const [favoriteState, setFavoriteState] = useState(false);
     const [modal, setModal] = useState(false);
-    const [full, setFull] = useState(false);
+    //const [full, setFull] = useState(false);
 
     const { navigate } = useContext(NavigationContext);
 
@@ -62,10 +63,13 @@ function ArtCard({ artwork }) {
         setModal(false);
     }
 
+    /*
     const handleClickArtwork = function () {
         setFull(!full);
     }
+    */
 
+    /*
     const openModal = function () {
         setFull(true);
     }
@@ -73,7 +77,14 @@ function ArtCard({ artwork }) {
     const closeModal = function () {
         setFull(false);
     }
+    */
 
+    const handleClickDetails = function () {
+        dispatch(setArt(artwork));
+        navigate("/artworkDetails");
+    }
+
+    /*
     return (
         <div className={containerClass}>
             {modal && (
@@ -109,6 +120,37 @@ function ArtCard({ artwork }) {
                 onClose={closeModal}
                 className="z-50"
             />}
+        </div>
+
+    )
+    */
+
+    return (
+        <div className={containerClass}>
+            {modal && (
+                <div className={modalContainerClass}>
+                    <div className={modalDivClass}>
+                        <div className={textContainerClass}>You must login to save an artwork/event!</div>
+                        <button onClick={handleClickButton} className={buttonClass}>
+                            Login
+                        </button>
+                        <IoIosClose onClick={handleClickClose} className={closeButtonClass} />
+                    </div>
+                </div>
+            )}
+            <div>
+                <img src={artwork.image} className={imageClass} onClick={handleClickDetails} />
+                <h2 className={titleClass} onClick={handleClickDetails}>{artwork.title}</h2>
+                <h3 className={authorClass}> {artwork.authorName ? artwork.authorName : "Author Unknown"}
+                </h3>
+            </div>
+            <div className={heartIconClass}>
+                {favoriteState ? (
+                    <FaHeart className={favoriteClass} onClick={() => handleClickHeart(artwork)} />
+                ) : (
+                    <FaRegHeart className={favoriteClass} onClick={() => handleClickHeart(artwork)} />
+                )}
+            </div>
         </div>
 
     )
