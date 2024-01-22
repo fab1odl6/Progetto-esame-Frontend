@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 
 function Footer() {
-  const footerStyle = "bg-gray-800 text-white py-20";
+  const footerStyle = "bg-gray-800 text-white py-20 mt-5";
   const containerStyle = "max-w-7xl mx-auto flex justify-between flex-wrap";
   const sectionStyle = "flex-1 mb-10";
   const marginRightStyle = "mr-10";

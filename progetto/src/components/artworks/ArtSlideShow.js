@@ -2,7 +2,6 @@ import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/
 import { useDispatch, useSelector } from "react-redux";
 import { swipeLeftArt, swipeRightArt, updateArt } from "../../store";
 import ArtShow from "./ArtShow";
-import className from "classnames";
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from "../firebase/FirebaseConfig";
 import { getDatabase } from 'firebase/database';
@@ -20,14 +19,14 @@ function ArtSlideShow() {
     const closeButtonClass = "absolute top-2 right-2 text-gray-700 cursor-pointer text-lg";
     const artTextClass = "";
     const artDivClass = "";
-    const artContainerClass = "mx-auto flex flex-row place-content-center max-w-sm p-6 bg-yellow-100 border-yellow-200 rounded-lg shadow hover:bg-yellow-800 dark:bg-yellow-800 dark:border-yellow-700 dark:hover:bg-yellow-700";
-    const artElementClass = "";
-    const imageClass = "w-full h-auto max-h-96";
+    const artContainerClass = "mx-auto flex flex-row place-content-center max-w-sm h-96 p-6 bg-yellow-100 border-yellow-200 rounded-lg shadow hover:bg-yellow-800 dark:bg-yellow-800 dark:border-yellow-700 dark:hover:bg-yellow-700";
+    const artElementClass = "items-center justify-center mx-auto";
+    const imageClass = "max-h-72 cursor-pointer place-self-center";
     const chevronClass = "place-self-center text-2xl";
-    const titleAndHeartClass = "flex";
+    const titleAndHeartClass = "flex mt-2";
     const favoriteClass = "ml-auto text-2xl";
-    const titleContainerClass = "text-lg place-content-center";
-    const titleClass = "font-bold";
+    const titleContainerClass = "text-lg";
+    const titleClass = "font-bold cursor-pointer";
 
 
     const { navigate } = useContext(NavigationContext);

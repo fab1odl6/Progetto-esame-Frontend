@@ -23,7 +23,7 @@ function EventSlideShow() {
     const eventElementClass = "";
     const imageClass = "w-full h-full cursor-pointer object-cover";
     const chevronClass = "place-self-center text-2xl";
-    const titleAndHeartClass = "flex";
+    const titleAndHeartClass = "flex mt-2";
     const favoriteClass = "ml-auto text-2xl";
     const titleClass = "text-lg place-content-center cursor-pointer";
 

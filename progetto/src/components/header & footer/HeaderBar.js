@@ -1,17 +1,20 @@
 import Link from "../navigation/Link";
-import { useSelector } from "react-redux";
-import { logoutUser } from "../../store";
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser, setPage } from "../../store";
 import NavigationContext from "../../context/navigation";
 import { useContext } from "react";
 
 function HeaderBar() {
+
   const sectionHeader = "bg-white";
   const sectionElement = "mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between";
   const navLinks = "hidden md:flex items-center gap-6 text-sm";
   const mobileMenuButton = "block md:hidden rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75";
   const loginButton = "rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow";
   const registerButton = "hidden sm:flex rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600";
+
+
+  const dispatch = useDispatch();
 
   const { navigate } = useContext(NavigationContext);
 
@@ -25,15 +28,18 @@ function HeaderBar() {
   ];
 
   const user = useSelector((state) => state.users.user);
-
+  const page = useSelector((state) => state.activePage.page);
+  console.log(page)
 
   const renderedLinks = links.map((link) => (
-    <Link key={link.label} to={link.path} className="text-teal-600">
+    <Link
+      key={link.label}
+      to={link.path}
+      singlePage={link.label}
+    >
       {link.label}
-    </Link>
+    </Link >
   ));
-
-  const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(logoutUser());
