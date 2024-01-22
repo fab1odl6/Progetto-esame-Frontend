@@ -28,16 +28,13 @@ function HeaderBar() {
   ];
 
   const user = useSelector((state) => state.users.user);
-<<<<<<< HEAD
   const page = useSelector((state) => state.activePage.page);
   console.log(page)
-=======
 
   const handleLogoClick = () => {
     navigate('/');
   };
 
->>>>>>> 4346e60bf90d1606592802f6aaf86e86a5bc78c2
 
   const renderedLinks = links.map((link) => (
     <Link
