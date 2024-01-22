@@ -9,16 +9,18 @@ function Link({ to, children, singlePage }) {
 
     const { navigate } = useNavigation();
 
-    const page = useSelector((state) => state.activePage.page);
+    const page = useSelector((state) => {
+        return state.activePage.page;
+    });
 
-    const classes = `${singlePage === page ? 'text-green-500' : 'text-red-500'}`;
+    const classes = `text-teal-600 ${singlePage === page ? 'underline underline-offset-2' : ''}`
 
 
     const handleClick = (event) => {
         if (event.metaKey || event.ctrlKey) {
             return;
         }
-        dispatch(setPage(page));
+        dispatch(setPage(singlePage));
         event.preventDefault();
         navigate(to);
     }

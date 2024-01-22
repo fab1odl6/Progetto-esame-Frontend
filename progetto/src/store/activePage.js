@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const activePageSlice = createSlice({
-    name: "activePage",
+    name: "activePageSlice",
     initialState: {
         page: "HomePage"
     },
     reducers: {
         setPage(state, action) {
-            console.log("Page in store: " + action.payload)
             return ({
                 ...state,
                 page: action.payload

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { registerUser, setLogged } from "../store";
+import { registerUser, setLogged, setUser } from "../store";
 import { useState, useContext } from "react";
 import NavigationContext from "../context/navigation";
 
@@ -50,6 +50,18 @@ function RegisterPage() {
             password: formData.password
         }));
         dispatch(setLogged(true));
+        dispatch(setUser({
+            personalData: {
+                name: formData.name,
+                surname: formData.surname,
+                username: formData.username,
+                password: formData.password
+            },
+            artworks: [],
+            events: [],
+            customEvents: []
+        }
+        ));
 
         setFormData({
             name: "",

@@ -2,7 +2,7 @@ import Link from "../navigation/Link";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser, setPage } from "../../store";
 import NavigationContext from "../../context/navigation";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 function HeaderBar() {
 
@@ -27,9 +27,7 @@ function HeaderBar() {
     { label: "Handle Events", path: "/handleEvents" },
   ];
 
-  const user = useSelector((state) => state.users.user);
-  const page = useSelector((state) => state.activePage.page);
-  console.log(page)
+  const { user, logged } = useSelector((state) => state.users);
 
   const handleLogoClick = () => {
     navigate('/');
@@ -50,6 +48,7 @@ function HeaderBar() {
     dispatch(logoutUser());
     navigate('/login');
   };
+
 
   return (
     <header className={sectionHeader}>

@@ -9,6 +9,7 @@ import searchSlice from "./search";
 import eventsSlice from "./events";
 import activePageSlice from "./activePage";
 
+
 const rootReducer = combineReducers({
   artworks: artworksSlice.reducer,
   users: usersSlice.reducer,
