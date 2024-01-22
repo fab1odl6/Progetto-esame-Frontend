@@ -61,7 +61,7 @@ function ArtworkDetailsPage() {
                 dispatch(setFavorite(false));
             }
         }
-    }, [logged]);
+    }, [logged, artworks]);
 
     console.log("Art in ArtworkDetails: " + art.image)
     return (

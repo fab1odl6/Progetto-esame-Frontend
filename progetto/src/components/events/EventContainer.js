@@ -18,7 +18,7 @@ function EventContainer({ future }) {
         <div>
             {filteredEvents.length > 0 ? (
                 <div>
-                    <EventGrid events={events} />
+                    <EventGrid events={filteredEvents} />
                 </div>
             ) : (
                 future ? (
