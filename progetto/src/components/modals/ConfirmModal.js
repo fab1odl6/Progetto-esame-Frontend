@@ -22,7 +22,7 @@ function ConfirmModal({onDelete, onUndo}) {
                     <svg className={iconContainerClass} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
-                    <h3 className={textClass}>Are you sure you want to delete this artwork from your favorites?</h3>
+                    <h3 className={textClass}>Are you sure you want to delete this element from your favorites?</h3>
                     <button data-modal-hide="popup-modal" type="button" onClick={onUndo} className={confrimButtonClass}>
                         Yes, I'm sure
                     </button>

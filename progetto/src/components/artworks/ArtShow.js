@@ -5,16 +5,12 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useEffect, useState, useContext } from "react";
 import NavigationContext from "../../context/navigation";
 import { Dialog, DialogContent } from "@mui/material";
+import LoginModals from "../modals/loginModals";
 
 
 function ArtShow({ artwork, favoriteState, onClickHeart, setFavoriteState, open, onClose }) {
 
     const modalClass = "fixed inset-0 flex flex-col items-center justify-center w-screen h-screen z-50";
-    const modalContainerClass = "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50";
-    const modalDivClass = "bg-white p-8 max-w-md rounded shadow-lg relative";
-    const textContainerClass = "mb-4";
-    const buttonClass = "bg-blue-500 text-white px-4 py-2 rounded cursor-pointer";
-    const closeButtonClass = "absolute top-2 right-2 text-gray-700 cursor-pointer text-lg";
     const containerClass = "border-slate-300 border-solid border-4 bg-white overflow-auto";
     const imageContainerClass = "flex justify-between relative";
     const imageClass = "max-w-xl max-h-xl";
@@ -65,19 +61,10 @@ function ArtShow({ artwork, favoriteState, onClickHeart, setFavoriteState, open,
         navigate("/artworkDetails");
     }
 
-
     return (
         <div className={modalClass}>
             {modal && (
-                <div className={modalContainerClass}>
-                    <div className={modalDivClass}>
-                        <div className={textContainerClass}>You must login to save an artwork/event!</div>
-                        <button onClick={handleClickButton} className={buttonClass}>
-                            Login
-                        </button>
-                        <IoIosClose onClick={handleClickCloseLog} className={closeButtonClass} />
-                    </div>
-                </div>
+                <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} />
             )}
             <Dialog open={open} onClose={onClose}>
                 <DialogContent>

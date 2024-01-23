@@ -94,18 +94,6 @@ function EventSlideShow() {
 
     const altText = "Image of " + array[index].name;
 
-    /*
-    <div className={modalContainerClass}>
-                    <div className={modalDivClass}>
-                        <div className={textContainerClass}>You must login to save an artwork/event!</div>
-                        <button onClick={handleClickButton} className={buttonClass}>
-                            Login
-                        </button>
-                        <IoIosClose onClick={handleClickCloseLog} className={closeButtonClass} />
-                    </div>
-                </div>
-    */
-
     return (
         <div className={containerClass}>
             {modal && (

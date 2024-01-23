@@ -6,31 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { setEvents } from "../../store";
 
-
-/*
-const events = [];
-async function readData(user) {
-    const app = initializeApp(firebaseConfig);
-    const dbRef = ref(getDatabase());
-
-    const eventsRef = child(dbRef, "/users/" + user.personalData.name + "/customEvents");
-    try {
-        const snapshot = await get(eventsRef);
-        if (snapshot.exists) {
-            const data = snapshot.val();
-            for (const key in data) {
-                events.push(data[key]);
-            }
-        }
-    } catch (e) {
-        console.error(e);
-    }
-}
-*/
-
-//await readData();
-
-
 function HandleEvents() {
 
     const containerClass = "w-max h-full p-4 mt-4 shadow overflow-y-auto";

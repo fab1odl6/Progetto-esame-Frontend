@@ -4,6 +4,7 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useContext, useEffect, useState } from "react";
 import NavigationContext from "../../context/navigation";
 import { Dialog, DialogContent } from "@mui/material";
+import LoginModals from "../modals/loginModals";
 
 
 
@@ -18,7 +19,6 @@ function EventShow({ favoriteState, onClickHeart, setFavoriteState, open, onClos
     const containerClass = "border-slate-300 border-solid border-4 bg-white";
     const imageContainerClass = "flex justify-between relative";
     const imageClass = "max-w-lg max-h-lg";
-    const closeIconClass = "text-3xl absolute border-1 border-black top-2.5 right-2.5 bg-white place-self-center";
     const firstRowClass = "flex justify-between";
     const favoriteClass = "ml-auto text-2xl";
 
@@ -65,15 +65,7 @@ function EventShow({ favoriteState, onClickHeart, setFavoriteState, open, onClos
     return (
         <div className={modalClass}>
             {modal && (
-                <div className={modalContainerClass}>
-                    <div className={modalDivClass}>
-                        <div className={textContainerClass}>You must login to save an artwork/event!</div>
-                        <button onClick={handleClickButton} className={buttonClass}>
-                            Login
-                        </button>
-                        <IoIosClose onClick={handleClickCloseLog} className={closeButtonClass} />
-                    </div>
-                </div>
+                <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} />
             )}
             <Dialog open={open} onClose={onClose}>
                 <DialogContent>
