@@ -92,8 +92,6 @@ function updateEvents(event) {
   });
 }
 
-console.log(eventArray);
-
 const eventsSlice = createSlice({
   name: "events",
   initialState: {
@@ -135,8 +133,6 @@ const eventsSlice = createSlice({
     },
 
     addNewEvent(state, action) {
-      console.log("state: " + state);
-      console.log("state.array: " + state.array);
       updateEvents(action.payload);
       const newArray = [...state.array, action.payload];
 

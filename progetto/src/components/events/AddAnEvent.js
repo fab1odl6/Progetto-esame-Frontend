@@ -6,7 +6,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DepartmentDropdown from "../dropdowns/DepartmentDropdown";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewEvent, setEvents, updateCustomEvents } from "../../store";
+import {
+  addNewEvent,
+  setEvents,
+  updateCustomEvents,
+  updateEvent,
+} from "../../store";
 
 function AddAnEvent() {
   const containerClass =
@@ -44,8 +49,12 @@ function AddAnEvent() {
     department: "",
   });
 
-  const { user, customEvents } = useSelector((state) => {
+  const { user, logged, customEvents } = useSelector((state) => {
     return state.users;
+  });
+
+  const { page } = useSelector((state) => {
+    return state.activePage;
   });
 
   const [error, setError] = useState(null);
@@ -111,6 +120,7 @@ function AddAnEvent() {
     };
     dispatch(updateCustomEvents(newEvent));
     dispatch(addNewEvent(newEvent));
+    dispatch(updateEvent(newEvent));
 
     setFormData({
       date: "",
@@ -130,9 +140,8 @@ function AddAnEvent() {
   };
 
   useEffect(() => {
-    console.log("A");
     updateLocal();
-  }, [customEvents]);
+  }, [customEvents, logged, page]);
 
   return (
     <div className={containerClass}>

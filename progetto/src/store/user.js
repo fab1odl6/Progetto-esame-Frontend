@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../components/firebase/FirebaseConfig";
 import { getDatabase, set, ref, remove } from "firebase/database";
-import { FLUSH } from "redux-persist";
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
@@ -195,20 +194,6 @@ const usersSlice = createSlice({
       return {
         ...state,
         events: action.payload,
-      };
-    },
-
-    async flush(state, action) {
-      const newArray = state.customEvents.filter(
-        (item) => item.name !== action.payload.name
-      );
-
-      return {
-        ...state,
-        logged: true,
-        artworks: state.artworks,
-        events: state.events,
-        customEvents: newArray,
       };
     },
   },

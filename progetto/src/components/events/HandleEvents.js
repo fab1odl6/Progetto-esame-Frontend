@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebase/FirebaseConfig";
-import { get, child, ref, getDatabase, remove } from "firebase/database";
+import { get, child, ref, getDatabase } from "firebase/database";
 import HandleEventCard from "./HandleEventCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -16,12 +16,17 @@ function HandleEvents() {
   const db = getDatabase();
   const dbRef = ref(db);
 
-  const { user, customEvents } = useSelector((state) => {
+  const { user, logged, customEvents } = useSelector((state) => {
     return state.users;
+  });
+
+  const { page } = useSelector((state) => {
+    return state.activePage;
   });
 
   const [eventsLocal, setEventsLocal] = useState(customEvents);
   const [submit, setSubmit] = useState(false);
+  const [deleteState, setDeleteState] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -38,6 +43,8 @@ function HandleEvents() {
         const eventData = Object.values(snapshot.val());
         dispatch(setEvents(eventData));
         setEventsLocal(eventData);
+      } else {
+        setEventsLocal([]);
       }
     } catch (e) {
       console.error(e);
@@ -45,16 +52,25 @@ function HandleEvents() {
   };
 
   useEffect(() => {
+    console.log("update variabile");
     updateLocal();
-  }, [customEvents, eventsLocal, dispatch]);
+  }, [customEvents]);
 
-  const render = customEvents.map((event) => {
+  const handleClickDelete = function () {
+    setDeleteState(!deleteState);
+    setSubmit(!submit);
+    console.log(customEvents);
+  };
+
+  const render = eventsLocal.map((event) => {
     return (
       <HandleEventCard
         key={event.name}
         event={event}
         submit={submit}
         setSubmit={setSubmit}
+        deleteState={deleteState}
+        handleClickDeleteParent={handleClickDelete}
       />
     );
   });
@@ -63,7 +79,7 @@ function HandleEvents() {
     <div className={containerClass}>
       <div className={titleClass}>Custom Events</div>
       <div>
-        {customEvents.length > 0 ? (
+        {eventsLocal.length > 0 ? (
           <div>{render}</div>
         ) : (
           <div className={emptyContainerClass}>
