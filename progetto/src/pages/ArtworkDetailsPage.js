@@ -61,7 +61,7 @@ function ArtworkDetailsPage() {
     return (
         <div className={containerClass}>
             {modal && (
-                <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} />
+                <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} open={handleClickHeart}/>
             )}
             <div className={imageContainerClass}>
                 <img className={imageClass} key={art.id} src={art.image} alt={art.title} />

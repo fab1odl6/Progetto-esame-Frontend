@@ -10,12 +10,6 @@ import LoginModals from '../modals/loginModals';
 function EventSlideShow() {
 
     const containerClass = "overflow: auto z-50";
-    const modalContainerClass = "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50";
-    const modalDivClass = "bg-white p-8 max-w-md rounded shadow-lg relative";
-    const textContainerClass = "mb-4";
-    const buttonClass = "bg-blue-500 text-white px-4 py-2 rounded cursor-pointer";
-    const closeButtonClass = "absolute top-2 right-2 text-gray-700 cursor-pointer text-lg";
-
     const eventTextClass = "";
     const eventDivClass = "relative w-full";
     const eventContainerClass = "flex justify-center mx-auto flex-row place-content-center border-2 mb-2 rounded-lg overflow-hidden z-50 max-w-sm p-6 bg-yellow-100 border-yellow-200 rounded-lg shadow hover:bg-yellow-800 dark:bg-yellow-800 dark:border-yellow-700 dark:hover:bg-yellow-700";
@@ -91,15 +85,15 @@ function EventSlideShow() {
         setFull(false)
     }
 
-    console.log(array)
-    console.log(index)
-    console.log(array[index])
+    //console.log(array)
+    //console.log(index)
+    //console.log(array[index])
 
     const altText = "Image of " + array[index].name;
 
     return (
         <div className={containerClass}>
-            {modal && <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} />}
+            {modal && <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} open={handleClickHeart}/>}
             <div className={eventTextClass}>Highlighted Events</div>
             <div className={eventDivClass}>
                 <div className={eventContainerClass}>
