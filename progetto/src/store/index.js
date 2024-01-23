@@ -23,6 +23,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
+  serialize: true, //New
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
