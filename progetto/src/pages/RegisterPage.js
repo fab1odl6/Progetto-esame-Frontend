@@ -51,19 +51,20 @@ function RegisterPage() {
             username: formData.username,
             password: formData.password
         }));
-        dispatch(setLogged(true));
         dispatch(setUser({
-            personalData: {
-                name: formData.name,
-                surname: formData.surname,
-                username: formData.username,
-                password: formData.password
+            matchedUser: {
+                personalData: {
+                    name: formData.name,
+                    surname: formData.surname,
+                    username: formData.username,
+                    password: formData.password
+                }
             },
             artworks: [],
             events: [],
             customEvents: []
-        }
-        ));
+        }));
+        dispatch(setLogged(true));
 
         setFormData({
             name: "",

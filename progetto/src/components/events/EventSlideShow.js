@@ -53,6 +53,7 @@ function EventSlideShow() {
     }
 
     const handleClickHeart = function (event) {
+        console.log("Logged: " + logged)
         if (logged) {
             dispatch(updateEvent(event));
             setFavoriteState(!favoriteState);
@@ -108,7 +109,7 @@ function EventSlideShow() {
     return (
         <div className={containerClass}>
             {modal && (
-                <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog}/>
+                <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} />
             )}
             <div className={eventTextClass}>Highlighted Events</div>
             <div className={eventDivClass}>

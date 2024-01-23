@@ -30,6 +30,7 @@ function HeaderBar() {
   const { user, logged } = useSelector((state) => state.users);
 
   const handleLogoClick = () => {
+    dispatch(setPage("HomePage"));
     navigate('/');
   };
 
@@ -44,17 +45,25 @@ function HeaderBar() {
     </Link >
   ));
 
-  const handleLogout = () => {
+  const handleLogout = function () {
     dispatch(logoutUser());
     navigate('/login');
   };
+
+  const handleLogin = function () {
+    navigate("/login");
+  }
+
+  const handleRegister = function () {
+    navigate("/register");
+  }
 
 
   return (
     <header className={sectionHeader}>
       <div className={sectionElement}>
         <div className="md:flex md:items-center md:gap-12" onClick={() => navigate('/')}>
-          <img src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png" onClick={handleLogoClick} alt="Icona" className="h-8 w-8 mr-2 cursor-pointer" />
+          <img src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png" onClick={handleLogoClick} alt="Icon" className="h-8 w-8 mr-2 cursor-pointer" />
           <Link to="/" className="block text-teal-600">
             <span className="sr-only">Home</span>
             <svg className="h-8" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -73,17 +82,17 @@ function HeaderBar() {
                 <a className={loginButton} href="#">
                   {user.personalData.username}
                 </a>
-                <a className={registerButton} onClick={handleLogout} href="#">
+                <a className={registerButton} onClick={handleLogout}>
                   Logout
                 </a>
               </>
             ) : (
               <>
-                <a className={loginButton} href="http://localhost:3000/login">
+                <a className={loginButton} onClick={handleLogin}>
                   Login
                 </a>
                 <div className="hidden sm:flex">
-                  <a className={registerButton} href="http://localhost:3000/register">
+                  <a className={registerButton} onClick={handleRegister}>
                     Register
                   </a>
                 </div>

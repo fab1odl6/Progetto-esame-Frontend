@@ -7,8 +7,8 @@ import { getDatabase, set, ref, remove } from "firebase/database";
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
-const updateData = function (user) {
-    set(ref(db, "/users/" + user.name + "/personalData"), {
+const updateData = async function (user) {
+    await set(ref(db, "/users/" + user.name + "/personalData"), {
         name: user.name,
         surname: user.surname,
         password: user.password,
@@ -108,7 +108,8 @@ const usersSlice = createSlice({
         customEvents: []
     },
     reducers: {
-        registerUser(state, action) {
+        async registerUser(state, action) {
+            console.log("registered user: " + action.payload.name)
             updateData(action.payload);
             return {
                 ...state,
@@ -117,6 +118,7 @@ const usersSlice = createSlice({
         },
 
         setUser(state, action) {
+            console.log("matchedUser: " + action.payload.matchedUser.name)
             return {
                 ...state,
                 user: action.payload.matchedUser,
@@ -143,6 +145,7 @@ const usersSlice = createSlice({
         },
 
         updateEvent(state, action) {
+            console.log("user: " + state.user.personalData)
             const updatedEvents = updateFavoriteEvent(state.events, action.payload, state.user.personalData);
 
             return {
