@@ -90,7 +90,7 @@ const updatePersonalCustomEvents = function (events, event, user) {
             date: event.date,
             department: event.department,
             guests: event.guests,
-            favorite: true,
+            favorite: false,
             full: false
         });
 
@@ -145,7 +145,6 @@ const usersSlice = createSlice({
         },
 
         updateEvent(state, action) {
-            console.log("user: " + state.user.personalData)
             const updatedEvents = updateFavoriteEvent(state.events, action.payload, state.user.personalData);
 
             return {

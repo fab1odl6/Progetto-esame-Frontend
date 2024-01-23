@@ -3,7 +3,7 @@ import HomePage from './Homepage';
 import NavigationContext from '../context/navigation';
 import { getDatabase, ref, get, child } from 'firebase/database';
 import { useDispatch } from 'react-redux';
-import { setUser, setLogged, logoutUser, clearText } from '../store';
+import { setUser, setLogged, logoutUser, clearText, setPage } from '../store';
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from '../components/firebase/FirebaseConfig';
 
@@ -156,6 +156,7 @@ const LoginPage = function () {
             setLoggedIn(true);
             console.log('isLoggedIn dopo il login:', true);
             navigate('/');
+            dispatch(setPage("HomePage"));
           } else {
             setError('Username o Password Errati, riprovare');
             setUsername('');
