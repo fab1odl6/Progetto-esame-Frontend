@@ -10,12 +10,7 @@ import LoginModals from "../modals/loginModals";
 
 function EventShow({ favoriteState, onClickHeart, setFavoriteState, open, onClose }) {
 
-    const modalClass = "fixed inset-0 flex flex-col items-center justify-center w-screen h-screen bg-blue bg-auto z-10";
-    const modalContainerClass = "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50";
-    const modalDivClass = "bg-white p-8 max-w-md rounded shadow-lg relative";
-    const textContainerClass = "mb-4";
-    const buttonClass = "bg-blue-500 text-white px-4 py-2 rounded cursor-pointer";
-    const closeButtonClass = "absolute top-2 right-2 text-gray-700 cursor-pointer text-lg";
+    const modalClass = "fixed inset-0 flex flex-col items-center justify-center w-screen h-screen bg-blue bg-auto z-1000";
     const containerClass = "border-slate-300 border-solid border-4 bg-white";
     const imageContainerClass = "flex justify-between relative";
     const imageClass = "max-w-lg max-h-lg";
@@ -65,7 +60,7 @@ function EventShow({ favoriteState, onClickHeart, setFavoriteState, open, onClos
     return (
         <div className={modalClass}>
             {modal && (
-                <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} />
+                <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} open={handleClickHeart}/>
             )}
             <Dialog open={open} onClose={onClose}>
                 <DialogContent>

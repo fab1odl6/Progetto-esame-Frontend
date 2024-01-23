@@ -85,7 +85,7 @@ function ArtCard({ artwork }) {
             )}
             <div className={containerClass}>
                 {modal && (
-                    <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickClose} />
+                    <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickClose} open={handleClickHeart}/>
                 )}
                 <div className={artContainer}>
                     <img src={artwork.image} className={imageClass} onClick={handleClickDetails} />
