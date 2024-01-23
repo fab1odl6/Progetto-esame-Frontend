@@ -23,12 +23,15 @@ function EventSlideShow() {
   const chevronClass = "place-self-center text-2xl";
   const titleAndHeartClass = "flex mt-2";
   const favoriteClass = "ml-auto text-2xl";
-  const titleClass = "text-lg place-content-center cursor-pointer";
+  const titleClass = "font-bold text-lg place-content-center cursor-pointer";
 
   const { navigate } = useContext(NavigationContext);
 
-  const { array, index } = useSelector((state) => {
-    return state.events;
+  const array = useSelector((state) => {
+    return state.events.array;
+  });
+  const index = useSelector((state) => {
+    return state.events.index;
   });
 
   const { logged, events } = useSelector((state) => {
