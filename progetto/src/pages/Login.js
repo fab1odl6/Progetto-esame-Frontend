@@ -179,106 +179,49 @@ const LoginPage = function () {
   }, [isLoggedIn]);
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.title}>Login</h2>
-      <form style={styles.form} onSubmit={handleLogin}>
-        <div style={styles.formGroup}>
-          <label style={styles.label}>Username:</label>
-          <input
-            type="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            style={styles.input}
-            required
-          />
-        </div>
-
-        <div style={styles.formGroup}>
-          <label style={styles.label}>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={styles.input}
-            required
-          />
-        </div>
-
-        {error && (
-          <div style={{ ...styles.error, display: 'block' }} onClick={() => console.log('Clicked on error:', error)}>
-            {error}
+    <div className="flex h-screen w-full items-center justify-center bg-cover bg-no-repeat" style={{ backgroundImage: "https://media-assets.wired.it/photos/632873a16d787d7fa7f012b8/4:3/w_1820,h_1365,c_limit/The%CC%81a%CC%82tre_D%E2%80%99ope%CC%81ra_Spatial.jpeg" }}>
+      <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+        <div className="text-white">
+          <div className="mb-8 flex flex-col items-center">
+            <img src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png" width="150" alt="" />
+            <h1 className="mb-2 text-2xl">Instagram</h1>
+            <span className="text-gray-300">Enter Login Details</span>
           </div>
-        )}
+          <form onSubmit={handleLogin}>
+            <div className="mb-4 text-lg">
+              <input
+                className="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="id@email.com"
+                required
+              />
+            </div>
 
-
-        <button type="submit" style={styles.button}>
-          Login
-        </button>
-
-        <div style={styles.registerLink}>
-          Do not have an account? <a href="http://localhost:3000/register" style={styles.registerText}>Sign in</a>
+            <div className="mb-4 text-lg">
+              <input
+                className="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="*********"
+                required
+              />
+            </div>
+            <div className="mt-8 flex justify-center text-lg text-black">
+              <button
+                type="submit"
+                className="rounded-3xl bg-yellow-400 bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600"
+              >
+                Login
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   );
-
-};
-
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh',
-    border: '1px solid #ddd',
-    borderRadius: '10px',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-  },
-  title: {
-    fontWeight: 'bold',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '300px',
-    margin: '20px',
-  },
-  formGroup: {
-    marginBottom: '15px',
-  },
-  label: {
-    marginBottom: '5px',
-  },
-  input: {
-    padding: '8px',
-    fontSize: '16px',
-  },
-  button: {
-    padding: '10px',
-    fontSize: '16px',
-    backgroundColor: '#af874c',
-    color: 'white',
-    border: 'none',
-    cursor: 'pointer',
-  },
-
-  error: {
-    color: 'red',
-    display: 'block',
-    zIndex: 1000,
-    position: 'relative',
-    backgroundColor: 'lightpink',
-  },
-  registerLink: {
-    marginTop: '10px',
-    textAlign: 'center',
-  },
-  registerText: {
-    color: 'blue',
-    textDecoration: 'underline',
-    cursor: 'pointer',
-  },
 };
 
 const ConditionalHomePage = () => {

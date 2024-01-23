@@ -1,5 +1,3 @@
-// CardBox.js
-
 import React from 'react';
 
 function CardBox({ imageUrl, name, onClick }) {
@@ -25,7 +23,7 @@ function CardBox({ imageUrl, name, onClick }) {
     left: '0',
     width: '100%',
     height: '2cm', // Altezza dell'area trasparente aumentata
-    background: 'rgba(255, 255, 255, 0.5)',
+    background: 'rgba(205, 127, 50, 0.7)',
     zIndex: 0,
   };
 
