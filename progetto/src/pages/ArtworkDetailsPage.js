@@ -2,18 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { updateArt, setFavorite } from "../store";
 import { useContext, useState, useEffect } from "react";
-import { IoIosClose } from "react-icons/io";
 import NavigationContext from "../context/navigation";
+import LoginModals from "../components/modals/loginModals";
 
 
 function ArtworkDetailsPage() {
 
     const containerClass = "items-center bg-white overflow-auto p-4";
-    const modalContainerClass = "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50";
-    const modalDivClass = "bg-white p-8 max-w-md rounded shadow-lg relative";
-    const textContainerClass = "mb-4";
-    const buttonClass = "bg-blue-500 text-white px-4 py-2 rounded cursor-pointer";
-    const closeButtonClass = "absolute top-2 right-2 text-gray-700 cursor-pointer text-lg";
     const imageContainerClass = "flex justify-center items-center relative";
     const titleClass = "text-lg font-semibold";
     const imageClass = "max-w-xl max-h-xl rounded";
@@ -63,20 +58,10 @@ function ArtworkDetailsPage() {
         }
     }, [logged, artworks]);
 
-
-    console.log("Art in ArtworkDetails: " + art.image)
     return (
         <div className={containerClass}>
             {modal && (
-                <div className={modalContainerClass}>
-                    <div className={modalDivClass}>
-                        <div className={textContainerClass}>You must login to save an artwork/event!</div>
-                        <button onClick={handleClickButton} className={buttonClass}>
-                            Login
-                        </button>
-                        <IoIosClose onClick={handleClickCloseLog} className={closeButtonClass} />
-                    </div>
-                </div>
+                <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} />
             )}
             <div className={imageContainerClass}>
                 <img className={imageClass} key={art.id} src={art.image} alt={art.title} />
