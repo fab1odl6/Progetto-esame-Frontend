@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { animateScroll as scroll } from 'react-scroll';
 
 
 const NavigationContext = createContext();
@@ -21,6 +22,8 @@ function NavigationProvider({ children }) {
     const navigate = (to) => {
         window.history.pushState({}, '', to);
         setCurrentPath(to);
+
+        scroll.scrollToTop();
     }
 
     return (
