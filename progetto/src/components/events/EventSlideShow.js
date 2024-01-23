@@ -5,7 +5,12 @@ import {
   FaRegHeart,
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { swipeLeftEvent, swipeRightEvent, updateEvent } from "../../store";
+import {
+  refreshEvents,
+  swipeLeftEvent,
+  swipeRightEvent,
+  updateEvent,
+} from "../../store";
 import EventShow from "./EventShow";
 import { useState, useEffect, useContext } from "react";
 import NavigationContext from "../../context/navigation";
@@ -25,11 +30,17 @@ function EventSlideShow() {
   const favoriteClass = "ml-auto text-2xl";
   const titleClass = "font-bold text-lg place-content-center cursor-pointer";
 
+  const dispatch = useDispatch();
+
   const { navigate } = useContext(NavigationContext);
+
+  dispatch(refreshEvents());
 
   const { array, index } = useSelector((state) => {
     return state.events;
   });
+
+  console.log(array);
 
   const { logged, events } = useSelector((state) => {
     return state.users;
@@ -37,8 +48,6 @@ function EventSlideShow() {
   const [favoriteState, setFavoriteState] = useState(false);
   const [modal, setModal] = useState(false);
   const [full, setFull] = useState(false);
-  console.log(array);
-  const dispatch = useDispatch();
 
   const handleClickChevronLeft = function () {
     dispatch(swipeLeftEvent());
@@ -87,10 +96,6 @@ function EventSlideShow() {
   const closeModal = function () {
     setFull(false);
   };
-
-  //console.log(array)
-  //console.log(index)
-  //console.log(array[index])
 
   const altText = "Image of " + array[index].name;
 
