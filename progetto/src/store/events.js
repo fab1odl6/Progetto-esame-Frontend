@@ -11,7 +11,7 @@ import {
 } from "firebase/database";
 import { firebaseConfig } from "../components/firebase/FirebaseConfig";
 
-const eventArray = Array();
+const eventArray = [];
 const app = initializeApp(firebaseConfig);
 const dbRef = ref(getDatabase());
 
@@ -49,6 +49,7 @@ async function readData() {
 }
 
 await readData();
+console.log(eventArray);
 
 function updateFavorite(event, user) {
   const db = getDatabase();

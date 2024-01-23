@@ -14,12 +14,12 @@ import LoginModals from "../modals/loginModals";
 function EventSlideShow() {
   const containerClass = "overflow: auto z-50";
   const eventTextClass = "";
-  const eventDivClass = "relative w-full";
+  const eventDivClass = "relative w-md";
   const eventContainerClass =
-    "flex justify-center mx-auto flex-row place-content-center border-2 mb-2 rounded-lg overflow-hidden z-50 max-w-sm p-6 bg-yellow-100 border-yellow-200 rounded-lg shadow hover:bg-yellow-800 dark:bg-yellow-800 dark:border-yellow-700 dark:hover:bg-yellow-700";
+    "w-sm h-96 flex justify-center mx-auto flex-row place-content-center border-2 mb-2 rounded-lg overflow-hidden z-50 max-w-sm p-6 bg-yellow-100 border-yellow-200 rounded-lg shadow hover:bg-yellow-800 dark:bg-yellow-800 dark:border-yellow-700 dark:hover:bg-yellow-700";
   const chevronContainerClass = "flex items-center justify-center";
   const eventElementClass = "";
-  const imageClass = "w-full h-full cursor-pointer object-cover";
+  const imageClass = "w-48 h-72 cursor-pointer object-cover";
   const chevronClass = "place-self-center text-2xl";
   const titleAndHeartClass = "flex mt-2";
   const favoriteClass = "ml-auto text-2xl";
@@ -37,7 +37,7 @@ function EventSlideShow() {
   const [favoriteState, setFavoriteState] = useState(false);
   const [modal, setModal] = useState(false);
   const [full, setFull] = useState(false);
-
+  console.log(array);
   const dispatch = useDispatch();
 
   const handleClickChevronLeft = function () {
