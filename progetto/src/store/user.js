@@ -80,10 +80,10 @@ const updatePersonalCustomEvents = function (events, event, user) {
     if (eventIndex !== -1) {
         const updatedEvents = [...events];
         updatedEvents.splice(eventIndex, 1);
-        remove(ref(db, `users/${user.name}/events/${event.name}`));
+        remove(ref(db, `users/${user.name}/customEvents/${event.name}`));
         return updatedEvents;
     } else {
-        set(ref(db, `users/${user.name}/events/${event.name}`), {
+        set(ref(db, `users/${user.name}/customEvents/${event.name}`), {
             id: event.id,
             name: event.name,
             image: event.image,

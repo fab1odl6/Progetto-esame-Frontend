@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import DepartmentDropdown from "../dropdowns/DepartmentDropdown";
 import { useDispatch, useSelector } from "react-redux";
-import { setEvents } from "../../store";
+import { addNewEvent, setEvents, updateCustomEvents } from "../../store";
 
 
 function AddAnEvent() {
@@ -94,8 +94,7 @@ function AddAnEvent() {
             return;
         }
 
-        const db = getDatabase();
-        set(ref(db, 'events/' + formData.name), {
+        const newEvent = {
             date: selectedDate.toDateString(),
             favorite: false,
             full: false,
@@ -104,18 +103,9 @@ function AddAnEvent() {
             image: formData.image,
             name: formData.name,
             department: selectedOption
-        });
-
-        set(ref(db, 'users/' + user.personalData.name + '/customEvents/' + formData.name), {
-            date: selectedDate.toDateString(),
-            favorite: false,
-            full: false,
-            guests: formData.guests,
-            id: 4,
-            image: formData.image,
-            name: formData.name,
-            department: selectedOption
-        });
+        };
+        dispatch(updateCustomEvents(newEvent));
+        dispatch(addNewEvent(newEvent));
 
         setFormData({
             date: "",
