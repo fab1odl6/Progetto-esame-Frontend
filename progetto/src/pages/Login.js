@@ -1,12 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
-import HomePage from './Homepage';
-import NavigationContext from '../context/navigation';
-import { getDatabase, ref, get, child } from 'firebase/database';
-import { useDispatch } from 'react-redux';
-import { setUser, setLogged, logoutUser, clearText, setPage } from '../store';
+import React, { useState, useContext, useEffect } from "react";
+import HomePage from "./Homepage";
+import NavigationContext from "../context/navigation";
+import { getDatabase, ref, get, child } from "firebase/database";
+import { useDispatch } from "react-redux";
+import { setUser, setLogged, logoutUser, clearText, setPage } from "../store";
 import { initializeApp } from "firebase/app";
-import { firebaseConfig } from '../components/firebase/FirebaseConfig';
-
+import { firebaseConfig } from "../components/firebase/FirebaseConfig";
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
@@ -39,7 +38,7 @@ async function getArts(user) {
           classification: art.classification,
           favorite: art.favorite,
           full: art.full,
-          type: art.type
+          type: art.type,
         });
       }
     }
@@ -67,7 +66,7 @@ async function getEvents(user) {
           department: event.department,
           guests: event.guests,
           favorite: event.favorite,
-          full: event.full
+          full: event.full,
         });
       }
     }
@@ -96,7 +95,7 @@ async function getCustomEvents(user) {
           department: event.department,
           guests: event.guests,
           favorite: false,
-          full: false
+          full: false,
         });
       }
     }
@@ -106,14 +105,12 @@ async function getCustomEvents(user) {
   return eventArray;
 }
 
-
 const LoginPage = function () {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState(null);
   const { navigate } = useContext(NavigationContext);
-
 
   const dispatch = useDispatch();
 
@@ -124,7 +121,7 @@ const LoginPage = function () {
   const handleLogout = () => {
     // Dispatch l'azione di logout
     dispatch(logoutUser());
-    navigate('/login');
+    navigate("/login");
   };
 
   const handleLogin = async (e) => {
@@ -142,49 +139,63 @@ const LoginPage = function () {
         console.log(users);
 
         if (users) {
-          const matchedUser = Object.values(users).find(u =>
-            u.personalData.username.toLowerCase() === username.toLowerCase() && u.personalData.password === password
+          const matchedUser = Object.values(users).find(
+            (u) =>
+              u.personalData.username.toLowerCase() ===
+                username.toLowerCase() && u.personalData.password === password
           );
 
           if (matchedUser) {
-            console.log('Utente loggato:', matchedUser);
+            console.log("Utente loggato:", matchedUser);
             const artworks = await getArts(matchedUser.personalData);
             const events = await getEvents(matchedUser.personalData);
-            const customEvents = await getCustomEvents(matchedUser.personalData);
+            const customEvents = await getCustomEvents(
+              matchedUser.personalData
+            );
             dispatch(setUser({ matchedUser, artworks, events, customEvents }));
             dispatch(setLogged(true));
             setLoggedIn(true);
-            console.log('isLoggedIn dopo il login:', true);
-            navigate('/');
+            console.log("isLoggedIn dopo il login:", true);
+            navigate("/");
             dispatch(setPage("HomePage"));
           } else {
-            setError('Username o Password Errati, riprovare');
-            setUsername('');
-            setPassword('');
+            setError("Username o Password Errati, riprovare");
+            setUsername("");
+            setPassword("");
             setLoggedIn(false); // Imposta isLoggedIn a false in caso di login non riuscito
           }
         } else {
-          setError('Dati utente non validi');
+          setError("Dati utente non validi");
         }
       }
     } catch (error) {
-      console.error('Errore durante la verifica dell\'utente:', error);
-      setError('Si è verificato un errore durante la verifica dell\'utente');
+      console.error("Errore durante la verifica dell'utente:", error);
+      setError("Si è verificato un errore durante la verifica dell'utente");
     }
 
-    console.log('Fine della funzione handleLogin');
+    console.log("Fine della funzione handleLogin");
   };
 
   useEffect(() => {
-    console.log('isLoggedIn dopo il login:', isLoggedIn);
+    console.log("isLoggedIn dopo il login:", isLoggedIn);
   }, [isLoggedIn]);
 
   return (
-    <div className="flex h-screen w-full items-center justify-center bg-cover bg-no-repeat" style={{ backgroundImage: "url('https://media-assets.wired.it/photos/632873a16d787d7fa7f012b8/4:3/w_1820,h_1365,c_limit/The%CC%81a%CC%82tre_D%E2%80%99ope%CC%81ra_Spatial.jpeg')" }}>
+    <div
+      className="flex h-screen w-full items-center justify-center bg-cover bg-no-repeat"
+      style={{
+        backgroundImage:
+          "url('https://media-assets.wired.it/photos/632873a16d787d7fa7f012b8/4:3/w_1820,h_1365,c_limit/The%CC%81a%CC%82tre_D%E2%80%99ope%CC%81ra_Spatial.jpeg')",
+      }}
+    >
       <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
         <div className="text-white">
           <div className="mb-8 flex flex-col items-center">
-            <img src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png" width="150" alt="" />
+            <img
+              src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png"
+              width="150"
+              alt=""
+            />
             <h1 className="mb-2 text-2xl">ArtTreasures</h1>
             <span className="text-gray-300">Enter Login Details</span>
           </div>
@@ -227,7 +238,7 @@ const LoginPage = function () {
 
 const ConditionalHomePage = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
-  console.log('isLoggedIn:', isLoggedIn);
+  console.log("isLoggedIn:", isLoggedIn);
 
   if (isLoggedIn) {
     return <HomePage />;

@@ -110,110 +110,132 @@ export default ArtCard;
 
 */
 
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from "react";
 import NavigationContext from "../../context/navigation";
 import { updateArt, setArt } from "../../store";
-import LoginModals from '../modals/loginModals';
-import ConfirmModal from '../modals/ConfirmModal';
+import LoginModals from "../modals/loginModals";
+import ConfirmModal from "../modals/ConfirmModal";
 
 function ArtCard({ artwork }) {
-    const containerClass = "relative flex items-center justify-center h-60 w-79.5 rounded-xl shadow-xl ring-gray-900/5 mx-auto my-8 group mb-1"; // Modificato il valore di h-72 e w-96
-    const artContainer = "z-10 h-full w-full overflow-hidden rounded-xl border border-gray-200 opacity-80 transition duration-300 ease-in-out group-hover:opacity-100 dark:border-gray-700 dark:opacity-70";
-    const imageClass = "animate-fade-in block h-full w-full scale-100 transform object-cover object-center opacity-100 transition duration-300 group-hover:scale-110";
-    const textContainer = "absolute bottom-0 left-0 p-4 w-full text-white bg-opacity-70 z-30";
-    const titleClass = "font-serif text-lg font-bold text-white shadow-xl"; // Modificato il valore di text-2xl
-    const subtitleClass = "text-sm font-light text-gray-200 shadow-xl";
-    const heartIconClass = "absolute -top-4 -right-4 m-4 z-20 cursor-pointer";
-    const favoriteClass = "favorite text-2xl z-6"; // Modificato il valore di text-3xl
+  const containerClass =
+    "relative flex items-center justify-center h-60 w-79.5 rounded-xl shadow-xl ring-gray-900/5 mx-auto my-8 group mb-1"; // Modificato il valore di h-72 e w-96
+  const artContainer =
+    "z-10 h-full w-full overflow-hidden rounded-xl border border-gray-200 opacity-80 transition duration-300 ease-in-out group-hover:opacity-100 dark:border-gray-700 dark:opacity-70";
+  const imageClass =
+    "animate-fade-in block h-full w-full scale-100 transform object-cover object-center opacity-100 transition duration-300 group-hover:scale-110";
+  const textContainer =
+    "absolute bottom-0 left-0 p-4 w-full text-white bg-opacity-70 z-30";
+  const titleClass = "font-serif text-lg font-bold text-white shadow-xl"; // Modificato il valore di text-2xl
+  const subtitleClass = "text-sm font-light text-gray-200 shadow-xl";
+  const heartIconClass = "absolute -top-4 -right-4 m-4 z-20 cursor-pointer";
+  const favoriteClass = "favorite text-2xl z-6"; // Modificato il valore di text-3xl
 
-    const { logged, artworks } = useSelector((state) => {
-        return state.users;
-    })
+  const { logged, artworks } = useSelector((state) => {
+    return state.users;
+  });
 
-    const [favoriteState, setFavoriteState] = useState(false);
-    const [modal, setModal] = useState(false);
-    const [confirmModal, setConfirmModal] = useState(false);
+  const [favoriteState, setFavoriteState] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [confirmModal, setConfirmModal] = useState(false);
 
-    const { navigate } = useContext(NavigationContext);
+  const { navigate } = useContext(NavigationContext);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const handleClickHeart = function (art) {
-        if (logged) {
-            if (favoriteState) {
-                setConfirmModal(!confirmModal);
-            } else {
-                dispatch(updateArt(artwork));
-                setFavoriteState(!favoriteState);
-            }
-        } else {
-            setModal(true);
-        }
+  const handleClickHeart = function (art) {
+    if (logged) {
+      if (favoriteState) {
+        setConfirmModal(!confirmModal);
+      } else {
+        dispatch(updateArt(artwork));
+        setFavoriteState(!favoriteState);
+      }
+    } else {
+      setModal(true);
     }
+  };
 
-    const deleteFavorite = function () {
-        if (confirmModal) {
-            dispatch(updateArt(artwork));
-            setConfirmModal(false);
-            setFavoriteState(!favoriteState);
-        }
+  const deleteFavorite = function () {
+    if (confirmModal) {
+      dispatch(updateArt(artwork));
+      setConfirmModal(false);
+      setFavoriteState(!favoriteState);
     }
+  };
 
-    useEffect(() => {
-        if (logged) {
-            if (artworks.find((item) => item.id === artwork.id)) {
-                setFavoriteState(true);
-            } else {
-                setFavoriteState(false);
-            }
-        }
-    }, [logged]);
-
-    const handleClickButton = function () {
-        navigate("/login");
+  useEffect(() => {
+    if (logged) {
+      if (artworks.find((item) => item.id === artwork.id)) {
+        setFavoriteState(true);
+      } else {
+        setFavoriteState(false);
+      }
     }
+  }, [logged]);
 
-    const handleClickClose = function () {
-        setModal(false);
-    }
+  const handleClickButton = function () {
+    navigate("/login");
+  };
 
-    const handleClickDetails = function () {
-        dispatch(setArt(artwork));
-        navigate("/artworkDetails");
-    }
+  const handleClickClose = function () {
+    setModal(false);
+  };
 
-    const undoDelete = function () {
-        setConfirmModal(false);
-    }
+  const handleClickDetails = function () {
+    dispatch(setArt(artwork));
+    navigate("/artworkDetails");
+  };
 
-    return (
-        <div>
-            {confirmModal && (
-                <ConfirmModal onDelete={undoDelete} onUndo={deleteFavorite} />
-            )}
-            <div className={containerClass}>
-                {modal && (
-                    <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickClose} />
-                )}
-                <div className={artContainer}>
-                    <img src={artwork.image} className={imageClass} onClick={handleClickDetails} />
-                </div>
-                <div className={textContainer}>
-                    <h1 className={titleClass} onClick={handleClickDetails}>{artwork.title}</h1>
-                    <h1 className={subtitleClass}> {artwork.authorName ? artwork.authorName : "Unknown Author"}</h1>
-                </div>
-                <div className={heartIconClass}>
-                    {favoriteState ? (
-                        <FaHeart className={favoriteClass} onClick={() => handleClickHeart(artwork)} />
-                    ) : (
-                        <FaRegHeart className={favoriteClass} onClick={() => handleClickHeart(artwork)} />
-                    )}
-                </div>
-            </div>
+  const undoDelete = function () {
+    setConfirmModal(false);
+  };
+
+  return (
+    <div>
+      {confirmModal && (
+        <ConfirmModal onDelete={undoDelete} onUndo={deleteFavorite} />
+      )}
+      <div className={containerClass}>
+        {modal && (
+          <LoginModals
+            onClickButton={handleClickButton}
+            onCloseLog={handleClickClose}
+          />
+        )}
+        <div className={artContainer}>
+          <img
+            src={artwork.image}
+            className={imageClass}
+            onClick={handleClickDetails}
+          />
         </div>
-    )
+        <div className={textContainer}>
+          <h1 className={titleClass} onClick={handleClickDetails}>
+            {artwork.title}
+          </h1>
+          <h1 className={subtitleClass}>
+            {" "}
+            {artwork.authorName ? artwork.authorName : "Unknown Author"}
+          </h1>
+        </div>
+        <div className={heartIconClass}>
+          {favoriteState ? (
+            <FaHeart
+              className={favoriteClass}
+              onClick={() => handleClickHeart(artwork)}
+            />
+          ) : (
+            <FaRegHeart
+              className={favoriteClass}
+              onClick={() => handleClickHeart(artwork)}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default ArtCard;

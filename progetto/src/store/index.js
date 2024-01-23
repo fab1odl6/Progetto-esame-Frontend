@@ -9,7 +9,6 @@ import searchSlice from "./search";
 import eventsSlice from "./events";
 import activePageSlice from "./activePage";
 
-
 const rootReducer = combineReducers({
   artworks: artworksSlice.reducer,
   users: usersSlice.reducer,
@@ -17,7 +16,7 @@ const rootReducer = combineReducers({
   artDetails: artDetailSlice.reducer,
   search: searchSlice.reducer,
   events: eventsSlice.reducer,
-  activePage: activePageSlice.reducer
+  activePage: activePageSlice.reducer,
 });
 
 const persistConfig = {
@@ -35,10 +34,28 @@ const store = configureStore({
 const persistor = persistStore(store);
 
 export { store, persistor };
-export const { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt } = artworksSlice.actions;
-export const { registerUser, setUser, setLogged, updateArt, updateEvent, updateCustomEvents, logoutUser, setArtworks, setEvents, flush } = usersSlice.actions;
+export const { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt } =
+  artworksSlice.actions;
+export const {
+  registerUser,
+  setUser,
+  setLogged,
+  updateArt,
+  updateEvent,
+  updateCustomEvents,
+  logoutUser,
+  setArtworks,
+  setEvents,
+  flush,
+} = usersSlice.actions;
 export const { setArt, setFavorite } = artDetailSlice.actions;
 export const { addFilterItem, removeFilterItem } = filtersSlice.actions;
 export const { updateText, clearText } = searchSlice.actions;
-export const { swipeLeftEvent, swipeRightEvent, switchFavoriteEvent, switchFullEvent, addNewEvent } = eventsSlice.actions;
+export const {
+  swipeLeftEvent,
+  swipeRightEvent,
+  switchFavoriteEvent,
+  switchFullEvent,
+  addNewEvent,
+} = eventsSlice.actions;
 export const { setPage } = activePageSlice.actions;

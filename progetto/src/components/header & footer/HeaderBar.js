@@ -5,14 +5,16 @@ import NavigationContext from "../../context/navigation";
 import { useContext, useEffect, useState } from "react";
 
 function HeaderBar() {
-
   const sectionHeader = "bg-white";
-  const sectionElement = "mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between";
+  const sectionElement =
+    "mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between";
   const navLinks = "hidden md:flex items-center gap-6 text-sm";
-  const mobileMenuButton = "block md:hidden rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75";
-  const loginButton = "rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow";
-  const registerButton = "hidden sm:flex rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600";
-
+  const mobileMenuButton =
+    "block md:hidden rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75";
+  const loginButton =
+    "rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow";
+  const registerButton =
+    "hidden sm:flex rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600";
 
   const dispatch = useDispatch();
 
@@ -31,43 +33,49 @@ function HeaderBar() {
 
   const handleLogoClick = () => {
     dispatch(setPage("HomePage"));
-    navigate('/');
+    navigate("/");
   };
 
-
   const renderedLinks = links.map((link) => (
-    <Link
-      key={link.label}
-      to={link.path}
-      singlePage={link.label}
-    >
+    <Link key={link.label} to={link.path} singlePage={link.label}>
       {link.label}
-    </Link >
+    </Link>
   ));
 
   const handleLogout = function () {
     dispatch(logoutUser());
-    navigate('/login');
+    navigate("/login");
   };
 
   const handleLogin = function () {
     navigate("/login");
-  }
+  };
 
   const handleRegister = function () {
     navigate("/register");
-  }
-
+  };
 
   return (
     <header className={sectionHeader}>
       <div className={sectionElement}>
-        <div className="md:flex md:items-center md:gap-12" onClick={() => navigate('/')}>
-          <img src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png" onClick={handleLogoClick} alt="Icon" className="h-8 w-8 mr-2 cursor-pointer" />
+        <div
+          className="md:flex md:items-center md:gap-12"
+          onClick={() => navigate("/")}
+        >
+          <img
+            src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png"
+            onClick={handleLogoClick}
+            alt="Icon"
+            className="h-8 w-8 mr-2 cursor-pointer"
+          />
           <Link to="/" className="block text-teal-600">
             <span className="sr-only">Home</span>
-            <svg className="h-8" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            </svg>
+            <svg
+              className="h-8"
+              viewBox="0 0 28 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            ></svg>
           </Link>
         </div>
 
@@ -110,7 +118,11 @@ function HeaderBar() {
                 stroke="currentColor"
                 strokeWidth="2"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             </button>
           </div>

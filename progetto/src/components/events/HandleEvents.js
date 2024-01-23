@@ -6,70 +6,57 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { setEvents } from "../../store";
 
-
 function HandleEvents() {
+  const containerClass = "w-max h-full p-4 mt-4 shadow overflow-y-auto";
 
-    const containerClass = "w-max h-full p-4 mt-4 shadow overflow-y-auto";
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase();
+  const dbRef = ref(db);
 
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase();
-    const dbRef = ref(db);
+  const { user, customEvents } = useSelector((state) => {
+    return state.users;
+  });
 
-    const { user, customEvents } = useSelector((state) => {
-        return state.users;
-    });
-    
-    const [eventsLocal, setEventsLocal] = useState(customEvents);
-    const [submit, setSubmit] = useState(false);
-    const [deleteState, setDeleteState] = useState(null);
+  const [eventsLocal, setEventsLocal] = useState(customEvents);
+  const [submit, setSubmit] = useState(false);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const updateLocal = async () => {
-        const eventsRef = child(dbRef, "/users/" + user.personalData.name + "/customEvents/")
+  const updateLocal = async () => {
+    const eventsRef = child(
+      dbRef,
+      "/users/" + user.personalData.name + "/customEvents/"
+    );
 
-        try {
-            const snapshot = await get(eventsRef);
+    try {
+      const snapshot = await get(eventsRef);
 
-            if (snapshot.exists()) {
-                const eventData = Object.values(snapshot.val());
-                dispatch(setEvents(eventData));
-                setEventsLocal(eventData);
-            }
-        } catch (e) {
-            console.error(e);
-        }
+      if (snapshot.exists()) {
+        const eventData = Object.values(snapshot.val());
+        dispatch(setEvents(eventData));
+        setEventsLocal(eventData);
+      }
+    } catch (e) {
+      console.error(e);
     }
+  };
 
-    useEffect(() => {
-        updateLocal();
-    }, [customEvents, eventsLocal, dispatch, deleteState]);
+  useEffect(() => {
+    updateLocal();
+  }, [customEvents, eventsLocal, dispatch]);
 
-    const handleClickDelete = function(){
-        
-        setDeleteState(!deleteState);
-        setSubmit(!submit);
-     //   dispatch(flush(event));
-    }
-
-    const render = customEvents.map((event) => {
-        return (
-            <HandleEventCard 
-                key={event.name} 
-                event={event} 
-                submit={submit} setSubmit={setSubmit} 
-                deleteState={deleteState}
-                setDeleteState={setDeleteState}
-                handleCLickDeleteq={handleClickDelete}
-            />
-        )
-    })
-
+  const render = customEvents.map((event) => {
     return (
-        <div className={containerClass}>
-            {render}
-        </div>
-    )
+      <HandleEventCard
+        key={event.name}
+        event={event}
+        submit={submit}
+        setSubmit={setSubmit}
+      />
+    );
+  });
+
+  return <div className={containerClass}>{render}</div>;
 }
 
 export default HandleEvents;

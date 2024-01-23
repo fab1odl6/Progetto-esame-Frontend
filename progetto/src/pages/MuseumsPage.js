@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Grid from "../components/thematic areas/Grid";
-import MuseumModal from '../components/thematic areas/MuseumModal';
-import { firebaseConfig } from '../components/firebase/FirebaseConfig';
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, onValue } from 'firebase/database';
-import { useDispatch } from 'react-redux';
-import { clearText } from '../store';
+import MuseumModal from "../components/thematic areas/MuseumModal";
+import { firebaseConfig } from "../components/firebase/FirebaseConfig";
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, onValue } from "firebase/database";
+import { useDispatch } from "react-redux";
+import { clearText } from "../store";
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-const departmentsRef = ref(database, '/departments');
-
+const departmentsRef = ref(database, "/departments");
 
 function Museums() {
-
-  const containerClass = 'mt-4';
-
+  const containerClass = "mt-4";
 
   const [museums, setMuseums] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -45,7 +42,7 @@ function Museums() {
           console.log(museumsFromFirebase);
         });
       } catch (error) {
-        console.error('Error fetching museums:', error);
+        console.error("Error fetching museums:", error);
       }
     };
 
@@ -64,18 +61,35 @@ function Museums() {
 
   return (
     <div className={containerClass}>
-      <div className="mainContent" style={{
-        background: 'linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url("https://www.area-arch.it/wp-content/uploads/sites/6/2023/10/Keope-Plate_copper.jpg")',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        minHeight: 'calc(100vh - 100px)',
-      }}>
-        <h1 style={{ textAlign: 'center', paddingTop: '50px', fontWeight: 'bold', fontSize: '2em' }}>THEMATIC AREAS</h1>
+      <div
+        className="mainContent"
+        style={{
+          background:
+            'linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url("https://www.area-arch.it/wp-content/uploads/sites/6/2023/10/Keope-Plate_copper.jpg")',
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          minHeight: "calc(100vh - 100px)",
+        }}
+      >
+        <h1
+          style={{
+            textAlign: "center",
+            paddingTop: "50px",
+            fontWeight: "bold",
+            fontSize: "2em",
+          }}
+        >
+          THEMATIC AREAS
+        </h1>
         <Grid museums={museums} openModal={openModal} />
-        <MuseumModal open={modalOpen} onClose={closeModal} museum={selectedMuseum} />
+        <MuseumModal
+          open={modalOpen}
+          onClose={closeModal}
+          museum={selectedMuseum}
+        />
       </div>
-    </div >
+    </div>
   );
 }
 

@@ -1,11 +1,9 @@
-import { useState, useEffect } from 'react';
-import classNames from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from "react";
+import classNames from "classnames";
+import { useDispatch, useSelector } from "react-redux";
 import { addFilterItem, removeFilterItem } from "../../store";
 
-
 function CheckboxDropdownPanel({ className, options }) {
-
   const labelClass = "hover:bg-sky-100 rounded cursor-pointer p-1 w-full";
   const inputClass = "mr-2";
 
@@ -13,7 +11,10 @@ function CheckboxDropdownPanel({ className, options }) {
   const dispatch = useDispatch();
   const filterState = useSelector((state) => state.filters.filterCheckbox);
 
-  const finalClassNames = classNames('border rounded p-3 shadow bg-white w-full', className);
+  const finalClassNames = classNames(
+    "border rounded p-3 shadow bg-white w-full",
+    className
+  );
 
   useEffect(() => {
     // Inizializza checkedItems in base allo stato iniziale state
@@ -25,20 +26,33 @@ function CheckboxDropdownPanel({ className, options }) {
   }, [filterState]);
 
   const handleCheckboxChange = (option) => {
-    const newCheckedItems = { ...checkedItems, [option.value]: !checkedItems[option.value] };
+    const newCheckedItems = {
+      ...checkedItems,
+      [option.value]: !checkedItems[option.value],
+    };
     setCheckedItems(newCheckedItems);
-    dispatch(addFilterItem({ filterName: "filterCheckbox", valueToAdd: option.value }));
-  }
+    dispatch(
+      addFilterItem({ filterName: "filterCheckbox", valueToAdd: option.value })
+    );
+  };
 
   const handleCheckboxRemoval = (option) => {
-    const newCheckedItems = { ...checkedItems, [option.value]: !checkedItems[option.value] };
+    const newCheckedItems = {
+      ...checkedItems,
+      [option.value]: !checkedItems[option.value],
+    };
     setCheckedItems(newCheckedItems);
-    dispatch(removeFilterItem({ filterName: "filterCheckbox", valueToRemove: option.value }))
-  }
+    dispatch(
+      removeFilterItem({
+        filterName: "filterCheckbox",
+        valueToRemove: option.value,
+      })
+    );
+  };
 
   return (
     <div className={finalClassNames}>
-      {options.map(option => (
+      {options.map((option) => (
         <div key={option.value}>
           <label className={labelClass} key={option.value}>
             <input
@@ -59,7 +73,6 @@ function CheckboxDropdownPanel({ className, options }) {
       ))}
     </div>
   );
-
 }
 
 export default CheckboxDropdownPanel;

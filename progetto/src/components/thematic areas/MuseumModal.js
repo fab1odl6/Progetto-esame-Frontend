@@ -1,7 +1,6 @@
-import React from 'react';
-import { Dialog, DialogContent, DialogTitle } from '@mui/material';
-import MuseumDetail from './MuseumDetail';
-
+import React from "react";
+import { Dialog, DialogContent, DialogTitle } from "@mui/material";
+import MuseumDetail from "./MuseumDetail";
 
 function MuseumModal({ open, onClose, museum }) {
   if (!museum) {
