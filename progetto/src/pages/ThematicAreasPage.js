@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Grid from "../components/thematic areas/Grid";
-import MuseumModal from "../components/thematic areas/MuseumModal";
+import ThematicAreasModal from "../components/thematic areas/ThematicAreasModal";
 import { firebaseConfig } from "../components/firebase/FirebaseConfig";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
@@ -83,7 +83,7 @@ function Museums() {
           THEMATIC AREAS
         </h1>
         <Grid museums={museums} openModal={openModal} />
-        <MuseumModal
+        <ThematicAreasModal
           open={modalOpen}
           onClose={closeModal}
           museum={selectedMuseum}

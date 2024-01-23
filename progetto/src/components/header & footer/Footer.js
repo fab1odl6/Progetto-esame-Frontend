@@ -1,5 +1,6 @@
-import React from "react";
+import { React, useContext } from "react";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import NavigationContext from "../../context/navigation";
 
 function Footer() {
   const footerStyle = "bg-gray-800 text-white py-20 mt-5";
@@ -8,7 +9,7 @@ function Footer() {
   const marginRightStyle = "mr-10";
   const textClass = "text-3xl mb-6";
   const linkContainerClass = "text-2xl mb-6";
-  const linkClass = "text-gray-300 text-lg mb-2 block";
+  const linkClass = "text-gray-300 text-lg mb-2 block cursor-pointer";
   const h3Class = "text-2xl mb-6";
   const mb4Class = "mb-4";
   const mb8Class = "mb-8";
@@ -18,6 +19,20 @@ function Footer() {
   const liClass = "mr-4";
   const iconLinkClass = "text-white text-3xl";
   const footerContainerStyle = "mt-10";
+
+  const { navigate } = useContext(NavigationContext);
+
+  const handleClickEveryArtwork = function () {
+    navigate("/everyArtwork");
+  };
+
+  const handleClickHomePage = function () {
+    navigate("/");
+  };
+
+  const handleClickThematicAreas = function () {
+    navigate("/thematicAreas");
+  };
 
   return (
     <footer className={`${footerStyle} ${footerContainerStyle}`}>
@@ -35,20 +50,17 @@ function Footer() {
           <h3 className={linkContainerClass}>QUICK LINKS</h3>
           <ul>
             <li>
-              <a
-                href="http://localhost:3000/everyArtwork"
-                className={linkClass}
-              >
+              <a onClick={handleClickEveryArtwork} className={linkClass}>
                 Permanent Collection
               </a>
             </li>
             <li>
-              <a href="http://localhost:3000/" className={linkClass}>
+              <a onClick={handleClickHomePage} className={linkClass}>
                 Events and Initiatives
               </a>
             </li>
             <li>
-              <a href="http://localhost:3000/museums" className={linkClass}>
+              <a onClick={handleClickThematicAreas} className={linkClass}>
                 Themathic Areas
               </a>
             </li>

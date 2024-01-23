@@ -1,10 +1,14 @@
 import { createContext, useState, useEffect } from "react";
 import { animateScroll as scroll } from "react-scroll";
+import { setPage } from "../store";
+import { useDispatch } from "react-redux";
 
 const NavigationContext = createContext();
 
 function NavigationProvider({ children }) {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handler = () => {
@@ -20,6 +24,7 @@ function NavigationProvider({ children }) {
   const navigate = (to) => {
     window.history.pushState({}, "", to);
     setCurrentPath(to);
+    dispatch(setPage(to));
 
     scroll.scrollToTop();
   };
