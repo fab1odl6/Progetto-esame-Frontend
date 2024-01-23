@@ -7,9 +7,9 @@ import { useEffect } from "react";
 
 function HandleEventsPage() {
   const containerClass = "flex justify-center h-[80vh]";
-  const addClass = "h-full";
+  const addClass = "w-md h-full";
   const separatorClass = "m-4";
-  const handleClass = "mt-10 h-full";
+  const handleClass = "mt-10 w-md h-full";
 
   const dispatch = useDispatch();
 

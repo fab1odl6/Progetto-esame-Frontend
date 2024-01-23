@@ -18,7 +18,7 @@ function AddAnEvent() {
     "mt-4 p-4 bg-green-100 border border-green-400 text-green-700";
   const successPClass = "w-48 mb-1 line-clamp-1";
   const mandatoryClass = "text-red-500";
-  const titleClass = "text-lg font-bold mb-4 mt-2";
+  const titleClass = "text-lg font-bold mb-4 mt-2 text-center";
   const formClass = "space-y-4";
   const inputContainerClass = "flex flex-col";
   const inputLabelClass = "mb-1";
