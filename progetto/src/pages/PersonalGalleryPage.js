@@ -77,26 +77,3 @@ function PersonalGalleryPage() {
 }
 
 export default PersonalGalleryPage;
-
-/*
-get(artworksRef)
-            .then((snapshot) => {
-                const artworksData = snapshot.val();
-                console.log("Artworks data from Firebase:", artworksData);
-
-                if (Array.isArray(artworksData)) {
-                    dispatch(setArtworks(artworksData));
-                    setArtworksLocal(artworksData); // Aggiorna lo stato locale con i dati
-                } else if (artworksData && typeof artworksData === 'object') {
-                    // converto oggetto in un array
-                    const dataArray = Object.values(artworksData);
-                    dispatch(setArtworks(dataArray));
-                    setArtworksLocal(dataArray);
-                } else {
-                    console.error("Artworks data is not in a recognized format");
-                }
-            })
-            .catch((error) => {
-                console.error("Error getting data:", error);
-            });
-*/
