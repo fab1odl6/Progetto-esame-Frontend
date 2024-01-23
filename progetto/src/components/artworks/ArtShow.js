@@ -64,7 +64,7 @@ function ArtShow({ artwork, favoriteState, onClickHeart, setFavoriteState, open,
     return (
         <div className={modalClass}>
             {modal && (
-                <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} />
+                <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} open={handleClickHeart}/>
             )}
             <Dialog open={open} onClose={onClose}>
                 <DialogContent>

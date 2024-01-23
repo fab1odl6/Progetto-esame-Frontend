@@ -43,7 +43,7 @@ function HandleEvents() {
         updateLocal();
     }, [customEvents, eventsLocal]);
 
-    const render = eventsLocal.map((event) => {
+    const render = customEvents.map((event) => {
         return (
             <HandleEventCard key={event.name} event={event} submit={submit} setSubmit={setSubmit} />
         )

@@ -145,7 +145,6 @@ const usersSlice = createSlice({
         },
 
         updateEvent(state, action) {
-            console.log("user: " + state.user.personalData)
             const updatedEvents = updateFavoriteEvent(state.events, action.payload, state.user.personalData);
 
             return {

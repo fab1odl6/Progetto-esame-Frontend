@@ -79,7 +79,7 @@ function ArtSlideShow() {
     return (
         <div>
             {modal && (
-                <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} />
+                <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} open={handleClickHeart}/>
             )}
             <div className={artTextClass}>Highlighted Artworks</div>
             <div className={artDivClass}>

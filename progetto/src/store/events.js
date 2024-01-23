@@ -4,7 +4,7 @@ import { getDatabase, ref, get, child, set, remove, update } from "firebase/data
 import { firebaseConfig } from "../components/firebase/FirebaseConfig";
 
 
-const eventArray = [];
+const eventArray = Array();
 const app = initializeApp(firebaseConfig);
 const dbRef = ref(getDatabase());
 
@@ -124,6 +124,8 @@ const eventsSlice = createSlice({
         },
 
         addNewEvent(state, action) {
+            console.log("state: " + state)
+            console.log("state.array: " + state.array)
             updateEvents(action.payload);
             const newArray = [...state.array, action.payload];
 
