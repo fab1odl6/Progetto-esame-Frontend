@@ -125,10 +125,11 @@ const eventsSlice = createSlice({
 
         addNewEvent(state, action) {
             updateEvents(action.payload);
+            const newArray = [...state.array, action.payload];
 
             return ({
                 ...state,
-                array: action.payload
+                array: newArray
             });
         }
     },
