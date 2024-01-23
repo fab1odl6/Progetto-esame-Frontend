@@ -1,7 +1,6 @@
-import React from 'react';
-import { Dialog, DialogContent, DialogTitle } from '@mui/material';
-import MuseumDetail from './MuseumDetail';
-
+import React from "react";
+import { Dialog, DialogContent, DialogTitle } from "@mui/material";
+import ThematicAreasDetail from "./ThematicAreasDetail";
 
 function MuseumModal({ open, onClose, museum }) {
   if (!museum) {
@@ -12,7 +11,7 @@ function MuseumModal({ open, onClose, museum }) {
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="lg">
       <DialogTitle>{museum.displayName}</DialogTitle>
       <DialogContent>
-        <MuseumDetail museum={museum} />
+        <ThematicAreasDetail museum={museum} />
       </DialogContent>
     </Dialog>
   );

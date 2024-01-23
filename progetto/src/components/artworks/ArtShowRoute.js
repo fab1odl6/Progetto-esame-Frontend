@@ -4,17 +4,16 @@ import { NavigationProvider } from "../../context/navigation";
 import ArtShow from "./ArtShow";
 
 function ArtFullShow() {
-
-    return (
-        <NavigationProvider>
-            <Route path="/">
-                <ArtShow />
-            </Route>
-            <Route path="/artworkDetails">
-                <ArtworksDetailsPage />
-            </Route>
-        </NavigationProvider>
-    )
+  return (
+    <NavigationProvider>
+      <Route path="/">
+        <ArtShow />
+      </Route>
+      <Route path="/artworkDetails">
+        <ArtworksDetailsPage />
+      </Route>
+    </NavigationProvider>
+  );
 }
 
 export default ArtFullShow;

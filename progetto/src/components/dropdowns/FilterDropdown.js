@@ -4,15 +4,12 @@ import { GoChevronDown } from "react-icons/go";
 import Panel from "./FilterDropdownPanel";
 import { addFilterItem } from "../../store";
 
-
 function Dropdown({ option, title }) {
-
   const optionClass = "hover:bg-sky-100 rounded cursor-pointer p-1";
   const containerClass = "w-48 relative";
   const panelClass = "flex justify-between items-center cursor-pointer";
   const chevronClass = "text-lg";
   const openedPanelClass = "absolute top-full";
-
 
   const [isOpen, setIsOpen] = useState(false);
   const divEl = useRef();
@@ -39,7 +36,9 @@ function Dropdown({ option, title }) {
 
   const handleOptionClick = (option) => {
     setIsOpen(false);
-    dispatch(addFilterItem({ filterName: "filterSelection", valueToAdd: option.label }));
+    dispatch(
+      addFilterItem({ filterName: "filterSelection", valueToAdd: option.label })
+    );
   };
 
   const renderedOptions = option.map((option) => {
@@ -56,17 +55,13 @@ function Dropdown({ option, title }) {
 
   return (
     <div ref={divEl} className={containerClass}>
-      <Panel
-        className={panelClass}
-        onClick={handleClick}
-      >
+      <Panel className={panelClass} onClick={handleClick}>
         {title}
         <GoChevronDown className={chevronClass} />
       </Panel>
       {isOpen && <Panel className={openedPanelClass}>{renderedOptions}</Panel>}
     </div>
   );
-
 }
 
 export default Dropdown;

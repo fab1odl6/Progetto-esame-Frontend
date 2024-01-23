@@ -1,7 +1,7 @@
 // Grid.js
 
-import React from 'react';
-import CardBox from './CardBox';
+import React from "react";
+import CardBox from "./CardBox";
 
 function Grid({ museums, openModal }) {
   const containerClass = "flex flex-wrap";
@@ -10,7 +10,11 @@ function Grid({ museums, openModal }) {
   return (
     <div className={containerClass}>
       {museums.map((museum) => (
-        <div key={museum.id} className={cardBoxDiv} onClick={() => openModal(museum)}>
+        <div
+          key={museum.id}
+          className={cardBoxDiv}
+          onClick={() => openModal(museum)}
+        >
           <CardBox
             imageUrl={museum.image}
             name={museum.name}
