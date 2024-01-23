@@ -1,10 +1,11 @@
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebase/FirebaseConfig";
-import { get, child, ref, getDatabase } from "firebase/database";
+import { get, child, ref, getDatabase, remove } from "firebase/database";
 import HandleEventCard from "./HandleEventCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { setEvents } from "../../store";
+
 
 function HandleEvents() {
 
@@ -20,6 +21,7 @@ function HandleEvents() {
     
     const [eventsLocal, setEventsLocal] = useState(customEvents);
     const [submit, setSubmit] = useState(false);
+    const [deleteState, setDeleteState] = useState(null);
 
     const dispatch = useDispatch();
 
@@ -41,11 +43,25 @@ function HandleEvents() {
 
     useEffect(() => {
         updateLocal();
-    }, [customEvents, eventsLocal]);
+    }, [customEvents, eventsLocal, dispatch, deleteState]);
+
+    const handleClickDelete = function(){
+        
+        setDeleteState(!deleteState);
+        setSubmit(!submit);
+     //   dispatch(flush(event));
+    }
 
     const render = customEvents.map((event) => {
         return (
-            <HandleEventCard key={event.name} event={event} submit={submit} setSubmit={setSubmit} />
+            <HandleEventCard 
+                key={event.name} 
+                event={event} 
+                submit={submit} setSubmit={setSubmit} 
+                deleteState={deleteState}
+                setDeleteState={setDeleteState}
+                handleCLickDeleteq={handleClickDelete}
+            />
         )
     })
 

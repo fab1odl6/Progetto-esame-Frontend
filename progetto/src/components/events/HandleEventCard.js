@@ -3,7 +3,7 @@ import { FaTrash } from "react-icons/fa";
 import { MdModeEdit, MdOutlineEditOff } from "react-icons/md";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { switchFavoriteEvent, updateEvent } from "../../store";
+import { flush, switchFavoriteEvent, updateEvent } from "../../store";
 import { remove, ref, getDatabase, set, update } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebase/FirebaseConfig";
@@ -39,7 +39,7 @@ async function writeData() {
 
 // await writeData();
 
-function HandleEventCard({ event, submit, setSubmit }) {
+function HandleEventCard({ event, submit, setSubmit, deleteState, setDeleteState, handleCLickDeleteq }) {
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase();
@@ -73,7 +73,6 @@ function HandleEventCard({ event, submit, setSubmit }) {
     })
 
     const [editState, setEditState] = useState(false);
-    const [deleteState, setDeleteState] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedOption, setSelectedOption] = useState(null);
     const [success, setSuccess] = useState(null);
@@ -89,8 +88,7 @@ function HandleEventCard({ event, submit, setSubmit }) {
     const handleClickDelete = function () {
         remove(ref(db, "users/" + user.personalData.name + "/customEvents/" + event.name));
         remove(ref(db, "events/" + event.name));
-        setDeleteState(!deleteState);
-        setSubmit(!submit);
+        handleCLickDeleteq();
     }
 
     const handleClickEdit = function () {

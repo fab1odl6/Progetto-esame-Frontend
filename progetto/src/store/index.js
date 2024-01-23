@@ -36,7 +36,7 @@ const persistor = persistStore(store);
 
 export { store, persistor };
 export const { swipeLeftArt, swipeRightArt, switchFavoriteArt, switchFullArt } = artworksSlice.actions;
-export const { registerUser, setUser, setLogged, updateArt, updateEvent, updateCustomEvents, logoutUser, setArtworks, setEvents } = usersSlice.actions;
+export const { registerUser, setUser, setLogged, updateArt, updateEvent, updateCustomEvents, logoutUser, setArtworks, setEvents, flush } = usersSlice.actions;
 export const { setArt, setFavorite } = artDetailSlice.actions;
 export const { addFilterItem, removeFilterItem } = filtersSlice.actions;
 export const { updateText, clearText } = searchSlice.actions;
