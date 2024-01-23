@@ -4,7 +4,8 @@ import { getDatabase, ref, get, child, set, remove, update } from "firebase/data
 import { firebaseConfig } from "../components/firebase/FirebaseConfig";
 
 
-let eventArray = [];
+const eventArray = [];
+const app = initializeApp(firebaseConfig);
 const dbRef = ref(getDatabase());
 
 async function readData() {
@@ -69,6 +70,23 @@ function updateFavorite(event, user) {
     }
 }
 
+function updateEvents(event) {
+    const db = getDatabase();
+
+    set(ref(db, "events/" + event.name), {
+        id: event.id,
+        name: event.name,
+        image: event.image,
+        date: event.date,
+        department: event.department,
+        guests: event.guests,
+        favorite: false,
+        full: false
+    });
+}
+
+console.log(eventArray)
+
 const eventsSlice = createSlice({
     name: "events",
     initialState: {
@@ -104,6 +122,15 @@ const eventsSlice = createSlice({
 
             return { ...state, array: newArray, full: newFull };
         },
+
+        addNewEvent(state, action) {
+            updateEvents(action.payload);
+
+            return ({
+                ...state,
+                array: action.payload
+            });
+        }
     },
 });
 

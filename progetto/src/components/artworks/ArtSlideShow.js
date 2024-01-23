@@ -1,23 +1,13 @@
 import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
 import { swipeLeftArt, swipeRightArt, updateArt, setArt } from "../../store";
-import ArtShow from "./ArtShow";
-import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from "../firebase/FirebaseConfig";
-import { getDatabase } from 'firebase/database';
 import { useEffect, useState, useContext } from 'react';
 import NavigationContext from '../../context/navigation';
-import { IoIosClose } from 'react-icons/io';
 import LoginModals from '../modals/loginModals';
 
 
 function ArtSlideShow() {
 
-    const modalContainerClass = "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50";
-    const modalDivClass = "bg-white p-8 max-w-md rounded shadow-lg relative";
-    const textContainerClass = "mb-4";
-    const buttonClass = "bg-blue-500 text-white px-4 py-2 rounded cursor-pointer";
-    const closeButtonClass = "absolute top-2 right-2 text-gray-700 cursor-pointer text-lg";
     const artTextClass = "";
     const artDivClass = "";
     const artContainerClass = "mx-auto flex flex-row place-content-center max-w-sm h-96 p-6 bg-yellow-100 border-yellow-200 rounded-lg shadow hover:bg-yellow-800 dark:bg-yellow-800 dark:border-yellow-700 dark:hover:bg-yellow-700";
@@ -36,9 +26,6 @@ function ArtSlideShow() {
         return state.artworks;
     });
 
-    //const app = initializeApp(firebaseConfig);
-    //const db = getDatabase();
-
     const dispatch = useDispatch();
 
     const { logged, artworks } = useSelector((state) => {
@@ -46,7 +33,6 @@ function ArtSlideShow() {
     })
     const [favoriteState, setFavoriteState] = useState(false);
     const [modal, setModal] = useState(false);
-    //const [full, setFull] = useState(false);
 
     const handleClickChevronLeft = function () {
         dispatch(swipeLeftArt());
@@ -66,12 +52,6 @@ function ArtSlideShow() {
         }
     }
 
-    /*
-    const handleClickArtwork = function () {
-        setFull(!full);
-    }
-    */
-
     useEffect(() => {
         if (logged) {
             if (artworks.find((item) => item.id === array[index].id)) {
@@ -89,40 +69,6 @@ function ArtSlideShow() {
     const handleClickCloseLog = function () {
         setModal(false);
     }
-
-    /*
-    const openModal = function () {
-        setFull(true);
-    }
-
-    const closeModal = function () {
-        setFull(false)
-    }
-    */
-
-    /*
-    {full &&
-                    <ArtShow
-                        artwork={array[index]}
-                        favoriteState={favoriteState}
-                        onClickHeart={handleClickHeart}
-                        setFavoriteState={setFavoriteState}
-                        open={openModal}
-                        onClose={closeModal}
-                    />
-                }
-
-                <div className={modalContainerClass}>
-                    <div className={modalDivClass}>
-                        <div className={textContainerClass}>You must login to save an artwork/event!</div>
-                        <button onClick={handleClickButton} className={buttonClass}>
-                            Login
-                        </button>
-                        <IoIosClose onClick={handleClickCloseLog} className={closeButtonClass} />
-                    </div>
-                </div>
-
-    */
 
     const handleClickDetails = function (artwork) {
         dispatch(setArt(artwork));

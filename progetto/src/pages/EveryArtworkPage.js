@@ -11,7 +11,7 @@ function EveryArtworkPage() {
 
     const searchBarClass = 'z-40 relative';
     const filterListClass = "z-30 relative";
-    const containerStateClass = "z-50 relative flex items-center mt-4";
+    const containerStateClass = "z-10 relative flex items-center mt-4";
     const resultTextClass = "text-lg font-bold";
     const buttonClass = "flex items-center px-2 py-1 bg-gray-300 rounded cursor-pointer ml-3";
     const iconClass = "ml-1";

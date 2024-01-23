@@ -4,7 +4,6 @@ import { swipeLeftEvent, swipeRightEvent, updateEvent } from "../../store";
 import EventShow from "./EventShow";
 import { useState, useEffect, useContext } from 'react';
 import NavigationContext from '../../context/navigation';
-import { IoIosClose } from 'react-icons/io';
 import LoginModals from '../modals/loginModals';
 
 
@@ -33,11 +32,11 @@ function EventSlideShow() {
 
     const { array, index } = useSelector((state) => {
         return state.events;
-    });
+    })
 
     const { logged, events } = useSelector((state) => {
         return state.users;
-    })
+    });
     const [favoriteState, setFavoriteState] = useState(false);
     const [modal, setModal] = useState(false);
     const [full, setFull] = useState(false);
@@ -92,25 +91,15 @@ function EventSlideShow() {
         setFull(false)
     }
 
-    const altText = "Image of " + array[index].name;
+    console.log(array)
+    console.log(index)
+    console.log(array[index])
 
-    /*
-    <div className={modalContainerClass}>
-                    <div className={modalDivClass}>
-                        <div className={textContainerClass}>You must login to save an artwork/event!</div>
-                        <button onClick={handleClickButton} className={buttonClass}>
-                            Login
-                        </button>
-                        <IoIosClose onClick={handleClickCloseLog} className={closeButtonClass} />
-                    </div>
-                </div>
-    */
+    const altText = "Image of " + array[index].name;
 
     return (
         <div className={containerClass}>
-            {modal && (
-                <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} />
-            )}
+            {modal && <LoginModals onClickButton={handleClickButton} onCloseLog={handleClickCloseLog} />}
             <div className={eventTextClass}>Highlighted Events</div>
             <div className={eventDivClass}>
                 <div className={eventContainerClass}>

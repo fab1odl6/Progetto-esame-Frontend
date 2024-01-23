@@ -23,6 +23,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
+  serialize: true, //New
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -39,5 +40,5 @@ export const { registerUser, setUser, setLogged, updateArt, updateEvent, updateC
 export const { setArt, setFavorite } = artDetailSlice.actions;
 export const { addFilterItem, removeFilterItem } = filtersSlice.actions;
 export const { updateText, clearText } = searchSlice.actions;
-export const { swipeLeftEvent, swipeRightEvent, switchFavoriteEvent, switchFullEvent } = eventsSlice.actions;
+export const { swipeLeftEvent, swipeRightEvent, switchFavoriteEvent, switchFullEvent, addNewEvent } = eventsSlice.actions;
 export const { setPage } = activePageSlice.actions;
