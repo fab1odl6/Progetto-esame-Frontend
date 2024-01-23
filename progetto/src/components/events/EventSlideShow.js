@@ -27,11 +27,8 @@ function EventSlideShow() {
 
   const { navigate } = useContext(NavigationContext);
 
-  const array = useSelector((state) => {
-    return state.events.array;
-  });
-  const index = useSelector((state) => {
-    return state.events.index;
+  const { array, index } = useSelector((state) => {
+    return state.events;
   });
 
   const { logged, events } = useSelector((state) => {

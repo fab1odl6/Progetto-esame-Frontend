@@ -101,6 +101,7 @@ function HandleEventCard({
       ref(db, "users/" + user.personalData.name + "/customEvents/" + event.name)
     );
     remove(ref(db, "events/" + event.name));
+    dispatch(updateEvent(event));
     handleClickDeleteParent();
   };
 

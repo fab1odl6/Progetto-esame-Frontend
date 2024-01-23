@@ -4,7 +4,7 @@ import { get, child, ref, getDatabase } from "firebase/database";
 import HandleEventCard from "./HandleEventCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { setEvents } from "../../store";
+import { setEvents, updateEvent } from "../../store";
 
 function HandleEvents() {
   const containerClass =
