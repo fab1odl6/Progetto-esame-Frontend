@@ -4,6 +4,7 @@ import ArtSlideShow from "../components/artworks/ArtSlideShow";
 import SearchBar from "../components/header & footer/SearchBar";
 import { useDispatch } from "react-redux";
 import { clearText } from "../store";
+import { useEffect } from "react";
 
 
 function HomePage() {
@@ -13,7 +14,10 @@ function HomePage() {
     const zIndexArt = 'z-50 mt-3';
 
     const dispatch = useDispatch();
-    dispatch(clearText());
+    
+    useEffect(() => {
+        dispatch(clearText());
+      }, []);
 
     return (
         <div>

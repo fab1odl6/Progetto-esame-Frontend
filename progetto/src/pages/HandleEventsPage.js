@@ -3,6 +3,7 @@ import HandleEvents from "../components/events/HandleEvents";
 import { useSelector, useDispatch } from "react-redux";
 import LoginPage from "../pages/Login";
 import { clearText } from "../store";
+import { useEffect } from "react";
 
 
 function HandleEventsPage() {
@@ -13,7 +14,10 @@ function HandleEventsPage() {
     const handleClass = "mt-10 h-full";
 
     const dispatch = useDispatch();
-    dispatch(clearText());
+
+    useEffect(() => {
+        dispatch(clearText());
+      }, []);
 
 
     const { logged } = useSelector((state) => {

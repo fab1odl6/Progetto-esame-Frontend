@@ -22,7 +22,9 @@ function PersonalGalleryPage() {
         return state.users;
     })
 
-    dispatch(clearText());
+    useEffect(() => {
+        dispatch(clearText());
+      }, []);
 
 
     const localUpdate = async () => {

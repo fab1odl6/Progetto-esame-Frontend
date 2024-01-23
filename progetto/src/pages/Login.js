@@ -117,7 +117,9 @@ const LoginPage = function () {
 
   const dispatch = useDispatch();
 
-  dispatch(clearText());
+  useEffect(() => {
+    dispatch(clearText());
+  }, []);
 
   const handleLogout = () => {
     // Dispatch l'azione di logout

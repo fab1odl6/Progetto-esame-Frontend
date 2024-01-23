@@ -22,7 +22,9 @@ function Museums() {
   const [selectedMuseum, setSelectedMuseum] = useState(null);
 
   const dispatch = useDispatch();
-  dispatch(clearText());
+  useEffect(() => {
+    dispatch(clearText());
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {

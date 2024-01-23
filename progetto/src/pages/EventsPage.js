@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 import EventContainer from "../components/events/EventContainer";
 import EventCard from '../components/events/EventCard';
@@ -17,7 +17,10 @@ function EventsPage() {
   const typographyClass = "font-bold";
 
   const dispatch = useDispatch();
-  dispatch(clearText());
+
+  useEffect(() => {
+    dispatch(clearText());
+  }, []);
 
 
   const [expandedAccordion, setExpandedAccordion] = useState({
