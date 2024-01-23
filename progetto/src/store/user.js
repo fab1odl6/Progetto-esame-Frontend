@@ -90,7 +90,7 @@ const updatePersonalCustomEvents = function (events, event, user) {
             date: event.date,
             department: event.department,
             guests: event.guests,
-            favorite: false,
+            favorite: true,
             full: false
         });
 

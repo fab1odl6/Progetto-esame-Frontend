@@ -88,6 +88,7 @@ function HandleEventCard({ event, submit, setSubmit }) {
 
     const handleClickDelete = function () {
         remove(ref(db, "users/" + user.personalData.name + "/customEvents/" + event.name));
+        remove(ref(db, "events/" + event.name));
         setDeleteState(!deleteState);
         setSubmit(!submit);
     }
