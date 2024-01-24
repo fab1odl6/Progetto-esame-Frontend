@@ -37,6 +37,7 @@ function EventSlideShow() {
   console.log("index: " + index);
 
   const { logged, events } = useSelector((state) => {
+    console.log(state);
     return state.users;
   });
   const [favoriteState, setFavoriteState] = useState(false);
@@ -94,65 +95,69 @@ function EventSlideShow() {
   const altText = "Image of " + array[index].name;
 
   return (
-    <div className={containerClass}>
-      {modal && (
-        <LoginModals
-          onClickButton={handleClickButton}
-          onCloseLog={handleClickCloseLog}
-          open={handleClickHeart}
-        />
-      )}
-      <div className={eventTextClass}>Highlighted Events</div>
-      <div className={eventDivClass}>
-        <div className={eventContainerClass}>
-          <div className={chevronContainerClass}>
-            <FaChevronLeft
-              className={chevronClass + " mr-2 cursor-pointer"}
-              onClick={handleClickChevronLeft}
+    <div>
+      {array[index] && (
+        <div className={containerClass}>
+          {modal && (
+            <LoginModals
+              onClickButton={handleClickButton}
+              onCloseLog={handleClickCloseLog}
+              open={handleClickHeart}
             />
-          </div>
-          <div className={eventElementClass}>
-            <div onClick={handleClickEvent}>
-              <img
-                className={imageClass}
-                src={array[index].image}
-                alt={altText}
-              />
-            </div>
-            <div className={titleAndHeartClass}>
-              <div className={titleClass} onClick={handleClickEvent}>
-                {array[index].name}
+          )}
+          <div className={eventTextClass}>Highlighted Events</div>
+          <div className={eventDivClass}>
+            <div className={eventContainerClass}>
+              <div className={chevronContainerClass}>
+                <FaChevronLeft
+                  className={chevronClass + " mr-2 cursor-pointer"}
+                  onClick={handleClickChevronLeft}
+                />
               </div>
-              {favoriteState ? (
-                <FaHeart
-                  className={favoriteClass}
-                  onClick={() => handleClickHeart(array[index])}
+              <div className={eventElementClass}>
+                <div onClick={handleClickEvent}>
+                  <img
+                    className={imageClass}
+                    src={array[index].image}
+                    alt={altText}
+                  />
+                </div>
+                <div className={titleAndHeartClass}>
+                  <div className={titleClass} onClick={handleClickEvent}>
+                    {array[index].name}
+                  </div>
+                  {favoriteState ? (
+                    <FaHeart
+                      className={favoriteClass}
+                      onClick={() => handleClickHeart(array[index])}
+                    />
+                  ) : (
+                    <FaRegHeart
+                      className={favoriteClass}
+                      onClick={() => handleClickHeart(array[index])}
+                    />
+                  )}
+                </div>
+              </div>
+              <div className={chevronContainerClass}>
+                <FaChevronRight
+                  className={chevronClass + " ml-2 cursor-pointer"}
+                  onClick={handleClickChevronRight}
                 />
-              ) : (
-                <FaRegHeart
-                  className={favoriteClass}
-                  onClick={() => handleClickHeart(array[index])}
-                />
-              )}
+              </div>
             </div>
-          </div>
-          <div className={chevronContainerClass}>
-            <FaChevronRight
-              className={chevronClass + " ml-2 cursor-pointer"}
-              onClick={handleClickChevronRight}
-            />
+            {fullState && (
+              <EventShow
+                favoriteState={favoriteState}
+                onClickHeart={handleClickHeart}
+                setFavoriteState={setFavoriteState}
+                open={openModal}
+                onClose={closeModal}
+              />
+            )}
           </div>
         </div>
-        {fullState && (
-          <EventShow
-            favoriteState={favoriteState}
-            onClickHeart={handleClickHeart}
-            setFavoriteState={setFavoriteState}
-            open={openModal}
-            onClose={closeModal}
-          />
-        )}
-      </div>
+      )}
     </div>
   );
 }

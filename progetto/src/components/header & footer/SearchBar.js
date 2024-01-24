@@ -27,6 +27,7 @@ function SearchBar() {
   const [text, setText] = useState("");
   const [matchedValues, setMatchedValues] = useState([]);
   const { array } = useSelector((state) => {
+    console.log(state);
     return state.artworks;
   });
 
