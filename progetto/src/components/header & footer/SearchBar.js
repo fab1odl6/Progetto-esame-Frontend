@@ -79,7 +79,7 @@ function SearchBar() {
                 className={finalClassNamesClass}
                 value={text}
                 onChange={handleChange}
-                placeholder="Search Artworks.."
+                placeholder="Search Artworks..."
               />
               <button type="submit" className={searchButtonClass}>
                 Search
