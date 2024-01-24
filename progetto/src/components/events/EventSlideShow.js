@@ -34,20 +34,21 @@ function EventSlideShow() {
 
   const { navigate } = useContext(NavigationContext);
 
-  dispatch(refreshEvents());
-
-  const { array, index } = useSelector((state) => {
+  const { array, index, favorite, full } = useSelector((state) => {
     return state.events;
   });
 
-  console.log(array);
+  console.log("array: " + array);
+  console.log("index: " + index);
+  console.log("favorite: " + favorite);
+  console.log("full: " + full);
 
   const { logged, events } = useSelector((state) => {
     return state.users;
   });
   const [favoriteState, setFavoriteState] = useState(false);
   const [modal, setModal] = useState(false);
-  const [full, setFull] = useState(false);
+  const [fullState, setFullState] = useState(false);
 
   const handleClickChevronLeft = function () {
     dispatch(swipeLeftEvent());
@@ -68,7 +69,7 @@ function EventSlideShow() {
   };
 
   const handleClickEvent = function () {
-    setFull(!full);
+    setFullState(!fullState);
   };
 
   useEffect(() => {
@@ -90,11 +91,11 @@ function EventSlideShow() {
   };
 
   const openModal = function () {
-    setFull(true);
+    setFullState(true);
   };
 
   const closeModal = function () {
-    setFull(false);
+    setFullState(false);
   };
 
   const altText = "Image of " + array[index].name;
@@ -149,7 +150,7 @@ function EventSlideShow() {
             />
           </div>
         </div>
-        {full && (
+        {fullState && (
           <EventShow
             favoriteState={favoriteState}
             onClickHeart={handleClickHeart}

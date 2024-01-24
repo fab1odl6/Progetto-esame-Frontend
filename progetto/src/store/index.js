@@ -56,6 +56,5 @@ export const {
   switchFavoriteEvent,
   switchFullEvent,
   addNewEvent,
-  refreshEvents,
 } = eventsSlice.actions;
 export const { setPage } = activePageSlice.actions;

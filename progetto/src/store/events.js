@@ -142,46 +142,6 @@ const eventsSlice = createSlice({
         array: newArray,
       };
     },
-
-    async refreshEvents(state, action) {
-      const eventArray = [];
-
-      const artworksRef = child(dbRef, "events");
-
-      try {
-        const snapshot = await get(artworksRef);
-
-        if (snapshot.exists()) {
-          const data = snapshot.val();
-
-          for (const key in data) {
-            if (data.hasOwnProperty(key)) {
-              const event = data[key];
-
-              eventArray.push({
-                id: event.id,
-                name: event.name,
-                image: event.image,
-                date: event.date,
-                department: event.department,
-                guests: event.guests,
-                favorite: event.favorite,
-                full: event.full,
-              });
-            }
-          }
-        } else {
-          console.log("No data available");
-        }
-      } catch (e) {
-        console.error(e);
-      }
-
-      return {
-        ...state,
-        array: eventArray,
-      };
-    },
   },
 });
 
