@@ -47,7 +47,7 @@ function FavoriteEventShow({ event, onClickClose, onClickHeart }) {
           />
           <IoIosClose className={close} onClick={handleClickClose} />
           <div className={`${favoriteContainerClass} ${heartCircleClass}`}>
-            <FaHeart className={favoriteClass} onClick={handleClickHeart} />
+            <FaHeart className={`${favoriteClass} text-red-500`} onClick={handleClickHeart} />
           </div>
         </div>
         <div className={contentClass}>

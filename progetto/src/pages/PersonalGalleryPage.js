@@ -20,6 +20,9 @@ function PersonalGalleryPage() {
     return state.users;
   });
 
+
+  const artTextClass = "text-center font-bold text-4xl my-20";
+
   useEffect(() => {
     dispatch(clearText());
   }, []);
@@ -66,7 +69,7 @@ function PersonalGalleryPage() {
     <div>
       {logged ? (
         <div>
-          <h1>Personal Gallery</h1>
+          <div className={artTextClass}>PERSONAL GALLERY</div>
           <ArtGrid artworks={artworksLocal} />
         </div>
       ) : (

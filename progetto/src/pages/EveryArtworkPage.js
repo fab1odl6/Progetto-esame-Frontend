@@ -1,12 +1,22 @@
+import React, { useEffect } from "react";
 import ArtGrid from "../components/artworks/ArtGrid";
 import FilterList from "../components/filters/FilterList";
 import SearchBar from "../components/header & footer/SearchBar";
 import { useSelector, useDispatch } from "react-redux";
 import { clearText } from "../store";
-import { useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 
 function EveryArtworkPage() {
+  const pageContainerStyle = {
+    backgroundImage: 'url("https://images.alphacoders.com/133/1331567.png")', // Sostituisci con il percorso corretto dell'immagine
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    minHeight: "100vh",
+    padding: "20px",
+    position: "relative",
+  };
+
   const searchBarClass = "z-40 relative";
   const filterListClass = "z-30 relative";
   const containerStateClass = "z-10 relative flex items-center mt-4";
@@ -19,8 +29,6 @@ function EveryArtworkPage() {
   const { array } = useSelector((state) => {
     return state.artworks;
   });
-
-  console.log(array);
 
   const dispatch = useDispatch();
   const filtersState = useSelector((state) => state.filters);
@@ -71,7 +79,7 @@ function EveryArtworkPage() {
   };
 
   return (
-    <div>
+    <div style={pageContainerStyle}>
       <div className={searchBarClass}>
         <SearchBar />
       </div>

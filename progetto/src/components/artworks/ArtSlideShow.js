@@ -11,7 +11,7 @@ import NavigationContext from "../../context/navigation";
 import LoginModals from "../modals/loginModals";
 
 function ArtSlideShow() {
-  const artTextClass = "";
+  const artTextClass = "text-center font-bold text-4xl my-20";
   const artDivClass = "";
   const artContainerClass =
     "mx-auto flex flex-row place-content-center max-w-sm h-96 p-6 bg-yellow-100 border-yellow-200 rounded-lg shadow hover:bg-yellow-800 dark:bg-yellow-800 dark:border-yellow-700 dark:hover:bg-yellow-700";
@@ -119,12 +119,12 @@ function ArtSlideShow() {
               </div>
               {favoriteState ? (
                 <FaHeart
-                  className={favoriteClass}
+                  className={`${favoriteClass} text-red-500`}
                   onClick={() => handleClickHeart(array[index])}
                 />
               ) : (
                 <FaRegHeart
-                  className={favoriteClass}
+                  className={`${favoriteClass} text-red-500`}
                   onClick={() => handleClickHeart(array[index])}
                 />
               )}

@@ -119,8 +119,10 @@ import LoginModals from "../modals/loginModals";
 import ConfirmModal from "../modals/ConfirmModal";
 
 function ArtCard({ artwork }) {
-  const containerClass = "relative flex items-center justify-center h-60 w-79.5 rounded-xl shadow-xl ring-gray-900/5 mx-auto my-8 group mb-1"; // Modificato il valore di h-72 e w-96
-  const artContainer = "z-10 h-full w-full overflow-hidden rounded-xl border border-gray-200 opacity-80 transition duration-300 ease-in-out group-hover:opacity-100 dark:border-gray-700 dark:opacity-70";
+  const containerClass =
+  "relative flex items-center justify-center h-60 w-79.5 rounded-xl shadow-xl ring-gray-900/5 mx-auto my-8 group mb-1";
+  const artContainer =
+  "z-10 h-full w-full overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700";
   const imageClass = "animate-fade-in block h-full w-full scale-100 transform object-cover object-center opacity-100 transition duration-300 group-hover:scale-110";
   const textContainer ="absolute bottomabsolute bottom-0 left-0 p-3 w-full text-white z-30 ";
   const titleClass = "font-serif text-lg font-bold text-white-700 shadow-md shadow-black-10"; 

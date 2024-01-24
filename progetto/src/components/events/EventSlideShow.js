@@ -13,7 +13,7 @@ import LoginModals from "../modals/loginModals";
 
 function EventSlideShow() {
   const containerClass = "overflow: auto z-50";
-  const eventTextClass = "";
+  const eventTextClass = "text-center font-bold text-4xl my-20";
   const eventDivClass = "relative w-md";
   const eventContainerClass =
     "w-sm h-96 flex justify-center mx-auto flex-row place-content-center border-2 mb-2 rounded-lg overflow-hidden z-50 max-w-sm p-6 bg-yellow-100 border-yellow-200 rounded-lg shadow hover:bg-yellow-800 dark:bg-yellow-800 dark:border-yellow-700 dark:hover:bg-yellow-700";
@@ -128,12 +128,12 @@ function EventSlideShow() {
               </div>
               {favoriteState ? (
                 <FaHeart
-                  className={favoriteClass}
+                  className={`${favoriteClass} text-red-500`}
                   onClick={() => handleClickHeart(array[index])}
                 />
               ) : (
                 <FaRegHeart
-                  className={favoriteClass}
+                  className={`${favoriteClass} text-red-500`}
                   onClick={() => handleClickHeart(array[index])}
                 />
               )}

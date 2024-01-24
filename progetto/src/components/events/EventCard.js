@@ -51,7 +51,7 @@ function EventCard({ event }) {
           <div className="cursor-pointer font-bold" onClick={handleClickShow}>
             {event.name}
           </div>
-          <FaHeart className={`${favoriteClass}`} onClick={handleClickHeart} />
+          <FaHeart className={`${favoriteClass} text-red-500`} onClick={handleClickHeart} />
         </div>
         {full && (
           <FavoriteEventShow

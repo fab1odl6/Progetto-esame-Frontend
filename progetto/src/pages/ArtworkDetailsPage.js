@@ -76,9 +76,9 @@ function ArtworkDetailsPage() {
       <div className={firstRowClass}>
         {art.title && <div className={titleClass}>Title: {art.title}</div>}
         {favoriteState ? (
-          <FaHeart className={favoriteClass} onClick={handleClickHeart} />
+          <FaHeart className={`${favoriteClass} text-red-500`} onClick={handleClickHeart} />
         ) : (
-          <FaRegHeart className={favoriteClass} onClick={handleClickHeart} />
+          <FaRegHeart className={`${favoriteClass} text-red-500`} onClick={handleClickHeart} />
         )}
       </div>
       {art.authorName && <div>Author: {art.authorName}</div>}
