@@ -3,7 +3,7 @@ import { FaTrash } from "react-icons/fa";
 import { MdModeEdit, MdOutlineEditOff } from "react-icons/md";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { updateEvent, removeEvent } from "../../store";
+import { updateEvent, removeEvent, addNewEvent } from "../../store";
 import { remove, ref, getDatabase, set } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebase/FirebaseConfig";
@@ -121,11 +121,7 @@ function HandleEventCard({
     e.preventDefault();
     handleClickDelete();
 
-    const eventRef = ref(
-      db,
-      "users/" + user.personalData.name + "/customEvents/" + formData.name
-    );
-    set(eventRef, {
+    const newEvent = {
       name: formData.name,
       date: selectedDate,
       department: selectedOption,
@@ -134,10 +130,17 @@ function HandleEventCard({
       favorite: favorite,
       full: event.full,
       id: event.id,
-    });
+    };
+
+    const eventRef = ref(
+      db,
+      "users/" + user.personalData.name + "/customEvents/" + formData.name
+    );
+    set(eventRef, newEvent);
 
     setSuccess(true);
     setEditState(false);
+    dispatch(addNewEvent(newEvent));
   };
 
   const handleChange = (e) => {

@@ -49,7 +49,6 @@ async function readData() {
 }
 
 await readData();
-console.log(eventArray);
 
 function updateFavorite(event, user) {
   const db = getDatabase();
@@ -94,7 +93,7 @@ function updateEvents(event) {
 }
 
 const eventsSlice = createSlice({
-  name: "events",
+  name: "eventsSlice",
   initialState: {
     array: eventArray,
     index: 0,
@@ -144,6 +143,7 @@ const eventsSlice = createSlice({
     },
 
     removeEvent(state, action) {
+      const db = getDatabase();
       console.log("a");
       const newArray = state.array.filter(
         (item) => item.name !== action.payload.name
