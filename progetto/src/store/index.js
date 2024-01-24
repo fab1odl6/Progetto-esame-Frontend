@@ -6,7 +6,7 @@ import usersSlice from "./user";
 import filtersSlice from "./filters";
 import artDetailSlice from "./artDetails";
 import searchSlice from "./search";
-import eventsSlice from "./test events";
+import eventsSlice from "./events";
 import activePageSlice from "./activePage";
 
 const rootReducer = combineReducers({
