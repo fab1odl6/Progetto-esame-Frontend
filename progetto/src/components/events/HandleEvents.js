@@ -59,7 +59,6 @@ function HandleEvents() {
   const handleClickDelete = function () {
     setDeleteState(!deleteState);
     setSubmit(!submit);
-    console.log(customEvents);
   };
 
   const render = eventsLocal.map((event) => {
