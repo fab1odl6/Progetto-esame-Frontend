@@ -23,7 +23,7 @@ function CardBox({ imageUrl, name, onClick }) {
     left: "0",
     width: "100%",
     height: "2cm", // Altezza dell'area trasparente aumentata
-    background: "rgba(205, 127, 50, 0.7)",
+    background: "rgba(192, 192, 192, 0.8)",
     zIndex: 0,
   };
 
