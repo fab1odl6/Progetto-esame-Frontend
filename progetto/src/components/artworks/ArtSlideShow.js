@@ -28,7 +28,6 @@ function ArtSlideShow() {
   const { array, index } = useSelector((state) => {
     return state.artworks;
   });
-  console.log("art array: " + array);
 
   const dispatch = useDispatch();
 

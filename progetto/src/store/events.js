@@ -142,6 +142,20 @@ const eventsSlice = createSlice({
         array: newArray,
       };
     },
+
+    removeEvent(state, action) {
+      console.log("a");
+      const newArray = state.array.filter(
+        (item) => item.name !== action.payload.name
+      );
+      remove(ref(db, "events/" + action.payload.name));
+      console.log(newArray);
+
+      return {
+        ...state,
+        array: newArray,
+      };
+    },
   },
 });
 

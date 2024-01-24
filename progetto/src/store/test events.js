@@ -49,7 +49,6 @@ async function readData() {
 }
 
 await readData();
-console.log(eventArray);
 
 function updateFavorite(event, user) {
   const db = getDatabase();
@@ -136,6 +135,17 @@ const eventsSlice = createSlice({
     addNewEvent(state, action) {
       updateEvents(action.payload);
       const newArray = [...state.array, action.payload];
+
+      return {
+        ...state,
+        array: newArray,
+      };
+    },
+
+    removeEvent(state, action) {
+      const db = getDatabase();
+      const newArray = state.array.slice(0, action.payload);
+      remove(ref(db, "events/" + action.payload.name));
 
       return {
         ...state,
