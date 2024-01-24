@@ -128,12 +128,12 @@ function EventSlideShow() {
                   </div>
                   {favoriteState ? (
                     <FaHeart
-                      className={favoriteClass}
+                      className={`${favoriteClass} text-red-500`}
                       onClick={() => handleClickHeart(array[index])}
                     />
                   ) : (
                     <FaRegHeart
-                      className={favoriteClass}
+                      className={`${favoriteClass} text-red-500`}
                       onClick={() => handleClickHeart(array[index])}
                     />
                   )}
