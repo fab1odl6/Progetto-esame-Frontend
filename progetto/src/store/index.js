@@ -6,8 +6,10 @@ import usersSlice from "./user";
 import filtersSlice from "./filters";
 import artDetailSlice from "./artDetails";
 import searchSlice from "./search";
-import eventsSlice from "./events";
+import eventsSlice from "./test events";
 import activePageSlice from "./activePage";
+
+console.log(eventsSlice.getInitialState());
 
 const rootReducer = combineReducers({
   artworks: artworksSlice.reducer,
@@ -15,7 +17,7 @@ const rootReducer = combineReducers({
   filters: filtersSlice.reducer,
   artDetails: artDetailSlice.reducer,
   search: searchSlice.reducer,
-  events: eventsSlice.reducer,
+  eventsss: eventsSlice.reducer,
   activePage: activePageSlice.reducer,
 });
 

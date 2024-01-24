@@ -5,12 +5,7 @@ import {
   FaRegHeart,
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  refreshEvents,
-  swipeLeftEvent,
-  swipeRightEvent,
-  updateEvent,
-} from "../../store";
+import { swipeLeftEvent, swipeRightEvent, updateEvent } from "../../store";
 import EventShow from "./EventShow";
 import { useState, useEffect, useContext } from "react";
 import NavigationContext from "../../context/navigation";
@@ -35,7 +30,8 @@ function EventSlideShow() {
   const { navigate } = useContext(NavigationContext);
 
   const { array, index, favorite, full } = useSelector((state) => {
-    return state.events;
+    console.log(state);
+    return state.eventsss;
   });
 
   console.log("array: " + array);
