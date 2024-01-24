@@ -9,15 +9,13 @@ import searchSlice from "./search";
 import eventsSlice from "./test events";
 import activePageSlice from "./activePage";
 
-console.log(eventsSlice.getInitialState());
-
 const rootReducer = combineReducers({
   artworks: artworksSlice.reducer,
   users: usersSlice.reducer,
   filters: filtersSlice.reducer,
   artDetails: artDetailSlice.reducer,
   search: searchSlice.reducer,
-  eventsss: eventsSlice.reducer,
+  events: eventsSlice.reducer,
   activePage: activePageSlice.reducer,
 });
 
@@ -58,5 +56,6 @@ export const {
   switchFavoriteEvent,
   switchFullEvent,
   addNewEvent,
+  removeEvent,
 } = eventsSlice.actions;
 export const { setPage } = activePageSlice.actions;

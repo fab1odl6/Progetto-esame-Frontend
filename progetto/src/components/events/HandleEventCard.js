@@ -3,7 +3,7 @@ import { FaTrash } from "react-icons/fa";
 import { MdModeEdit, MdOutlineEditOff } from "react-icons/md";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { updateEvent } from "../../store";
+import { updateEvent, removeEvent } from "../../store";
 import { remove, ref, getDatabase, set } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebase/FirebaseConfig";
@@ -100,7 +100,8 @@ function HandleEventCard({
     remove(
       ref(db, "users/" + user.personalData.name + "/customEvents/" + event.name)
     );
-    remove(ref(db, "events/" + event.name));
+
+    dispatch(removeEvent(event));
     dispatch(updateEvent(event));
     handleClickDeleteParent();
   };

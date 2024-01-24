@@ -29,15 +29,12 @@ function EventSlideShow() {
 
   const { navigate } = useContext(NavigationContext);
 
-  const { array, index, favorite, full } = useSelector((state) => {
-    console.log(state);
-    return state.eventsss;
+  const { array, index } = useSelector((state) => {
+    return state.events;
   });
 
   console.log("array: " + array);
   console.log("index: " + index);
-  console.log("favorite: " + favorite);
-  console.log("full: " + full);
 
   const { logged, events } = useSelector((state) => {
     return state.users;
