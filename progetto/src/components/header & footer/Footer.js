@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import NavigationContext from "../../context/navigation";
 
 function Footer() {
-  const footerStyle = "bg-gray-800 text-white py-20 mt-5";
+  const footerStyle = "bg-gray-800 text-white py-10 mt-0";
   const containerStyle = "max-w-7xl mx-auto flex justify-between flex-wrap";
   const sectionStyle = "flex-1 mb-10";
   const marginRightStyle = "mr-10";
@@ -47,7 +47,7 @@ function Footer() {
         </div>
 
         <div className={sectionStyle}>
-          <h3 className={linkContainerClass}>QUICK LINKS</h3>
+          <h3 className={`${linkContainerClass} mb-12`}>QUICK LINKS</h3>
           <ul>
             <li>
               <a onClick={handleClickEveryArtwork} className={linkClass}>
@@ -66,6 +66,7 @@ function Footer() {
             </li>
           </ul>
         </div>
+
 
         <div className={`${sectionStyle} ${borderRightStyle}`}>
           <h3 className={h3Class}>CONTACT US</h3>
