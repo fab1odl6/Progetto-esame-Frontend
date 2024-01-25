@@ -44,12 +44,7 @@ async function writeData() {
 
 // await writeData();
 
-function HandleEventCard({
-  event,
-  submit,
-  setSubmit,
-  handleClickDeleteParent,
-}) {
+function HandleEventCard({ event, submit, setSubmit }) {
   const app = initializeApp(firebaseConfig);
   const db = getDatabase();
 
@@ -83,10 +78,6 @@ function HandleEventCard({
 
   const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => {
-    return state.users;
-  });
-
   const [editState, setEditState] = useState(false);
   const [deleteState, setDeleteState] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -106,7 +97,7 @@ function HandleEventCard({
     dispatch(updateCustomEvents(event));
     dispatch(removeEvent(event));
     dispatch(updateEvent(event));
-    handleClickDeleteParent();
+    setSubmit(!submit);
     setEditState(false);
     setDeleteState(!deleteState);
   };

@@ -37,7 +37,6 @@ function EventSlideShow() {
   console.log("index: " + index);
 
   const { logged, events } = useSelector((state) => {
-    console.log(state);
     return state.users;
   });
   const [favoriteState, setFavoriteState] = useState(false);

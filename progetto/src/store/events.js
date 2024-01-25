@@ -148,7 +148,9 @@ const eventsSlice = createSlice({
 
     removeEvent(state, action) {
       const db = getDatabase();
-      const newArray = state.array.slice(0, action.payload);
+      const newArray = state.array.filter(
+        (item) => item.name !== action.payload.name
+      );
       remove(ref(db, "events/" + action.payload.path));
 
       return {

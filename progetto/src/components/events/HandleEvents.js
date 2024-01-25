@@ -51,10 +51,6 @@ function HandleEvents() {
     updateLocal();
   }, [customEvents]);
 
-  const handleClickDelete = function () {
-    setSubmit(!submit);
-  };
-
   const render = eventsLocal.map((event) => {
     return (
       <HandleEventCard
@@ -62,7 +58,6 @@ function HandleEvents() {
         event={event}
         submit={submit}
         setSubmit={setSubmit}
-        handleClickDeleteParent={handleClickDelete}
       />
     );
   });
