@@ -9,7 +9,7 @@ import {
   addNewEvent,
   updateCustomEvents,
 } from "../../store";
-import { ref, getDatabase, set, get, child } from "firebase/database";
+import { ref, getDatabase, set } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebase/FirebaseConfig";
 import DatePicker from "react-datepicker";
@@ -164,7 +164,6 @@ function HandleEventCard({ event, submit, setSubmit }) {
   });
 
   useEffect(() => {
-    console.log(events);
     if (events.find((item) => item.name === event.name)) {
       console.log("if");
       setFavorite(true);

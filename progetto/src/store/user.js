@@ -196,6 +196,13 @@ const usersSlice = createSlice({
         events: action.payload,
       };
     },
+
+    setCustomEvents(state, action) {
+      return {
+        ...state,
+        customEvents: action.payload,
+      };
+    },
   },
 });
 

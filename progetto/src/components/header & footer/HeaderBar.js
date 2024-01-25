@@ -2,7 +2,7 @@ import Link from "../navigation/Link";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser, setPage } from "../../store";
 import NavigationContext from "../../context/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 
 function HeaderBar() {
   const sectionHeader = "bg-white";

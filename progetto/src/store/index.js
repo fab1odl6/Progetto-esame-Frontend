@@ -47,6 +47,7 @@ export const {
   logoutUser,
   setArtworks,
   setEvents,
+  setCustomEvents,
 } = usersSlice.actions;
 export const { setArt, setFavorite } = artDetailSlice.actions;
 export const { addFilterItem, removeFilterItem } = filtersSlice.actions;
