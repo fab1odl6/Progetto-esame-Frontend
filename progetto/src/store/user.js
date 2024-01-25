@@ -54,11 +54,11 @@ const updateFavoriteEvent = function (events, event, user) {
   if (eventIndex !== -1) {
     const updatedEvents = [...events];
     updatedEvents.splice(eventIndex, 1);
-    remove(ref(db, `users/${user.name}/events/${event.name}`));
+    remove(ref(db, `users/${user.name}/events/${event.path}`));
 
     return updatedEvents;
   } else {
-    set(ref(db, `users/${user.name}/events/${event.name}`), {
+    set(ref(db, `users/${user.name}/events/${event.path}`), {
       id: event.id,
       name: event.name,
       image: event.image,
@@ -67,6 +67,7 @@ const updateFavoriteEvent = function (events, event, user) {
       guests: event.guests,
       favorite: true,
       full: false,
+      path: event.path,
     });
 
     return [...events, event];
@@ -79,10 +80,10 @@ const updatePersonalCustomEvents = function (events, event, user) {
   if (eventIndex !== -1) {
     const updatedEvents = [...events];
     updatedEvents.splice(eventIndex, 1);
-    remove(ref(db, `users/${user.name}/customEvents/${event.name}`));
+    remove(ref(db, `users/${user.name}/customEvents/${event.path}`));
     return updatedEvents;
   } else {
-    set(ref(db, `users/${user.name}/customEvents/${event.name}`), {
+    set(ref(db, `users/${user.name}/customEvents/${event.path}`), {
       id: event.id,
       name: event.name,
       image: event.image,
@@ -91,6 +92,7 @@ const updatePersonalCustomEvents = function (events, event, user) {
       guests: event.guests,
       favorite: true,
       full: false,
+      path: event.path,
     });
 
     return [...events, event];

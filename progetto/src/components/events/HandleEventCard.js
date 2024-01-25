@@ -3,8 +3,13 @@ import { FaTrash } from "react-icons/fa";
 import { MdModeEdit, MdOutlineEditOff } from "react-icons/md";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { updateEvent, removeEvent, addNewEvent } from "../../store";
-import { remove, ref, getDatabase, set } from "firebase/database";
+import {
+  updateEvent,
+  removeEvent,
+  addNewEvent,
+  updateCustomEvents,
+} from "../../store";
+import { remove, ref, getDatabase, set, update } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebase/FirebaseConfig";
 import DatePicker from "react-datepicker";
@@ -94,15 +99,16 @@ function HandleEventCard({
     department: event.department,
     guests: event.guests,
     image: event.image,
+    path: event.path,
   });
 
   const handleClickDelete = function () {
     remove(
-      ref(db, "users/" + user.personalData.name + "/customEvents/" + event.name)
+      ref(db, "users/" + user.personalData.name + "/customEvents/" + event.path)
     );
-    console.log("b");
     dispatch(removeEvent(event));
     dispatch(updateEvent(event));
+    setEditState(false);
     handleClickDeleteParent();
   };
 
@@ -119,7 +125,6 @@ function HandleEventCard({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    handleClickDelete();
 
     const newEvent = {
       name: formData.name,
@@ -127,20 +132,34 @@ function HandleEventCard({
       department: selectedOption,
       guests: formData.guests,
       image: formData.image,
-      favorite: favorite,
+      favorite: true,
       full: event.full,
       id: event.id,
+      path: event.path,
     };
 
-    const eventRef = ref(
-      db,
-      "users/" + user.personalData.name + "/customEvents/" + formData.name
+    dispatch(removeEvent(event));
+    dispatch(updateEvent(event));
+    dispatch(updateCustomEvents(event));
+
+    set(
+      ref(
+        db,
+        "/users/" + user.personalData.name + "/customEvents/" + event.path
+      ),
+      newEvent
     );
-    set(eventRef, newEvent);
+
+    set(
+      ref(db, "/users/" + user.personalData.name + "/events/" + event.path),
+      newEvent
+    );
+
+    set(ref(db, "events/" + event.path), newEvent);
 
     setSuccess(true);
     setEditState(false);
-    dispatch(addNewEvent(newEvent));
+    setFavorite(true);
   };
 
   const handleChange = (e) => {
@@ -224,7 +243,7 @@ function HandleEventCard({
                 <input
                   type="text"
                   id="img"
-                  name="img"
+                  name="image"
                   value={formData.image}
                   onChange={handleChange}
                   className={inputClass}
@@ -239,13 +258,14 @@ function HandleEventCard({
                 <div>
                   <div className={datePickerContainerClass}>
                     <DatePicker
+                      showIcon
+                      toggleCalendarOnIconClick
                       id="date"
                       name="date"
                       value={selectedDate}
                       selected={selectedDate}
                       onChange={handleChangeDate}
                       dateFormat="dd/MM/yyyy"
-                      className={datePickerClass}
                     />
                     <GoChevronDown className={chevronClass} />
                   </div>

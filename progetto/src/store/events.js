@@ -37,6 +37,7 @@ async function readData() {
             guests: event.guests,
             favorite: event.favorite,
             full: event.full,
+            path: event.path,
           });
         }
       }
@@ -54,7 +55,7 @@ function updateFavorite(event, user) {
   const db = getDatabase();
 
   if (!event.favorite) {
-    set(ref(db, "users/" + user.name + "/events/" + event.name), {
+    set(ref(db, "users/" + user.name + "/events/" + event.path), {
       id: event.id,
       name: event.name,
       image: event.image,
@@ -63,15 +64,16 @@ function updateFavorite(event, user) {
       guests: event.guests,
       favorite: true,
       full: false,
+      path: event.path,
     });
 
-    update(ref(db, "events/" + event.name), {
+    update(ref(db, "events/" + event.path), {
       favorite: true,
     });
   } else {
-    remove(ref(db, "users/" + user.name + "/events/" + event.name));
+    remove(ref(db, "users/" + user.name + "/events/" + event.path));
 
-    update(ref(db, "events/" + event.name), {
+    update(ref(db, "events/" + event.path), {
       favorite: false,
     });
   }
@@ -80,7 +82,7 @@ function updateFavorite(event, user) {
 function updateEvents(event) {
   const db = getDatabase();
 
-  set(ref(db, "events/" + event.name), {
+  set(ref(db, "events/" + event.path), {
     id: event.id,
     name: event.name,
     image: event.image,
@@ -89,6 +91,7 @@ function updateEvents(event) {
     guests: event.guests,
     favorite: false,
     full: false,
+    path: event.path,
   });
 }
 
@@ -99,6 +102,7 @@ const eventsSlice = createSlice({
     index: 0,
     favorite: false,
     full: false,
+    path: "",
   },
   reducers: {
     swipeRightEvent(state, action) {
@@ -148,8 +152,7 @@ const eventsSlice = createSlice({
       const newArray = state.array.filter(
         (item) => item.name !== action.payload.name
       );
-      remove(ref(db, "events/" + action.payload.name));
-      console.log(newArray);
+      remove(ref(db, "events/" + action.payload.path));
 
       return {
         ...state,

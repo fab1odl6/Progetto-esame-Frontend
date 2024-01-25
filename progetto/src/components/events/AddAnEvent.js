@@ -117,6 +117,7 @@ function AddAnEvent() {
       image: formData.image,
       name: formData.name,
       department: selectedOption,
+      path: formData.name,
     };
     dispatch(updateCustomEvents(newEvent));
     dispatch(addNewEvent(newEvent));
@@ -199,6 +200,8 @@ function AddAnEvent() {
             <div>
               <div className={datePickerContainerClass}>
                 <DatePicker
+                  showIcon
+                  toggleCalendarOnIconClick
                   id="date"
                   name="date"
                   value={selectedDate}

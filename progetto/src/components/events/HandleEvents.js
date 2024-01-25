@@ -78,7 +78,7 @@ function HandleEvents() {
     <div className={containerClass}>
       <div className={titleClass}>Custom Events</div>
       <div>
-        {eventsLocal.length > 0 ? (
+        {customEvents.length > 0 ? (
           <div>{render}</div>
         ) : (
           <div className={emptyContainerClass}>

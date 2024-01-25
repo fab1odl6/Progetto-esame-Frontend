@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["users", "artDetails", "activePage"],
+  whitelist: ["users", "artDetails"],
   serialize: true, //New
 };
 
