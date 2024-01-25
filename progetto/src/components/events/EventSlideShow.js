@@ -22,7 +22,7 @@ function EventSlideShow() {
   const imageClass = "w-48 h-72 cursor-pointer object-cover";
   const chevronClass = "place-self-center text-2xl";
   const titleAndHeartClass = "flex mt-2";
-  const favoriteClass = "ml-auto text-2xl";
+  const favoriteClass = "ml-auto text-2xl cursor-pointer";
   const titleClass = "font-bold text-lg place-content-center cursor-pointer";
 
   const dispatch = useDispatch();
@@ -32,9 +32,6 @@ function EventSlideShow() {
   const { array, index } = useSelector((state) => {
     return state.events;
   });
-
-  //console.log("array: " + array);
-  console.log("index: " + index);
 
   const { logged, events } = useSelector((state) => {
     return state.users;
@@ -52,7 +49,6 @@ function EventSlideShow() {
   };
 
   const handleClickHeart = function (event) {
-    console.log("Logged: " + logged);
     if (logged) {
       dispatch(updateEvent(event));
       setFavoriteState(!favoriteState);
