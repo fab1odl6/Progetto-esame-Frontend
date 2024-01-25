@@ -33,7 +33,7 @@ function EventSlideShow() {
     return state.events;
   });
 
-  console.log("array: " + array);
+  //console.log("array: " + array);
   console.log("index: " + index);
 
   const { logged, events } = useSelector((state) => {
