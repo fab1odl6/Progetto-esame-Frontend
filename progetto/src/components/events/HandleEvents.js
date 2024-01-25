@@ -47,7 +47,6 @@ function HandleEvents() {
   };
 
   useEffect(() => {
-    console.log("update variabile");
     updateLocal();
   }, [customEvents]);
 

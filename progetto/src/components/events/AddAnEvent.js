@@ -110,7 +110,7 @@ function AddAnEvent() {
 
     const newEvent = {
       date: selectedDate.toDateString(),
-      favorite: false,
+      favorite: true,
       full: false,
       guests: formData.guests,
       id: 4,
@@ -119,9 +119,9 @@ function AddAnEvent() {
       department: selectedOption,
       path: formData.name,
     };
-    dispatch(updateCustomEvents(newEvent));
-    dispatch(addNewEvent(newEvent));
-    dispatch(updateEvent(newEvent));
+    dispatch(updateCustomEvents(newEvent)); // eventi custom dell'utente
+    dispatch(addNewEvent(newEvent)); // eventi generali del db
+    dispatch(updateEvent(newEvent)); // eventi preferiti dell'utente
 
     setFormData({
       date: "",

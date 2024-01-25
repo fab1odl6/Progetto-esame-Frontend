@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { MdModeEdit, MdOutlineEditOff } from "react-icons/md";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
@@ -9,7 +9,7 @@ import {
   addNewEvent,
   updateCustomEvents,
 } from "../../store";
-import { remove, ref, getDatabase, set, update } from "firebase/database";
+import { ref, getDatabase, set, get, child } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebase/FirebaseConfig";
 import DatePicker from "react-datepicker";
@@ -38,7 +38,7 @@ async function writeData() {
       set(ref(db, "users/Fabio/customEvents/" + e.name), e);
     }
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 }
 
@@ -155,6 +155,25 @@ function HandleEventCard({ event, submit, setSubmit }) {
     setSelectedOption(option);
   };
 
+  const { page } = useSelector((state) => {
+    return state.activePage;
+  });
+
+  const { events } = useSelector((state) => {
+    return state.users;
+  });
+
+  useEffect(() => {
+    console.log(events);
+    if (events.find((item) => item.name === event.name)) {
+      console.log("if");
+      setFavorite(true);
+    } else {
+      console.log("else");
+      setFavorite(false);
+    }
+  }, [page]);
+
   return (
     <div>
       {!deleteState && (
@@ -169,12 +188,12 @@ function HandleEventCard({ event, submit, setSubmit }) {
                 {favorite ? (
                   <FaHeart
                     className={favoriteClass}
-                    onClick={() => handleClickHeart(event)}
+                    onClick={handleClickHeart}
                   />
                 ) : (
                   <FaRegHeart
                     className={favoriteClass}
-                    onClick={() => handleClickHeart(event)}
+                    onClick={handleClickHeart}
                   />
                 )}
               </div>

@@ -110,7 +110,6 @@ const usersSlice = createSlice({
   },
   reducers: {
     async registerUser(state, action) {
-      console.log("registered user: " + action.payload.name);
       updateData(action.payload);
       return {
         ...state,
@@ -119,7 +118,6 @@ const usersSlice = createSlice({
     },
 
     setUser(state, action) {
-      console.log("matchedUser: " + action.payload.matchedUser.name);
       return {
         ...state,
         user: action.payload.matchedUser,
