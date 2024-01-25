@@ -16,17 +16,12 @@ function HandleEvents() {
   const db = getDatabase();
   const dbRef = ref(db);
 
-  const { user, logged, customEvents } = useSelector((state) => {
+  const { user, customEvents } = useSelector((state) => {
     return state.users;
-  });
-
-  const { page } = useSelector((state) => {
-    return state.activePage;
   });
 
   const [eventsLocal, setEventsLocal] = useState(customEvents);
   const [submit, setSubmit] = useState(false);
-  const [deleteState, setDeleteState] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -57,7 +52,6 @@ function HandleEvents() {
   }, [customEvents]);
 
   const handleClickDelete = function () {
-    setDeleteState(!deleteState);
     setSubmit(!submit);
   };
 
@@ -68,7 +62,6 @@ function HandleEvents() {
         event={event}
         submit={submit}
         setSubmit={setSubmit}
-        deleteState={deleteState}
         handleClickDeleteParent={handleClickDelete}
       />
     );
@@ -78,7 +71,7 @@ function HandleEvents() {
     <div className={containerClass}>
       <div className={titleClass}>Custom Events</div>
       <div>
-        {customEvents.length > 0 ? (
+        {eventsLocal.length > 0 ? (
           <div>{render}</div>
         ) : (
           <div className={emptyContainerClass}>

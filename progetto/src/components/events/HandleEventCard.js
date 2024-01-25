@@ -48,7 +48,6 @@ function HandleEventCard({
   event,
   submit,
   setSubmit,
-  deleteState,
   handleClickDeleteParent,
 }) {
   const app = initializeApp(firebaseConfig);
@@ -89,10 +88,11 @@ function HandleEventCard({
   });
 
   const [editState, setEditState] = useState(false);
+  const [deleteState, setDeleteState] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [favorite, setFavorite] = useState(event.favorite);
+  const [favorite, setFavorite] = useState(true);
   const [formData, setFormData] = useState({
     name: event.name,
     date: event.date,
@@ -103,13 +103,12 @@ function HandleEventCard({
   });
 
   const handleClickDelete = function () {
-    remove(
-      ref(db, "users/" + user.personalData.name + "/customEvents/" + event.path)
-    );
+    dispatch(updateCustomEvents(event));
     dispatch(removeEvent(event));
     dispatch(updateEvent(event));
-    setEditState(false);
     handleClickDeleteParent();
+    setEditState(false);
+    setDeleteState(!deleteState);
   };
 
   const handleClickEdit = function () {
@@ -141,21 +140,7 @@ function HandleEventCard({
     dispatch(removeEvent(event));
     dispatch(updateEvent(event));
     dispatch(updateCustomEvents(event));
-
-    set(
-      ref(
-        db,
-        "/users/" + user.personalData.name + "/customEvents/" + event.path
-      ),
-      newEvent
-    );
-
-    set(
-      ref(db, "/users/" + user.personalData.name + "/events/" + event.path),
-      newEvent
-    );
-
-    set(ref(db, "events/" + event.path), newEvent);
+    dispatch(addNewEvent(newEvent));
 
     setSuccess(true);
     setEditState(false);
