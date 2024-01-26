@@ -39,6 +39,7 @@ async function readData() {
             full: event.full,
             path: event.path,
             userGenerated: event.userGenerated,
+            generator: event.generator,
           });
         }
       }
@@ -67,6 +68,7 @@ function updateFavorite(event, user) {
       full: false,
       path: event.path,
       userGenerated: event.userGenerated,
+      generator: event.generator,
     });
 
     update(ref(db, "events/" + event.path), {
@@ -95,6 +97,7 @@ function updateEvents(event) {
     full: false,
     path: event.path,
     userGenerated: event.userGenerated,
+    generator: event.generator,
   });
 }
 
