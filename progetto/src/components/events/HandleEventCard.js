@@ -83,7 +83,6 @@ function HandleEventCard({ event, submit, setSubmit }) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [favorite, setFavorite] = useState(true);
   const [formData, setFormData] = useState({
     name: event.name,
     date: event.date,
@@ -108,11 +107,6 @@ function HandleEventCard({ event, submit, setSubmit }) {
     setSubmit(!submit);
   };
 
-  const handleClickHeart = function () {
-    setFavorite(!favorite);
-    dispatch(updateEvent(event));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -135,7 +129,6 @@ function HandleEventCard({ event, submit, setSubmit }) {
 
     setSuccess(true);
     setEditState(false);
-    setFavorite(true);
   };
 
   const handleChange = (e) => {
@@ -163,16 +156,6 @@ function HandleEventCard({ event, submit, setSubmit }) {
     return state.users;
   });
 
-  useEffect(() => {
-    if (events.find((item) => item.name === event.name)) {
-      console.log("if");
-      setFavorite(true);
-    } else {
-      console.log("else");
-      setFavorite(false);
-    }
-  }, [page]);
-
   return (
     <div>
       {!deleteState && (
@@ -184,17 +167,6 @@ function HandleEventCard({ event, submit, setSubmit }) {
               </div>
               <div className={titleAndHeartClass}>
                 <div>{formData.name}</div>
-                {favorite ? (
-                  <FaHeart
-                    className={favoriteClass}
-                    onClick={handleClickHeart}
-                  />
-                ) : (
-                  <FaRegHeart
-                    className={favoriteClass}
-                    onClick={handleClickHeart}
-                  />
-                )}
               </div>
             </div>
           </div>

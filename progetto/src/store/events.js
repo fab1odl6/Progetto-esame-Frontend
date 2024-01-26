@@ -38,6 +38,7 @@ async function readData() {
             favorite: event.favorite,
             full: event.full,
             path: event.path,
+            userGenerated: event.userGenerated,
           });
         }
       }
@@ -65,6 +66,7 @@ function updateFavorite(event, user) {
       favorite: true,
       full: false,
       path: event.path,
+      userGenerated: event.userGenerated,
     });
 
     update(ref(db, "events/" + event.path), {
@@ -92,6 +94,7 @@ function updateEvents(event) {
     favorite: false,
     full: false,
     path: event.path,
+    userGenerated: event.userGenerated,
   });
 }
 

@@ -132,6 +132,9 @@ function EventSlideShow() {
                       onClick={() => handleClickHeart(array[index])}
                     />
                   )}
+                  <div>
+                    {array[index].userGenerated ? <div>si</div> : <div>no</div>}
+                  </div>
                 </div>
               </div>
               <div className={chevronContainerClass}>

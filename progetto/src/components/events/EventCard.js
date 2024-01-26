@@ -51,8 +51,12 @@ function EventCard({ event }) {
           <div className="cursor-pointer font-bold" onClick={handleClickShow}>
             {event.name}
           </div>
-          <FaHeart className={`${favoriteClass} text-red-500`} onClick={handleClickHeart} />
+          <FaHeart
+            className={`${favoriteClass} text-red-500`}
+            onClick={handleClickHeart}
+          />
         </div>
+        <div>{event.userGenerated ? <div>si</div> : <div>no</div>}</div>
         {full && (
           <FavoriteEventShow
             event={event}

@@ -68,6 +68,7 @@ const updateFavoriteEvent = function (events, event, user) {
       favorite: true,
       full: false,
       path: event.path,
+      userGenerated: event.userGenerated,
     });
 
     return [...events, event];
@@ -93,6 +94,7 @@ const updatePersonalCustomEvents = function (events, event, user) {
       favorite: true,
       full: false,
       path: event.path,
+      userGenerated: event.userGenerated,
     });
 
     return [...events, event];
