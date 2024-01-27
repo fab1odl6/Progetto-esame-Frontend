@@ -4,8 +4,7 @@ import { useState, useContext, useEffect } from "react";
 import NavigationContext from "../context/navigation";
 
 function RegisterPage() {
-  const containerClass =
-    "p-4 max-w-md bg-white rounded-md shadow-md mt-4 mx-auto items-center";
+  const containerClass = "p-4 max-w-md bg-white rounded-md shadow-md mt-4 mx-auto items-center";
   const mandatoryClass = "text-red-500";
   const successDivClass =
     "mt-4 p-4 bg-green-100 border border-green-400 text-green-700";
@@ -89,78 +88,93 @@ function RegisterPage() {
     setSuccess(true);
   };
 
+  const formBackgroundStyle = {
+  backgroundColor: 'rgba(218, 165, 32, 0.8)',
+  borderRadius: '10px',
+  padding: '20px',
+};
+
+
   return (
-    <div className={containerClass}>
-      {success && (
-        <div className={successDivClass}>
-          <p className={successPClass}>
-            <strong>Success:</strong> You have registered correctly!
-          </p>
+    <section className="bg-white dark:bg-gray-900">
+      <div className="flex justify-center min-h-screen">
+        <div className="hidden bg-cover lg:block lg:w-2/5" style={{backgroundImage: "url('https://i0.wp.com/orizzontecultura.com/wp-content/uploads/2021/02/Gustave-Klimt-Il-bacio.jpg?resize=726%2C1024&ssl=1')"}}>
         </div>
-      )}
-      <div className={titleClass}>Register</div>
-      <form onSubmit={handleSubmit} className={formClass}>
-        <div className={divClass}>
-          <label htmlFor="name" className={labelClass}>
-            Name: <span className={mandatoryClass}>*</span>
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className={inputClass}
-            required
-          />
+
+        <div className="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
+          <div className="w-full">
+            <h1 className="text-2xl font-semibold tracking-wider text-gray-800 capitalize dark:text-white">
+              Get your free account now.
+            </h1>
+
+            <form className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2" onSubmit={handleSubmit}>
+              <div>
+                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Name</label>
+                <input
+                  type="text"
+                  placeholder="Mario"
+                  className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Surname</label>
+                <input
+                  type="text"
+                  placeholder="Rossi"
+                  className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  name="surname"
+                  value={formData.surname}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Username</label>
+                <input
+                  type="text"
+                  placeholder="mario.rossi"
+                  className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Password</label>
+                <input
+                  type="password"
+                  placeholder="Enter your password"
+                  className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div>
+                {/* Altri campi se necessario */}
+              </div>
+
+              <button
+                className="flex items-center justify-between w-full px-5 py-2.5 text-sm font-medium text-white bg-teal-600 rounded-md hover:bg-teal-700 focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-50"
+                type="submit"
+              >
+                <span>Sign In</span>
+              </button>
+            </form>
+          </div>
         </div>
-        <div className={divClass}>
-          <label htmlFor="surname" className={labelClass}>
-            Surname: <span className={mandatoryClass}>*</span>
-          </label>
-          <input
-            type="text"
-            id="surname"
-            name="surname"
-            value={formData.surname}
-            onChange={handleChange}
-            className={inputClass}
-            required
-          />
-        </div>
-        <div className={divClass}>
-          <label htmlFor="username" className={labelClass}>
-            Username: <span className={mandatoryClass}>*</span>
-          </label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            className={inputClass}
-            required
-          />
-        </div>
-        <div className={divClass}>
-          <label htmlFor="password" className={labelClass}>
-            Password: <span className={mandatoryClass}>*</span>
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className={inputClass}
-            required
-          />
-        </div>
-        <button type="submit" className={buttonClass}>
-          Register
-        </button>
-      </form>
-    </div>
+      </div>
+    </section>
   );
 }
 
