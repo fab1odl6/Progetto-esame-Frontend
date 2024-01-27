@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaArrowLeft } from "react-icons/fa"; // Aggiunta FaArrowLeft
 import { updateArt, setFavorite } from "../store";
 import { useContext, useState, useEffect } from "react";
 import NavigationContext from "../context/navigation";
@@ -53,6 +53,11 @@ function ArtworkDetailsPage() {
     setModal(false);
   };
 
+  const handleClickBack = function () {
+    navigate("/everyArtwork"); 
+  };
+
+
   useEffect(() => {
     document.body.style.padding = "0";
     document.body.style.margin = "0";
@@ -79,7 +84,8 @@ function ArtworkDetailsPage() {
           open={handleClickHeart}
         />
       )}
-      <div
+      
+     <div
         className={imageContainerClass}
         style={{
           position: "relative",
@@ -89,11 +95,15 @@ function ArtworkDetailsPage() {
           backgroundPosition: "top left",
         }}
       >
+
         {art.image && <div className={overlayClass}></div>}
         <div className={contentContainerClass + " flex-1"}>
           {art.image && (
             <img className={imageClass} key={art.id} src={art.image} alt={art.title} />
           )}
+          <div className="absolute top-4 left-4 cursor-pointer" onClick={handleClickBack}>
+            <FaArrowLeft className="text-3xl text-blue" />
+          </div>
           <div className={textContainerClass}>
             <div className={highlightedInfoContainerClass}>
               <div className={`${titleClass} text-wood`}>Titolo: {art.title}</div>
