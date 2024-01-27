@@ -11,6 +11,16 @@ function HomePage() {
   const zIndexEvent = "z-50 mb-3 mt-3";
   const zIndexArt = "z-50 mt-3";
 
+  const inlineStyle = {
+    backgroundImage: "url(https://wallpapers.com/images/hd/louvre-art-museum-eibcgjqsiti7p69m.jpg)", 
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    minHeight: "100vh", 
+    display: "flex",
+    flexDirection: "column",
+  };
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,7 +28,7 @@ function HomePage() {
   }, []);
 
   return (
-    <div>
+    <div style={inlineStyle}>
       <div className={zIndexClass}>
         <SearchBar />
       </div>
