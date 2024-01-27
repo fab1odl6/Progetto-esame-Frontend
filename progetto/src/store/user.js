@@ -68,6 +68,8 @@ const updateFavoriteEvent = function (events, event, user) {
       favorite: true,
       full: false,
       path: event.path,
+      userGenerated: event.userGenerated,
+      generator: event.generator,
     });
 
     return [...events, event];
@@ -93,6 +95,8 @@ const updatePersonalCustomEvents = function (events, event, user) {
       favorite: true,
       full: false,
       path: event.path,
+      userGenerated: event.userGenerated,
+      generator: event.generator,
     });
 
     return [...events, event];
@@ -194,6 +198,13 @@ const usersSlice = createSlice({
       return {
         ...state,
         events: action.payload,
+      };
+    },
+
+    setCustomEvents(state, action) {
+      return {
+        ...state,
+        customEvents: action.payload,
       };
     },
   },

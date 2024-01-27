@@ -67,6 +67,7 @@ async function getEvents(user) {
           guests: event.guests,
           favorite: event.favorite,
           full: event.full,
+          userGenerated: event.userGenerated,
         });
       }
     }
@@ -96,6 +97,7 @@ async function getCustomEvents(user) {
           guests: event.guests,
           favorite: false,
           full: false,
+          userGenerated: event.userGenerated,
         });
       }
     }

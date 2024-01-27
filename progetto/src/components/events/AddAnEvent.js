@@ -118,6 +118,8 @@ function AddAnEvent() {
       name: formData.name,
       department: selectedOption,
       path: formData.name,
+      userGenerated: true,
+      generator: user.personalData.name,
     };
     dispatch(updateCustomEvents(newEvent)); // eventi custom dell'utente
     dispatch(addNewEvent(newEvent)); // eventi generali del db
