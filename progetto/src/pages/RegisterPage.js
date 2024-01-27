@@ -88,24 +88,23 @@ function RegisterPage() {
     setSuccess(true);
   };
 
-  const formBackgroundStyle = {
-  backgroundColor: 'rgba(218, 165, 32, 0.8)',
-  borderRadius: '10px',
-  padding: '20px',
-};
-
+  const wrapperStyle = {
+    background: 'rgba(255, 255, 255, 0.2)', 
+    borderRadius: '10px',
+    padding: '20px',
+  };
 
   return (
     <section className="bg-white dark:bg-gray-900">
-      <div className="flex justify-center min-h-screen">
+      <div className="flex justify-center min-h-screen" style={wrapperStyle}>
         <div className="hidden bg-cover lg:block lg:w-2/5" style={{backgroundImage: "url('https://i0.wp.com/orizzontecultura.com/wp-content/uploads/2021/02/Gustave-Klimt-Il-bacio.jpg?resize=726%2C1024&ssl=1')"}}>
         </div>
-
         <div className="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
           <div className="w-full">
             <h1 className="text-2xl font-semibold tracking-wider text-gray-800 capitalize dark:text-white">
               Get your free account now.
             </h1>
+            
 
             <form className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2" onSubmit={handleSubmit}>
               <div>
