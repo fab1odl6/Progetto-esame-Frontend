@@ -28,9 +28,9 @@ function ArtworkDetailsPage({ navigateBack }) {
 
 
   const handleNavigateBack = () => {
-    // Utilizza la prop navigateBack per tornare alla pagina precedente
     navigateBack();
   };
+
   const [buttonText, setButtonText] = useState("");
 
   const { logged, artworks } = useSelector((state) => {
