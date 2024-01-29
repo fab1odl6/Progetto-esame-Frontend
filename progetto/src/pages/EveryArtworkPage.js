@@ -8,7 +8,7 @@ import { FaTimes } from "react-icons/fa";
 
 function EveryArtworkPage() {
   const pageContainerStyle = {
-    backgroundImage: 'url("https://images.alphacoders.com/133/1331567.png")', // Sostituisci con il percorso corretto dell'immagine
+    backgroundImage: 'url("https://images.alphacoders.com/133/1331567.png")', 
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -17,8 +17,8 @@ function EveryArtworkPage() {
     position: "relative",
   };
 
-  const searchBarClass = "z-40 relative";
-  const filterListClass = "z-30 relative";
+  const searchBarClass = "z-50 relative";
+  const filterListClass = "z-40 relative";
   const containerStateClass = "z-10 relative flex items-center mt-4";
   const resultTextClass = "text-lg font-bold";
   const buttonClass =
