@@ -7,9 +7,9 @@ import { clearText } from "../store";
 import { useEffect } from "react";
 
 function HomePage() {
-  const zIndexClass = "z-10";
-  const zIndexEvent = "z-50 mb-3 mt-3";
-  const zIndexArt = "z-50 mt-3";
+  const zIndexClass = "z-50";
+  const zIndexEvent = "z-40 mb-3 mt-3";
+  const zIndexArt = "z-40 mt-3";
 
   const inlineStyle = {
     backgroundImage: "url(https://wallpapers.com/images/hd/louvre-art-museum-eibcgjqsiti7p69m.jpg)", 
