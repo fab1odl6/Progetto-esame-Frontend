@@ -8,7 +8,6 @@ import LoginModals from "../components/modals/loginModals";
 
 function ArtworkDetailsPage() {
   const containerClass = "items-center bg-white overflow-auto p-4";
-<<<<<<< HEAD
   const imageContainerClass = "flex justify-center items-center relative image-container";
   const titleClass = "text-lg font-semibold";
   const imageClass = "max-w-xl max-h-xl rounded";
@@ -18,23 +17,6 @@ function ArtworkDetailsPage() {
   const backgroundClass = "bg-cover bg-center bg-fixed backdrop-filter backdrop-blur-lg";
 
   
-=======
-  const imageContainerClass = "flex items-center relative"; // Modificato da "items-center" a "items-center"
-  const contentContainerClass =
-    "flex flex-row justify-start items-center relative z-10 ml-4 space-x-4 flex-1"; // Modifica qui: aggiunta della classe items-center
-  const descriptionContainerClass = "flex items-center justify-center ml-8"; // Aggiunta della classe per centrare e spostare a destra
-  const titleClass = "text-lg font-semibold text-wood";
-  const imageClass = "flex-1 max-w-xl max-h-xl rounded ml-4";
-  const firstRowClass = "flex justify-between items-center p-2";
-  const favoriteClass = "text-2xl cursor-pointer";
-  const linkClass = "font-semibold text-wood hover:underline";
-  const overlayClass = "absolute inset-0 bg-black opacity-50";
-  const heartContainerClass = "absolute p-4";
-  const highlightedInfoContainerClass =
-    "bg-white bg-opacity-75 p-4 rounded-md shadow-md ml-4";
-  const textContainerClass = "ml-auto p-4";
-
->>>>>>> 860951fe8530c94410bec9b856a60cef0fdbc21a
   const { navigate } = useContext(NavigationContext);
 
   const { art, favoriteState } = useSelector((state) => {
@@ -145,8 +127,4 @@ function ArtworkDetailsPage() {
   );
 }
 
-<<<<<<< HEAD
 export default ArtworkDetailsPage;
-=======
-export default ArtworkDetailsPage;
->>>>>>> 860951fe8530c94410bec9b856a60cef0fdbc21a
