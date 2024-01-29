@@ -64,16 +64,7 @@ function HeaderBar() {
           onClick={handleLogoClick}
           alt="Icon"
           className="h-8 w-8 mr-2 cursor-pointer"
-        />
-        <Link to="/" className="block text-teal-600">
-          <span className="sr-only">Home</span>
-          <svg
-            className="h-8"
-            viewBox="0 0 28 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          ></svg>
-        </Link>
+        /> 
       </div>
         <nav className={navLinks} aria-label="Global">
           {renderedLinks}
