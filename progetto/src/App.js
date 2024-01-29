@@ -48,7 +48,7 @@ function App() {
               <HandleEventsPage />
             </Route>
             <Route path="/artworkDetails">
-              <ArtworksDetailsPage />
+              <ArtworksDetailsPage navigateBack={() => window.history.back()} />
             </Route>
             <Route path="/register">
               <RegisterPage />

@@ -6,7 +6,8 @@ import NavigationContext from "../context/navigation";
 import LoginModals from "../components/modals/loginModals";
 
 
-function ArtworkDetailsPage() {
+
+function ArtworkDetailsPage({ navigateBack }) {
   const containerClass = "items-center bg-white overflow-auto p-4";
   const imageContainerClass = "flex justify-center items-center relative image-container";
   const titleClass = "text-lg font-semibold";
@@ -23,10 +24,13 @@ function ArtworkDetailsPage() {
     return state.artDetails;
   });
 
-  const handleNavigateBack = () => {
-    navigate("/everyArtwork");
-  };
+  
 
+
+  const handleNavigateBack = () => {
+    // Utilizza la prop navigateBack per tornare alla pagina precedente
+    navigateBack();
+  };
   const [buttonText, setButtonText] = useState("");
 
   const { logged, artworks } = useSelector((state) => {
