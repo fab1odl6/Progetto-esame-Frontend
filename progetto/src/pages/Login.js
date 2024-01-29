@@ -113,6 +113,7 @@ const LoginPage = function () {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState(null);
   const { navigate } = useContext(NavigationContext);
+  
 
   const dispatch = useDispatch();
 
@@ -161,7 +162,7 @@ const LoginPage = function () {
             navigate("/");
             dispatch(setPage("HomePage"));
           } else {
-            setError("Username o Password Errati, riprovare");
+            setError("Incorrect Email or Password, try again");
             setUsername("");
             setPassword("");
             setLoggedIn(false); // Imposta isLoggedIn a false in caso di login non riuscito
@@ -183,8 +184,7 @@ const LoginPage = function () {
   }, [isLoggedIn]);
 
   return (
-    <div
-      className="flex h-screen w-full items-center justify-center bg-cover bg-no-repeat"
+    <div className="flex h-screen w-full items-center justify-center bg-cover bg-no-repeat"
       style={{
         backgroundImage:
           "url('https://media-assets.wired.it/photos/632873a16d787d7fa7f012b8/4:3/w_1820,h_1365,c_limit/The%CC%81a%CC%82tre_D%E2%80%99ope%CC%81ra_Spatial.jpeg')",
@@ -202,6 +202,7 @@ const LoginPage = function () {
             <span className="text-gray-300">Enter Login Details</span>
           </div>
           <form onSubmit={handleLogin}>
+            
             <div className="mb-4 text-lg">
               <input
                 className="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-300 shadow-lg outline-none backdrop-blur-md"
@@ -223,6 +224,7 @@ const LoginPage = function () {
                 required
               />
             </div>
+            <div className="mt-2 text-red-500">{error}</div> {/* Render error message */}
             <div className="mt-8 flex justify-center text-lg text-black">
               <button
                 type="submit"

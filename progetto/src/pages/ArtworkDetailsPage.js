@@ -1,31 +1,33 @@
 import { useDispatch, useSelector } from "react-redux";
-import { FaHeart, FaRegHeart, FaArrowLeft } from "react-icons/fa"; // Aggiunta FaArrowLeft
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { updateArt, setFavorite } from "../store";
 import { useContext, useState, useEffect } from "react";
 import NavigationContext from "../context/navigation";
 import LoginModals from "../components/modals/loginModals";
 
+
 function ArtworkDetailsPage() {
   const containerClass = "items-center bg-white overflow-auto p-4";
-  const imageContainerClass = "flex items-center relative"; // Modificato da "items-center" a "items-center"
-  const contentContainerClass = "flex flex-row justify-start items-center relative z-10 ml-4 space-x-4 flex-1"; // Modifica qui: aggiunta della classe items-center
-  const descriptionContainerClass = "flex items-center justify-center ml-8"; // Aggiunta della classe per centrare e spostare a destra
-  const titleClass = "text-lg font-semibold text-wood";
-  const imageClass = "flex-1 max-w-xl max-h-xl rounded ml-4";
+  const imageContainerClass = "flex justify-center items-center relative image-container";
+  const titleClass = "text-lg font-semibold";
+  const imageClass = "max-w-xl max-h-xl rounded";
   const firstRowClass = "flex justify-between items-center p-2";
   const favoriteClass = "text-2xl cursor-pointer";
-  const linkClass = "font-semibold text-wood hover:underline";
-  const overlayClass = "absolute inset-0 bg-black opacity-50";
-  const heartContainerClass = "absolute p-4";
-  const highlightedInfoContainerClass = "bg-white bg-opacity-75 p-4 rounded-md shadow-md ml-4";
-  const textContainerClass = "ml-auto p-4";
+  const linkClass = "text-blue-500 hover:underline";
+  const backgroundClass = "bg-cover bg-center bg-fixed backdrop-filter backdrop-blur-lg";
 
-
+  
   const { navigate } = useContext(NavigationContext);
 
   const { art, favoriteState } = useSelector((state) => {
     return state.artDetails;
   });
+
+  const handleNavigateBack = () => {
+    navigate("/everyArtwork");
+  };
+
+  const [buttonText, setButtonText] = useState("");
 
   const { logged, artworks } = useSelector((state) => {
     return state.users;
@@ -40,6 +42,9 @@ function ArtworkDetailsPage() {
       dispatch(updateArt(art));
       setModal(false);
       dispatch(setFavorite(!favoriteState));
+
+      setButtonText((prevText) => (prevText === "Add to Favorites" ? "Remove from Favorites" : "Add to Favorites"));
+
     } else {
       setModal(true);
     }
@@ -53,30 +58,30 @@ function ArtworkDetailsPage() {
     setModal(false);
   };
 
-  const handleClickBack = function () {
-    navigate("/everyArtwork"); 
-  };
-
-
   useEffect(() => {
-    document.body.style.padding = "0";
-    document.body.style.margin = "0";
-
     if (logged) {
       if (artworks.find((item) => item.id === art.id)) {
         dispatch(setFavorite(true));
+        setButtonText("Remove from Favorites");
       } else {
         dispatch(setFavorite(false));
+        setButtonText("Add to Favorites");
       }
     }
-    return () => {
-      document.body.style.padding = "";
-      document.body.style.margin = "";
-    };
-  }, [logged, artworks]);
+  }, [logged, artworks, art.id]);
+  
+  const TextContainer = ({ children }) => (
+    <div className="bg-gray-800 bg-opacity-75 p-8 rounded-md backdrop-filter backdrop-blur-md">
+      <div className="text-left">
+        {children}
+      </div>
+    </div>
+  );
+  
 
   return (
-    <div className={`${containerClass} my-custom-padding`} style={{ margin: 0, padding: 0 }}>
+    <section className={`text-gray-600 body-font ${backgroundClass} w-full overflow-hidden`} style={{ margin: 0, padding: 0, backgroundImage: `url(${art.image})` }}>
+      <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
       {modal && (
         <LoginModals
           onClickButton={handleClickButton}
@@ -84,55 +89,42 @@ function ArtworkDetailsPage() {
           open={handleClickHeart}
         />
       )}
-      
-     <div
-        className={imageContainerClass}
-        style={{
-          position: "relative",
-          minHeight: "1000px", // Altezza minima desiderata per lo sfondo
-          backgroundImage: art.image ? `url(${art.image})` : "none",
-          backgroundSize: "100% 100%",
-          backgroundPosition: "top left",
-        }}
-      >
-
-        {art.image && <div className={overlayClass}></div>}
-        <div className={contentContainerClass + " flex-1"}>
-          {art.image && (
-            <img className={imageClass} key={art.id} src={art.image} alt={art.title} />
-          )}
-          <div className="absolute top-4 left-4 cursor-pointer" onClick={handleClickBack}>
-            <FaArrowLeft className="text-3xl text-blue" />
-          </div>
-          <div className={textContainerClass}>
-            <div className={highlightedInfoContainerClass}>
-              <div className={`${titleClass} text-wood`}>Titolo: {art.title}</div>
-              <div className={`text-wood`}>Autore: {art.authorName}</div>
-              {art.link && (
-                <div>
-                  <span className={`text-wood`}>Link di Origine: </span>
-                  <a className={`${linkClass} text-wood`} href={art.link} target="_blank" rel="noopener noreferrer">
-                    {art.title}
-                  </a>
+        <button className="absolute top-4 left-4 inline-flex items-center text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded text-lg" onClick={handleNavigateBack}>
+          <span className="mr-2">&#8592;</span>
+          Back
+        </button>
+        <div className={`lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0 ${imageContainerClass}`}>
+          <img className={`${imageClass} object-cover object-center rounded max-w-full max-h-full`} alt={art.title} src={art.image} />
+        </div>
+        <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+          <TextContainer>
+          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900 text-white">Title: {art.title}</h1>
+          <p className="mb-8 leading-relaxed text-white">Autore: {art.authorName}</p>
+          {art.link && (
+                <div className="mb-8 leading-relaxed text-white">
+                  Link di Origine:{" "}
+                  {art.link && (
+                    <a className={linkClass} href={art.link} target="_blank" rel="noopener noreferrer">
+                      {art.title}
+                    </a>
+                  )}
                 </div>
               )}
-              <div className={`text-wood`}>Dipartimento: {art.department}</div>
-              <div className={`text-wood`}>Cultura: {art.culture}</div>
-              <div className={`text-wood`}>Data: {art.date}</div>
-              <div className={`text-wood`}>Classificazione: {art.classification}</div>
-            </div>
+          <p className="mb-8 leading-relaxed text-white">Dipartimento: {art.department}</p>
+          <p className="mb-8 leading-relaxed text-white">Cultura: {art.culture}</p>
+          <p className="mb-8 leading-relaxed text-white">Data: {art.date}</p>
+          <p className="mb-8 leading-relaxed text-white">Classificazione: {art.classification}</p>
+          <div className="flex justify-center text-white">
+            <button className="inline-flex items-center text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded text-lg" onClick={handleClickHeart}>
+              {favoriteState ? <FaHeart className="text-red-500 mr-2" /> : <FaRegHeart className="text-red-500 mr-2" />}
+              {buttonText}
+            </button>
           </div>
-          <div className={heartContainerClass} style={{ top: "90%", left: "38%", transform: "translate(-50%, -50%)" }}>
-            {favoriteState ? (
-              <FaHeart className={`${favoriteClass} text-red-500`} onClick={handleClickHeart} />
-            ) : (
-              <FaRegHeart className={`${favoriteClass} text-red-500`} onClick={handleClickHeart} />
-            )}
-          </div>
+          </TextContainer>
         </div>
       </div>
-    </div>
+    </section>
   );
-  }
-  
-  export default ArtworkDetailsPage;
+}
+
+export default ArtworkDetailsPage;

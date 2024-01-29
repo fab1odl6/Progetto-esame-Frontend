@@ -204,6 +204,7 @@ function ArtCard({ artwork }) {
           <LoginModals
             onClickButton={handleClickButton}
             onCloseLog={handleClickClose}
+            open={handleClickHeart}
           />
         )}
         <div className={artContainer}>
