@@ -12,9 +12,9 @@ function HeaderBar() {
   const mobileMenuButton =
     "block md:hidden rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75";
   const loginButton =
-    "rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow";
+    "rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow cursor-pointer";
   const registerButton =
-    "hidden sm:flex rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600";
+    "hidden sm:flex rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 cursor-pointer";
 
   const dispatch = useDispatch();
 
@@ -64,16 +64,7 @@ function HeaderBar() {
           onClick={handleLogoClick}
           alt="Icon"
           className="h-8 w-8 mr-2 cursor-pointer"
-        />
-        <Link to="/" className="block text-teal-600">
-          <span className="sr-only">Home</span>
-          <svg
-            className="h-8"
-            viewBox="0 0 28 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          ></svg>
-        </Link>
+        /> 
       </div>
         <nav className={navLinks} aria-label="Global">
           {renderedLinks}
