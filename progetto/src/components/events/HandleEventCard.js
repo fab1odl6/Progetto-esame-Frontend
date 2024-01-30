@@ -78,6 +78,10 @@ function HandleEventCard({ event, submit, setSubmit }) {
 
   const dispatch = useDispatch();
 
+  const { user } = useSelector((state) => {
+    return state.users;
+  });
+
   const [editState, setEditState] = useState(false);
   const [deleteState, setDeleteState] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -120,11 +124,13 @@ function HandleEventCard({ event, submit, setSubmit }) {
       full: event.full,
       id: event.id,
       path: event.path,
+      userGenerated: true,
+      generator: user.personalData.name,
     };
 
     dispatch(removeEvent(event));
     dispatch(updateEvent(event));
-    dispatch(updateCustomEvents(event));
+    dispatch(updateCustomEvents(newEvent));
     dispatch(addNewEvent(newEvent));
 
     setSuccess(true);
