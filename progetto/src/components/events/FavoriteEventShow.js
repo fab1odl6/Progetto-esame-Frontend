@@ -6,8 +6,15 @@ import {
   FaBuilding,
   FaUsers,
 } from "react-icons/fa";
+import { Dialog, DialogContent } from "@mui/material";
 
-function FavoriteEventShow({ event, onClickClose, onClickHeart }) {
+function FavoriteEventShow({
+  event,
+  onClickClose,
+  onClickHeart,
+  open,
+  onClose,
+}) {
   const modalClass =
     "fixed inset-0 flex flex-col items-center justify-center w-screen h-screen bg-blue bg-auto z-10";
   const containerClass =
@@ -37,50 +44,57 @@ function FavoriteEventShow({ event, onClickClose, onClickHeart }) {
 
   return (
     <div className={modalClass}>
-      <div className={containerClass}>
-        <div className={imageContainerClass}>
-          <img
-            className={image}
-            key={event.id}
-            src={event.image}
-            alt={event.name}
-          />
-          <IoIosClose className={close} onClick={handleClickClose} />
-          <div className={`${favoriteContainerClass} ${heartCircleClass}`}>
-            <FaHeart className={`${favoriteClass} text-red-500`} onClick={handleClickHeart} />
+      <Dialog open={open} onClose={onClose}>
+        <DialogContent>
+          <div className={containerClass}>
+            <div className={imageContainerClass}>
+              <img
+                className={image}
+                key={event.id}
+                src={event.image}
+                alt={event.name}
+              />
+              <IoIosClose className={close} onClick={handleClickClose} />
+              <div className={`${favoriteContainerClass} ${heartCircleClass}`}>
+                <FaHeart
+                  className={`${favoriteClass} text-red-500`}
+                  onClick={handleClickHeart}
+                />
+              </div>
+            </div>
+            <div className={contentClass}>
+              {event.name && (
+                <div className={dataContainerClass}>
+                  <FaUser className={dataIconClass} />
+                  <span className={labelTextClass}>Title:&nbsp;</span>
+                  <span className={dataTextClass}>{event.name}</span>
+                </div>
+              )}
+              {event.department && (
+                <div className={dataContainerClass}>
+                  <FaBuilding className={dataIconClass} />
+                  <span className={labelTextClass}>Department:&nbsp;</span>
+                  <span className={dataTextClass}>{event.department}</span>
+                </div>
+              )}
+              {event.guests && (
+                <div className={dataContainerClass}>
+                  <FaUsers className={dataIconClass} />
+                  <span className={labelTextClass}>Guests:&nbsp;</span>
+                  <span className={dataTextClass}>{event.guests}</span>
+                </div>
+              )}
+              {event.date && (
+                <div className={dataContainerClass}>
+                  <FaCalendar className={dataIconClass} />
+                  <span className={labelTextClass}>Date:&nbsp;</span>
+                  <span className={dataTextClass}>{event.date}</span>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-        <div className={contentClass}>
-          {event.name && (
-            <div className={dataContainerClass}>
-              <FaUser className={dataIconClass} />
-              <span className={labelTextClass}>Title:&nbsp;</span>
-              <span className={dataTextClass}>{event.name}</span>
-            </div>
-          )}
-          {event.department && (
-            <div className={dataContainerClass}>
-              <FaBuilding className={dataIconClass} />
-              <span className={labelTextClass}>Department:&nbsp;</span>
-              <span className={dataTextClass}>{event.department}</span>
-            </div>
-          )}
-          {event.guests && (
-            <div className={dataContainerClass}>
-              <FaUsers className={dataIconClass} />
-              <span className={labelTextClass}>Guests:&nbsp;</span>
-              <span className={dataTextClass}>{event.guests}</span>
-            </div>
-          )}
-          {event.date && (
-            <div className={dataContainerClass}>
-              <FaCalendar className={dataIconClass} />
-              <span className={labelTextClass}>Date:&nbsp;</span>
-              <span className={dataTextClass}>{event.date}</span>
-            </div>
-          )}
-        </div>
-      </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
