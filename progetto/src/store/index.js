@@ -60,4 +60,4 @@ export const {
   addNewEvent,
   removeEvent,
 } = eventsSlice.actions;
-export const { setPage } = activePageSlice.actions;
+export const { setPage, setPreviousPage } = activePageSlice.actions;

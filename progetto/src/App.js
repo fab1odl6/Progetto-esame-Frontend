@@ -10,24 +10,41 @@ import HandleEventsPage from "./pages/HandleEventsPage";
 import PersonalGalleryPage from "./pages/PersonalGalleryPage";
 import ArtworksDetailsPage from "./pages/ArtworkDetailsPage";
 import RegisterPage from "./pages/RegisterPage";
-import { useSelector } from "react-redux";
 import LoginPage from "./pages/Login";
 import Footer from "./components/header & footer/Footer";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor } from "./store";
+import PageNotFound from "./pages/PageNotFound";
+import { useSelector } from "react-redux";
 
 function App() {
-  const { user, logged } = useSelector((state) => {
-    return state.users;
-  });
   const mainContainerStyle = "mt-10";
 
-  // writeUserData(5, "fdedg");
+  const validPaths = [
+    "/",
+    "/everyArtwork",
+    "/thematicAreas",
+    "/personalGallery",
+    "/myEvents",
+    "/handleEvents",
+    "/artworkDetails",
+    "/register",
+    "/login",
+  ];
+
+  const { page, previousPage } = useSelector((state) => {
+    return state.activePage;
+  });
+
+  const isPathValid =
+    validPaths.includes(page) || validPaths.includes(previousPage);
+
   return (
     <NavigationProvider>
       <PersistGate loading={null} persistor={persistor}>
         <div className={mainContainerStyle}>
           <HeaderBar />
+          {!isPathValid && <PageNotFound />}
           <div>
             <Route path="/">
               <HomePage />

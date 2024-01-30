@@ -29,7 +29,7 @@ function HeaderBar() {
     { label: "Handle Events", path: "/handleEvents" },
   ];
 
-  const { user, logged } = useSelector((state) => state.users);
+  const { user } = useSelector((state) => state.users);
 
   const handleLogoClick = () => {
     dispatch(setPage("HomePage"));
@@ -58,14 +58,14 @@ function HeaderBar() {
   return (
     <header className={sectionHeader}>
       <div className={sectionElement}>
-      <div className="md:flex md:items-center">
-        <img
-          src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png"
-          onClick={handleLogoClick}
-          alt="Icon"
-          className="h-8 w-8 mr-2 cursor-pointer"
-        /> 
-      </div>
+        <div className="md:flex md:items-center">
+          <img
+            src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png"
+            onClick={handleLogoClick}
+            alt="Icon"
+            className="h-8 w-8 mr-2 cursor-pointer"
+          />
+        </div>
         <nav className={navLinks} aria-label="Global">
           {renderedLinks}
         </nav>
