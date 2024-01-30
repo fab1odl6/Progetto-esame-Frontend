@@ -7,7 +7,8 @@ import LoginModals from "../modals/loginModals";
 import NavigationContext from "../../context/navigation";
 
 function EventSlideShowCard1({ event }) {
-  const eventContainerClass = "w-sm h-full flex justify-center mx-auto flex-row place-content-center border-2 mb-2 rounded-lg overflow-hidden z-50 max-w-sm p-6 bg-yellow-100 border-yellow-200 rounded-lg shadow hover:bg-yellow-800 dark:bg-yellow-800 dark:border-yellow-700 dark:hover:bg-yellow-700";
+  const eventContainerClass =
+    "w-sm h-full flex justify-center mx-auto flex-row place-content-center border-2 mb-2 rounded-lg overflow-hidden z-50 max-w-sm p-6 bg-yellow-100 border-yellow-200 rounded-lg shadow hover:bg-yellow-800 dark:bg-yellow-800 dark:border-yellow-700 dark:hover:bg-yellow-700";
   const eventElementClass = "";
   const imageClass = "w-48 h-72 cursor-pointer object-cover mx-auto";
   const titleAndHeartClass = "flex mt-2";
@@ -19,6 +20,9 @@ function EventSlideShowCard1({ event }) {
 
   const { logged, events } = useSelector((state) => {
     return state.users;
+  });
+  const { index } = useSelector((state) => {
+    return state.events;
   });
   const [favoriteState, setFavoriteState] = useState(false);
   const [modal, setModal] = useState(false);
@@ -45,7 +49,7 @@ function EventSlideShowCard1({ event }) {
         setFavoriteState(false);
       }
     }
-  }, [logged]);
+  }, [logged, index]);
 
   const openModal = function () {
     setFullState(true);
@@ -67,7 +71,7 @@ function EventSlideShowCard1({ event }) {
   return (
     <div>
       <div className={eventContainerClass}>
-        <div >
+        <div>
           {modal && (
             <LoginModals
               onClickButton={handleClickButton}
