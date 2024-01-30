@@ -238,6 +238,8 @@ function HandleEventCard({ event, submit, setSubmit }) {
                       selected={selectedDate}
                       onChange={handleChangeDate}
                       dateFormat="dd/MM/yyyy"
+                      minDate={new Date()}
+                      autoComplete="off"
                     />
                     <GoChevronDown className={chevronClass} />
                   </div>

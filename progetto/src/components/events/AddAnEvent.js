@@ -212,6 +212,7 @@ function AddAnEvent() {
                   dateFormat="dd/MM/yyyy"
                   className={datePickerClass}
                   required
+                  minDate={new Date()}
                   autoComplete="off"
                 />
               </div>
