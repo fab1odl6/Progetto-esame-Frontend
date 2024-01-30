@@ -68,6 +68,7 @@ async function getEvents(user) {
           favorite: event.favorite,
           full: event.full,
           userGenerated: event.userGenerated,
+          generator: event.generator,
         });
       }
     }
@@ -86,7 +87,8 @@ async function getCustomEvents(user) {
 
     if (snapshot.exists()) {
       const data = snapshot.val();
-      for (const key in data) {
+
+      Object.keys(data).forEach((key) => {
         const event = data[key];
         eventArray.push({
           id: event.id,
@@ -98,12 +100,14 @@ async function getCustomEvents(user) {
           favorite: false,
           full: false,
           userGenerated: event.userGenerated,
+          generator: event.generator,
         });
-      }
+      });
     }
   } catch (e) {
     console.error(e);
   }
+
   return eventArray;
 }
 
@@ -113,7 +117,6 @@ const LoginPage = function () {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState(null);
   const { navigate } = useContext(NavigationContext);
-  
 
   const dispatch = useDispatch();
 
@@ -130,7 +133,7 @@ const LoginPage = function () {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    console.log(`Username: ${username}, Password: ${password}`);
+    // console.log(`Username: ${username}, Password: ${password}`);
 
     const usersRef = ref(db, "users/");
 
@@ -139,7 +142,7 @@ const LoginPage = function () {
 
       if (snapshot.exists()) {
         const users = snapshot.val();
-        console.log(users);
+        //console.log(users);
 
         if (users) {
           const matchedUser = Object.values(users).find(
@@ -149,7 +152,7 @@ const LoginPage = function () {
           );
 
           if (matchedUser) {
-            console.log("Utente loggato:", matchedUser);
+            //  console.log("Utente loggato:", matchedUser);
             const artworks = await getArts(matchedUser.personalData);
             const events = await getEvents(matchedUser.personalData);
             const customEvents = await getCustomEvents(
@@ -158,7 +161,7 @@ const LoginPage = function () {
             dispatch(setUser({ matchedUser, artworks, events, customEvents }));
             dispatch(setLogged(true));
             setLoggedIn(true);
-            console.log("isLoggedIn dopo il login:", true);
+            // console.log("isLoggedIn dopo il login:", true);
             navigate("/");
             dispatch(setPage("HomePage"));
           } else {
@@ -176,15 +179,16 @@ const LoginPage = function () {
       setError("Si è verificato un errore durante la verifica dell'utente");
     }
 
-    console.log("Fine della funzione handleLogin");
+    // console.log("Fine della funzione handleLogin");
   };
 
   useEffect(() => {
-    console.log("isLoggedIn dopo il login:", isLoggedIn);
+    //   console.log("isLoggedIn dopo il login:", isLoggedIn);
   }, [isLoggedIn]);
 
   return (
-    <div className="flex h-screen w-full items-center justify-center bg-cover bg-no-repeat"
+    <div
+      className="flex h-screen w-full items-center justify-center bg-cover bg-no-repeat"
       style={{
         backgroundImage:
           "url('https://media-assets.wired.it/photos/632873a16d787d7fa7f012b8/4:3/w_1820,h_1365,c_limit/The%CC%81a%CC%82tre_D%E2%80%99ope%CC%81ra_Spatial.jpeg')",
@@ -202,7 +206,6 @@ const LoginPage = function () {
             <span className="text-gray-300">Enter Login Details</span>
           </div>
           <form onSubmit={handleLogin}>
-            
             <div className="mb-4 text-lg">
               <input
                 className="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-300 shadow-lg outline-none backdrop-blur-md"
@@ -213,7 +216,6 @@ const LoginPage = function () {
                 required
               />
             </div>
-
             <div className="mb-4 text-lg">
               <input
                 className="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-300 shadow-lg outline-none backdrop-blur-md"
@@ -224,7 +226,8 @@ const LoginPage = function () {
                 required
               />
             </div>
-            <div className="mt-2 text-red-500">{error}</div> {/* Render error message */}
+            <div className="mt-2 text-red-500">{error}</div>{" "}
+            {/* Render error message */}
             <div className="mt-8 flex justify-center text-lg text-black">
               <button
                 type="submit"

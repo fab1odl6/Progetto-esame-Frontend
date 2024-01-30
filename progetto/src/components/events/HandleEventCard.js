@@ -78,7 +78,7 @@ function HandleEventCard({ event, submit, setSubmit }) {
 
   const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => {
+  const { user, events } = useSelector((state) => {
     return state.users;
   });
 
@@ -111,7 +111,7 @@ function HandleEventCard({ event, submit, setSubmit }) {
     setSubmit(!submit);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const newEvent = {
@@ -128,10 +128,13 @@ function HandleEventCard({ event, submit, setSubmit }) {
       generator: user.personalData.name,
     };
 
-    dispatch(removeEvent(event));
-    dispatch(updateEvent(event));
-    dispatch(updateCustomEvents(newEvent));
-    dispatch(addNewEvent(newEvent));
+    dispatch(removeEvent(event)); // rimuove l'evento dal db e dall'array di events.js
+    dispatch(addNewEvent(newEvent)); // aggiunge il nuovo evento al db e all'array di events.js
+
+    dispatch(updateEvent(event)); // rimuove l'evento dal db e dall'array di events di user.js
+    dispatch(updateEvent(newEvent)); // aggiungo il nuovo evento al db e all'array di events di user.js
+
+    dispatch(updateCustomEvents(newEvent)); // aggiunge il nuovo evento al db e all'array di customEvents di user.js
 
     setSuccess(true);
     setEditState(false);
@@ -153,14 +156,6 @@ function HandleEventCard({ event, submit, setSubmit }) {
   const handleOptionSelection = (option) => {
     setSelectedOption(option);
   };
-
-  const { page } = useSelector((state) => {
-    return state.activePage;
-  });
-
-  const { events } = useSelector((state) => {
-    return state.users;
-  });
 
   return (
     <div>

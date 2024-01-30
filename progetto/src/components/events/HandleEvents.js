@@ -4,7 +4,7 @@ import { get, child, ref, getDatabase } from "firebase/database";
 import HandleEventCard from "./HandleEventCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { setEvents, setCustomEvents } from "../../store";
+import { setCustomEvents } from "../../store";
 
 function HandleEvents() {
   const containerClass =
@@ -36,7 +36,7 @@ function HandleEvents() {
 
       if (snapshot.exists()) {
         const eventData = Object.values(snapshot.val());
-        dispatch(setEvents(eventData));
+        dispatch(setCustomEvents(eventData));
         setEventsLocal(eventData);
       } else {
         setEventsLocal([]);

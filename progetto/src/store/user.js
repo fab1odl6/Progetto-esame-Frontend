@@ -113,7 +113,7 @@ const usersSlice = createSlice({
     customEvents: [],
   },
   reducers: {
-    async registerUser(state, action) {
+    registerUser(state, action) {
       updateData(action.payload);
       return {
         ...state,
@@ -157,6 +157,7 @@ const usersSlice = createSlice({
         action.payload,
         state.user.personalData
       );
+      console.log("porcodio");
 
       return {
         ...state,
@@ -190,21 +191,22 @@ const usersSlice = createSlice({
     setArtworks(state, action) {
       return {
         ...state,
-        artworks: action.payload,
+        artworks: [...action.payload],
       };
     },
 
     setEvents(state, action) {
+      console.log("setEvents");
       return {
         ...state,
-        events: action.payload,
+        events: [...action.payload],
       };
     },
 
     setCustomEvents(state, action) {
       return {
         ...state,
-        customEvents: action.payload,
+        customEvents: [...action.payload],
       };
     },
   },

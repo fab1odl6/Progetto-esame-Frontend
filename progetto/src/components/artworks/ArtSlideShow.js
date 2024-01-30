@@ -261,7 +261,7 @@ function ArtSlideShow() {
   }, [index, logged]);
 
   const render = array.map((item) => {
-    return <ArtSlideShowCard artwork={item} />;
+    return <ArtSlideShowCard artwork={item} key={item.name} />;
   });
 
   return (

@@ -40,7 +40,7 @@ function EventSlideShowCard1({ event }) {
   const handleClickEvent = function () {
     setFullState(!fullState);
   };
-
+  console.log(events);
   useEffect(() => {
     if (logged) {
       if (events.find((item) => item.name === event.name)) {
@@ -49,7 +49,7 @@ function EventSlideShowCard1({ event }) {
         setFavoriteState(false);
       }
     }
-  }, [logged, index]);
+  }, [logged, index, events]);
 
   const openModal = function () {
     setFullState(true);

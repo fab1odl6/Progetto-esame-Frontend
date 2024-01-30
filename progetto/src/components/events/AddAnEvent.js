@@ -8,7 +8,7 @@ import DepartmentDropdown from "../dropdowns/DepartmentDropdown";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addNewEvent,
-  setEvents,
+  setCustomEvents,
   updateCustomEvents,
   updateEvent,
 } from "../../store";
@@ -49,33 +49,36 @@ function AddAnEvent() {
     department: "",
   });
 
-  const { user, logged, customEvents } = useSelector((state) => {
+  const { user, logged, customEvents, events } = useSelector((state) => {
     return state.users;
-  });
-
-  const { page } = useSelector((state) => {
-    return state.activePage;
   });
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [eventsLocal, setEventsLocal] = useState(customEvents);
+  const [localEvents, setLocalEvents] = useState(customEvents);
 
   const updateLocal = async function () {
     const eventsRef = child(
       dbRef,
-      "/users/" + user.personalData.name + "/customEvents/"
+      "/users/" + user.personalData.name + "/customEvents"
     );
 
     try {
       const snapshot = await get(eventsRef);
 
       if (snapshot.exists()) {
-        const eventData = Object.values(snapshot.val());
-        dispatch(setEvents(eventData));
-        setEventsLocal(eventData);
+        const data = snapshot.val();
+        const updatedEvents = [];
+
+        for (const key in data) {
+          const event = data[key];
+          updatedEvents.push(event);
+        }
+
+        dispatch(setCustomEvents([...localEvents, ...updatedEvents]));
+        setLocalEvents([...localEvents, ...updatedEvents]);
       }
     } catch (e) {
       console.error(e);
@@ -99,7 +102,7 @@ function AddAnEvent() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!formData.name || !selectedDate || !formData.image || !selectedOption) {
@@ -139,12 +142,12 @@ function AddAnEvent() {
     setSelectedDate(null);
     setSelectedOption(null);
 
-    await updateLocal();
+    updateLocal();
   };
 
   useEffect(() => {
     updateLocal();
-  }, [customEvents, logged, page]);
+  }, [customEvents, logged]);
 
   return (
     <div className={containerClass}>
