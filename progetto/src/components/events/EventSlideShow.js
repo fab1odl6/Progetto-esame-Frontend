@@ -10,7 +10,7 @@ import { IconButton } from "@mui/material";
 
 function EventSlideShow() {
   const containerClass = "overflow:auto z-50";
-  const eventTextClass = "text-center font-bold text-4xl my-20";
+  const eventTextClass = "text-center font-bold text-4xl my-10";
   const carouselClass = "relative w-md";
   const dispatch = useDispatch();
 

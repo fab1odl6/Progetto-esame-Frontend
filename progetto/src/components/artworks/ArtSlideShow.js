@@ -229,7 +229,7 @@ function ArtSlideShow() {
   const artContentClass = "flex-1 flex flex-col p-10 box-border text-black";
   const artTextClass = "text-center font-bold text-8xl mb-10";
   const titleContainerClass = "flex-1 flex flex-col justify-between";
-  const titleClass = "font-bold text-3xl cursor-pointer";
+  const titleClass = "font-bold text-4xl cursor-pointer";
   const authorClass = "mt-10 text-2xl";
   const favoriteIconClass =
     "absolute top-10 right-10 text-4xl cursor-pointer text-red-500";
@@ -267,7 +267,7 @@ function ArtSlideShow() {
 
   return (
     <div>
-      <ArtText>Highlighted Artworks</ArtText>
+      <ArtText className={titleClass}>Highlighted Artworks</ArtText>
       <Carousel
         className={carouselClass}
         children={render}

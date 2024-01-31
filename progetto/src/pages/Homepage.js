@@ -12,11 +12,12 @@ function HomePage() {
   const zIndexArt = "z-40 mt-3";
 
   const inlineStyle = {
-    backgroundImage: "url(https://wallpapers.com/images/hd/louvre-art-museum-eibcgjqsiti7p69m.jpg)", 
+    backgroundImage:
+      "url(https://wallpapers.com/images/hd/louvre-art-museum-eibcgjqsiti7p69m.jpg)",
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
-    minHeight: "100vh", 
+    minHeight: "100vh",
     display: "flex",
     flexDirection: "column",
   };
