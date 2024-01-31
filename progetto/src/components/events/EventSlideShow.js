@@ -53,9 +53,13 @@ function EventSlideShow() {
     setModal(false);
   };
 
-  const render = array.map((item) => {
-    return <EventSlideShowCard1 event={item} />;
-  });
+  const render = array
+    .filter((item) => {
+      return new Date(item.date) >= new Date();
+    })
+    .map((item) => {
+      return <EventSlideShowCard1 event={item} key={item.name} />;
+    });
 
   const handleClickLeft = function () {
     dispatch(swipeLeftEvent());

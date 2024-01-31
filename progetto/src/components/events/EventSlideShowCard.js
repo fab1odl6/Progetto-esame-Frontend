@@ -40,7 +40,6 @@ function EventSlideShowCard1({ event }) {
   const handleClickEvent = function () {
     setFullState(!fullState);
   };
-  console.log(events);
   useEffect(() => {
     if (logged) {
       if (events.find((item) => item.name === event.name)) {

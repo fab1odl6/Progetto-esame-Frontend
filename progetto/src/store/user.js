@@ -157,7 +157,6 @@ const usersSlice = createSlice({
         action.payload,
         state.user.personalData
       );
-      console.log("porcodio");
 
       return {
         ...state,

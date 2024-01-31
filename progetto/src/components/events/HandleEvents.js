@@ -52,12 +52,7 @@ function HandleEvents() {
 
   const render = eventsLocal.map((event) => {
     return (
-      <HandleEventCard
-        key={event.name}
-        event={event}
-        submit={submit}
-        setSubmit={setSubmit}
-      />
+      <HandleEventCard event={event} submit={submit} setSubmit={setSubmit} />
     );
   });
 

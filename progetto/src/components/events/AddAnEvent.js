@@ -55,6 +55,7 @@ function AddAnEvent() {
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [alreadyExistsError, setAlreadyExistsError] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
   const [localEvents, setLocalEvents] = useState(customEvents);
@@ -105,6 +106,20 @@ function AddAnEvent() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (events.find((item) => item.name === formData.name)) {
+      setAlreadyExistsError(true);
+      setFormData({
+        date: "",
+        favorite: false,
+        full: false,
+        guests: "",
+        image: "",
+        name: "",
+      });
+
+      return;
+    }
+
     if (!formData.name || !selectedDate || !formData.image || !selectedOption) {
       setError("Fill the mandatory fields!");
       setSuccess(null);
@@ -141,6 +156,7 @@ function AddAnEvent() {
     setError(null);
     setSelectedDate(null);
     setSelectedOption(null);
+    setAlreadyExistsError(null);
 
     updateLocal();
   };
@@ -151,6 +167,13 @@ function AddAnEvent() {
 
   return (
     <div className={containerClass}>
+      {alreadyExistsError && (
+        <div className="w-md bg-red-500 text-white p-4">
+          This event already exists,
+          <br />
+          try changing its name!
+        </div>
+      )}
       {error && (
         <div className={errorDivClass}>
           <p className={errorPClass}>
