@@ -5,6 +5,8 @@ const activePageSlice = createSlice({
   initialState: {
     page: "HomePage",
     previousPage: "/",
+    everyArtworkPage: 1,
+    personalGalleryPage: 1,
   },
   reducers: {
     setPage(state, action) {
@@ -19,6 +21,18 @@ const activePageSlice = createSlice({
         previousPage: action.payload,
       };
     },
+    setEveryArtworkPage(state,action){
+      return {
+        ...state,
+        everyArtworkPage: action.payload
+      }
+    },
+    setPersonalGalleryPage(state,action){
+      return {
+        ...state,
+        personalGalleryPage: action.payload
+      }
+    }
   },
 });
 

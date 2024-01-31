@@ -5,6 +5,7 @@ import SearchBar from "../components/header & footer/SearchBar";
 import { useSelector, useDispatch } from "react-redux";
 import { clearText } from "../store";
 import { FaTimes } from "react-icons/fa";
+import { setEveryArtworkPage } from "../store";
 
 function EveryArtworkPage() {
   const pageContainerStyle = {
@@ -36,7 +37,8 @@ function EveryArtworkPage() {
   const searchState = useSelector((state) => state.search.text);
 
   //NEW
-  const [currentPage, setCurrentPage] = useState(1);
+  //const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = useSelector((state) => state.activePage.everyArtworkPage)
   const itemsPerPage = 20;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -88,7 +90,8 @@ function EveryArtworkPage() {
   };
 
   const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    //setCurrentPage(pageNumber);
+    dispatch(setEveryArtworkPage(pageNumber))
   };
 
   return (
@@ -108,9 +111,9 @@ function EveryArtworkPage() {
           </button>
         </div>
       )}
-      <div className={artGridClass}>
+      <div className={'${artGridClass} max-w-screen-xl mx-auto flex flex-col items-center relative'}>
         <ArtGrid artworks={currentItems} />
-        <div className="pagination ">
+        <div className="mt-4 flex items-center">
           <button
             className={buttonClass}
             onClick={() => handlePageChange(currentPage - 1)}
@@ -118,6 +121,7 @@ function EveryArtworkPage() {
           >
             Previous
           </button>
+          <p className="flex items-center px-2 py-1 bg-gray-300 rounded ml-3">{currentPage}</p>
           <button
             className={buttonClass}
             onClick={() => handlePageChange(currentPage + 1)}
