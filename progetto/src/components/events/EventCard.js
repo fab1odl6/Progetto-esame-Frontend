@@ -20,7 +20,7 @@ function EventCard({ event }) {
 
   const handleClickHeart = function () {
     if (new Date(event.date) < new Date()) {
-      setErrorState(!errorState);
+      setErrorState(true);
       return;
     }
     setConfirmModal(!confirmModal);
