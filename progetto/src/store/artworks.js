@@ -20,7 +20,7 @@ async function writeData() {
     const url =
       "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
     const searchRes = await fetch(
-      "https://collectionapi.metmuseum.org/public/collection/v1/search?q=love"
+      "https://collectionapi.metmuseum.org/public/collection/v1/search?q=christ"
     );
     const searchData = await searchRes.json();
     const objectIDs = searchData.objectIDs;
@@ -33,27 +33,25 @@ async function writeData() {
         dataObj.message !== "Not a valid object" &&
         dataObj.primaryImage !== ""
       ) {
-        if (artArray.length < 1) {
-          artArray.push({
-            id: dataObj.objectID,
-            link: dataObj.objectURL,
-            authorName: dataObj.artistDisplayName,
-            title: dataObj.title,
-            image: dataObj.primaryImage,
-            department: dataObj.department,
-            culture: dataObj.culture,
-            period: dataObj.period,
-            date: dataObj.objectEndDate,
-            dimensions: dataObj.dimensions,
-            city: dataObj.city,
-            state: dataObj.state,
-            country: dataObj.artistNationality,
-            classification: dataObj.classification,
-            favorite: false,
-            full: false,
-            type: dataObj.objectName,
-          });
-        }
+        artArray.push({
+          id: dataObj.objectID,
+          link: dataObj.objectURL,
+          authorName: dataObj.artistDisplayName,
+          title: dataObj.title,
+          image: dataObj.primaryImage,
+          department: dataObj.department,
+          culture: dataObj.culture,
+          period: dataObj.period,
+          date: dataObj.objectEndDate,
+          dimensions: dataObj.dimensions,
+          city: dataObj.city,
+          state: dataObj.state,
+          country: dataObj.artistNationality,
+          classification: dataObj.classification,
+          favorite: false,
+          full: false,
+          type: dataObj.objectName,
+        });
       }
     });
 
@@ -63,9 +61,10 @@ async function writeData() {
   }
 
   const db = getDatabase();
+  console.log(artArray);
   artArray.map((dataObj) => {
     console.log(dataObj.title);
-    set(ref(db, "/artworks/" + dataObj.title), {
+    set(ref(db, "artworks/" + dataObj.title), {
       id: dataObj.id,
       link: dataObj.link,
       authorName: dataObj.authorName,
@@ -101,27 +100,25 @@ async function readData() {
       for (const key in data) {
         if (data.hasOwnProperty(key)) {
           const art = data[key];
-          if (artArray.length < 5) {
-            artArray.push({
-              id: art.id,
-              link: art.link,
-              authorName: art.authorName,
-              title: art.title,
-              image: art.image,
-              department: art.department,
-              culture: art.culture,
-              period: art.period,
-              date: art.date,
-              dimensions: art.dimensions,
-              city: art.city,
-              state: art.state,
-              country: art.country,
-              classification: art.classification,
-              favorite: art.favorite,
-              full: art.full,
-              type: art.type,
-            });
-          }
+          artArray.push({
+            id: art.id,
+            link: art.link,
+            authorName: art.authorName,
+            title: art.title,
+            image: art.image,
+            department: art.department,
+            culture: art.culture,
+            period: art.period,
+            date: art.date,
+            dimensions: art.dimensions,
+            city: art.city,
+            state: art.state,
+            country: art.country,
+            classification: art.classification,
+            favorite: art.favorite,
+            full: art.full,
+            type: art.type,
+          });
         }
       }
     } else {

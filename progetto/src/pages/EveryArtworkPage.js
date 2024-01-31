@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import ArtGrid from "../components/artworks/ArtGrid";
 import FilterList from "../components/filters/FilterList";
 import SearchBar from "../components/header & footer/SearchBar";
@@ -8,7 +8,7 @@ import { FaTimes } from "react-icons/fa";
 
 function EveryArtworkPage() {
   const pageContainerStyle = {
-    backgroundImage: 'url("https://images.alphacoders.com/133/1331567.png")', 
+    backgroundImage: 'url("https://images.alphacoders.com/133/1331567.png")',
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -19,7 +19,8 @@ function EveryArtworkPage() {
 
   const searchBarClass = "z-50 relative";
   const filterListClass = "z-40 relative";
-  const containerStateClass = "z-10 relative flex items-center mt-4 bg-gray-200";
+  const containerStateClass =
+    "z-10 relative flex items-center mt-4 bg-gray-200";
   const resultTextClass = "text-lg font-bold";
   const buttonClass =
     "flex items-center px-2 py-1 bg-gray-300 rounded cursor-pointer ml-3";
@@ -135,10 +136,10 @@ function EveryArtworkPage() {
         </div>
       )}
       <div className={artGridClass}>
-      <ArtGrid artworks={currentItems} />
+        <ArtGrid artworks={currentItems} />
         <div className="pagination ">
           <button
-          className={buttonClass}
+            className={buttonClass}
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
           >
