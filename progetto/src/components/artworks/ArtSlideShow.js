@@ -260,8 +260,9 @@ function ArtSlideShow() {
     }
   }, [index, logged]);
 
-  const render = array.map((item) => {
-    return <ArtSlideShowCard artwork={item} key={item.name} />;
+  // Estrai i primi 5 elementi dell'array e mescolali casualmente
+  const render = array.slice(0, 5).map((item) => {
+    return <ArtSlideShowCard artwork={item} key={item.id} />;
   });
 
   return (
