@@ -5,6 +5,7 @@ import HandleEventCard from "./HandleEventCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { setCustomEvents } from "../../store";
+import ConfirmModal from "../modals/ConfirmModal";
 
 function HandleEvents() {
   const containerClass =

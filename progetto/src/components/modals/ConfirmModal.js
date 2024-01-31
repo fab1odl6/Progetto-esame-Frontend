@@ -1,4 +1,4 @@
-function ConfirmModal({ onDelete, onUndo }) {
+function ConfirmModal({ onDelete, onUndo, message }) {
   const modalContainerClass =
     "fixed inset-0 z-50 overflow-auto flex items-center justify-center";
   const modalDivClass =
@@ -56,9 +56,7 @@ function ConfirmModal({ onDelete, onUndo }) {
               d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
             />
           </svg>
-          <h3 className={textClass}>
-            Are you sure you want to delete this element from your favorites?
-          </h3>
+          <h3 className={textClass}>{message}</h3>
           <button
             data-modal-hide="popup-modal"
             type="button"

@@ -16,6 +16,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { GoChevronDown } from "react-icons/go";
 import DepartmentDropdown from "../dropdowns/DepartmentDropdown";
+import ConfirmModal from "../modals/ConfirmModal";
 
 async function writeData() {
   const app = initializeApp(firebaseConfig);
@@ -85,6 +86,7 @@ function HandleEventCard({ event, submit, setSubmit }) {
   const [editState, setEditState] = useState(false);
   const [deleteState, setDeleteState] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [confirmModal, setConfirmModal] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
   const [success, setSuccess] = useState(null);
   const [formData, setFormData] = useState({
@@ -97,12 +99,17 @@ function HandleEventCard({ event, submit, setSubmit }) {
   });
 
   const handleClickDelete = function () {
+    setConfirmModal(!confirmModal);
+  };
+
+  const handleDelete = function () {
     dispatch(updateCustomEvents(event));
     dispatch(removeEvent(event));
     dispatch(updateEvent(event));
     setSubmit(!submit);
     setEditState(false);
     setDeleteState(!deleteState);
+    setConfirmModal(!confirmModal);
   };
 
   const handleClickEdit = function () {
@@ -159,6 +166,15 @@ function HandleEventCard({ event, submit, setSubmit }) {
 
   return (
     <div>
+      {confirmModal && (
+        <ConfirmModal
+          onDelete={handleClickDelete}
+          onUndo={handleDelete}
+          message={
+            "Are you sure ypu want to delete the event '" + event.name + "'?"
+          }
+        />
+      )}
       {!deleteState && (
         <div className={fullContainerClass}>
           <div className={containerClass}>
