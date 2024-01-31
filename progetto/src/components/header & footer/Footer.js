@@ -3,7 +3,8 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import NavigationContext from "../../context/navigation";
 
 function Footer() {
-  const footerStyle = "bg-gray-800 text-white py-10 mt-0";
+  const bgcolor = "bg-[#334466]"
+  const footerStyle = `${bgcolor} text-white py-10 mt-0`;
   const containerStyle = "max-w-7xl mx-auto flex justify-between flex-wrap";
   const sectionStyle = "flex-1 mb-10";
   const marginRightStyle = "mr-10";

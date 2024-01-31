@@ -5,16 +5,17 @@ import NavigationContext from "../../context/navigation";
 import { useContext } from "react";
 
 function HeaderBar() {
-  const sectionHeader = "bg-white";
+  const sectionHeader = "bg-[#6688cc]";
   const sectionElement =
     "mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between";
   const navLinks = "hidden md:flex items-center gap-6 text-sm";
   const mobileMenuButton =
     "block md:hidden rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75";
+  const coloreDesiderato = "bg-[#77aaff]"; 
   const loginButton =
-    "rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow cursor-pointer";
+  `rounded-md ${coloreDesiderato} px-5 py-2.5 text-sm font-medium text-white shadow cursor-pointer`;
   const registerButton =
-    "hidden sm:flex rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 cursor-pointer";
+    "hidden sm:flex rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#556699] cursor-pointer";
 
   const dispatch = useDispatch();
 
@@ -37,7 +38,7 @@ function HeaderBar() {
   };
 
   const renderedLinks = links.map((link) => (
-    <Link key={link.label} to={link.path} singlePage={link.label}>
+    <Link key={link.label} to={link.path} singlePage={link.label} >
       {link.label}
     </Link>
   ));

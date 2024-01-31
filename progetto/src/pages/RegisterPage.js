@@ -18,6 +18,8 @@ function RegisterPage() {
     "w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500";
   const buttonClass =
     "w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue";
+  const buttoncolor = "bg-[#77aaff]"
+  const registerbuttonClass = `"flex items-center justify-between w-full px-5 py-2.5 text-sm font-medium text-white ${buttoncolor} rounded-md hover: ${buttoncolor} focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-50"`
 
   const { navigate } = useContext(NavigationContext);
 
@@ -176,7 +178,7 @@ function RegisterPage() {
               </div>
 
               <button
-                className="flex items-center justify-between w-full px-5 py-2.5 text-sm font-medium text-white bg-teal-600 rounded-md hover:bg-teal-700 focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-50"
+                className={registerbuttonClass}
                 type="submit"
               >
                 <span>Sign In</span>

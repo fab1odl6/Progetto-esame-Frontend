@@ -6,16 +6,22 @@ import NavigationContext from "../context/navigation";
 import LoginModals from "../components/modals/loginModals";
 
 function ArtworkDetailsPage({ navigateBack }) {
-  const containerClass = "items-center bg-white overflow-auto p-4";
+  const textcontainerClass= "bg-gray-800 bg-opacity-75 p-8 rounded-md backdrop-filter backdrop-blur-md";
+  const titleClass="title-font sm:text-4xl text-3xl mb-4 font-medium text-white";
   const imageContainerClass =
-    "flex justify-center items-center relative image-container";
-  const titleClass = "text-lg font-semibold";
-  const imageClass = "max-w-xl max-h-xl rounded";
-  const firstRowClass = "flex justify-between items-center p-2";
-  const favoriteClass = "text-2xl cursor-pointer";
+    "lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0 flex justify-center items-center relative image-container";
+  const descriptionClass = "mb-8 leading-relaxed text-white";
+  const coloreDesiderato = "bg-[#77aaff]";
+  const heartClass = "text-red-500 mr-2";
+  const favoriteboxClass = "flex justify-center text-white";
+  const favoritebuttonClass = "inline-flex items-center text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-400 rounded text-lg";
+  const imageClass = "max-w-xl max-h-xl rounded object-cover object-center rounded max-w-full max-h-full";
   const linkClass = "text-blue-500 hover:underline";
   const backgroundClass =
-    "bg-cover bg-center bg-fixed backdrop-filter backdrop-blur-lg";
+    "text-gray-600 body-font bg-cover bg-center bg-fixed backdrop-filter backdrop-blur-lg  w-full overflow-hidden";
+  const loginmodalClass = "container mx-auto flex px-5 py-24 md:flex-row flex-col items-center";
+  const navigatebackClass= `absolute top-4 left-4 inline-flex items-center text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-400 rounded text-l`;
+  const textboxClass= "lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center";
 
   const { navigate } = useContext(NavigationContext);
 
@@ -74,17 +80,17 @@ function ArtworkDetailsPage({ navigateBack }) {
   }, [logged, artworks, art.id]);
 
   const TextContainer = ({ children }) => (
-    <div className="bg-gray-800 bg-opacity-75 p-8 rounded-md backdrop-filter backdrop-blur-md">
+    <div className={textcontainerClass}>
       <div className="text-left">{children}</div>
     </div>
   );
 
   return (
     <section
-      className={`text-gray-600 body-font ${backgroundClass} w-full overflow-hidden`}
+      className={backgroundClass}
       style={{ margin: 0, padding: 0, backgroundImage: `url(${art.image})` }}
     >
-      <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+      <div className={loginmodalClass}>
         {modal && (
           <LoginModals
             onClickButton={handleClickButton}
@@ -93,31 +99,30 @@ function ArtworkDetailsPage({ navigateBack }) {
           />
         )}
         <button
-          className="absolute top-4 left-4 inline-flex items-center text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded text-lg"
-          onClick={handleNavigateBack}
+          className={navigatebackClass}
         >
           <span className="mr-2">&#8592;</span>
           Back
         </button>
         <div
-          className={`lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0 ${imageContainerClass}`}
+          className={imageContainerClass}
         >
           <img
-            className={`${imageClass} object-cover object-center rounded max-w-full max-h-full`}
+            className={imageClass}
             alt={art.title}
             src={art.image}
           />
         </div>
-        <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+        <div className= {textboxClass}>
           <TextContainer>
-            <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
+            <h1 className={titleClass}>
               <b>Title</b>: {art.title}
             </h1>
-            <p className="mb-8 leading-relaxed text-white">
+            <p className={descriptionClass}>
               <b>Author</b>: {art.authorName}
             </p>
             {art.link && (
-              <div className="mb-8 leading-relaxed text-white">
+              <div className={descriptionClass}>
                 <b>Source Link</b>:{" "}
                 {art.link && (
                   <a
@@ -131,28 +136,28 @@ function ArtworkDetailsPage({ navigateBack }) {
                 )}
               </div>
             )}
-            <p className="mb-8 leading-relaxed text-white">
+            <p className={descriptionClass}>
               <b>Department</b>: {art.department || "Unknown Department"}
             </p>
-            <p className="mb-8 leading-relaxed text-white">
+            <p className={descriptionClass}>
               <b>Culture</b>: {art.culture || "Unknown Culture"}
             </p>
-            <p className="mb-8 leading-relaxed text-white">
+            <p className={descriptionClass}>
               <b>Date</b>: {art.date}
             </p>
-            <p className="mb-8 leading-relaxed text-white">
+            <p className={descriptionClass}>
               <b>Classification</b>:{" "}
               {art.classification || "Unknown Classification"}
             </p>
-            <div className="flex justify-center text-white">
+            <div className={favoriteboxClass}>
               <button
-                className="inline-flex items-center text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded text-lg"
+                className={favoritebuttonClass}
                 onClick={handleClickHeart}
               >
                 {favoriteState ? (
-                  <FaHeart className="text-red-500 mr-2" />
+                  <FaHeart className={heartClass} />
                 ) : (
-                  <FaRegHeart className="text-red-500 mr-2" />
+                  <FaRegHeart className={heartClass} />
                 )}
                 {buttonText}
               </button>
