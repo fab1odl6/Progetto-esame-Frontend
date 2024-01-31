@@ -4,7 +4,8 @@ import { useState, useContext, useEffect } from "react";
 import NavigationContext from "../context/navigation";
 
 function RegisterPage() {
-  const containerClass = "p-4 max-w-md bg-white rounded-md shadow-md mt-4 mx-auto items-center";
+  const containerClass =
+    "p-4 max-w-md bg-white rounded-md shadow-md mt-4 mx-auto items-center";
   const mandatoryClass = "text-red-500";
   const successDivClass =
     "mt-4 p-4 bg-green-100 border border-green-400 text-green-700";
@@ -89,26 +90,35 @@ function RegisterPage() {
   };
 
   const wrapperStyle = {
-    background: 'rgba(255, 255, 255, 0.2)', 
-    borderRadius: '10px',
-    padding: '20px',
+    background: "rgba(255, 255, 255, 0.2)",
+    borderRadius: "10px",
+    padding: "20px",
   };
 
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="flex justify-center min-h-screen" style={wrapperStyle}>
-        <div className="hidden bg-cover lg:block lg:w-2/5" style={{backgroundImage: "url('https://i0.wp.com/orizzontecultura.com/wp-content/uploads/2021/02/Gustave-Klimt-Il-bacio.jpg?resize=726%2C1024&ssl=1')"}}>
-        </div>
+        <div
+          className="hidden bg-cover lg:block lg:w-2/5"
+          style={{
+            backgroundImage:
+              "url('https://i0.wp.com/orizzontecultura.com/wp-content/uploads/2021/02/Gustave-Klimt-Il-bacio.jpg?resize=726%2C1024&ssl=1')",
+          }}
+        ></div>
         <div className="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
           <div className="w-full">
             <h1 className="text-2xl font-semibold tracking-wider text-gray-800 capitalize dark:text-white">
               Get your free account now.
             </h1>
-            
 
-            <form className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2" onSubmit={handleSubmit}>
+            <form
+              className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2"
+              onSubmit={handleSubmit}
+            >
               <div>
-                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Name</label>
+                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                  Name
+                </label>
                 <input
                   type="text"
                   placeholder="Mario"
@@ -121,7 +131,9 @@ function RegisterPage() {
               </div>
 
               <div>
-                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Surname</label>
+                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                  Surname
+                </label>
                 <input
                   type="text"
                   placeholder="Rossi"
@@ -134,7 +146,9 @@ function RegisterPage() {
               </div>
 
               <div>
-                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Username</label>
+                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                  Username
+                </label>
                 <input
                   type="text"
                   placeholder="mario.rossi"
@@ -147,7 +161,9 @@ function RegisterPage() {
               </div>
 
               <div>
-                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Password</label>
+                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                  Password
+                </label>
                 <input
                   type="password"
                   placeholder="Enter your password"
@@ -157,10 +173,6 @@ function RegisterPage() {
                   onChange={handleChange}
                   required
                 />
-              </div>
-
-              <div>
-                {/* Altri campi se necessario */}
               </div>
 
               <button

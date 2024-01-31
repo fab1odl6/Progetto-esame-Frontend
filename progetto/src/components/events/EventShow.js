@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { IoIosClose } from "react-icons/io";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
 import NavigationContext from "../../context/navigation";

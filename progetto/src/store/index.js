@@ -23,7 +23,7 @@ const persistConfig = {
   key: "root",
   storage,
   whitelist: ["users", "artDetails"],
-  serialize: true, //New
+  serialize: true,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

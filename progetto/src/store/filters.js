@@ -9,7 +9,6 @@ const filtersSlice = createSlice({
     filterCheckbox: [],
   },
   reducers: {
-    //INSERIMENTO GENERICO
     addFilterItem(state, action) {
       const { filterName, valueToAdd } = action.payload;
       if (state[filterName] && !state[filterName].includes(valueToAdd)) {
@@ -18,11 +17,9 @@ const filtersSlice = createSlice({
           [filterName]: [...state[filterName], valueToAdd],
         };
       }
-      // Se il filtro specificato non esiste, restituisci lo stato inalterato
       return state;
     },
 
-    //GENERICA RIMOZIONE
     removeFilterItem(state, action) {
       const { filterName, valueToRemove } = action.payload;
 
@@ -34,7 +31,7 @@ const filtersSlice = createSlice({
           ),
         };
       }
-      // Se il filtro specificato non esiste, restituisci lo stato inalterato
+
       return state;
     },
   },

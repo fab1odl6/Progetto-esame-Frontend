@@ -75,7 +75,6 @@ function EveryArtworkPage() {
     );
   });
 
-  //NEW
   const currentItems = filteredArray.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
@@ -88,35 +87,9 @@ function EveryArtworkPage() {
     dispatch(clearText());
   };
 
-  //NEW
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
-  /*
-  return (
-    <div style={pageContainerStyle}>
-      <div className={searchBarClass}>
-        <SearchBar />
-      </div>
-      <div className={filterListClass}>
-        <FilterList artworks={array} />
-      </div>
-      {searchState && searchState.trim() !== "" && (
-        <div className={containerStateClass}>
-          <p className={resultTextClass}>Results for: {searchState}</p>
-          <button className={buttonClass} onClick={handleRemove}>
-            <FaTimes className={iconClass} />
-            Clear
-          </button>
-        </div>
-      )}
-      <div className={artGridClass}>
-        <ArtGrid artworks={filteredArray} />
-      </div>
-    </div>
-  );
-  */
 
   return (
     <div style={pageContainerStyle}>

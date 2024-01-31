@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setArt } from "../../store";
-import { IoIosClose } from "react-icons/io";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useEffect, useState, useContext } from "react";
 import NavigationContext from "../../context/navigation";

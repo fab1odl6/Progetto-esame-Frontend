@@ -7,12 +7,11 @@ const searchSlice = createSlice({
   },
   reducers: {
     updateText: (state, action) => {
-      console.log("OK");
-      state.text = action.payload; // Aggiorna lo stato con il nuovo valore
+      state.text = action.payload;
     },
 
     clearText: (state) => {
-      state.text = ""; // Resetta lo stato alla stringa vuota
+      state.text = "";
     },
   },
 });

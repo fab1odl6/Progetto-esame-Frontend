@@ -19,7 +19,7 @@ function InputDropdownPanel({ className, options }) {
   const handleChange = (event) => {
     const inputValue = event.target?.value;
     setText(inputValue);
-    // Filtra i valori corrispondenti
+
     const matches = options.filter((value) =>
       value.toLowerCase().includes(inputValue.toLowerCase())
     );

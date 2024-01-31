@@ -1,14 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initializeApp } from "firebase/app";
-import {
-  getDatabase,
-  ref,
-  get,
-  child,
-  set,
-  remove,
-  update,
-} from "firebase/database";
+import { getDatabase, ref, get, child, set, remove } from "firebase/database";
 import { firebaseConfig } from "../components/firebase/FirebaseConfig";
 
 const artArray = [];

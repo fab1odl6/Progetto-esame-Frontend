@@ -17,9 +17,8 @@ function CheckboxDropdownPanel({ className, options }) {
   );
 
   useEffect(() => {
-    // Inizializza checkedItems in base allo stato iniziale state
     const initialState = filterState.reduce((acc, value) => {
-      acc[value] = true; // Checkbox selezionata inizialmente
+      acc[value] = true;
       return acc;
     }, {});
     setCheckedItems(initialState);

@@ -20,7 +20,6 @@ function PersonalGalleryPage() {
     return state.users;
   });
 
-
   const artTextClass = "text-center font-bold text-4xl my-20";
 
   useEffect(() => {
@@ -42,9 +41,8 @@ function PersonalGalleryPage() {
 
         if (Array.isArray(artworksData)) {
           dispatch(setArtworks(artworksData));
-          setArtworksLocal(artworksData); // Aggiorna lo stato locale con i dati
+          setArtworksLocal(artworksData);
         } else if (artworksData && typeof artworksData === "object") {
-          // converto oggetto in un array
           const dataArray = Object.values(artworksData);
           dispatch(setArtworks(dataArray));
           setArtworksLocal(dataArray);
@@ -62,8 +60,6 @@ function PersonalGalleryPage() {
       localUpdate();
     }
   }, [dispatch, logged]);
-
-  console.log("Artworks in Redux store:", artworksRedux); // Log gli artworks nello stato Redux
 
   return (
     <div>

@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { MdModeEdit, MdOutlineEditOff } from "react-icons/md";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateEvent,
@@ -79,7 +78,7 @@ function HandleEventCard({ event, submit, setSubmit }) {
 
   const dispatch = useDispatch();
 
-  const { user, events } = useSelector((state) => {
+  const { user } = useSelector((state) => {
     return state.users;
   });
 

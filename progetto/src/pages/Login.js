@@ -133,8 +133,6 @@ const LoginPage = function () {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // console.log(`Username: ${username}, Password: ${password}`);
-
     const usersRef = ref(db, "users/");
 
     try {
@@ -142,7 +140,6 @@ const LoginPage = function () {
 
       if (snapshot.exists()) {
         const users = snapshot.val();
-        //console.log(users);
 
         if (users) {
           const matchedUser = Object.values(users).find(
@@ -152,7 +149,6 @@ const LoginPage = function () {
           );
 
           if (matchedUser) {
-            //  console.log("Utente loggato:", matchedUser);
             const artworks = await getArts(matchedUser.personalData);
             const events = await getEvents(matchedUser.personalData);
             const customEvents = await getCustomEvents(
@@ -161,14 +157,14 @@ const LoginPage = function () {
             dispatch(setUser({ matchedUser, artworks, events, customEvents }));
             dispatch(setLogged(true));
             setLoggedIn(true);
-            // console.log("isLoggedIn dopo il login:", true);
+
             navigate("/");
             dispatch(setPage("HomePage"));
           } else {
             setError("Incorrect Email or Password, try again");
             setUsername("");
             setPassword("");
-            setLoggedIn(false); // Imposta isLoggedIn a false in caso di login non riuscito
+            setLoggedIn(false);
           }
         } else {
           setError("Dati utente non validi");
@@ -178,13 +174,7 @@ const LoginPage = function () {
       console.error("Errore durante la verifica dell'utente:", error);
       setError("Si è verificato un errore durante la verifica dell'utente");
     }
-
-    // console.log("Fine della funzione handleLogin");
   };
-
-  useEffect(() => {
-    //   console.log("isLoggedIn dopo il login:", isLoggedIn);
-  }, [isLoggedIn]);
 
   return (
     <div
@@ -241,17 +231,6 @@ const LoginPage = function () {
       </div>
     </div>
   );
-};
-
-const ConditionalHomePage = () => {
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  console.log("isLoggedIn:", isLoggedIn);
-
-  if (isLoggedIn) {
-    return <HomePage />;
-  }
-
-  return "Benvenuto!"; // Puoi anche renderizzare altro (ad esempio, un messaggio di benvenuto)
 };
 
 export default LoginPage;

@@ -23,15 +23,14 @@ function FavoriteEventShow({
   const image = "max-w-lg max-h-lg w-full h-auto rounded-t-lg";
   const close =
     "text-4xl absolute top-2 right-2 cursor-pointer bg-white p-1 rounded-full";
-  const contentClass = "p-4 mt-2 mb-2 relative flex flex-col items-center"; // Aggiunti margini superiore e inferiore
-  // const firstRow = "flex justify-between items-center w-full"; // Aggiunto w-full
+  const contentClass = "p-4 mt-2 mb-2 relative flex flex-col items-center";
   const favoriteContainerClass = "absolute bottom-1 right-2";
-  const favoriteClass = "text-2xl cursor-pointer";
+  const favoriteClass = "text-2xl cursor-pointer text-red-500";
   const heartCircleClass = "rounded-full p-1 bg-gray-200";
-  const dataContainerClass = "flex items-center mb-2 w-full"; // Aggiunto margine inferiore
-  const dataIconClass = "mr-2 text-blue-700"; // Modificato per spostare l'icona a destra
-  const dataTextClass = "font-bold"; // Nuova classe per il testo
-  const labelTextClass = "text-gray-500"; // Nuova classe per il testo dell'etichetta
+  const dataContainerClass = "flex items-center mb-2 w-full";
+  const dataIconClass = "mr-2 text-blue-700";
+  const dataTextClass = "font-bold";
+  const labelTextClass = "text-gray-500";
 
   const handleClickClose = function () {
     onClickClose();
@@ -56,10 +55,7 @@ function FavoriteEventShow({
               />
               <IoIosClose className={close} onClick={handleClickClose} />
               <div className={`${favoriteContainerClass} ${heartCircleClass}`}>
-                <FaHeart
-                  className={`${favoriteClass} text-red-500`}
-                  onClick={handleClickHeart}
-                />
+                <FaHeart className={favoriteClass} onClick={handleClickHeart} />
               </div>
             </div>
             <div className={contentClass}>
