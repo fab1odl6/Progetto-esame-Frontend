@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import ArtGrid from "../components/artworks/ArtGrid";
 import FilterList from "../components/filters/FilterList";
 import SearchBar from "../components/header & footer/SearchBar";
@@ -19,7 +19,7 @@ function EveryArtworkPage() {
 
   const searchBarClass = "z-50 relative";
   const filterListClass = "z-40 relative";
-  const containerStateClass = "z-10 relative flex items-center mt-4";
+  const containerStateClass = "z-10 relative flex items-center mt-4 bg-gray-200";
   const resultTextClass = "text-lg font-bold";
   const buttonClass =
     "flex items-center px-2 py-1 bg-gray-300 rounded cursor-pointer ml-3";
@@ -33,6 +33,12 @@ function EveryArtworkPage() {
   const dispatch = useDispatch();
   const filtersState = useSelector((state) => state.filters);
   const searchState = useSelector((state) => state.search.text);
+
+  //NEW
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
   const filteredArray = array.filter((element) => {
     const matchesTitle =
@@ -68,6 +74,9 @@ function EveryArtworkPage() {
     );
   });
 
+  //NEW
+  const currentItems = filteredArray.slice(indexOfFirstItem, indexOfLastItem);
+
   useEffect(() => {
     if (!searchState) {
       dispatch(clearText());
@@ -78,6 +87,12 @@ function EveryArtworkPage() {
     dispatch(clearText());
   };
 
+  //NEW
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  /*
   return (
     <div style={pageContainerStyle}>
       <div className={searchBarClass}>
@@ -97,6 +112,46 @@ function EveryArtworkPage() {
       )}
       <div className={artGridClass}>
         <ArtGrid artworks={filteredArray} />
+      </div>
+    </div>
+  );
+  */
+
+  return (
+    <div style={pageContainerStyle}>
+      <div className={searchBarClass}>
+        <SearchBar />
+      </div>
+      <div className={filterListClass}>
+        <FilterList artworks={array} />
+      </div>
+      {searchState && searchState.trim() !== "" && (
+        <div className={containerStateClass}>
+          <p className={resultTextClass}>Results for: {searchState}</p>
+          <button className={buttonClass} onClick={handleRemove}>
+            <FaTimes className={iconClass} />
+            Clear
+          </button>
+        </div>
+      )}
+      <div className={artGridClass}>
+      <ArtGrid artworks={currentItems} />
+        <div className="pagination ">
+          <button
+          className={buttonClass}
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <button
+            className={buttonClass}
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={indexOfLastItem >= filteredArray.length}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );
