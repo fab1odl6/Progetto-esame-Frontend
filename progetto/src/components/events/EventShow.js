@@ -6,6 +6,7 @@ import { Dialog, DialogContent } from "@mui/material";
 import LoginModals from "../modals/loginModals";
 
 function EventShow({
+  event,
   favoriteState,
   onClickHeart,
   setFavoriteState,
@@ -22,10 +23,9 @@ function EventShow({
 
   const { navigate } = useContext(NavigationContext);
 
-  const { array, index } = useSelector((state) => {
+  const { index } = useSelector((state) => {
     return state.events;
   });
-
   const { events, logged } = useSelector((state) => {
     return state.users;
   });
@@ -41,7 +41,7 @@ function EventShow({
 
   useEffect(() => {
     if (logged) {
-      if (events.find((item) => item.name === array[index].name)) {
+      if (events.find((item) => item.name === event.name)) {
         setFavoriteState(true);
       } else {
         setFavoriteState(false);
@@ -72,30 +72,28 @@ function EventShow({
             <div className={imageContainerClass}>
               <img
                 className={imageClass}
-                key={array[index].id}
-                src={array[index].image}
-                alt={array[index].name}
+                key={event.id}
+                src={event.image}
+                alt={event.name}
               />
             </div>
             <div className={firstRowClass}>
-              {array[index].name && <div>Title: {array[index].name}</div>}
+              {event.name && <div>Title: {event.name}</div>}
               {favoriteState ? (
                 <FaHeart
                   className={favoriteClass}
-                  onClick={() => handleClickHeart(array[index])}
+                  onClick={() => handleClickHeart(event)}
                 />
               ) : (
                 <FaRegHeart
                   className={favoriteClass}
-                  onClick={() => handleClickHeart(array[index])}
+                  onClick={() => handleClickHeart(event)}
                 />
               )}
             </div>
-            {array[index].department && (
-              <div>Department: {array[index].department}</div>
-            )}
-            {array[index].guests && <div>Guests: {array[index].guests}</div>}
-            {array[index].date && <div>Date: {array[index].date}</div>}
+            {event.department && <div>Department: {event.department}</div>}
+            {event.guests && <div>Guests: {event.guests}</div>}
+            {event.date && <div>Date: {event.date}</div>}
           </div>
         </DialogContent>
       </Dialog>

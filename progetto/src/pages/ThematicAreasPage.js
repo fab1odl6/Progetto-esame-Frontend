@@ -57,14 +57,13 @@ function Museums() {
   };
 
   return (
-    <div className={containerClass}>
-      {/* Sezione con l'immagine */}
+    <div>
       <div
         style={{
           position: "relative",
           width: "100%",
-          height: "500px",
-          overflow: "hidden",
+          height: "500px", // o l'altezza desiderata
+          // overflow: "hidden", // Rimuovi l'overflow: "hidden"
         }}
       >
         <img
@@ -73,7 +72,7 @@ function Museums() {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            filter: "brightness(50%)", // Aggiunto l'effetto di penombra
+            filter: "brightness(50%)",
           }}
         />
         <div
@@ -92,15 +91,16 @@ function Museums() {
           THEMATIC AREAS
         </div>
       </div>
-
       {/* Sezione con la griglia delle aree tematiche */}
-      <div className="mainContent">
-        <Grid museums={museums} openModal={openModal} />
-        <ThematicAreasModal
-          open={modalOpen}
-          onClose={closeModal}
-          museum={selectedMuseum}
-        />
+      <div className={containerClass}>
+        <div className="mainContent">
+          <Grid museums={museums} openModal={openModal} />
+          <ThematicAreasModal
+            open={modalOpen}
+            onClose={closeModal}
+            museum={selectedMuseum}
+          />
+        </div>
       </div>
     </div>
   );

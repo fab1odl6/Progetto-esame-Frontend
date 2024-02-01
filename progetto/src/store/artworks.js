@@ -123,60 +123,25 @@ async function readData() {
 
 await readData();
 
-async function updateFavorite(art, user) {
-  console.log("Art: " + art.favorite);
-  const db = getDatabase();
-  console.log("User: " + user.name);
-
-  if (!art.favorite) {
-    console.log("false");
-    await set(ref(db, "users/" + user.name + "/artworks/" + art.title), {
-      id: art.id,
-      link: art.link,
-      authorName: art.authorName,
-      title: art.title,
-      image: art.image,
-      department: art.department,
-      culture: art.culture,
-      period: art.period,
-      date: art.date,
-      dimensions: art.dimensions,
-      city: art.city,
-      state: art.state,
-      country: art.country,
-      classification: art.classification,
-      favorite: true,
-      full: false,
-      type: art.type,
-    });
-    console.log("Ok");
-  } else {
-    console.log("true");
-    await remove(ref(db, "users/" + user.name + "/artworks/" + art.title));
-  }
-}
-
 const artworksSlice = createSlice({
   name: "artworks",
   initialState: {
     array: artArray,
     index: 0,
     favorite: false,
-    full: false,
   },
   reducers: {
     swipeRightArt(state, action) {
-      const newIndex = (state.index + 1) % state.array.length;
+      const newIndex = state.index + 1;
       return { ...state, index: newIndex };
     },
 
     swipeLeftArt(state, action) {
-      const newIndex =
-        (state.index - 1 + state.array.length) % state.array.length;
+      const newIndex = state.index - 1;
       return { ...state, index: newIndex };
     },
 
-    async switchFavoriteArt(state, action) {
+    switchFavoriteArt(state, action) {
       const newFavorite = !state.array[state.index].favorite;
       const newArray = [...state.array];
       newArray[state.index] = {
@@ -184,16 +149,7 @@ const artworksSlice = createSlice({
         favorite: newFavorite,
       };
 
-      await updateFavorite(action.payload.art, action.payload.user);
       return { ...state, array: newArray, favorite: newFavorite };
-    },
-
-    switchFullArt(state, action) {
-      const newFull = !state.array[state.index].full;
-      const newArray = [...state.array];
-      newArray[state.index] = { ...newArray[state.index], full: newFull };
-
-      return { ...state, array: newArray, full: newFull };
     },
   },
 });
