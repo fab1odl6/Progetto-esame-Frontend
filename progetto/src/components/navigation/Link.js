@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useNavigation from "../../hooks/use-navigation";
 import { setPage } from "../../store";
 
-const colorClass = "text-[#556699]"
+const colorClass = "text-[#444455]"
 
 function Link({ to, children }) {
   const dispatch = useDispatch();

@@ -15,7 +15,7 @@ function HeaderBar() {
   const loginButton =
   `rounded-md ${coloreDesiderato} px-5 py-2.5 text-sm font-medium text-white shadow cursor-pointer`;
   const registerButton =
-    "hidden sm:flex rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#556699] cursor-pointer";
+    "hidden sm:flex rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#444455] cursor-pointer";
 
   const dispatch = useDispatch();
 
@@ -64,7 +64,8 @@ function HeaderBar() {
           src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png"
           onClick={handleLogoClick}
           alt="Icon"
-          className="h-8 w-8 mr-2 cursor-pointer text-[#556699]" 
+          className="h-8 w-8 mr-2 cursor-pointer"
+          style={{ filter: 'brightness(0) invert(1)', color: '#556699' }}
         />
         </div>
         <nav className={navLinks} aria-label="Global">

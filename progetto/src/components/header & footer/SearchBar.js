@@ -6,10 +6,15 @@ import { updateText } from "../../store";
 import React from "react";
 
 function SearchBar() {
+  const cursorpointerClass= "cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-800";
   const searchBarHeaderClass = classNames(
     "flex justify-center items-center relative z-10"
   );
+  const searcboxClass = "absolute inset-y-0 left-3 flex items-center pointer-events-none";
+  const iconpositionClass = "relative w-full";
+  const searchtextClass = "w-4 h-4 text-gray-500 dark:text-gray-400";
   const searchBarClass = classNames("mt-5 w-5/6 text-gray-500 relative");
+  const colorborerClass ="border-b border-blue-200";
   const formClass = "flex items-center w-full";
   const searchDivClass = "relative flex items-center w-full";
   const finalClassNamesClass = classNames(
@@ -57,10 +62,10 @@ function SearchBar() {
       <div className={searchBarClass}>
         <form onSubmit={handleSubmit} className={formClass}>
           <div className={searchDivClass}>
-            <div className="relative w-full">
-              <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+            <div className={iconpositionClass}>
+              <div className={searcboxClass}>
                 <svg
-                  className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  className={searchtextClass}
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -90,13 +95,13 @@ function SearchBar() {
                 {matchedValues.slice(0, 3).map((value, index) => (
                   <React.Fragment key={index}>
                     <div
-                      className="cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+                      className= {cursorpointerClass}
                       onClick={() => handleSelect(value)}
                     >
                       {value.title}
                     </div>
                     {index < matchedValues.length - 1 && (
-                      <div className="border-b border-blue-200"></div>
+                      <div className={colorborerClass}></div>
                     )}
                   </React.Fragment>
                 ))}
