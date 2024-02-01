@@ -36,10 +36,7 @@ function Museums() {
             description: data[key].description,
           }));
 
-          console.log(museumsFromFirebase);
-
           setMuseums(museumsFromFirebase);
-          console.log(museumsFromFirebase);
         });
       } catch (error) {
         console.error("Error fetching museums:", error);
@@ -61,27 +58,43 @@ function Museums() {
 
   return (
     <div className={containerClass}>
+      {/* Sezione con l'immagine */}
       <div
-        className="mainContent"
         style={{
-          background:
-            'linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url("https://www.area-arch.it/wp-content/uploads/sites/6/2023/10/Keope-Plate_copper.jpg")',
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          minHeight: "calc(100vh - 100px)",
+          position: "relative",
+          width: "100%",
+          height: "500px",
+          overflow: "hidden",
         }}
       >
-        <h1
+        <img
+          src="https://www.055firenze.it/ridimensiona.html/cms/1920/1080/100_100_100/cms/custom/files/100005/ct50012_id223491_t1/5._Depero._Cavalcata_Fantastica_unimmagine_dellallestimento_Palazzo_Medici_Riccardi_Firenze_Ph._Nicola_Neri.jpeg"
           style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            filter: "brightness(50%)", // Aggiunto l'effetto di penombra
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
             textAlign: "center",
-            paddingTop: "50px",
+            color: "#fff",
             fontWeight: "bold",
             fontSize: "2em",
+            zIndex: 1,
           }}
         >
           THEMATIC AREAS
-        </h1>
+        </div>
+      </div>
+
+      {/* Sezione con la griglia delle aree tematiche */}
+      <div className="mainContent">
         <Grid museums={museums} openModal={openModal} />
         <ThematicAreasModal
           open={modalOpen}
