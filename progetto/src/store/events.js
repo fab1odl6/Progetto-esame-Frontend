@@ -53,36 +53,6 @@ async function readData() {
 
 await readData();
 
-function updateFavorite(event, user) {
-  const db = getDatabase();
-
-  if (!event.favorite) {
-    set(ref(db, "users/" + user.name + "/events/" + event.path), {
-      id: event.id,
-      name: event.name,
-      image: event.image,
-      date: event.date,
-      department: event.department,
-      guests: event.guests,
-      favorite: true,
-      full: false,
-      path: event.path,
-      userGenerated: event.userGenerated,
-      generator: event.generator,
-    });
-
-    update(ref(db, "events/" + event.path), {
-      favorite: true,
-    });
-  } else {
-    remove(ref(db, "users/" + user.name + "/events/" + event.path));
-
-    update(ref(db, "events/" + event.path), {
-      favorite: false,
-    });
-  }
-}
-
 function updateEvents(event) {
   const db = getDatabase();
 
@@ -119,18 +89,6 @@ const eventsSlice = createSlice({
       const newIndex =
         (state.index - 1 + state.array.length) % state.array.length;
       return { ...state, index: newIndex };
-    },
-
-    switchFavoriteEvent(state, action) {
-      const newFavorite = !state.array[state.index].favorite;
-      const newArray = [...state.array];
-      newArray[state.index] = {
-        ...newArray[state.index],
-        favorite: newFavorite,
-      };
-
-      updateFavorite(action.payload.event, action.payload.user);
-      return { ...state, array: newArray, favorite: newFavorite };
     },
 
     addNewEvent(state, action) {
