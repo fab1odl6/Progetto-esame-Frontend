@@ -90,7 +90,6 @@ function EveryArtworkPage() {
   };
 
   const handlePageChange = (pageNumber) => {
-    //setCurrentPage(pageNumber);
     dispatch(setEveryArtworkPage(pageNumber))
   };
 

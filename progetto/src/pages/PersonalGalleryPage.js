@@ -4,23 +4,28 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, child } from "firebase/database";
 import { firebaseConfig } from "../components/firebase/FirebaseConfig";
 import ArtGrid from "../components/artworks/ArtGrid";
-import { setArtworks, clearText } from "../store";
+import { setArtworks, clearText, setPersonalGalleryPage } from "../store";
 import LoginPage from "./Login";
 
 function PersonalGalleryPage() {
+
+  const artTextClass = "text-center font-bold text-4xl my-20";
+  const buttonClass = "flex items-center px-2 py-1 bg-gray-300 rounded cursor-pointer ml-3";
+
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
   const dbRef = ref(db);
-
   const dispatch = useDispatch();
   const artworksRedux = useSelector((state) => state.artworks);
   const [artworksLocal, setArtworksLocal] = useState([]);
+  const currentPage = useSelector((state) => state.activePage.personalGalleryPage)
+  const itemsPerPage = 4;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
   const { user, logged } = useSelector((state) => {
     return state.users;
   });
-
-  const artTextClass = "text-center font-bold text-4xl my-20";
 
   useEffect(() => {
     dispatch(clearText());
@@ -37,7 +42,6 @@ function PersonalGalleryPage() {
 
       if (snapshot.exists()) {
         const artworksData = snapshot.val();
-        console.log("Artworks data from Firebase: ", artworksData);
 
         if (Array.isArray(artworksData)) {
           dispatch(setArtworks(artworksData));
@@ -61,12 +65,35 @@ function PersonalGalleryPage() {
     }
   }, [dispatch, logged]);
 
+  const currentItems = artworksLocal.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (pageNumber) => {
+    dispatch(setPersonalGalleryPage(pageNumber))
+  };
+
   return (
     <div>
       {logged ? (
-        <div>
+        <div className="max-w-screen-xl mx-auto flex flex-col items-center relative">
           <div className={artTextClass}>PERSONAL GALLERY</div>
-          <ArtGrid artworks={artworksLocal} />
+          <ArtGrid artworks={currentItems} />
+          <div className="mt-4 flex items-center">
+            <button
+              className={buttonClass}
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            <p className="flex items-center px-2 py-1 bg-gray-300 rounded ml-3">{currentPage}</p>
+            <button
+              className={buttonClass}
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={indexOfLastItem >= artworksLocal.length}
+            >
+              Next
+            </button>
+          </div>
         </div>
       ) : (
         <LoginPage />
