@@ -5,7 +5,7 @@ import NavigationContext from "../../context/navigation";
 import { useContext } from "react";
 
 function HeaderBar() {
-  const sectionHeader = "bg-[#6688cc]";
+  const sectionHeader = "bg-[#99aadd]";
   const sectionElement =
     "mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between";
   const navLinks = "hidden md:flex items-center gap-6 text-sm";
@@ -15,7 +15,7 @@ function HeaderBar() {
   const loginButton =
   `rounded-md ${coloreDesiderato} px-5 py-2.5 text-sm font-medium text-white shadow cursor-pointer`;
   const registerButton =
-    "hidden sm:flex rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#556699] cursor-pointer";
+    "hidden sm:flex rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#444455] cursor-pointer";
 
   const dispatch = useDispatch();
 
@@ -60,12 +60,13 @@ function HeaderBar() {
     <header className={sectionHeader}>
       <div className={sectionElement}>
         <div className="md:flex md:items-center">
-          <img
-            src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png"
-            onClick={handleLogoClick}
-            alt="Icon"
-            className="h-8 w-8 mr-2 cursor-pointer"
-          />
+        <img
+          src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png"
+          onClick={handleLogoClick}
+          alt="Icon"
+          className="h-8 w-8 mr-2 cursor-pointer"
+          style={{ filter: 'brightness(0) invert(1)', color: '#556699' }}
+        />
         </div>
         <nav className={navLinks} aria-label="Global">
           {renderedLinks}

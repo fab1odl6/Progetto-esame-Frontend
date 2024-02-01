@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import useNavigation from "../../hooks/use-navigation";
 import { setPage } from "../../store";
 
+const colorClass = "text-[#444455]"
+
 function Link({ to, children }) {
   const dispatch = useDispatch();
 
@@ -11,7 +13,7 @@ function Link({ to, children }) {
     return state.activePage.page;
   });
 
-  const classes = `text-teal-600 ${
+  const classes = `${colorClass} ${
     to === page ? "underline underline-offset-2" : ""
   }`;
 
@@ -24,7 +26,7 @@ function Link({ to, children }) {
   };
 
   return (
-    <a className={classes} href={to} onClick={handleClick}>
+    <a className={classes} href={to} onClick={handleClick} >
       {children}
     </a>
   );
