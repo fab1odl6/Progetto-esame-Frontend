@@ -75,39 +75,41 @@ function PersonalGalleryPage() {
 
   return (
     <div>
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "500px",
-          overflow: "hidden",
-        }}
-      >
-        <img
-          src="https://www.lucelight.it/file/fotoblocco-156237.jpg"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            filter: "brightness(50%)", // Aggiunto l'effetto di penombra
-          }}
-        />
+      {logged && (
         <div
           style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            textAlign: "center",
-            color: "#fff",
-            fontWeight: "bold",
-            fontSize: "2em",
-            zIndex: 1,
+            position: "relative",
+            width: "100%",
+            height: "500px",
+            overflow: "hidden",
           }}
         >
-          PERSONAL GALLERY
+          <img
+            src="https://www.lucelight.it/file/fotoblocco-156237.jpg"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              filter: "brightness(50%)", // Aggiunto l'effetto di penombra
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              textAlign: "center",
+              color: "#fff",
+              fontWeight: "bold",
+              fontSize: "2em",
+              zIndex: 1,
+            }}
+          >
+            PERSONAL GALLERY
+          </div>
         </div>
-      </div>
+      )}
       {logged ? (
         <div className="max-w-screen-xl mx-auto flex flex-col items-center relative">
           <ArtGrid artworks={currentItems} />
