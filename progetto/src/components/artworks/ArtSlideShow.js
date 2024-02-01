@@ -119,7 +119,7 @@ function ArtSlideShow() {
 
   return (
     <div>
-      <ArtText className={titleClass}>Highlighted Artworks</ArtText>
+      <ArtText className={titleClass}></ArtText>
       <Carousel
         className={carouselClass}
         children={render}

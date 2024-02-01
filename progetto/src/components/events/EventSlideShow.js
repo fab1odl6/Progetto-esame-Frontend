@@ -16,7 +16,7 @@ import { IconButton } from "@mui/material";
 function EventSlideShow() {
   const containerClass = "overflow:auto z-50";
   const eventTextClass = "text-center font-bold text-4xl my-10";
-  const carouselClass = "relative w-md";
+  const carouselClass = "relative w-md m-0";
   const dispatch = useDispatch();
 
   const { navigate } = useContext(NavigationContext);
@@ -89,7 +89,7 @@ function EventSlideShow() {
               open={handleClickHeart}
             />
           )}
-          <div className={eventTextClass}>Highlighted Events</div>
+          <div className={eventTextClass}></div>
           <Carousel
             className={carouselClass}
             children={render}
