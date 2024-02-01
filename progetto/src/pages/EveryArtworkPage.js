@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { clearText } from "../store";
 import { FaTimes } from "react-icons/fa";
 import { setEveryArtworkPage } from "../store";
+import { animateScroll as scroll } from 'react-scroll';
 
 function EveryArtworkPage() {
   const pageContainerStyle = {
@@ -91,6 +92,7 @@ function EveryArtworkPage() {
 
   const handlePageChange = (pageNumber) => {
     dispatch(setEveryArtworkPage(pageNumber))
+    scroll.scrollToTop();
   };
 
   return (
