@@ -9,7 +9,7 @@ function Dropdown({ option, title }) {
   const containerClass = "w-48 relative";
   const panelClass = "flex justify-between items-center cursor-pointer";
   const chevronClass = "text-lg";
-  const openedPanelClass = "absolute top-full";
+  const openedPanelClass = "absolute top-full overflow-y-auto max-h-[150px]";
 
   const [isOpen, setIsOpen] = useState(false);
   const divEl = useRef();

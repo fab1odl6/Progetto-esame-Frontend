@@ -7,7 +7,7 @@ function CheckboxDropdown({ options, title }) {
   const textClass =
     "flex justify-between items-center cursor-pointer border rounded p-3 shadow bg-white w-full";
   const chevronClass = "text-lg";
-  const panelClass = "absolute top-full";
+  const panelClass = "absolute top-full overflow-y-auto max-h-[150px]";
 
   const [isOpen, setIsOpen] = useState(false);
   const divEl = useRef(null);
