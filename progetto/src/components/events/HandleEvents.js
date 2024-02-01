@@ -20,7 +20,7 @@ function HandleEvents() {
     return state.users;
   });
 
-  const [eventsLocal, setEventsLocal] = useState(customEvents);
+  const [localEvents, setLocalEvents] = useState(customEvents);
   const [submit, setSubmit] = useState(false);
 
   const dispatch = useDispatch();
@@ -37,22 +37,31 @@ function HandleEvents() {
       if (snapshot.exists()) {
         const eventData = Object.values(snapshot.val());
         dispatch(setCustomEvents(eventData));
-        setEventsLocal(eventData);
+        setLocalEvents(eventData);
       } else {
-        setEventsLocal([]);
+        setLocalEvents([]);
       }
     } catch (e) {
       console.error(e);
     }
   };
 
+  const { page } = useSelector((state) => {
+    return state.activePage;
+  });
+
   useEffect(() => {
     updateLocal();
   }, [customEvents]);
 
-  const render = eventsLocal.map((event) => {
+  const render = localEvents.map((event) => {
     return (
-      <HandleEventCard event={event} submit={submit} setSubmit={setSubmit} />
+      <HandleEventCard
+        key={event.name}
+        event={event}
+        submit={submit}
+        setSubmit={setSubmit}
+      />
     );
   });
 
@@ -60,7 +69,7 @@ function HandleEvents() {
     <div className={containerClass}>
       <div className={titleClass}>Custom Events</div>
       <div>
-        {eventsLocal.length > 0 ? (
+        {localEvents.length > 0 ? (
           <div>{render}</div>
         ) : (
           <div className={emptyContainerClass}>

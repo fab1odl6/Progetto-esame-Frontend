@@ -105,6 +105,7 @@ function HandleEventCard({ event, submit, setSubmit }) {
     dispatch(updateCustomEvents(event));
     dispatch(removeEvent(event));
     dispatch(updateEvent(event));
+
     setSubmit(!submit);
     setEditState(false);
     setDeleteState(!deleteState);
@@ -170,7 +171,7 @@ function HandleEventCard({ event, submit, setSubmit }) {
           onDelete={handleClickDelete}
           onUndo={handleDelete}
           message={
-            "Are you sure ypu want to delete the event '" + event.name + "'?"
+            "Are you sure you want to delete the event '" + event.name + "'?"
           }
         />
       )}
