@@ -6,6 +6,7 @@ import { firebaseConfig } from "../components/firebase/FirebaseConfig";
 import ArtGrid from "../components/artworks/ArtGrid";
 import { setArtworks, clearText, setPersonalGalleryPage } from "../store";
 import LoginPage from "./Login";
+import { animateScroll as scroll } from 'react-scroll';
 
 function PersonalGalleryPage() {
 
@@ -19,7 +20,7 @@ function PersonalGalleryPage() {
   const artworksRedux = useSelector((state) => state.artworks);
   const [artworksLocal, setArtworksLocal] = useState([]);
   const currentPage = useSelector((state) => state.activePage.personalGalleryPage)
-  const itemsPerPage = 4;
+  const itemsPerPage = 8;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
@@ -69,6 +70,7 @@ function PersonalGalleryPage() {
 
   const handlePageChange = (pageNumber) => {
     dispatch(setPersonalGalleryPage(pageNumber))
+    scroll.scrollToTop();
   };
 
   return (
