@@ -5,7 +5,7 @@ import NavigationContext from "../../context/navigation";
 import { useContext } from "react";
 
 function HeaderBar() {
-  const sectionHeader = "bg-[#6688cc]";
+  const sectionHeader = "bg-[#99aadd]";
   const sectionElement =
     "mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between";
   const navLinks = "hidden md:flex items-center gap-6 text-sm";
@@ -60,12 +60,12 @@ function HeaderBar() {
     <header className={sectionHeader}>
       <div className={sectionElement}>
         <div className="md:flex md:items-center">
-          <img
-            src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png"
-            onClick={handleLogoClick}
-            alt="Icon"
-            className="h-8 w-8 mr-2 cursor-pointer"
-          />
+        <img
+          src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png"
+          onClick={handleLogoClick}
+          alt="Icon"
+          className="h-8 w-8 mr-2 cursor-pointer text-[#556699]" 
+        />
         </div>
         <nav className={navLinks} aria-label="Global">
           {renderedLinks}
