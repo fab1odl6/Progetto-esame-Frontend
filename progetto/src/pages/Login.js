@@ -181,7 +181,7 @@ const LoginPage = function () {
       className="flex h-screen w-full items-center justify-center bg-cover bg-no-repeat"
       style={{
         backgroundImage:
-          "url('https://media-assets.wired.it/photos/632873a16d787d7fa7f012b8/4:3/w_1820,h_1365,c_limit/The%CC%81a%CC%82tre_D%E2%80%99ope%CC%81ra_Spatial.jpeg')",
+          "url('https://cdn.pixabay.com/photo/2015/12/15/05/43/starry-night-1093721_960_720.jpg')",
       }}
     >
       <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">

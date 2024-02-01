@@ -5,7 +5,7 @@ import NavigationContext from "../../context/navigation";
 import { useContext } from "react";
 
 function HeaderBar() {
-  const sectionHeader = "bg-[#99aadd]";
+  const sectionHeader = "bg-[#99aadd] mt-0 !important";
   const sectionElement =
     "mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between";
   const navLinks = "hidden md:flex items-center gap-6 text-sm";
