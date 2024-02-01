@@ -2,7 +2,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect, useContext } from "react";
 import NavigationContext from "../../context/navigation";
-import { updateArt, setArt } from "../../store";
+import { setArt, addArtworkUser, removeArtworkUser } from "../../store";
 import LoginModals from "../modals/loginModals";
 import ConfirmModal from "../modals/ConfirmModal";
 
@@ -35,12 +35,12 @@ function ArtCard({ artwork }) {
 
   const dispatch = useDispatch();
 
-  const handleClickHeart = function (art) {
+  const handleClickHeart = function () {
     if (logged) {
       if (favoriteState) {
         setConfirmModal(!confirmModal);
       } else {
-        dispatch(updateArt(artwork));
+        dispatch(addArtworkUser(artwork));
         setFavoriteState(!favoriteState);
       }
     } else {
@@ -50,7 +50,7 @@ function ArtCard({ artwork }) {
 
   const deleteFavorite = function () {
     if (confirmModal) {
-      dispatch(updateArt(artwork));
+      dispatch(removeArtworkUser(artwork));
       setConfirmModal(false);
       setFavoriteState(!favoriteState);
     }
@@ -79,15 +79,21 @@ function ArtCard({ artwork }) {
     navigate("/artworkDetails");
   };
 
-  const undoDelete = function () {
+  const closeModal = function () {
     setConfirmModal(false);
+  };
+
+  const openModal = function () {
+    setConfirmModal(true);
   };
 
   return (
     <div>
       {confirmModal && (
         <ConfirmModal
-          onDelete={undoDelete}
+          open={openModal}
+          onClose={closeModal}
+          onDelete={closeModal}
           onUndo={deleteFavorite}
           message={
             "Are you sure you want to delete '" +

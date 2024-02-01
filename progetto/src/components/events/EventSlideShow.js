@@ -1,5 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { swipeLeftEvent, swipeRightEvent, updateEvent } from "../../store";
+import {
+  addEventUser,
+  removeEventUser,
+  swipeLeftEvent,
+  swipeRightEvent,
+} from "../../store";
 import { useState, useEffect, useContext } from "react";
 import NavigationContext from "../../context/navigation";
 import LoginModals from "../modals/loginModals";
@@ -28,7 +33,11 @@ function EventSlideShow() {
 
   const handleClickHeart = function (event) {
     if (logged) {
-      dispatch(updateEvent(event));
+      if (favoriteState) {
+        dispatch(removeEventUser(event));
+      } else {
+        dispatch(addEventUser(event));
+      }
       setFavoriteState(!favoriteState);
     } else {
       setModal(true);

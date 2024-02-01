@@ -2,9 +2,8 @@ import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebase/FirebaseConfig";
 import { get, child, ref, getDatabase } from "firebase/database";
 import HandleEventCard from "./HandleEventCard";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { setCustomEvents } from "../../store";
 
 function HandleEvents() {
   const containerClass =
@@ -20,12 +19,11 @@ function HandleEvents() {
     return state.users;
   });
 
-  const [localEvents, setLocalEvents] = useState(customEvents);
+  const [localEvents, setLocalEvents] = useState([]);
   const [submit, setSubmit] = useState(false);
 
-  const dispatch = useDispatch();
-
   const updateLocal = async () => {
+    console.log("LOOP");
     const eventsRef = child(
       dbRef,
       "/users/" + user.personalData.name + "/customEvents/"
@@ -36,7 +34,6 @@ function HandleEvents() {
 
       if (snapshot.exists()) {
         const eventData = Object.values(snapshot.val());
-        dispatch(setCustomEvents(eventData));
         setLocalEvents(eventData);
       } else {
         setLocalEvents([]);
@@ -45,10 +42,6 @@ function HandleEvents() {
       console.error(e);
     }
   };
-
-  const { page } = useSelector((state) => {
-    return state.activePage;
-  });
 
   useEffect(() => {
     updateLocal();

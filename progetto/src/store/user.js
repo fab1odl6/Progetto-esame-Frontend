@@ -212,6 +212,161 @@ const usersSlice = createSlice({
         customEvents: [action.payload],
       };
     },
+
+    addArtworkUser(state, action) {
+      set(
+        ref(
+          db,
+          "users/" +
+            state.user.personalData.name +
+            "/artworks/" +
+            action.payload.title
+        ),
+        {
+          id: action.payload.id,
+          link: action.payload.link,
+          authorName: action.payload.authorName,
+          title: action.payload.title,
+          image: action.payload.image,
+          department: action.payload.department,
+          culture: action.payload.culture,
+          period: action.payload.period,
+          date: action.payload.date,
+          dimensions: action.payload.dimensions,
+          city: action.payload.city,
+          state: action.payload.state,
+          country: action.payload.country,
+          classification: action.payload.classification,
+          favorite: action.payload.favorite,
+          full: action.payload.full,
+          type: action.payload.type,
+        }
+      );
+      return {
+        ...state,
+        artworks: [...state.artworks, action.payload],
+      };
+    },
+
+    removeArtworkUser(state, action) {
+      remove(
+        ref(
+          db,
+          "users/" +
+            state.user.personalData.name +
+            "/artworks/" +
+            action.payload.title
+        )
+      );
+
+      const newArray = state.artworks.filter(
+        (item) => item.id !== action.payload.id
+      );
+      return {
+        ...state,
+        artworks: newArray,
+      };
+    },
+
+    addEventUser(state, action) {
+      set(
+        ref(
+          db,
+          "users/" +
+            state.user.personalData.name +
+            "/events/" +
+            action.payload.path
+        ),
+        {
+          id: action.payload.id,
+          name: action.payload.name,
+          image: action.payload.image,
+          date: action.payload.date,
+          department: action.payload.department,
+          guests: action.payload.guests,
+          favorite: true,
+          full: false,
+          path: action.payload.path,
+          userGenerated: action.payload.userGenerated,
+          generator: action.payload.generator,
+        }
+      );
+      return {
+        ...state,
+        events: [...state.events, action.payload],
+      };
+    },
+
+    removeEventUser(state, action) {
+      remove(
+        ref(
+          db,
+          "users/" +
+            state.user.personalData.name +
+            "/events/" +
+            action.payload.path
+        )
+      );
+
+      const newArray = state.events.filter(
+        (item) => item.name !== action.payload.name
+      );
+
+      return {
+        ...state,
+        events: newArray,
+      };
+    },
+
+    addCustomEventUser(state, action) {
+      set(
+        ref(
+          db,
+          "users/" +
+            state.user.personalData.name +
+            "/customEvents/" +
+            action.payload.path
+        ),
+        {
+          id: action.payload.id,
+          name: action.payload.name,
+          image: action.payload.image,
+          date: action.payload.date,
+          department: action.payload.department,
+          guests: action.payload.guests,
+          favorite: true,
+          full: false,
+          path: action.payload.path,
+          userGenerated: action.payload.userGenerated,
+          generator: action.payload.generator,
+        }
+      );
+      return {
+        ...state,
+        customEvents: [...state.customEvents, action.payload],
+      };
+    },
+
+    removeCustomEventUser(state, action) {
+      remove(
+        ref(
+          db,
+          "users/" +
+            state.user.personalData.name +
+            "/customEvents/" +
+            action.payload.path
+        )
+      );
+
+      const newArray = state.customEvents.filter(
+        (item) => item.name !== action.payload.name
+      );
+
+      return {
+        ...state,
+        customEvents: newArray,
+      };
+    },
   },
 });
 

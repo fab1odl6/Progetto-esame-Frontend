@@ -3,10 +3,12 @@ import { FaTrash } from "react-icons/fa";
 import { MdModeEdit, MdOutlineEditOff } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  updateEvent,
   removeEvent,
   addNewEvent,
-  updateCustomEvents,
+  removeCustomEventUser,
+  removeEventUser,
+  addEventUser,
+  addCustomEventUser,
 } from "../../store";
 import { ref, getDatabase, set } from "firebase/database";
 import { initializeApp } from "firebase/app";
@@ -102,9 +104,9 @@ function HandleEventCard({ event, submit, setSubmit }) {
   };
 
   const handleDelete = function () {
-    dispatch(updateCustomEvents(event));
     dispatch(removeEvent(event));
-    dispatch(updateEvent(event));
+    dispatch(removeCustomEventUser(event));
+    dispatch(removeEventUser(event));
 
     setSubmit(!submit);
     setEditState(false);
@@ -123,8 +125,8 @@ function HandleEventCard({ event, submit, setSubmit }) {
 
     const newEvent = {
       name: formData.name,
-      date: selectedDate,
-      department: selectedOption,
+      date: selectedDate || event.date,
+      department: selectedOption || event.department,
       guests: formData.guests,
       image: formData.image,
       favorite: true,
@@ -138,10 +140,11 @@ function HandleEventCard({ event, submit, setSubmit }) {
     dispatch(removeEvent(event)); // rimuove l'evento dal db e dall'array di events.js
     dispatch(addNewEvent(newEvent)); // aggiunge il nuovo evento al db e all'array di events.js
 
-    dispatch(updateEvent(event)); // rimuove l'evento dal db e dall'array di events di user.js
-    dispatch(updateEvent(newEvent)); // aggiungo il nuovo evento al db e all'array di events di user.js
+    dispatch(removeEventUser(event)); // rimuove l'evento dal db e dall'array di events di user.js
+    dispatch(addEventUser(newEvent)); // aggiunge il nuovo evento al db e all'array di events di user.js
 
-    dispatch(updateCustomEvents(newEvent)); // aggiunge il nuovo evento al db e all'array di customEvents di user.js
+    dispatch(removeCustomEventUser(event)); // rimuove l'evento dal db e dall'array di customEvents di user.js
+    dispatch(addCustomEventUser(newEvent)); // aggiunge il nuovo evento al db e all'array di customEvents di user.js
 
     setSuccess(true);
     setEditState(false);

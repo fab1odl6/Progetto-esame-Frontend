@@ -6,12 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DepartmentDropdown from "../dropdowns/DepartmentDropdown";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addNewEvent,
-  setCustomEvents,
-  updateCustomEvents,
-  updateEvent,
-} from "../../store";
+import { addCustomEventUser, addNewEvent, addEventUser } from "../../store";
 
 function AddAnEvent() {
   const containerClass =
@@ -78,8 +73,7 @@ function AddAnEvent() {
           updatedEvents.push(event);
         }
 
-        dispatch(setCustomEvents([...localEvents, ...updatedEvents]));
-        setLocalEvents([...localEvents, ...updatedEvents]);
+        setLocalEvents(updatedEvents);
       }
     } catch (e) {
       console.error(e);
@@ -139,9 +133,10 @@ function AddAnEvent() {
       userGenerated: true,
       generator: user.personalData.name,
     };
-    dispatch(updateCustomEvents(newEvent)); // eventi custom dell'utente
-    dispatch(addNewEvent(newEvent)); // eventi generali del db
-    dispatch(updateEvent(newEvent)); // eventi preferiti dell'utente
+
+    dispatch(addEventUser(newEvent));
+    dispatch(addCustomEventUser(newEvent));
+    dispatch(addNewEvent(newEvent));
 
     setFormData({
       date: "",
