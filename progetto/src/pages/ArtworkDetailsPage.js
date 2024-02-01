@@ -100,6 +100,7 @@ function ArtworkDetailsPage({ navigateBack }) {
         )}
         <button
           className={navigatebackClass}
+          onClick={handleNavigateBack}
         >
           <span className="mr-2">&#8592;</span>
           Back
