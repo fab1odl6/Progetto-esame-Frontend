@@ -107,7 +107,6 @@ const eventsSlice = createSlice({
     array: eventArray,
     index: 0,
     favorite: false,
-    full: false,
     path: "",
   },
   reducers: {
@@ -132,14 +131,6 @@ const eventsSlice = createSlice({
 
       updateFavorite(action.payload.event, action.payload.user);
       return { ...state, array: newArray, favorite: newFavorite };
-    },
-
-    switchFullEvent(state, action) {
-      const newFull = !state.array[state.index].full;
-      const newArray = [...state.array];
-      newArray[state.index] = { ...newArray[state.index], full: newFull };
-
-      return { ...state, array: newArray, full: newFull };
     },
 
     addNewEvent(state, action) {

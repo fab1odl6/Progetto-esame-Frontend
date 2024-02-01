@@ -111,6 +111,7 @@ function EventSlideShowCard1({ event }) {
 
         {fullState && (
           <EventShow
+            event={event}
             favoriteState={favoriteState}
             onClickHeart={handleClickHeart}
             setFavoriteState={setFavoriteState}
