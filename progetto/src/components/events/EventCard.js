@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import FavoriteEventShow from "./FavoriteEventShow";
 import { useDispatch } from "react-redux";
-import { updateEvent } from "../../store";
+import { removeEventUser } from "../../store";
 import ConfirmModal from "../modals/ConfirmModal";
 
 function EventCard({ event }) {
@@ -32,12 +32,16 @@ function EventCard({ event }) {
 
   const deleteFavorite = function () {
     if (confirmModal) {
-      dispatch(updateEvent(event));
+      dispatch(removeEventUser(event));
       setConfirmModal(false);
     }
   };
 
-  const undoDelete = function () {
+  const openConfirmModal = function () {
+    setConfirmModal(true);
+  };
+
+  const closeConfirmModal = function () {
     setConfirmModal(false);
   };
 
@@ -53,7 +57,9 @@ function EventCard({ event }) {
     <div>
       {confirmModal && (
         <ConfirmModal
-          onDelete={undoDelete}
+          open={openConfirmModal}
+          onClose={closeConfirmModal}
+          onDelete={closeConfirmModal}
           onUndo={deleteFavorite}
           message={
             "Are you sure you want to delete '" +

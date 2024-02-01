@@ -48,6 +48,12 @@ export const {
   setArtworks,
   setEvents,
   setCustomEvents,
+  addArtworkUser,
+  removeArtworkUser,
+  addEventUser,
+  removeEventUser,
+  addCustomEventUser,
+  removeCustomEventUser,
 } = usersSlice.actions;
 export const { setArt, setFavorite } = artDetailSlice.actions;
 export const { addFilterItem, removeFilterItem } = filtersSlice.actions;
@@ -60,4 +66,9 @@ export const {
   addNewEvent,
   removeEvent,
 } = eventsSlice.actions;
-export const { setPage, setPreviousPage, setEveryArtworkPage, setPersonalGalleryPage } = activePageSlice.actions;
+export const {
+  setPage,
+  setPreviousPage,
+  setEveryArtworkPage,
+  setPersonalGalleryPage,
+} = activePageSlice.actions;

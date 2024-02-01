@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import LoginPage from "./Login";
 import { clearText } from "../store";
 
-function EventsPage() {
+function MyEventsPage() {
   const titleContainerClass = "flex";
   const mainContentClass =
     "bg-gradient-to-b from-opacity-80 to-opacity-80 via-white bg-cover bg-center min-h-screen-100px background-image: url('background-image-url'); padding: 20px;";
@@ -88,4 +88,4 @@ function EventsPage() {
   );
 }
 
-export default EventsPage;
+export default MyEventsPage;

@@ -1,6 +1,6 @@
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { updateEvent } from "../../store";
+import { addEventUser, removeEventUser } from "../../store";
 import EventShow from "./EventShow";
 import { useState, useEffect, useContext } from "react";
 import LoginModals from "../modals/loginModals";
@@ -30,7 +30,11 @@ function EventSlideShowCard1({ event }) {
 
   const handleClickHeart = function (event) {
     if (logged) {
-      dispatch(updateEvent(event));
+      if (favoriteState) {
+        dispatch(removeEventUser(event));
+      } else {
+        dispatch(addEventUser(event));
+      }
       setFavoriteState(!favoriteState);
     } else {
       setModal(true);

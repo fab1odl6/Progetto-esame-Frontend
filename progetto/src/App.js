@@ -5,7 +5,7 @@ import HeaderBar from "../src/components/header & footer/HeaderBar";
 import { NavigationProvider } from "./context/navigation";
 import "bootstrap/dist/css/bootstrap.min.css";
 import EveryArtworkPage from "./pages/EveryArtworkPage";
-import EventsPage from "../src/pages/EventsPage";
+import MyEventsPage from "../src/pages/MyEventsPage";
 import HandleEventsPage from "./pages/HandleEventsPage";
 import PersonalGalleryPage from "./pages/PersonalGalleryPage";
 import ArtworksDetailsPage from "./pages/ArtworkDetailsPage";
@@ -59,7 +59,7 @@ function App() {
               <PersonalGalleryPage />
             </Route>
             <Route path="/myEvents">
-              <EventsPage />
+              <MyEventsPage />
             </Route>
             <Route path="/handleEvents">
               <HandleEventsPage />

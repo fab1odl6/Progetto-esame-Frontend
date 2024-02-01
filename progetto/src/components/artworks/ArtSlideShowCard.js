@@ -1,6 +1,6 @@
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { updateArt, setArt } from "../../store";
+import { setArt, removeArtworkUser, addArtworkUser } from "../../store";
 import { useEffect, useState, useContext } from "react";
 import NavigationContext from "../../context/navigation";
 import LoginModals from "../modals/loginModals";
@@ -97,7 +97,11 @@ function ArtSlideShowCard({ artwork }) {
 
   const handleClickHeart = function (art) {
     if (logged) {
-      dispatch(updateArt(art));
+      if (favoriteState) {
+        dispatch(removeArtworkUser(art));
+      } else {
+        dispatch(addArtworkUser(art));
+      }
       setFavoriteState(!favoriteState);
       setModal(false);
     } else {
