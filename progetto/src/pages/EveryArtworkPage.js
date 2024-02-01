@@ -20,7 +20,7 @@ function EveryArtworkPage() {
   };
 
   const searchBarClass = "z-50 relative";
-  const filterListClass = "z-40 relative";
+  const filterListClass = "z-50 relative";
   const containerStateClass =
     "z-10 relative flex items-center mt-4 bg-gray-200";
   const resultTextClass = "text-lg font-bold";
@@ -100,7 +100,7 @@ function EveryArtworkPage() {
       <div className={searchBarClass}>
         <SearchBar />
       </div>
-      <div className={filterListClass}>
+      <div className={filterListClass} style={{ position: 'relative', zIndex: 51 }}>
         <FilterList artworks={array} />
       </div>
       {searchState && searchState.trim() !== "" && (
@@ -112,7 +112,7 @@ function EveryArtworkPage() {
           </button>
         </div>
       )}
-      <div className={'${artGridClass} max-w-screen-xl mx-auto flex flex-col items-center relative'}>
+      <div className={`${artGridClass} max-w-screen-xl mx-auto flex flex-col items-center relative`}>
         <ArtGrid artworks={currentItems} />
         <div className="mt-4 flex items-center">
           <button
