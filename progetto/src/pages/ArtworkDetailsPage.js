@@ -6,12 +6,12 @@ import NavigationContext from "../context/navigation";
 import LoginModals from "../components/modals/loginModals";
 
 function ArtworkDetailsPage({ navigateBack }) {
-  const textcontainerClass= "bg-gray-800 bg-opacity-75 p-8 rounded-md backdrop-filter backdrop-blur-md";
+  const bgcolor = "bg-[#334466]"
+  const textcontainerClass=  `${bgcolor} bg-opacity-75 p-8 rounded-md backdrop-filter backdrop-blur-md`;
   const titleClass="title-font sm:text-4xl text-3xl mb-4 font-medium text-white";
   const imageContainerClass =
     "lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0 flex justify-center items-center relative image-container";
   const descriptionClass = "mb-8 leading-relaxed text-white";
-  const coloreDesiderato = "bg-[#77aaff]";
   const heartClass = "text-red-500 mr-2";
   const favoriteboxClass = "flex justify-center text-white";
   const favoritebuttonClass = "inline-flex items-center text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-400 rounded text-lg";
