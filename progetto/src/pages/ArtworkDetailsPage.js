@@ -6,22 +6,28 @@ import NavigationContext from "../context/navigation";
 import LoginModals from "../components/modals/loginModals";
 
 function ArtworkDetailsPage({ navigateBack }) {
-  const textcontainerClass= "bg-gray-800 bg-opacity-75 p-8 rounded-md backdrop-filter backdrop-blur-md";
-  const titleClass="title-font sm:text-4xl text-3xl mb-4 font-medium text-white";
+  const textcontainerClass =
+    "bg-gray-800 bg-opacity-75 p-8 rounded-md backdrop-filter backdrop-blur-md";
+  const titleClass =
+    "title-font sm:text-4xl text-3xl mb-4 font-medium text-white";
   const imageContainerClass =
     "lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0 flex justify-center items-center relative image-container";
   const descriptionClass = "mb-8 leading-relaxed text-white";
   const coloreDesiderato = "bg-[#77aaff]";
   const heartClass = "text-red-500 mr-2";
   const favoriteboxClass = "flex justify-center text-white";
-  const favoritebuttonClass = "inline-flex items-center text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-400 rounded text-lg";
-  const imageClass = "max-w-xl max-h-xl rounded object-cover object-center rounded max-w-full max-h-full";
+  const favoritebuttonClass =
+    "inline-flex items-center text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-400 rounded text-lg";
+  const imageClass =
+    "max-w-xl max-h-xl rounded object-cover object-center rounded max-w-full max-h-full";
   const linkClass = "text-blue-500 hover:underline";
   const backgroundClass =
     "text-gray-600 body-font bg-cover bg-center bg-fixed backdrop-filter backdrop-blur-lg  w-full overflow-hidden";
-  const loginmodalClass = "container mx-auto flex px-5 py-24 md:flex-row flex-col items-center";
-  const navigatebackClass= `absolute top-4 left-4 inline-flex items-center text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-400 rounded text-l`;
-  const textboxClass= "lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center";
+  const loginmodalClass =
+    "container mx-auto flex px-5 py-24 md:flex-row flex-col items-center";
+  const navigatebackClass = `absolute top-4 left-4 inline-flex items-center text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-400 rounded text-l`;
+  const textboxClass =
+    "lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center";
 
   const { navigate } = useContext(NavigationContext);
 
@@ -43,7 +49,6 @@ function ArtworkDetailsPage({ navigateBack }) {
   const dispatch = useDispatch();
 
   const handleClickHeart = function () {
-    console.log("Logged: " + logged);
     if (logged) {
       dispatch(updateArt(art));
       setModal(false);
@@ -76,6 +81,8 @@ function ArtworkDetailsPage({ navigateBack }) {
         dispatch(setFavorite(false));
         setButtonText("Add to Favorites");
       }
+    } else {
+      dispatch(setFavorite(false));
     }
   }, [logged, artworks, art.id]);
 
@@ -98,23 +105,14 @@ function ArtworkDetailsPage({ navigateBack }) {
             open={handleClickHeart}
           />
         )}
-        <button
-          className={navigatebackClass}
-          onClick={handleNavigateBack}
-        >
+        <button className={navigatebackClass} onClick={handleNavigateBack}>
           <span className="mr-2">&#8592;</span>
           Back
         </button>
-        <div
-          className={imageContainerClass}
-        >
-          <img
-            className={imageClass}
-            alt={art.title}
-            src={art.image}
-          />
+        <div className={imageContainerClass}>
+          <img className={imageClass} alt={art.title} src={art.image} />
         </div>
-        <div className= {textboxClass}>
+        <div className={textboxClass}>
           <TextContainer>
             <h1 className={titleClass}>
               <b>Title</b>: {art.title}
