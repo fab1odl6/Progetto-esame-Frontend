@@ -15,7 +15,7 @@ import { clearText } from "../store";
 function MyEventsPage() {
   const titleContainerClass = "flex";
   const mainContentClass =
-    "bg-gradient-to-b from-opacity-80 to-opacity-80 via-white bg-cover bg-center min-h-screen-100px background-image: url('background-image-url'); padding: 20px;";
+    "bg-gradient-to-b from-opacity-80 to-opacity-80 via-white bg-cover bg-center min-h-screen-100px";
   const titleClass = "text-center font-bold text-4xl my-20";
   const accordionClass = "mb-20";
   const typographyClass = "font-bold";
@@ -49,7 +49,28 @@ function MyEventsPage() {
       {logged ? (
         <div>
           <div className={mainContentClass}>
-            <h1 className={titleClass}>EVENTS</h1>
+            {/* Immagine con scritta */}
+            <div style={{ position: 'relative' }}>
+              <img
+                src="https://rare-gallery.com/uploads/posts/505263-historical-art.jpg"
+                style={{ width: '100%', height: '550px', objectFit: "cover" }}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  color: 'white',
+                  textShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
+                  textAlign: 'center',
+                  fontSize: '24px',
+                  fontWeight: 'bold',
+                }}
+              >
+                MY EVENTS
+              </div>
+            </div>
 
             {events.map((event) => (
               <Accordion
@@ -57,9 +78,15 @@ function MyEventsPage() {
                 expanded={expandedAccordion[event.id]}
                 onChange={() => handleToggle(event.id)}
                 className={accordionClass}
+                style={{ backgroundColor: 'blue' }}
               >
-                <AccordionSummary>
-                  <div className={titleContainerClass}>
+                <AccordionSummary
+                  className={titleContainerClass}
+                  style={{
+                    background: 'linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2))',
+                  }}
+                >
+                  <div>
                     <Typography variant="h6" className={typographyClass}>
                       {event.title}
                     </Typography>
