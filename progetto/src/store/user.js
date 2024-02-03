@@ -197,7 +197,6 @@ const usersSlice = createSlice({
     },
 
     setEvents(state, action) {
-      console.log("setEvents");
       return {
         ...state,
         events: [...action.payload],
