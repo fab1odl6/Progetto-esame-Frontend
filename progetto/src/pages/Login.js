@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import HomePage from "./Homepage";
 import NavigationContext from "../context/navigation";
 import { getDatabase, ref, get, child } from "firebase/database";
 import { useDispatch } from "react-redux";
@@ -227,6 +226,16 @@ const LoginPage = function () {
               </button>
             </div>
           </form>
+          <div className="flex">
+            Don't have an account yet?{" "}
+            <a
+              className="cursor-pointer text-blue-500 hover:text-blue-700"
+              onClick={() => navigate("/register")}
+            >
+              &nbsp;Register
+            </a>
+            !
+          </div>
         </div>
       </div>
     </div>
