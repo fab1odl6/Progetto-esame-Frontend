@@ -108,7 +108,7 @@ function HomePage() {
         <img
           src="https://cdn.sanity.io/images/cctd4ker/production/644670e7c77a813b8fc7d6dfa427beefacad4684-3840x2160.jpg?w=3840&q=75&fit=clip&auto=format"
           alt="Custom Image"
-          style={{ width: "100%", height: "400px", objectFit: "cover" }}
+          style={{ width: "100%", height: "600px", objectFit: "cover" }}
         />
         {/* Primo box blu con scritte */}
         <div style={highlightedBoxStyle}>
