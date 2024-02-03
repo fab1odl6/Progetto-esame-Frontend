@@ -7,18 +7,18 @@ import LoginModals from "../modals/loginModals";
 import ConfirmModal from "../modals/ConfirmModal";
 
 function ArtCard({ artwork }) {
-  const textbgcolor= "bg-[#bbaabb]";
-  const textcolor = "#444455"
-  const containerClass =
-    `relative flex items-center justify-center h-60 w-79.5 rounded-xl shadow-xl ${textbgcolor} mx-auto my-8 group mb-1`;
+  const textbgcolor = "bg-[#bbaabb]";
+  const textcolor = "#444455";
+  const containerClass = `relative flex items-center justify-center h-60 w-79.5 rounded-xl shadow-xl ${textbgcolor} mx-auto my-8 group mb-1`;
   const artContainer =
     "z-10 h-full w-full overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700";
   const imageClass =
     "animate-fade-in block h-full w-full scale-100 transform object-cover object-center opacity-100 transition duration-300 group-hover:scale-110";
   const textContainer =
-    "absolute bottomabsolute bottom-0 left-0 p-3 w-full text-white z-30 shadow-md";  
+    "absolute bottomabsolute bottom-0 left-0 p-3 w-full text-white z-30 shadow-md";
   const titleClass =
-    "font-serif text-lg font-bold text-white-700 shadow-md shadow-black-10 " + textcolor;
+    "font-serif text-lg font-bold text-white-700 shadow-md shadow-black-10 " +
+    textcolor;
   const subtitleClass =
     "text-sm font-light text-white-700 shadow-md shadow-black-10 " + textcolor;
   const heartIconClass = "absolute -top-4 -right-4 m-4 z-20 cursor-pointer";
@@ -30,7 +30,7 @@ function ArtCard({ artwork }) {
   });
 
   const [favoriteState, setFavoriteState] = useState(false);
-  const [modal, setModal] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
 
   const { navigate } = useContext(NavigationContext);
@@ -46,7 +46,7 @@ function ArtCard({ artwork }) {
         setFavoriteState(!favoriteState);
       }
     } else {
-      setModal(true);
+      setLoginModal(true);
     }
   };
 
@@ -73,7 +73,7 @@ function ArtCard({ artwork }) {
   };
 
   const handleClickClose = function () {
-    setModal(false);
+    setLoginModal(false);
   };
 
   const handleClickDetails = function () {
@@ -105,7 +105,7 @@ function ArtCard({ artwork }) {
         />
       )}
       <div className={containerClass}>
-        {modal && (
+        {loginModal && (
           <LoginModals
             onClickButton={handleClickButton}
             onCloseLog={handleClickClose}
