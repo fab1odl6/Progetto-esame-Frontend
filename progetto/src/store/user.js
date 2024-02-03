@@ -22,6 +22,7 @@ const updateFavoriteArt = function (artworks, art, user) {
     const updatedArtworks = [...artworks];
     updatedArtworks.splice(artIndex, 1);
     remove(ref(db, `users/${user.name}/artworks/${art.title}`));
+
     return updatedArtworks;
   } else {
     set(ref(db, `users/${user.name}/artworks/${art.title}`), {
@@ -80,15 +81,12 @@ const updatePersonalCustomEvents = function (events, event, user) {
   const eventIndex = events.findIndex((item) => item.name === event.name);
 
   if (eventIndex !== -1) {
-    console.log("C'era, ora è rimosso");
-
     const updatedEvents = [...events];
     updatedEvents.splice(eventIndex, 1);
     remove(ref(db, `users/${user.name}/customEvents/${event.path}`));
+
     return updatedEvents;
   } else {
-    console.log("Non c'era, ora è stato inserito");
-
     set(ref(db, `users/${user.name}/customEvents/${event.path}`), {
       id: event.id,
       name: event.name,
