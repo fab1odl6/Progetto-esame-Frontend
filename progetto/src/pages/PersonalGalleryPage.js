@@ -10,8 +10,12 @@ import { animateScroll as scroll } from 'react-scroll';
 
 function PersonalGalleryPage() {
 
-  const artTextClass = "text-center font-bold text-4xl my-20";
   const buttonClass = "flex items-center px-2 py-1 bg-gray-300 rounded cursor-pointer ml-3";
+  const imageboxClass = "relative w-full h-200px overflow-hidden";
+  const textonimageClass = "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
+  const gridboxClass = "max-w-screen-xl mx-auto flex flex-col items-center relative";
+  const paginationbuttonClass = "mt-4 flex items-center";
+  const currentpageClass = "flex items-center px-2 py-1 bg-gray-300 rounded ml-3";
 
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
@@ -72,48 +76,26 @@ function PersonalGalleryPage() {
     dispatch(setPersonalGalleryPage(pageNumber))
     scroll.scrollToTop();
   };
-
+  
   return (
     <div>
       {logged && (
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            height: "550px",
-            overflow: "hidden",
-          }}
-        >
-          <img
-            src="https://www.lucelight.it/file/fotoblocco-156237.jpg"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              filter: "brightness(50%)", // Aggiunto l'effetto di penombra
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              textAlign: "center",
-              color: "#fff",
-              fontWeight: "bold",
-              fontSize: "2em",
-              zIndex: 1,
-            }}
-          >
+        <div className={imageboxClass}>
+        <img
+          src="https://www.lucelight.it/file/fotoblocco-156237.jpg"
+          style={{ maxHeight: "550px", width: "100%", objectFit: "cover" }}
+          className="filter brightness-50"
+          alt="Artwork"
+        />
+          <div className={textonimageClass}>
             PERSONAL GALLERY
           </div>
         </div>
       )}
       {logged ? (
-        <div className="max-w-screen-xl mx-auto flex flex-col items-center relative">
+        <div className={gridboxClass}>
           <ArtGrid artworks={currentItems} />
-          <div className="mt-4 flex items-center">
+          <div className={paginationbuttonClass}>
             <button
               className={buttonClass}
               onClick={() => handlePageChange(currentPage - 1)}
@@ -121,7 +103,7 @@ function PersonalGalleryPage() {
             >
               Previous
             </button>
-            <p className="flex items-center px-2 py-1 bg-gray-300 rounded ml-3">{currentPage}</p>
+            <p className={currentpageClass}>{currentPage}</p>
             <button
               className={buttonClass}
               onClick={() => handlePageChange(currentPage + 1)}

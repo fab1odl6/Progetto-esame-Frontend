@@ -20,13 +20,15 @@ function EveryArtworkPage() {
 
   const searchBarClass = "z-50 relative";
   const filterListClass = "z-50 relative";
-  const containerStateClass =
-    "z-10 relative flex items-center mt-4 bg-gray-200";
+  const containerStateClass = "z-10 relative flex items-center mt-4 bg-gray-200";
   const resultTextClass = "text-lg font-bold";
-  const buttonClass =
-    "flex items-center px-2 py-1 bg-gray-300 rounded cursor-pointer ml-3";
+  const buttonClass = "flex items-center px-2 py-1 bg-gray-300 rounded cursor-pointer ml-3";
   const iconClass = "ml-1";
-  const artGridClass = "z-auto relative";
+  const artGridClass = "z-auto relative max-w-screen-xl mx-auto flex flex-col items-center relative";
+  const imageboxClass = "relative w-full h-200px overflow-hidden";
+  const textonimageClass = "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
+  const paginationbuttonClass = "mt-4 flex items-center";
+  const currentpageClass = "flex items-center px-2 py-1 bg-gray-300 rounded ml-3";
 
   const { array } = useSelector((state) => {
     return state.artworks;
@@ -95,45 +97,19 @@ function EveryArtworkPage() {
   };
 
   return (
-    <div>
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "500px",
-          margin: "0", 
-        }}
-      >
-        <img
-          src="https://www.exibart.com/repository/media/2019/09/00094701.jpg"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            filter: "brightness(50%)",
-            margin: "0",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            textAlign: "center",
-            color: "#fff",
-            fontWeight: "bold",
-            fontSize: "2em",
-            zIndex: 1,
-          }}
-        >
+    <div className={pageContainerStyle}>
+      <div className={imageboxClass}>
+      <img
+        src="https://www.exibart.com/repository/media/2019/09/00094701.jpg"
+        style={{ maxHeight: "550px", width: "100%", objectFit: "cover" }}
+        className="filter brightness-50"
+        alt="Artwork"
+      />
+        <div className={textonimageClass}>
           EVERY ARTWORKS
         </div>
       </div>
-  
-      <div style={{ ...pageContainerStyle, marginTop: 0 }}> {/* Aggiungi marginTop: 0 */}
-        {/* Rimuovi il secondo div */}
-        <div className={searchBarClass}>
+      <div className={searchBarClass}>
         <SearchBar />
       </div>
       <div className={filterListClass} style={{ position: 'relative', zIndex: 51 }}>
@@ -148,9 +124,9 @@ function EveryArtworkPage() {
           </button>
         </div>
       )}
-      <div className={`${artGridClass} max-w-screen-xl mx-auto flex flex-col items-center relative`}>
+      <div className={artGridClass}>
         <ArtGrid artworks={currentItems} />
-        <div className="mt-4 flex items-center">
+        <div className={paginationbuttonClass}>
           <button
             className={buttonClass}
             onClick={() => handlePageChange(currentPage - 1)}
@@ -158,7 +134,7 @@ function EveryArtworkPage() {
           >
             Previous
           </button>
-          <p className="flex items-center px-2 py-1 bg-gray-300 rounded ml-3">{currentPage}</p>
+          <p className={currentpageClass}>{currentPage}</p>
           <button
             className={buttonClass}
             onClick={() => handlePageChange(currentPage + 1)}
@@ -169,7 +145,6 @@ function EveryArtworkPage() {
         </div>
       </div>
     </div>
-  </div>
   );
 }
 

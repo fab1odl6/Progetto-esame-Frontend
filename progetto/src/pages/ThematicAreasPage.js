@@ -13,6 +13,9 @@ const departmentsRef = ref(database, "/departments");
 
 function Museums() {
   const containerClass = "mt-4";
+  const imageboxClass = "relative w-full h-200px overflow-hidden";
+  const textonimageClass = "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
+
 
   const [museums, setMuseums] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -58,39 +61,17 @@ function Museums() {
 
   return (
     <div>
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "500px", // o l'altezza desiderata
-          // overflow: "hidden", // Rimuovi l'overflow: "hidden"
-        }}
-      >
+      <div className={imageboxClass}>
         <img
           src="https://www.055firenze.it/ridimensiona.html/cms/1920/1080/100_100_100/cms/custom/files/100005/ct50012_id223491_t1/5._Depero._Cavalcata_Fantastica_unimmagine_dellallestimento_Palazzo_Medici_Riccardi_Firenze_Ph._Nicola_Neri.jpeg"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            filter: "brightness(50%)",
-          }}
+          style={{ maxHeight: "550px", width: "100%", objectFit: "cover" }}
+          className="filter brightness-50"
+          alt="Artwork"
         />
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            textAlign: "center",
-            color: "#fff",
-            fontWeight: "bold",
-            fontSize: "2em",
-            zIndex: 1,
-          }}
-        >
-          THEMATIC AREAS
+          <div className={textonimageClass}>
+            THEMATIC AREAS
+          </div>
         </div>
-      </div>
       {/* Sezione con la griglia delle aree tematiche */}
       <div className={containerClass}>
         <div className="mainContent">
