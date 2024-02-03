@@ -10,7 +10,6 @@ import { animateScroll as scroll } from 'react-scroll';
 
 function EveryArtworkPage() {
   const pageContainerStyle = {
-    backgroundImage: 'url("https://images.alphacoders.com/133/1331567.png")',
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -96,8 +95,45 @@ function EveryArtworkPage() {
   };
 
   return (
-    <div style={pageContainerStyle}>
-      <div className={searchBarClass}>
+    <div>
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "500px",
+          margin: "0", 
+        }}
+      >
+        <img
+          src="https://www.exibart.com/repository/media/2019/09/00094701.jpg"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            filter: "brightness(50%)",
+            margin: "0",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            textAlign: "center",
+            color: "#fff",
+            fontWeight: "bold",
+            fontSize: "2em",
+            zIndex: 1,
+          }}
+        >
+          EVERY ARTWORKS
+        </div>
+      </div>
+  
+      <div style={{ ...pageContainerStyle, marginTop: 0 }}> {/* Aggiungi marginTop: 0 */}
+        {/* Rimuovi il secondo div */}
+        <div className={searchBarClass}>
         <SearchBar />
       </div>
       <div className={filterListClass} style={{ position: 'relative', zIndex: 51 }}>
@@ -133,6 +169,7 @@ function EveryArtworkPage() {
         </div>
       </div>
     </div>
+  </div>
   );
 }
 

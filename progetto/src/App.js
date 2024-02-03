@@ -18,7 +18,7 @@ import PageNotFound from "./pages/PageNotFound";
 import { useSelector } from "react-redux";
 
 function App() {
-  const mainContainerStyle = "mt-10";
+  const mainContainerStyle = "mt-0";
 
   const validPaths = [
     "/",
@@ -41,9 +41,9 @@ function App() {
 
   return (
     <NavigationProvider>
+      <HeaderBar />
       <PersistGate loading={null} persistor={persistor}>
         <div className={mainContainerStyle}>
-          <HeaderBar />
           {!isPathValid && <PageNotFound />}
           <div>
             <Route path="/">
