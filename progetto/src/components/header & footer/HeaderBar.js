@@ -57,7 +57,7 @@ function HeaderBar() {
   };
 
   return (
-    <header className={sectionHeader}>
+    <header className={`${sectionHeader} mt-0 mb-0`}>
       <div className={sectionElement}>
         <div className="md:flex md:items-center">
         <img
