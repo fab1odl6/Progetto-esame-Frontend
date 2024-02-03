@@ -190,6 +190,7 @@ const LoginPage = function () {
               src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png"
               width="150"
               alt=""
+              style={{ filter: "brightness(0) invert(1)", color: "#556699" }}
             />
             <h1 className="mb-2 text-2xl">ArtTreasures</h1>
             <span className="text-gray-300">Enter Login Details</span>
