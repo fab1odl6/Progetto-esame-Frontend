@@ -229,12 +229,11 @@ const LoginPage = function () {
           <div className="flex">
             Don't have an account yet?{" "}
             <a
-              className="cursor-pointer text-blue-500 hover:text-blue-700"
+              className="cursor-pointer text-white-500"
               onClick={() => navigate("/register")}
             >
-              &nbsp;Register
+              &nbsp;<b className="underline">Register!</b>
             </a>
-            !
           </div>
         </div>
       </div>
