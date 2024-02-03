@@ -82,11 +82,17 @@ const eventsSlice = createSlice({
   reducers: {
     swipeRightEvent(state, action) {
       const newIndex = state.index + 1;
+      if (newIndex === state.array.length) {
+        return state;
+      }
       return { ...state, index: newIndex };
     },
 
     swipeLeftEvent(state, action) {
       const newIndex = state.index - 1;
+      if (newIndex === -1) {
+        return state;
+      }
       return { ...state, index: newIndex };
     },
 

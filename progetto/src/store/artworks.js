@@ -133,11 +133,17 @@ const artworksSlice = createSlice({
   reducers: {
     swipeRightArt(state, action) {
       const newIndex = state.index + 1;
+      if (newIndex === state.array.length) {
+        return state;
+      }
       return { ...state, index: newIndex };
     },
 
     swipeLeftArt(state, action) {
       const newIndex = state.index - 1;
+      if (newIndex === -1) {
+        return state;
+      }
       return { ...state, index: newIndex };
     },
 
