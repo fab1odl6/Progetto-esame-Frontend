@@ -93,7 +93,6 @@ function EventCard({ event }) {
           <FavoriteEventShow
             event={event}
             key={event.name}
-            onClickClose={handleClickShow}
             onClickHeart={handleClickHeart}
             open={openModal}
             onClose={closeModal}

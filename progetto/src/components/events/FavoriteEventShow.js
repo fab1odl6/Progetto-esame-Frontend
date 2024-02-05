@@ -8,13 +8,7 @@ import {
 } from "react-icons/fa";
 import { Dialog, DialogContent } from "@mui/material";
 
-function FavoriteEventShow({
-  event,
-  onClickClose,
-  onClickHeart,
-  open,
-  onClose,
-}) {
+function FavoriteEventShow({ event, onClickHeart, open, onClose }) {
   const modalClass =
     "fixed inset-0 flex flex-col items-center justify-center w-screen h-screen bg-blue bg-auto z-10";
   const containerClass =
@@ -33,12 +27,12 @@ function FavoriteEventShow({
   const labelTextClass = "text-gray-500";
 
   const handleClickClose = function () {
-    onClickClose();
+    onClose();
   };
 
   const handleClickHeart = function () {
     onClickHeart();
-    onClickClose();
+    onClose();
   };
 
   return (
