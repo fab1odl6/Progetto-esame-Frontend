@@ -59,8 +59,8 @@ function EventCard({ event }) {
         <ConfirmModal
           open={openConfirmModal}
           onClose={closeConfirmModal}
-          onDelete={closeConfirmModal}
-          onUndo={deleteFavorite}
+          onDelete={deleteFavorite}
+          onUndo={closeConfirmModal}
           message={
             "Are you sure you want to delete '" +
             event.name +

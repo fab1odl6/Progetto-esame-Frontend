@@ -95,8 +95,8 @@ function ArtCard({ artwork }) {
         <ConfirmModal
           open={openModal}
           onClose={closeModal}
-          onDelete={closeModal}
-          onUndo={deleteFavorite}
+          onDelete={deleteFavorite}
+          onUndo={closeModal}
           message={
             "Are you sure you want to delete '" +
             artwork.title +

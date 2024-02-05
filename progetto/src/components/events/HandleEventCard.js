@@ -168,12 +168,22 @@ function HandleEventCard({ event }) {
     setSelectedOption(option);
   };
 
+  const openModal = function () {
+    setConfirmModal(true);
+  };
+
+  const closeModal = function () {
+    setConfirmModal(false);
+  };
+
   return (
     <div>
       {confirmModal && (
         <ConfirmModal
-          onDelete={handleClickDelete}
-          onUndo={handleDelete}
+          open={openModal}
+          onClose={closeModal}
+          onDelete={handleDelete}
+          onUndo={handleClickDelete}
           message={
             "Are you sure you want to delete the event '" + event.name + "'?"
           }
