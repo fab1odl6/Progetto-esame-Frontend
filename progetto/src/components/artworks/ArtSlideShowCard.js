@@ -87,13 +87,12 @@ function ArtSlideShowCard({ artwork }) {
 
   const { navigate } = useContext(NavigationContext);
 
-  const { index } = useSelector((state) => state.artworks);
-
   const dispatch = useDispatch();
 
-  const { logged, artworks } = useSelector((state) => state.users);
   const [favoriteState, setFavoriteState] = useState(false);
   const [modal, setModal] = useState(false);
+  const { index } = useSelector((state) => state.artworks);
+  const { logged, artworks } = useSelector((state) => state.users);
 
   const handleClickHeart = function (art) {
     if (logged) {
@@ -103,7 +102,6 @@ function ArtSlideShowCard({ artwork }) {
         dispatch(addArtworkUser(art));
       }
       setFavoriteState(!favoriteState);
-      setModal(false);
     } else {
       setModal(true);
     }
