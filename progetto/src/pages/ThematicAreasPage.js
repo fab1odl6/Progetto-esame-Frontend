@@ -77,7 +77,7 @@ function Museums() {
           <ThematicAreasModal
             open={modalOpen}
             onClose={closeModal}
-            thematicArea={selectedMuseum}
+            museum={selectedMuseum}
           />
         </div>
       </div>
