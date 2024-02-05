@@ -88,10 +88,9 @@ function ArtSlideShow() {
     "absolute top-10 right-10 text-4xl cursor-pointer text-red-500";
   const chevronIconClass = "text-3xl cursor-pointer";
 
-  const { array, index } = useSelector((state) => state.artworks);
-
   const dispatch = useDispatch();
 
+  const { array, index } = useSelector((state) => state.artworks);
   const { logged, artworks } = useSelector((state) => state.users);
   const [favoriteState, setFavoriteState] = useState(false);
 
