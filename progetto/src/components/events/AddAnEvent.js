@@ -237,7 +237,7 @@ function AddAnEvent() {
           </div>
           <div className="inputContainerClass">
             <label htmlFor="guests" className="inputLabelClass">
-              Ospiti:
+              Guest:
             </label>
             <input
               type="text"
@@ -251,9 +251,6 @@ function AddAnEvent() {
           </div>
 
           <div className="flex items-center justify-between">
-            <p className="text-sm text-gray-500">
-              Nessun account? <a className="underline" href="">Registrati</a>
-            </p>
 
             <button
               type="submit"
