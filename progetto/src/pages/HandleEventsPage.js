@@ -6,7 +6,7 @@ import { clearText } from "../store";
 import { useEffect } from "react";
 
 function HandleEventsPage() {
-  const containerClass = "flex justify-center h-[80vh]";
+  const containerClass = "flex justify-center h-auto"; // Cambia 80vh a auto
   const addClass = "w-md h-full";
   const separatorClass = "m-4";
   const handleClass = "mt-10 w-md h-full";
@@ -22,13 +22,17 @@ function HandleEventsPage() {
   });
 
   return (
-    <div>
+    <div className={containerClass}>
       {logged ? (
-        <div className={containerClass}>
-          <AddAnEvent className={addClass} />
+        <>
+          <div className="contenitore-larghezza-completa">
+            <AddAnEvent />
+          </div>
           <div className={separatorClass}></div>
-          <HandleEvents className={handleClass} />
-        </div>
+          <div className="contenitore-larghezza-completa">
+            <HandleEvents />
+          </div>
+        </>
       ) : (
         <LoginPage />
       )}

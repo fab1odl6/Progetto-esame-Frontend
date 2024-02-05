@@ -29,3 +29,11 @@ code {
 .react-datepicker__input-container input {
   width: 100%;
 }
+
+.contenitore-larghezza-completa {
+  width: 100%;
+}
+
+.h-md {
+  height: 70vh; /* O qualsiasi altezza desiderata */
+}
