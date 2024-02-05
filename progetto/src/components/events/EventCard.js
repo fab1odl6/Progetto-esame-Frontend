@@ -59,8 +59,8 @@ function EventCard({ event }) {
         <ConfirmModal
           open={openConfirmModal}
           onClose={closeConfirmModal}
-          onDelete={closeConfirmModal}
-          onUndo={deleteFavorite}
+          onDelete={deleteFavorite}
+          onUndo={closeConfirmModal}
           message={
             "Are you sure you want to delete '" +
             event.name +
@@ -93,7 +93,6 @@ function EventCard({ event }) {
           <FavoriteEventShow
             event={event}
             key={event.name}
-            onClickClose={handleClickShow}
             onClickHeart={handleClickHeart}
             open={openModal}
             onClose={closeModal}

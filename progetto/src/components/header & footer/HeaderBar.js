@@ -11,9 +11,8 @@ function HeaderBar() {
   const navLinks = "hidden md:flex items-center gap-6 text-sm";
   const mobileMenuButton =
     "block md:hidden rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75";
-  const coloreDesiderato = "bg-[#77aaff]"; 
-  const loginButton =
-  `rounded-md ${coloreDesiderato} px-5 py-2.5 text-sm font-medium text-white shadow cursor-pointer`;
+  const coloreDesiderato = "bg-[#77aaff]";
+  const loginButton = `rounded-md ${coloreDesiderato} px-5 py-2.5 text-sm font-medium text-white shadow cursor-pointer`;
   const registerButton =
     "hidden sm:flex rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#444455] cursor-pointer";
 
@@ -33,12 +32,11 @@ function HeaderBar() {
   const { user } = useSelector((state) => state.users);
 
   const handleLogoClick = () => {
-    dispatch(setPage("HomePage"));
     navigate("/");
   };
 
   const renderedLinks = links.map((link) => (
-    <Link key={link.label} to={link.path} singlePage={link.label} >
+    <Link key={link.label} to={link.path} singlePage={link.label}>
       {link.label}
     </Link>
   ));
@@ -60,13 +58,13 @@ function HeaderBar() {
     <header className={`${sectionHeader} mt-0 mb-0`}>
       <div className={sectionElement}>
         <div className="md:flex md:items-center">
-        <img
-          src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png"
-          onClick={handleLogoClick}
-          alt="Icon"
-          className="h-8 w-8 mr-2 cursor-pointer"
-          style={{ filter: 'brightness(0) invert(1)', color: '#556699' }}
-        />
+          <img
+            src="https://cdn.icon-icons.com/icons2/1364/PNG/512/publicmuseumsign_89226.png"
+            onClick={handleLogoClick}
+            alt="Icon"
+            className="h-8 w-8 mr-2 cursor-pointer"
+            style={{ filter: "brightness(0) invert(1)", color: "#556699" }}
+          />
         </div>
         <nav className={navLinks} aria-label="Global">
           {renderedLinks}

@@ -6,7 +6,7 @@ import { useState, useEffect, useContext } from "react";
 import LoginModals from "../modals/loginModals";
 import NavigationContext from "../../context/navigation";
 
-function EventSlideShowCard1({ event }) {
+function EventSlideShowCard({ event }) {
   const eventContainerClass =
     "w-sm h-full flex justify-center mx-auto flex-row place-content-center border-2 mb-2 rounded-lg overflow-hidden z-50 max-w-sm p-6 bg-yellow-100 border-yellow-200 rounded-lg shadow hover:bg-yellow-800 dark:bg-yellow-800 dark:border-yellow-700 dark:hover:bg-yellow-700";
   const eventElementClass = "";
@@ -124,4 +124,4 @@ function EventSlideShowCard1({ event }) {
   );
 }
 
-export default EventSlideShowCard1;
+export default EventSlideShowCard;

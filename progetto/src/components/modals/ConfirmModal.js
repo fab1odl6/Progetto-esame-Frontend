@@ -22,7 +22,7 @@ function ConfirmModal({ open, onClose, onDelete, onUndo, message }) {
         <div id="popup-modal" className={modalContainerClass}>
           <div className={modalDivClass}>
             <button
-              onClick={onDelete}
+              onClick={onUndo}
               type="button"
               className={closeButtonClass}
               data-modal-hide="popup-modal"
@@ -64,13 +64,13 @@ function ConfirmModal({ open, onClose, onDelete, onUndo, message }) {
               <button
                 data-modal-hide="popup-modal"
                 type="button"
-                onClick={onUndo}
+                onClick={onDelete}
                 className={confrimButtonClass}
               >
                 Yes, I'm sure
               </button>
               <button
-                onClick={onDelete}
+                onClick={onUndo}
                 data-modal-hide="popup-modal"
                 type="button"
                 className={cancelButtonClass}

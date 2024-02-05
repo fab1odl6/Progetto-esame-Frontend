@@ -9,7 +9,7 @@ import { useState, useEffect, useContext } from "react";
 import NavigationContext from "../../context/navigation";
 import LoginModals from "../modals/loginModals";
 import { Carousel } from "@material-tailwind/react";
-import EventSlideShowCard1 from "./EventSlideShowCard";
+import EventSlideShowCard from "./EventSlideShowCard";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { IconButton } from "@mui/material";
 
@@ -67,7 +67,7 @@ function EventSlideShow() {
       return new Date(item.date) >= new Date();
     })
     .map((item) => {
-      return <EventSlideShowCard1 event={item} key={item.name} />;
+      return <EventSlideShowCard event={item} key={item.name} />;
     });
 
   const handleClickLeft = function () {
