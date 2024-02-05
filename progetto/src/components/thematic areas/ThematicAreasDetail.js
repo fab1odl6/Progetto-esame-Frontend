@@ -1,6 +1,21 @@
 import React, { useState } from "react";
 
 function MuseumDetail({ museum }) {
+  const bgbuttoncolor = "bg-[#77aaff]"
+  const titleboxClass = "text-center";  
+  const titleClass = `text-4xl font-bold mt-20 text-[#444455] text-shadow-md`;
+  const contentboxClass = "min-h-screen flex flex-col items-center relative";
+  const boxdepartementnameClass = "absolute top-0 right-0 bottom-0 left-0 bg-white bg-opacity-70";
+  const boximageClass = "relative max-w-[800px] mx-auto rounded-lg overflow-hidden shadow-md z-1";
+  const descriptionboxClass = "relative max-w-[800px] mx-auto rounded-lg overflow-hidden z-1";
+  const imageClass = "w-full mb-8 rounded-lg shadow-md";
+  const departmentnameClass = "absolute bottom-20 left-5 text-white text-shadow-md z-2";
+  const departmentnametextClass = "text-2xl font-bold";
+  const descriptioClass = "p-5 box-border text-left bg-opacity-90 bg-white z-10 rounded-tl-lg rounded-tr-lg text-[#444455] mt-[-5%]";
+  const buttonClass = `middle none center mr-3 rounded-lg py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md ${bgbuttoncolor} transition-all hover:shadow-lg hover:${bgbuttoncolor} active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`;
+
+
+
   const [showFullDescription, setShowFullDescription] = useState(false);
 
   const toggleDescription = () => {
@@ -9,98 +24,32 @@ function MuseumDetail({ museum }) {
 
   return (
     <div>
-      <div>
-        <h1
-          style={{
-            textAlign: "center",
-            fontSize: "2.5em",
-            fontWeight: "bold",
-            marginTop: "20px",
-            color: "#333",
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
-          }}
-        >
+      <div className={titleboxClass}>
+        <h1 className={titleClass}>
           THEMATIC AREA DETAILS
         </h1>
       </div>
-      <div
-        style={{
-          background: `url("https://www.area-arch.it/wp-content/uploads/sites/6/2023/10/Keope-Plate_copper.jpg") center/cover no-repeat`,
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          position: "relative",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-            backgroundColor: "rgba(255, 255, 255, 0.7)",
-          }}
-        ></div>
-        <div
-          style={{
-            position: "relative",
-            maxWidth: "800px",
-            margin: "auto",
-            borderRadius: "12px",
-            overflow: "hidden",
-            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
-            zIndex: 1,
-          }}
-        >
-          <div
-            style={{
-              position: "relative",
-              maxWidth: "800px",
-              margin: "auto",
-              borderRadius: "12px",
-              overflow: "hidden",
-              zIndex: 1,
-            }}
-          >
-            <img
-              src={museum.image}
-              alt="Immagine del museo"
-              style={{
-                width: "100%",
-                marginBottom: "20px",
-                borderRadius: "12px",
-                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                bottom: "5%",
-                left: "5%",
-                color: "#fff",
-                textShadow: "4px 4px 8px rgba(0, 0, 0, 0.7)",
-                zIndex: 2,
-              }}
-            >
-              <h2 style={{ fontSize: "1.5em", fontWeight: "bold" }}>
+      <div className={contentboxClass}>
+        <div className={boxdepartementnameClass}></div>
+        <div className={boximageClass}>
+
+        <div className={descriptionboxClass}>
+
+          <img
+            src={museum.image}
+            alt="Immagine del museo"
+            className={imageClass}
+          />
+
+              <div className={departmentnameClass}>
+             
+              <h2 className={departmentnametextClass}>
                 {museum.name}
               </h2>
             </div>
           </div>
 
-          <div
-            style={{
-              padding: "20px",
-              boxSizing: "border-box",
-              textAlign: "left",
-              backgroundColor: "rgba(255, 255, 255, 0.9)",
-              zIndex: 2,
-              borderTopLeftRadius: "12px",
-              borderTopRightRadius: "12px",
-            }}
-          >
+          <div className={descriptioClass}>
             <p>
               {showFullDescription
                 ? museum.description
@@ -109,14 +58,14 @@ function MuseumDetail({ museum }) {
             {museum.description && museum.description.length > 700 && (
               <button
                 onClick={toggleDescription}
-                className="middle none center mr-3 rounded-lg py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                className={buttonClass}
                 style={{
-                  background: 'linear-gradient(to right, #c29467, #c29467)',
-                  border: 'none', // Remove border if needed
+                  marginTop: '20px',
                 }}
               >
                 {showFullDescription ? "Read Less ↑" : "Read More ↓"}
               </button>
+            
             )}
           </div>
         </div>
