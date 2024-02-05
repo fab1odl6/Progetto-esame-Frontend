@@ -6,15 +6,17 @@ import { updateText } from "../../store";
 import React from "react";
 
 function SearchBar() {
-  const cursorpointerClass= "cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-800";
+  const cursorpointerClass =
+    "cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-800";
   const searchBarHeaderClass = classNames(
     "flex justify-center items-center relative z-10"
   );
-  const searcboxClass = "absolute inset-y-0 left-3 flex items-center pointer-events-none";
+  const searcboxClass =
+    "absolute inset-y-0 left-3 flex items-center pointer-events-none";
   const iconpositionClass = "relative w-full";
   const searchtextClass = "w-4 h-4 text-gray-500 dark:text-gray-400";
   const searchBarClass = classNames("mt-5 w-5/6 text-gray-500 relative");
-  const colorborerClass ="border-b border-blue-200";
+  const colorborerClass = "border-b border-blue-200";
   const formClass = "flex items-center w-full";
   const searchDivClass = "relative flex items-center w-full";
   const finalClassNamesClass = classNames(
@@ -23,13 +25,14 @@ function SearchBar() {
   const ml2Class = "ml-2";
   const matchedPanelClass =
     "matched-panel absolute top-full left-0 w-full bg-white border rounded shadow mt-1 z-300 p-2 overflow-y-auto max-h-40";
-  const bgbutton = "bg-[#77aaff]"
+  const bgbutton = "bg-[#77aaff]";
   const searchButtonClass = classNames(
     `${ml2Class} text-white ${bgbutton} hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 absolute right-0 top-1/2 transform -translate-y-1/2 h-full`
   );
 
   const { navigate } = useContext(NavigationContext);
   const dispatch = useDispatch();
+
   const [text, setText] = useState("");
   const [matchedValues, setMatchedValues] = useState([]);
   const { array } = useSelector((state) => {
@@ -95,7 +98,7 @@ function SearchBar() {
                 {matchedValues.slice(0, 3).map((value, index) => (
                   <React.Fragment key={index}>
                     <div
-                      className= {cursorpointerClass}
+                      className={cursorpointerClass}
                       onClick={() => handleSelect(value)}
                     >
                       {value.title}
