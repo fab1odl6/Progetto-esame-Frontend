@@ -18,15 +18,15 @@ function EventSlideShowCard({ event }) {
   const dispatch = useDispatch();
   const { navigate } = useContext(NavigationContext);
 
-  const [favoriteState, setFavoriteState] = useState(false);
-  const [modal, setModal] = useState(false);
-  const [fullState, setFullState] = useState(false);
   const { logged, events } = useSelector((state) => {
     return state.users;
   });
   const { index } = useSelector((state) => {
     return state.events;
   });
+  const [favoriteState, setFavoriteState] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [fullState, setFullState] = useState(false);
 
   const handleClickHeart = function (event) {
     if (logged) {
@@ -44,7 +44,6 @@ function EventSlideShowCard({ event }) {
   const handleClickEvent = function () {
     setFullState(!fullState);
   };
-
   useEffect(() => {
     if (logged) {
       if (events.find((item) => item.name === event.name)) {

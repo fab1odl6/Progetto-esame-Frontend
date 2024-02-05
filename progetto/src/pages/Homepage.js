@@ -88,7 +88,7 @@ function HomePage() {
     textAlign: "center",
     fontSize: "18px",
     fontWeight: "bold",
-    margin: "10px auto",
+    margin: "50px auto",
     maxWidth: "400px", 
   };
 
@@ -100,17 +100,14 @@ function HomePage() {
 
   return (
     <div style={yellowBackgroundStyle}>
-      <div className="header-container" style={headerStyle}>
-        <SearchBar />
-      </div>
-      {/* L'immagine sotto la SearchBar */}
       <div className="custom-image-container" style={{ position: "relative" }}>
         <img
           src="https://cdn.sanity.io/images/cctd4ker/production/644670e7c77a813b8fc7d6dfa427beefacad4684-3840x2160.jpg?w=3840&q=75&fit=clip&auto=format"
           alt="Custom Image"
           style={{ width: "100%", height: "600px", objectFit: "cover" }}
         />
-        {/* Primo box blu con scritte */}
+        <SearchBar />
+        {/* Primo box blu con scritte sotto la barra di ricerca */}
         <div style={highlightedBoxStyle}>
           <p>Highlighted Events</p>
         </div>
@@ -121,17 +118,19 @@ function HomePage() {
       <div className={zIndexEvent}>
         <EventSlideShow />
       </div>
+      
       {/* Nuovo blocco di codice */}
-      <p class="text-gray-500 dark:text-gray-400"></p>
-      <div class="inline-flex items-center justify-center w-full">
-        <hr class="w-64 h-2 my-8 bg-gray-200 border-0 rounded dark:bg-gray-700" />
-        <div class="absolute px-4 -translate-x-1/2 left-1/2 dark:bg-gray-900">
-          <svg class="w-8 h-8 text-gray-700 dark:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
+      <p className="text-gray-500 dark:text-gray-400"></p>
+      <div className="inline-flex items-center justify-center w-full">
+        <hr className="w-64 h-2 my-8 bg-gray-200 border-0 rounded dark:bg-gray-700" />
+        <div className="absolute px-4 -translate-x-1/2 left-1/2 dark:bg-gray-900">
+          <svg className="w-8 h-8 text-gray-700 dark:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
             <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z"/>
           </svg>
         </div>
       </div>
-      <p class="text-gray-500 dark:text-gray-400"></p>
+      <p className="text-gray-500 dark:text-gray-400"></p>
+      
       {/* Secondo box blu con scritte */}
       <div style={highlightedBoxStyle}>
         <p>Highlighted Artworks</p>
@@ -144,6 +143,7 @@ function HomePage() {
 }
 
 export default HomePage;
+
 
 
 

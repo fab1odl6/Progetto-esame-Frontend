@@ -35,6 +35,9 @@ function MyEventsPage() {
     setExpandedAccordion((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
+  const accordionBarColor = 'lightblue'; // Colore per la barrettta dell'accordion e il container della scritta
+  const accordionBarColorDark = 'darkblue'; // Colore più scuro quando l'Accordion è aperto
+
   const events = [
     { id: 1, title: "Future Events", content: <EventCard future={true} /> },
     { id: 2, title: "Past Events", content: <EventCard future={false} /> },
@@ -78,26 +81,44 @@ function MyEventsPage() {
                 expanded={expandedAccordion[event.id]}
                 onChange={() => handleToggle(event.id)}
                 className={accordionClass}
-                style={{ backgroundColor: 'blue' }}
+                style={{ backgroundColor: expandedAccordion[event.id] ? accordionBarColorDark : 'transparent' }}
               >
                 <AccordionSummary
                   className={titleContainerClass}
                   style={{
-                    background: 'linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2))',
+                    borderBottom: '1px solid rgba(255, 255, 255, 0.5)',
+                    padding: '0',
+                    background: expandedAccordion[event.id] ? accordionBarColorDark : accordionBarColor,
+                    marginBottom: expandedAccordion[event.id] ? '0' : '-1px',
                   }}
                 >
-                  <div>
-                    <Typography variant="h6" className={typographyClass}>
+                  <div
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      background: expandedAccordion[event.id] ? accordionBarColorDark : accordionBarColor,
+                      color: 'white',
+                      fontWeight: 'bold',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    <Typography variant="h6" className={`${typographyClass} font-weight-bold text-uppercase`} style={{ color: 'white' }}>
                       {event.title}
                     </Typography>
                     {expandedAccordion[event.id] ? (
-                      <GoChevronDown />
+                      <GoChevronDown style={{ color: 'white' }} />
                     ) : (
-                      <GoChevronLeft />
+                      <GoChevronLeft style={{ color: 'white' }} />
                     )}
                   </div>
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails
+                  style={{
+                    backgroundColor: 'lightgray',
+                  }}
+                >
                   <div>
                     <EventContainer
                       {...{ future: event.id === 1 ? true : false }}

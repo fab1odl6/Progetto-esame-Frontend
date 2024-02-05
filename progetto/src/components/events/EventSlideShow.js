@@ -24,6 +24,7 @@ function EventSlideShow() {
   const { array, index } = useSelector((state) => {
     return state.events;
   });
+
   const { logged, events } = useSelector((state) => {
     return state.users;
   });
