@@ -10,7 +10,7 @@ import { addCustomEventUser, addNewEvent, addEventUser } from "../../store";
 
 function AddAnEvent() {
   const containerClass =
-    "p-4 w-md h-md overflow-auto border bg-white rounded-md shadow-md mt-4 h-full";
+    "p-4 w-full h-md overflow-auto border bg-white rounded-md shadow-md mt-4 h-full";
   const errorDivClass =
     "mt-4 p-4 bg-red-100 border border-red-400 text-red-700";
   const errorPClass = "w-48 mb-1 line-clamp-1";
@@ -161,116 +161,118 @@ function AddAnEvent() {
   }, [customEvents, logged]);
 
   return (
-    <div className={containerClass}>
-      {alreadyExistsError && (
-        <div className="w-md bg-red-500 text-white p-4">
-          This event already exists,
-          <br />
-          try changing its name!
+   <section className="relative flex flex-col lg:flex-row lg:h-screen lg:items-center larghezza-completa">
+      <div className="w-full lg:w-1/2 p-4 lg:p-12">
+        <div className="mx-auto max-w-full text-center">
+          <h1 className="text-2xl font-bold sm:text-3xl">ADD AN EVENT!</h1>
         </div>
-      )}
-      {error && (
-        <div className={errorDivClass}>
-          <p className={errorPClass}>
-            <strong>Error</strong>{" "}
-          </p>
-        </div>
-      )}
-      {success && (
-        <div className={successDivClass}>
-          <p className={successPClass}>
-            <strong>Success</strong>
-          </p>
-        </div>
-      )}
-      <h3 className={titleClass}>Add an event!</h3>
-      <form className={formClass} onSubmit={handleSubmit}>
-        <div className={inputContainerClass}>
-          <label htmlFor="name" className={inputLabelClass}>
-            Name: <span className={mandatoryClass}>*</span>
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className={inputClass}
-            required
-            autoComplete="off"
-          />
-        </div>
-        <div className={inputContainerClass}>
-          <label htmlFor="image" className={inputLabelClass}>
-            Image URL: <span className={mandatoryClass}>*</span>
-          </label>
-          <input
-            type="text"
-            id="image"
-            name="image"
-            value={formData.image}
-            onChange={handleChange}
-            className={inputClass}
-            required
-            autoComplete="off"
-          />
-        </div>
-        <div className={inputContainerClass}>
-          <label htmlFor="date" className={inputLabelClass}>
-            Date: <span className={mandatoryClass}>*</span>
-          </label>
-          <div>
-            <div>
-              <div className={datePickerContainerClass}>
-                <DatePicker
-                  showIcon
-                  toggleCalendarOnIconClick
-                  id="date"
-                  name="date"
-                  value={selectedDate}
-                  selected={selectedDate}
-                  onChange={handleChangeDate}
-                  dateFormat="dd/MM/yyyy"
-                  className={datePickerClass}
-                  required
-                  minDate={new Date()}
-                  autoComplete="off"
-                />
-              </div>
+
+        <form onSubmit={handleSubmit} className="mx-auto mb-0 mt-8 max-w-md space-y-4 flex flex-col">
+          {alreadyExistsError && (
+            <div className="w-md bg-red-500 text-white p-4">
+              Questo evento esiste già, prova a cambiarne il nome!
             </div>
-          </div>
-        </div>
-        <div className={inputContainerClass}>
-          <div>
-            <DepartmentDropdown
-              onOptionSelect={handleOptionSelection}
+          )}
+
+          <div className="flex flex-col">
+            <label htmlFor="name">Nome: <span className="text-red-500">*</span></label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-4/5 rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+              required
               autoComplete="off"
             />
-            <span className={mandatoryClass}>*</span>
-            {selectedOption && (
-              <p className={selectedOptionClass}>{selectedOption}</p>
-            )}
           </div>
-        </div>
-        <div className={inputContainerClass}>
-          <label htmlFor="guests" className={inputLabelClass}>
-            Guests:
-          </label>
-          <input
-            type="text"
-            id="guests"
-            name="guests"
-            value={formData.guests}
-            onChange={handleChange}
-            className={inputClass}
-            autoComplete="off"
-          />
-        </div>
-        <button type="submit" className={buttonClass}>
-          Submit
-        </button>
-      </form>
-    </div>
+
+
+          <div>
+            <label htmlFor="image">URL dell'immagine: <span className="text-red-500">*</span></label>
+            <input
+              type="text"
+              id="image"
+              name="image"
+              value={formData.image}
+              onChange={handleChange}
+              className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+              required
+              autoComplete="off"
+            />
+          </div>
+          <div className="inputContainerClass">
+            <label htmlFor="date" className="inputLabelClass">
+              Data: <span className="mandatoryClass">*</span>
+            </label>
+            <div className="datePickerContainerClass">
+              <DatePicker
+                showIcon
+                toggleCalendarOnIconClick
+                id="date"
+                name="date"
+                value={selectedDate}
+                selected={selectedDate}
+                onChange={handleChangeDate}
+                dateFormat="dd/MM/yyyy"
+                className="datePickerClass"
+                required
+                minDate={new Date()}
+                autoComplete="off"
+              />
+            </div>
+          </div>
+          <div className="inputContainerClass">
+            <div>
+              <DepartmentDropdown
+                onOptionSelect={handleOptionSelection}
+                autoComplete="off"
+              />
+              <span className="mandatoryClass">*</span>
+              {selectedOption && (
+                <p className="selectedOptionClass">{selectedOption}</p>
+              )}
+            </div>
+          </div>
+          <div className="inputContainerClass">
+            <label htmlFor="guests" className="inputLabelClass">
+              Ospiti:
+            </label>
+            <input
+              type="text"
+              id="guests"
+              name="guests"
+              value={formData.guests}
+              onChange={handleChange}
+              className="inputClass"
+              autoComplete="off"
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-gray-500">
+              Nessun account? <a className="underline" href="">Registrati</a>
+            </p>
+
+            <button
+              type="submit"
+              className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+            >
+              Invia
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div className="relative h-64 w-full lg:h-full lg:w-1/2">
+        <img
+          alt="Benvenuto"
+          src="https://www.gallerialivorno.it/wp-content/uploads/2022/07/Gabriella-Caverni-Le-ortensie-azzurre.jpg"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      </div>
+    </section>
   );
 }
 
