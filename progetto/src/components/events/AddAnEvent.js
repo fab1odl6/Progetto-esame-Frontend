@@ -147,7 +147,7 @@ function AddAnEvent() {
       name: "",
     });
 
-    setSuccess("Great! Your event has been uploaded correctly!");
+    setSuccess(true);
     setError(null);
     setSelectedDate(null);
     setSelectedOption(null);
