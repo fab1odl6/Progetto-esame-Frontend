@@ -1,9 +1,6 @@
 import React from "react";
 
 function ImageBox({ imageUrl, museum }) {
-  console.log("imageUrl:", imageUrl);
-  console.log("department:", museum);
-
   const containerClass =
     "relative w-full h-full overflow-hidden m-0 p-0 box inline-block";
   const imageClass = "w-full h-full object-cover rounded-t-md";
