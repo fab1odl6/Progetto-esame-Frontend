@@ -22,7 +22,6 @@ function HandleEvents() {
   const [localEvents, setLocalEvents] = useState([]);
 
   const updateLocal = async () => {
-    console.log("LOOP");
     const eventsRef = child(
       dbRef,
       "/users/" + user.personalData.name + "/customEvents/"
