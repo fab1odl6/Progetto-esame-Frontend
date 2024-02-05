@@ -46,7 +46,7 @@ async function writeData() {
 
 // await writeData();
 
-function HandleEventCard({ event, submit, setSubmit }) {
+function HandleEventCard({ event }) {
   const app = initializeApp(firebaseConfig);
   const db = getDatabase();
 
@@ -88,6 +88,7 @@ function HandleEventCard({ event, submit, setSubmit }) {
   const [deleteState, setDeleteState] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [confirmModal, setConfirmModal] = useState(null);
+  const [submit, setSubmit] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [success, setSuccess] = useState(null);
   const [formData, setFormData] = useState({

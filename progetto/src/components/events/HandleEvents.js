@@ -20,7 +20,6 @@ function HandleEvents() {
   });
 
   const [localEvents, setLocalEvents] = useState([]);
-  const [submit, setSubmit] = useState(false);
 
   const updateLocal = async () => {
     console.log("LOOP");
@@ -48,14 +47,7 @@ function HandleEvents() {
   }, [customEvents]);
 
   const render = localEvents.map((event) => {
-    return (
-      <HandleEventCard
-        key={event.name}
-        event={event}
-        submit={submit}
-        setSubmit={setSubmit}
-      />
-    );
+    return <HandleEventCard key={event.name} event={event} />;
   });
 
   return (
