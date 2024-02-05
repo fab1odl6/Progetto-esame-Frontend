@@ -14,8 +14,8 @@ const departmentsRef = ref(database, "/departments");
 function Museums() {
   const containerClass = "mt-4";
   const imageboxClass = "relative w-full h-200px overflow-hidden";
-  const textonimageClass = "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
-
+  const textonimageClass =
+    "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
 
   const [museums, setMuseums] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -68,10 +68,8 @@ function Museums() {
           className="filter brightness-50"
           alt="Artwork"
         />
-          <div className={textonimageClass}>
-            THEMATIC AREAS
-          </div>
-        </div>
+        <div className={textonimageClass}>THEMATIC AREAS</div>
+      </div>
       {/* Sezione con la griglia delle aree tematiche */}
       <div className={containerClass}>
         <div className="mainContent">
@@ -79,7 +77,7 @@ function Museums() {
           <ThematicAreasModal
             open={modalOpen}
             onClose={closeModal}
-            museum={selectedMuseum}
+            thematicArea={selectedMuseum}
           />
         </div>
       </div>
