@@ -19,6 +19,8 @@ import { GoChevronDown } from "react-icons/go";
 import DepartmentDropdown from "../dropdowns/DepartmentDropdown";
 import ConfirmModal from "../modals/ConfirmModal";
 
+const mandatoryClass = "text-red-500";
+
 async function writeData() {
   const app = initializeApp(firebaseConfig);
   const db = getDatabase();
@@ -217,89 +219,79 @@ function HandleEventCard({ event }) {
       {editState && (
         <div className="flex">
           <form className={formContainerClass} onSubmit={handleSubmit}>
-            <div>
-              <div className={inputContainerClass}>
-                <label htmlFor="name" className={inputLabelClass}>
-                  Name:
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className={inputClass}
-                />
-              </div>
-            </div>
-            <div>
-              <div className={inputContainerClass}>
-                <label htmlFor="image" className={inputLabelClass}>
-                  Image:
-                </label>
-                <input
-                  type="text"
-                  id="img"
-                  name="image"
-                  value={formData.image}
-                  onChange={handleChange}
-                  className={inputClass}
-                />
-              </div>
-            </div>
             <div className={inputContainerClass}>
-              <label htmlFor="date" className={inputLabelClass}>
-                Date:
-              </label>
-              <div>
-                <div>
-                  <div className={datePickerContainerClass}>
-                    <DatePicker
-                      showIcon
-                      toggleCalendarOnIconClick
-                      id="date"
-                      name="date"
-                      value={selectedDate}
-                      selected={selectedDate}
-                      onChange={handleChangeDate}
-                      dateFormat="dd/MM/yyyy"
-                      minDate={new Date()}
-                      autoComplete="off"
-                    />
-                    <GoChevronDown className={chevronClass} />
-                  </div>
-                </div>
-              </div>
+              <label htmlFor="name" className={inputLabelClass}>Nome: <span className={mandatoryClass}>*</span></label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className={inputClass}
+                required
+                autoComplete="off"
+              />
             </div>
+
             <div className={inputContainerClass}>
-              <div>
-                <DepartmentDropdown onOptionSelect={handleOptionSelection} />
-                {selectedOption && (
-                  <p className={selectedOptionClass}>
-                    Selected option: {selectedOption}
-                  </p>
-                )}
-              </div>
+              <label htmlFor="image" className={inputLabelClass}>URL dell'immagine: <span className={mandatoryClass}>*</span></label>
+              <input
+                type="text"
+                id="img"
+                name="image"
+                value={formData.image}
+                onChange={handleChange}
+                className={inputClass}
+                required
+                autoComplete="off"
+              />
             </div>
-            <div>
-              <div className={inputContainerClass}>
-                <label htmlFor="guests" className={inputLabelClass}>
-                  Guests:
-                </label>
-                <input
-                  type="text"
-                  id="guests"
-                  name="guests"
-                  value={formData.guests}
-                  onChange={handleChange}
-                  className={inputClass}
+
+            <div className={inputContainerClass}>
+              <label htmlFor="date" className={inputLabelClass}>Data: <span className={mandatoryClass}>*</span></label>
+              <div className={datePickerContainerClass}>
+                <DatePicker
+                  showIcon
+                  toggleCalendarOnIconClick
+                  id="date"
+                  name="date"
+                  value={selectedDate}
+                  selected={selectedDate}
+                  onChange={handleChangeDate}
+                  dateFormat="dd/MM/yyyy"
+                  className={datePickerClass}
+                  required
+                  minDate={new Date()}
+                  autoComplete="off"
                 />
               </div>
             </div>
+
+            <div className={inputContainerClass}>
+              <label htmlFor="guests" className={inputLabelClass}>Guests:</label>
+              <input
+                type="text"
+                id="guests"
+                name="guests"
+                value={formData.guests}
+                onChange={handleChange}
+                className={inputClass}
+                autoComplete="off"
+              />
+            </div>
+
+            <div className={inputContainerClass}>
+              <DepartmentDropdown onOptionSelect={handleOptionSelection} />
+              {selectedOption && (
+                <p className={selectedOptionClass}>Selected option: {selectedOption}</p>
+              )}
+            </div>
+
             <button type="submit" className={buttonClass}>
-              Submit
+              Invia
             </button>
           </form>
+
           <MdOutlineEditOff
             className={editIconClass}
             onClick={handleClickEdit}

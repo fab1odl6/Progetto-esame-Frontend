@@ -9,26 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCustomEventUser, addNewEvent, addEventUser } from "../../store";
 
 function AddAnEvent() {
-  const containerClass =
-    "p-4 w-full h-md overflow-auto border bg-white rounded-md shadow-md mt-4 h-full";
-  const errorDivClass =
-    "mt-4 p-4 bg-red-100 border border-red-400 text-red-700";
-  const errorPClass = "w-48 mb-1 line-clamp-1";
-  const successDivClass =
-    "mt-4 p-4 bg-green-100 border border-green-400 text-green-700";
-  const successPClass = "w-48 mb-1 line-clamp-1";
-  const mandatoryClass = "text-red-500";
-  const titleClass = "text-lg font-bold mb-4 mt-2 text-center";
-  const formClass = "space-y-4";
-  const inputContainerClass = "flex flex-col";
-  const inputLabelClass = "mb-1";
-  const inputClass = "border border-gray-300 rounded-md p-2";
-  const buttonClass =
-    "bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600";
-  const selectedOptionClass =
-    "mt-1 w-48 p-2 bg-blue-500 text-white rounded line-clamp-1";
-  const datePickerContainerClass = "flex relative items-center";
-  const datePickerClass = "w-full p-2 border rounded outline-none";
+  
 
   const app = initializeApp(firebaseConfig);
   const db = getDatabase();
@@ -164,17 +145,17 @@ function AddAnEvent() {
    <section className="relative flex flex-col lg:flex-row lg:h-screen lg:items-center larghezza-completa">
       <div className="w-full lg:w-1/2 p-4 lg:p-12">
         <div className="mx-auto max-w-full text-center">
-          <h1 className="text-2xl font-bold sm:text-3xl">ADD AN EVENT!</h1>
+          <h1 className="text-2xl font-bold sm:text-3xl text-[#444455]">ADD AN EVENT!</h1>
         </div>
 
         <form onSubmit={handleSubmit} className="mx-auto mb-0 mt-8 max-w-md space-y-4 flex flex-col">
           {alreadyExistsError && (
-            <div className="w-md bg-red-500 text-white p-4">
+            <div className="w-md bg-red-500 text-[#444455] p-4">
               Questo evento esiste già, prova a cambiarne il nome!
             </div>
           )}
 
-          <div className="flex flex-col">
+          <div className="flex flex-col text-[#444455]">
             <label htmlFor="name">Nome: <span className="text-red-500">*</span></label>
             <input
               type="text"
@@ -189,7 +170,7 @@ function AddAnEvent() {
           </div>
 
 
-          <div>
+          <div className="text-[#444455]">
             <label htmlFor="image">URL dell'immagine: <span className="text-red-500">*</span></label>
             <input
               type="text"
@@ -202,7 +183,7 @@ function AddAnEvent() {
               autoComplete="off"
             />
           </div>
-          <div className="inputContainerClass">
+          <div className="text-[#444455]">
             <label htmlFor="date" className="inputLabelClass">
               Data: <span className="mandatoryClass">*</span>
             </label>
@@ -223,7 +204,7 @@ function AddAnEvent() {
               />
             </div>
           </div>
-          <div className="inputContainerClass">
+          <div className="text-[#444455]">
             <div>
               <DepartmentDropdown
                 onOptionSelect={handleOptionSelection}
@@ -235,7 +216,7 @@ function AddAnEvent() {
               )}
             </div>
           </div>
-          <div className="inputContainerClass">
+          <div className="text-[#444455]">
             <label htmlFor="guests" className="inputLabelClass">
               Guest:
             </label>
@@ -254,9 +235,9 @@ function AddAnEvent() {
 
             <button
               type="submit"
-              className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+              className="inline-block rounded-lg bg-[#77aaff] px-5 py-3 text-sm font-medium text-white"
             >
-              Invia
+              Send
             </button>
           </div>
         </form>
