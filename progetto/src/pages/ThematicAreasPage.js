@@ -11,17 +11,18 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const departmentsRef = ref(database, "/departments");
 
-function Museums() {
+function ThematicAreasPage() {
   const containerClass = "mt-4";
   const imageboxClass = "relative w-full h-200px overflow-hidden";
   const textonimageClass =
     "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
 
-  const [museums, setMuseums] = useState([]);
+  const [thematicAreas, setThematicAreas] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedMuseum, setSelectedMuseum] = useState(null);
+  const [selectedTA, setSelectedTA] = useState(null);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(clearText());
   }, []);
@@ -32,30 +33,30 @@ function Museums() {
         onValue(departmentsRef, (snapshot) => {
           const data = snapshot.val();
 
-          const museumsFromFirebase = Object.keys(data).map((key) => ({
+          const TAFromFirebase = Object.keys(data).map((key) => ({
             id: key,
             name: data[key].name,
             image: data[key].img,
             description: data[key].description,
           }));
 
-          setMuseums(museumsFromFirebase);
+          setThematicAreas(TAFromFirebase);
         });
       } catch (error) {
-        console.error("Error fetching museums:", error);
+        console.error("Error fetching thematic areas:", error);
       }
     };
 
     fetchData();
   }, []);
 
-  const openModal = (museum) => {
-    setSelectedMuseum(museum);
+  const openModal = (TA) => {
+    setSelectedTA(TA);
     setModalOpen(true);
   };
 
   const closeModal = () => {
-    setSelectedMuseum(null);
+    setSelectedTA(null);
     setModalOpen(false);
   };
 
@@ -73,11 +74,11 @@ function Museums() {
       {/* Sezione con la griglia delle aree tematiche */}
       <div className={containerClass}>
         <div className="mainContent">
-          <Grid museums={museums} openModal={openModal} />
+          <Grid thematicAreas={thematicAreas} openModal={openModal} />
           <ThematicAreasModal
             open={modalOpen}
             onClose={closeModal}
-            museum={selectedMuseum}
+            thematicArea={selectedTA}
           />
         </div>
       </div>
@@ -85,4 +86,4 @@ function Museums() {
   );
 }
 
-export default Museums;
+export default ThematicAreasPage;
