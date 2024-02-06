@@ -18,7 +18,7 @@ function ThematicAreasPage() {
     "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
 
   const [thematicAreas, setThematicAreas] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modal, setModal] = useState(false);
   const [selectedTA, setSelectedTA] = useState(null);
 
   const dispatch = useDispatch();
@@ -52,12 +52,12 @@ function ThematicAreasPage() {
 
   const openModal = (TA) => {
     setSelectedTA(TA);
-    setModalOpen(true);
+    setModal(true);
   };
 
   const closeModal = () => {
     setSelectedTA(null);
-    setModalOpen(false);
+    setModal(false);
   };
 
   return (
@@ -76,7 +76,7 @@ function ThematicAreasPage() {
         <div className="mainContent">
           <Grid thematicAreas={thematicAreas} openModal={openModal} />
           <ThematicAreasModal
-            open={modalOpen}
+            open={modal}
             onClose={closeModal}
             thematicArea={selectedTA}
           />
