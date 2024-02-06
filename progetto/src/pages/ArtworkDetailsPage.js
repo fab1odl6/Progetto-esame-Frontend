@@ -6,9 +6,10 @@ import NavigationContext from "../context/navigation";
 import LoginModals from "../components/modals/loginModals";
 
 function ArtworkDetailsPage({ navigateBack }) {
-  const bgcolor = "bg-[#334466]"
-  const textcontainerClass=  `${bgcolor} bg-opacity-75 p-8 rounded-md backdrop-filter backdrop-blur-md`;
-  const titleClass="title-font sm:text-4xl text-3xl mb-4 font-medium text-white";
+  const bgcolor = "bg-[#334466]";
+  const textcontainerClass = `${bgcolor} bg-opacity-75 p-8 rounded-md backdrop-filter backdrop-blur-md`;
+  const titleClass =
+    "title-font sm:text-4xl text-3xl mb-4 font-medium text-white";
   const imageContainerClass =
     "lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0 flex justify-center items-center relative image-container";
   const descriptionClass = "mb-8 leading-relaxed text-white";
@@ -27,29 +28,26 @@ function ArtworkDetailsPage({ navigateBack }) {
   const textboxClass =
     "lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center";
 
+  const dispatch = useDispatch();
+
   const { navigate } = useContext(NavigationContext);
 
+  const { logged, artworks } = useSelector((state) => {
+    return state.users;
+  });
   const { art, favoriteState } = useSelector((state) => {
     return state.artDetails;
   });
+  const [modal, setModal] = useState(false);
+  const [buttonText, setButtonText] = useState("");
 
   const handleNavigateBack = () => {
     navigateBack();
   };
 
-  const [buttonText, setButtonText] = useState("");
-
-  const { logged, artworks } = useSelector((state) => {
-    return state.users;
-  });
-  const [modal, setModal] = useState(false);
-
-  const dispatch = useDispatch();
-
   const handleClickHeart = function () {
     if (logged) {
       dispatch(updateArt(art));
-      setModal(false);
       dispatch(setFavorite(!favoriteState));
 
       setButtonText((prevText) =>
@@ -70,6 +68,12 @@ function ArtworkDetailsPage({ navigateBack }) {
     setModal(false);
   };
 
+  const TextContainer = ({ children }) => (
+    <div className={textcontainerClass}>
+      <div className="text-left">{children}</div>
+    </div>
+  );
+
   useEffect(() => {
     if (logged) {
       if (artworks.find((item) => item.id === art.id)) {
@@ -83,12 +87,6 @@ function ArtworkDetailsPage({ navigateBack }) {
       dispatch(setFavorite(false));
     }
   }, [logged, artworks, art.id]);
-
-  const TextContainer = ({ children }) => (
-    <div className={textcontainerClass}>
-      <div className="text-left">{children}</div>
-    </div>
-  );
 
   return (
     <section
