@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { swipeLeftEvent, swipeRightEvent } from "../../store";
-import { useState, useEffect } from "react";
 import { Carousel } from "@material-tailwind/react";
 import EventSlideShowCard from "./EventSlideShowCard";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -15,10 +14,6 @@ function EventSlideShow() {
   const { array, index } = useSelector((state) => {
     return state.events;
   });
-  const { logged, events } = useSelector((state) => {
-    return state.users;
-  });
-  const [favoriteState, setFavoriteState] = useState(false);
 
   const handleClickLeft = function () {
     dispatch(swipeLeftEvent());
@@ -27,16 +22,6 @@ function EventSlideShow() {
   const handleClickRight = function () {
     dispatch(swipeRightEvent());
   };
-
-  useEffect(() => {
-    if (logged) {
-      if (events.find((item) => item.name === array[index].name)) {
-        setFavoriteState(true);
-      } else {
-        setFavoriteState(false);
-      }
-    }
-  }, [index, logged]);
 
   const render = array
     .filter((item) => {

@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { swipeLeftArt, swipeRightArt } from "../../store";
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Carousel } from "@material-tailwind/react";
 import ArtSlideShowCard from "./ArtSlideShowCard";
@@ -90,9 +89,7 @@ function ArtSlideShow() {
 
   const dispatch = useDispatch();
 
-  const { array, index } = useSelector((state) => state.artworks);
-  const { logged, artworks } = useSelector((state) => state.users);
-  const [favoriteState, setFavoriteState] = useState(false);
+  const { array } = useSelector((state) => state.artworks);
 
   const handleClickLeft = function () {
     dispatch(swipeLeftArt());
@@ -101,16 +98,6 @@ function ArtSlideShow() {
   const handleClickRight = function () {
     dispatch(swipeRightArt());
   };
-
-  useEffect(() => {
-    if (logged) {
-      if (artworks.find((item) => item.id === array[index].id)) {
-        setFavoriteState(true);
-      } else {
-        setFavoriteState(false);
-      }
-    }
-  }, [index, logged]);
 
   const render = array.slice(0, 5).map((item) => {
     return <ArtSlideShowCard artwork={item} key={item.id} />;

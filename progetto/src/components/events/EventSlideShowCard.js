@@ -44,15 +44,6 @@ function EventSlideShowCard({ event }) {
   const handleClickEvent = function () {
     setFullState(!fullState);
   };
-  useEffect(() => {
-    if (logged) {
-      if (events.find((item) => item.name === event.name)) {
-        setFavoriteState(true);
-      } else {
-        setFavoriteState(false);
-      }
-    }
-  }, [logged, index, events]);
 
   const openModal = function () {
     setFullState(true);
@@ -69,6 +60,16 @@ function EventSlideShowCard({ event }) {
   const handleClickClose = function () {
     setModal(false);
   };
+
+  useEffect(() => {
+    if (logged) {
+      if (events.find((item) => item.name === event.name)) {
+        setFavoriteState(true);
+      } else {
+        setFavoriteState(false);
+      }
+    }
+  }, [logged, index, events]);
 
   const altText = "Image of " + event.name;
   return (
