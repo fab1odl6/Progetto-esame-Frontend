@@ -1,23 +1,23 @@
 import React from "react";
 import CardBox from "./CardBox";
 
-function Grid({ museums, openModal }) {
+function Grid({ thematicAreas, openModal }) {
   const containerClass = "flex flex-wrap";
   const cardBoxDiv = "flex-none box-border p-5 md:p-10 lg:p-20 w-1/2";
 
   return (
     <div className={containerClass}>
-      {museums.map((museum) => (
+      {thematicAreas.map((thematicAreas) => (
         <div
-          key={museum.id}
+          key={thematicAreas.id}
           className={cardBoxDiv}
-          onClick={() => openModal(museum)}
+          onClick={() => openModal(thematicAreas)}
         >
           <CardBox
-            imageUrl={museum.image}
-            name={museum.name}
-            description={museum.description}
-            onClick={() => openModal(museum)}
+            imageUrl={thematicAreas.image}
+            name={thematicAreas.name}
+            description={thematicAreas.description}
+            onClick={() => openModal(thematicAreas)}
           />
         </div>
       ))}

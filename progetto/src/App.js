@@ -1,5 +1,5 @@
 import HomePage from "../src/pages/Homepage";
-import ThematicAreas from "../src/pages/ThematicAreasPage";
+import ThematicAreasPage from "../src/pages/ThematicAreasPage";
 import Route from "./components/navigation/Route";
 import HeaderBar from "../src/components/header & footer/HeaderBar";
 import { NavigationProvider } from "./context/navigation";
@@ -53,7 +53,7 @@ function App() {
               <EveryArtworkPage />
             </Route>
             <Route path="/thematicAreas">
-              <ThematicAreas />
+              <ThematicAreasPage />
             </Route>
             <Route path="/personalGallery">
               <PersonalGalleryPage />

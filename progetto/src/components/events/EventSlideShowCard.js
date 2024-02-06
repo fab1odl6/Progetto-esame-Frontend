@@ -8,6 +8,7 @@ import NavigationContext from "../../context/navigation";
 
 function EventSlideShowCard({ event }) {
   const dispatch = useDispatch();
+
   const { navigate } = useContext(NavigationContext);
 
   const eventContainerClass = "max-w-screen-md w-full h-full flex justify-center mx-auto flex-col place-content-center border-2 mb-2 rounded-lg overflow-hidden z-50 p-6 bg-blue-200 border-blue-800 rounded-lg shadow dark:bg-blue-800 dark:border-yellow-700 cursor-pointer transition-colors duration-300 ease-in-out hover:bg-blue-300";
@@ -25,7 +26,7 @@ function EventSlideShowCard({ event }) {
   const [modal, setModal] = useState(false);
   const [fullState, setFullState] = useState(false);
 
-  const handleClickHeart = function (event) {
+  const handleClickHeart = function () {
     if (logged) {
       if (favoriteState) {
         dispatch(removeEventUser(event));
@@ -42,15 +43,6 @@ function EventSlideShowCard({ event }) {
     setFullState(!fullState);
   };
 
-  useEffect(() => {
-    if (logged) {
-      if (events.find((item) => item.name === event.name)) {
-        setFavoriteState(true);
-      } else {
-        setFavoriteState(false);
-      }
-    }
-  }, [logged, index, events]);
 
   const openModal = function () {
     setFullState(true);
@@ -68,12 +60,21 @@ function EventSlideShowCard({ event }) {
     setModal(false);
   };
 
-  const altText = "Image of " + event.name;
+  useEffect(() => {
+    if (logged) {
+      if (events.find((item) => item.name === event.name)) {
+        setFavoriteState(true);
+      } else {
+        setFavoriteState(false);
+      }
+    }
+  }, [logged, index, events]);
+
 
   return (
     <div className={eventContainerClass}>
       <div className={imageContainerClass} onClick={handleClickEvent}>
-        <img className={imageClass} src={event.image} alt={altText} />
+        <img className={imageClass} src={event.image} alt={event.name} />
       </div>
       <div className={titleAndHeartClass}>
         <div className={titleClass} onClick={handleClickEvent}>
@@ -85,38 +86,28 @@ function EventSlideShowCard({ event }) {
           </div>
           <div className={favoriteClass}>
             {favoriteState ? (
-              <FaHeart
-                className="text-4xl cursor-pointer text-red-500"
-                onClick={() => handleClickHeart(event)}
-              />
+              <FaHeart className="text-4xl cursor-pointer text-red-500" onClick={handleClickHeart} />
             ) : (
               <FaRegHeart
                 className="text-4xl cursor-pointer text-red-500"
-                onClick={() => handleClickHeart(event)}
+                onClick={handleClickHeart}
               />
             )}
           </div>
         </div>
       </div>
 
-      {fullState && (
-        <EventShow
-          event={event}
-          favoriteState={favoriteState}
-          onClickHeart={handleClickHeart}
-          setFavoriteState={setFavoriteState}
-          open={openModal}
-          onClose={closeModal}
-        />
-      )}
-
-      {modal && (
-        <LoginModals
-          onClickButton={handleClickButton}
-          onCloseLog={handleClickClose}
-          open={handleClickHeart}
-        />
-      )}
+        {fullState && (
+          <EventShow
+            event={event}
+            favoriteState={favoriteState}
+            setFavoriteState={setFavoriteState}
+            onClickHeart={handleClickHeart}
+            open={openModal}
+            onClose={closeModal}
+          />
+        )}
+      </div>
     </div>
   );
 }

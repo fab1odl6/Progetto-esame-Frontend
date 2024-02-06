@@ -47,12 +47,20 @@ function EventShow({
   });
   const [modal, setModal] = useState(false);
 
-  const handleClickHeart = function (event) {
+  const handleClickHeart = function () {
     if (logged) {
       onClickHeart(event);
     } else {
       setModal(true);
     }
+  };
+
+  const handleClickButton = function () {
+    navigate("/login");
+  };
+
+  const handleClickCloseLog = function () {
+    setModal(false);
   };
 
   useEffect(() => {
@@ -64,14 +72,6 @@ function EventShow({
       }
     }
   }, [index, logged]);
-
-  const handleClickButton = function () {
-    navigate("/login");
-  };
-
-  const handleClickCloseLog = function () {
-    setModal(false);
-  };
 
   return (
     <div className={modalClass}>
@@ -92,51 +92,21 @@ function EventShow({
                 src={event.image}
                 alt={event.name}
               />
-              <IoIosClose className={close} onClick={onClose} />
-              <div className={`${favoriteContainerClass} ${heartCircleClass}`}>
-                {favoriteState ? (
-                  <FaHeart
-                    className={favoriteClass}
-                    onClick={() => handleClickHeart(event)}
-                  />
-                ) : (
-                  <FaRegHeart
-                    className={favoriteClass}
-                    onClick={() => handleClickHeart(event)}
-                  />
-                )}
-              </div>
             </div>
-            <div className={contentClass}>
-              {event.name && (
-                <div className={dataContainerClass}>
-                  <FaUser className={dataIconClass} />
-                  <span className={labelTextClass}>Title:&nbsp;</span>
-                  <span className={dataTextClass}>{event.name}</span>
-                </div>
-              )}
-              {event.department && (
-                <div className={dataContainerClass}>
-                  <FaBuilding className={dataIconClass} />
-                  <span className={labelTextClass}>Department:&nbsp;</span>
-                  <span className={dataTextClass}>{event.department}</span>
-                </div>
-              )}
-              {event.guests && (
-                <div className={dataContainerClass}>
-                  <FaUsers className={dataIconClass} />
-                  <span className={labelTextClass}>Guests:&nbsp;</span>
-                  <span className={dataTextClass}>{event.guests}</span>
-                </div>
-              )}
-              {event.date && (
-                <div className={dataContainerClass}>
-                  <FaCalendar className={dataIconClass} />
-                  <span className={labelTextClass}>Date:&nbsp;</span>
-                  <span className={dataTextClass}>{event.date}</span>
-                </div>
+            <div className={firstRowClass}>
+              {event.name && <div>Title: {event.name}</div>}
+              {favoriteState ? (
+                <FaHeart className={favoriteClass} onClick={handleClickHeart} />
+              ) : (
+                <FaRegHeart
+                  className={favoriteClass}
+                  onClick={handleClickHeart}
+                />
               )}
             </div>
+            {event.department && <div>Department: {event.department}</div>}
+            {event.guests && <div>Guests: {event.guests}</div>}
+            {event.date && <div>Date: {event.date}</div>}
           </div>
         </DialogContent>
       </Dialog>
