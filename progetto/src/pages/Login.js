@@ -111,23 +111,17 @@ async function getCustomEvents(user) {
 }
 
 const LoginPage = function () {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+
   const { navigate } = useContext(NavigationContext);
 
-  const dispatch = useDispatch();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     dispatch(clearText());
   }, []);
-
-  const handleLogout = () => {
-    // Dispatch l'azione di logout
-    dispatch(logoutUser());
-    navigate("/login");
-  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -155,15 +149,12 @@ const LoginPage = function () {
             );
             dispatch(setUser({ matchedUser, artworks, events, customEvents }));
             dispatch(setLogged(true));
-            setLoggedIn(true);
 
             navigate("/");
-            dispatch(setPage("HomePage"));
           } else {
             setError("Incorrect Email or Password, try again");
             setUsername("");
             setPassword("");
-            setLoggedIn(false);
           }
         } else {
           setError("Dati utente non validi");
