@@ -114,8 +114,8 @@ function EventSlideShowCard({ event }) {
           <EventShow
             event={event}
             favoriteState={favoriteState}
-            onClickHeart={handleClickHeart}
             setFavoriteState={setFavoriteState}
+            onClickHeart={handleClickHeart}
             open={openModal}
             onClose={closeModal}
           />

@@ -89,10 +89,10 @@ function ArtSlideShowCard({ artwork }) {
 
   const dispatch = useDispatch();
 
-  const [favoriteState, setFavoriteState] = useState(false);
-  const [modal, setModal] = useState(false);
   const { index } = useSelector((state) => state.artworks);
   const { logged, artworks } = useSelector((state) => state.users);
+  const [favoriteState, setFavoriteState] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const handleClickHeart = function (art) {
     if (logged) {
@@ -107,16 +107,6 @@ function ArtSlideShowCard({ artwork }) {
     }
   };
 
-  useEffect(() => {
-    if (logged) {
-      if (artworks.find((item) => item.id === artwork.id)) {
-        setFavoriteState(true);
-      } else {
-        setFavoriteState(false);
-      }
-    }
-  }, [index, logged]);
-
   const handleClickButton = function () {
     navigate("/login");
   };
@@ -129,6 +119,16 @@ function ArtSlideShowCard({ artwork }) {
     dispatch(setArt(artwork));
     navigate("/artworkDetails");
   };
+
+  useEffect(() => {
+    if (logged) {
+      if (artworks.find((item) => item.id === artwork.id)) {
+        setFavoriteState(true);
+      } else {
+        setFavoriteState(false);
+      }
+    }
+  }, [index, logged]);
 
   const altText = artwork.title;
 
