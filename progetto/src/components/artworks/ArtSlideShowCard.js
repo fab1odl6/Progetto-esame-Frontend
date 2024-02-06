@@ -24,6 +24,7 @@ const ArtImage = styled.img`
   width: 50%;
   height: 100%;
   object-fit: cover;
+  cursor: pointer;
 `;
 
 const ArtContent = styled.div`
