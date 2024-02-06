@@ -115,7 +115,7 @@ function ArtSlideShowCard({ artwork }) {
     setModal(false);
   };
 
-  const handleClickDetails = function (artwork) {
+  const handleClickDetails = function () {
     dispatch(setArt(artwork));
     navigate("/artworkDetails");
   };
@@ -142,14 +142,12 @@ function ArtSlideShowCard({ artwork }) {
       <ArtImage
         src={artwork.image}
         alt={artwork.title}
-        onClick={() => handleClickDetails(artwork)}
+        onClick={handleClickDetails}
       />
       <ArtContent>
         <TitleContainer>
           <div>
-            <Title onClick={() => handleClickDetails(artwork)}>
-              {artwork.title}
-            </Title>
+            <Title onClick={handleClickDetails}>{artwork.title}</Title>
             {artwork.authorName ? (
               <Author>{artwork.authorName}</Author>
             ) : (
