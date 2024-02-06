@@ -157,12 +157,12 @@ const LoginPage = function () {
             setPassword("");
           }
         } else {
-          setError("Dati utente non validi");
+          setError("Invalid user data");
         }
       }
     } catch (error) {
-      console.error("Errore durante la verifica dell'utente:", error);
-      setError("Si è verificato un errore durante la verifica dell'utente");
+      console.error("Error during user verification: ", error);
+      setError("An error occurred during user verification");
     }
   };
 
