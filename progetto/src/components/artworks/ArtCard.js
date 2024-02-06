@@ -25,17 +25,16 @@ function ArtCard({ artwork }) {
   const favoriteClass = "favorite text-2xl z-6 text-red-500";
   const textStyle = " relative text-shadow-md " + textcolor;
 
-  const { logged, artworks } = useSelector((state) => {
-    return state.users;
-  });
-
-  const [favoriteState, setFavoriteState] = useState(false);
-  const [loginModal, setLoginModal] = useState(false);
-  const [confirmModal, setConfirmModal] = useState(false);
+  const dispatch = useDispatch();
 
   const { navigate } = useContext(NavigationContext);
 
-  const dispatch = useDispatch();
+  const { logged, artworks } = useSelector((state) => {
+    return state.users;
+  });
+  const [favoriteState, setFavoriteState] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
+  const [confirmModal, setConfirmModal] = useState(false);
 
   const handleClickHeart = function () {
     if (logged) {
@@ -58,16 +57,6 @@ function ArtCard({ artwork }) {
     }
   };
 
-  useEffect(() => {
-    if (logged) {
-      if (artworks.find((item) => item.id === artwork.id)) {
-        setFavoriteState(true);
-      } else {
-        setFavoriteState(false);
-      }
-    }
-  }, [logged]);
-
   const handleClickButton = function () {
     navigate("/login");
   };
@@ -81,13 +70,23 @@ function ArtCard({ artwork }) {
     navigate("/artworkDetails");
   };
 
+  const openModal = function () {
+    setConfirmModal(true);
+  };
+
   const closeModal = function () {
     setConfirmModal(false);
   };
 
-  const openModal = function () {
-    setConfirmModal(true);
-  };
+  useEffect(() => {
+    if (logged) {
+      if (artworks.find((item) => item.id === artwork.id)) {
+        setFavoriteState(true);
+      } else {
+        setFavoriteState(false);
+      }
+    }
+  }, [logged]);
 
   return (
     <div>
