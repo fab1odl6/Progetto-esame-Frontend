@@ -67,7 +67,7 @@ function HomePage() {
 
   const welcomeTextStyle = {
     position: "absolute",
-    top: "50%",
+    top: "40%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     color: "white",
@@ -76,8 +76,8 @@ function HomePage() {
     textShadow: "2px 2px 4px rgba(0, 0, 0, 0.7)",
   };
 
-  const yellowBackgroundStyle = {
-    backgroundColor: "#aee4ff", 
+  const BackgroundStyle = {
+    backgroundColor: "bg-white", 
   };
 
   const highlightedBoxStyle = {
@@ -99,12 +99,12 @@ function HomePage() {
   }, []);
 
   return (
-    <div style={yellowBackgroundStyle}>
+    <div style={BackgroundStyle}>
       <div className="custom-image-container" style={{ position: "relative" }}>
         <img
           src="https://cdn.sanity.io/images/cctd4ker/production/644670e7c77a813b8fc7d6dfa427beefacad4684-3840x2160.jpg?w=3840&q=75&fit=clip&auto=format"
           alt="Custom Image"
-          style={{ width: "100%", height: "600px", objectFit: "cover" }}
+          style={{ width: "100%", height: "550px", objectFit: "cover" }}
         />
         <SearchBar />
         {/* Primo box blu con scritte sotto la barra di ricerca */}
