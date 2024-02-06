@@ -130,8 +130,6 @@ function ArtSlideShowCard({ artwork }) {
     }
   }, [index, logged]);
 
-  const altText = artwork.title;
-
   return (
     <ArtContainer>
       {modal && (
@@ -143,7 +141,7 @@ function ArtSlideShowCard({ artwork }) {
       )}
       <ArtImage
         src={artwork.image}
-        alt={altText}
+        alt={artwork.title}
         onClick={() => handleClickDetails(artwork)}
       />
       <ArtContent>

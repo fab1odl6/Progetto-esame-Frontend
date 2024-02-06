@@ -72,7 +72,6 @@ function EventSlideShowCard({ event }) {
     }
   }, [logged, index, events]);
 
-  const altText = "Image of " + event.name;
   return (
     <div>
       <div className={eventContainerClass}>
@@ -87,7 +86,7 @@ function EventSlideShowCard({ event }) {
         </div>
         <div className={eventElementClass}>
           <div onClick={handleClickEvent}>
-            <img className={imageClass} src={event.image} alt={altText} />
+            <img className={imageClass} src={event.image} alt={event.name} />
           </div>
           <div className={titleAndHeartClass}>
             <div className={titleClass} onClick={handleClickEvent}>
