@@ -38,8 +38,6 @@ function EveryArtworkPage() {
   const filtersState = useSelector((state) => state.filters);
   const searchState = useSelector((state) => state.search.text);
 
-  //NEW
-  //const [currentPage, setCurrentPage] = useState(1);
   const currentPage = useSelector((state) => state.activePage.everyArtworkPage)
   const itemsPerPage = 20;
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -99,31 +97,22 @@ function EveryArtworkPage() {
   return (
     <div className={pageContainerStyle}>
       <div className={imageboxClass}>
-      <img
-        src="https://www.exibart.com/repository/media/2019/09/00094701.jpg"
-        style={{ maxHeight: "550px", width: "100%", objectFit: "cover" }}
-        className="filter brightness-50"
-        alt="Artwork"
-      />
+        <img
+          src="https://www.exibart.com/repository/media/2019/09/00094701.jpg"
+          style={{ maxHeight: "550px", width: "100%", objectFit: "cover" }}
+          className="filter brightness-50"
+          alt="Artwork"
+        />
         <div className={textonimageClass}>
           EVERY ARTWORKS
         </div>
       </div>
-      <div className={searchBarClass}>
+      <div className={searchBarClass} style={{ zIndex: 52 }}>
         <SearchBar />
       </div>
       <div className={filterListClass} style={{ position: 'relative', zIndex: 51 }}>
         <FilterList artworks={array} />
       </div>
-      {searchState && searchState.trim() !== "" && (
-        <div className={containerStateClass}>
-          <p className={resultTextClass}>Results for: {searchState}</p>
-          <button className={buttonClass} onClick={handleRemove}>
-            <FaTimes className={iconClass} />
-            Clear
-          </button>
-        </div>
-      )}
       <div className={artGridClass}>
         <ArtGrid artworks={currentItems} />
         <div className={paginationbuttonClass}>
@@ -144,6 +133,15 @@ function EveryArtworkPage() {
           </button>
         </div>
       </div>
+      {searchState && searchState.trim() !== "" && (
+        <div className={containerStateClass}>
+          <p className={resultTextClass}>Results for: {searchState}</p>
+          <button className={buttonClass} onClick={handleRemove}>
+            <FaTimes className={iconClass} />
+            Clear
+          </button>
+        </div>
+      )}
     </div>
   );
 }
