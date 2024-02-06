@@ -36,7 +36,7 @@ function ThematicAreasDetail({ thematicArea }) {
           <div className={descriptionboxClass}>
             <img
               src={thematicArea.image}
-              alt="Immagine del museo"
+              alt="Thematic Area Image"
               className={imageClass}
             />
 
