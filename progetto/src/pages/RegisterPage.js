@@ -7,18 +7,19 @@ function RegisterPage() {
   const textcolorClass = "text-[#444455]";
   const textClass = `text-2xl font-semibold tracking-wider ${textcolorClass} capitalize dark:text-white`;
   const buttoncolor = "bg-[#77aaff]";
-  const registerbuttonClass = `"flex items-center justify-between w-full px-5 py-2.5 text-sm font-medium text-white ${buttoncolor} rounded-md hover: ${buttoncolor} focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-50"`
+  const registerbuttonClass = `"flex items-center justify-between w-full px-5 py-2.5 text-sm font-medium text-white ${buttoncolor} rounded-md hover: ${buttoncolor} focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-50"`;
   const formtextClass = `block mb-2 text-sm ${textcolorClass}`;
   const sectionClass = "bg-white dark:bg-gray-900";
   const positionClass = "flex justify-center min-h-screen";
   const imageboxClass = "hidden bg-cover lg:block lg:w-2/5";
-  const formClass = "flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5";
+  const formClass =
+    "flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5";
   const gridformClass = "grid grid-cols-1 gap-6 mt-8 md:grid-cols-2";
-  const tipformClass = "block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+  const tipformClass =
+    "block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40";
 
   const { navigate } = useContext(NavigationContext);
 
-  const [success, setSuccess] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -46,7 +47,6 @@ function RegisterPage() {
       !formData.username ||
       !formData.password
     ) {
-      setSuccess(null);
       return;
     }
 
@@ -83,7 +83,6 @@ function RegisterPage() {
     });
 
     navigate("/");
-    setSuccess(true);
   };
 
   const wrapperStyle = {
@@ -104,18 +103,11 @@ function RegisterPage() {
         ></div>
         <div className={formClass}>
           <div className="w-full">
-            <h1 className={textClass}>
-              Get your free account now.
-            </h1>
+            <h1 className={textClass}>Get your free account now.</h1>
 
-            <form
-              className={gridformClass}
-              onSubmit={handleSubmit}
-            >
+            <form className={gridformClass} onSubmit={handleSubmit}>
               <div>
-                <label className={formtextClass}>
-                  Name
-                </label>
+                <label className={formtextClass}>Name</label>
                 <input
                   type="text"
                   placeholder="Mario"
@@ -127,9 +119,7 @@ function RegisterPage() {
               </div>
 
               <div>
-                <label className={formtextClass}>
-                  Surname
-                </label>
+                <label className={formtextClass}>Surname</label>
                 <input
                   type="text"
                   placeholder="Rossi"
@@ -142,9 +132,7 @@ function RegisterPage() {
               </div>
 
               <div>
-                <label className={formtextClass}>
-                  Username
-                </label>
+                <label className={formtextClass}>Username</label>
                 <input
                   type="text"
                   placeholder="mario.rossi"
@@ -156,9 +144,7 @@ function RegisterPage() {
               </div>
 
               <div>
-                <label className={formtextClass}>
-                  Password
-                </label>
+                <label className={formtextClass}>Password</label>
                 <input
                   type="password"
                   placeholder="Enter your password"
@@ -170,10 +156,7 @@ function RegisterPage() {
                 />
               </div>
 
-              <button
-                className={registerbuttonClass}
-                type="submit"
-              >
+              <button className={registerbuttonClass} type="submit">
                 <span>Sign In</span>
               </button>
             </form>
