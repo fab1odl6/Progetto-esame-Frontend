@@ -31,12 +31,20 @@ function EventShow({
   });
   const [modal, setModal] = useState(false);
 
-  const handleClickHeart = function (event) {
+  const handleClickHeart = function () {
     if (logged) {
       onClickHeart(event);
     } else {
       setModal(true);
     }
+  };
+
+  const handleClickButton = function () {
+    navigate("/login");
+  };
+
+  const handleClickCloseLog = function () {
+    setModal(false);
   };
 
   useEffect(() => {
@@ -48,14 +56,6 @@ function EventShow({
       }
     }
   }, [index, logged]);
-
-  const handleClickButton = function () {
-    navigate("/login");
-  };
-
-  const handleClickCloseLog = function () {
-    setModal(false);
-  };
 
   return (
     <div className={modalClass}>
@@ -80,14 +80,11 @@ function EventShow({
             <div className={firstRowClass}>
               {event.name && <div>Title: {event.name}</div>}
               {favoriteState ? (
-                <FaHeart
-                  className={favoriteClass}
-                  onClick={() => handleClickHeart(event)}
-                />
+                <FaHeart className={favoriteClass} onClick={handleClickHeart} />
               ) : (
                 <FaRegHeart
                   className={favoriteClass}
-                  onClick={() => handleClickHeart(event)}
+                  onClick={handleClickHeart}
                 />
               )}
             </div>
