@@ -85,21 +85,21 @@ function ArtSlideShowCard({ artwork }) {
   const favoriteIconClass = "absolute top-10 right-10 text-4xl cursor-pointer";
   const chevronIconClass = "text-3xl cursor-pointer";
 
-  const { navigate } = useContext(NavigationContext);
-
   const dispatch = useDispatch();
+
+  const { navigate } = useContext(NavigationContext);
 
   const { index } = useSelector((state) => state.artworks);
   const { logged, artworks } = useSelector((state) => state.users);
   const [favoriteState, setFavoriteState] = useState(false);
   const [modal, setModal] = useState(false);
 
-  const handleClickHeart = function (art) {
+  const handleClickHeart = function () {
     if (logged) {
       if (favoriteState) {
-        dispatch(removeArtworkUser(art));
+        dispatch(removeArtworkUser(artwork));
       } else {
-        dispatch(addArtworkUser(art));
+        dispatch(addArtworkUser(artwork));
       }
       setFavoriteState(!favoriteState);
     } else {
@@ -160,15 +160,9 @@ function ArtSlideShowCard({ artwork }) {
           </div>
           <FavoriteIcon>
             {favoriteState ? (
-              <FaHeart
-                className="text-red-500"
-                onClick={() => handleClickHeart(artwork)}
-              />
+              <FaHeart className="text-red-500" onClick={handleClickHeart} />
             ) : (
-              <FaRegHeart
-                className="text-red-500"
-                onClick={() => handleClickHeart(artwork)}
-              />
+              <FaRegHeart className="text-red-500" onClick={handleClickHeart} />
             )}
           </FavoriteIcon>
         </TitleContainer>

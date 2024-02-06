@@ -16,6 +16,7 @@ function EventSlideShowCard({ event }) {
   const titleClass = "font-bold text-lg place-content-center cursor-pointer";
 
   const dispatch = useDispatch();
+
   const { navigate } = useContext(NavigationContext);
 
   const { logged, events } = useSelector((state) => {
@@ -28,7 +29,7 @@ function EventSlideShowCard({ event }) {
   const [modal, setModal] = useState(false);
   const [fullState, setFullState] = useState(false);
 
-  const handleClickHeart = function (event) {
+  const handleClickHeart = function () {
     if (logged) {
       if (favoriteState) {
         dispatch(removeEventUser(event));
@@ -93,14 +94,11 @@ function EventSlideShowCard({ event }) {
               {event.name}
             </div>
             {favoriteState ? (
-              <FaHeart
-                className={favoriteClass}
-                onClick={() => handleClickHeart(event)}
-              />
+              <FaHeart className={favoriteClass} onClick={handleClickHeart} />
             ) : (
               <FaRegHeart
                 className={favoriteClass}
-                onClick={() => handleClickHeart(event)}
+                onClick={handleClickHeart}
               />
             )}
           </div>
