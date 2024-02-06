@@ -50,11 +50,9 @@ function ArtCard({ artwork }) {
   };
 
   const deleteFavorite = function () {
-    if (confirmModal) {
-      dispatch(removeArtworkUser(artwork));
-      setConfirmModal(false);
-      setFavoriteState(!favoriteState);
-    }
+    dispatch(removeArtworkUser(artwork));
+    setConfirmModal(false);
+    setFavoriteState(!favoriteState);
   };
 
   const handleClickButton = function () {
