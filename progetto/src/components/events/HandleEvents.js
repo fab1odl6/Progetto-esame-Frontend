@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 
 function HandleEvents() {
   const containerClass =
-    "max-w-md min-w-md h-full p-4 mt-4 shadow overflow-y-auto";
-  const titleClass = "text-lg font-bold mb-4 mt-2 mx-auto text-center";
+    "max-w-screen-md min-w-screen-md h-full p-4 mt-4 shadow overflow-y-auto";
+  const titleClass = "text-2xl font-bold mb-4 mt-2 mx-auto text-center";
   const emptyContainerClass = "max-w-md min-w-md";
 
   const app = initializeApp(firebaseConfig);
@@ -51,15 +51,21 @@ function HandleEvents() {
 
   return (
     <div className={containerClass}>
-      <div className={titleClass}>Custom Events</div>
+      <div className={titleClass}>CUSTOM EVENTS</div>
       <div>
         {localEvents.length > 0 ? (
           <div>{render}</div>
         ) : (
-          <div className={emptyContainerClass}>
-            You haven't created an event yet,
-            <br />
-            give it a try!
+          <div className={`custom-message-container ${emptyContainerClass}`}>
+            <p className="custom-message-text">
+              You haven't created an event yet,
+              <br />
+              give it a try!
+            </p>
+            {/* Aggiungi un pulsante di prova se necessario */}
+            {/* <button className="custom-message-try-btn" onClick={handleTryButtonClick}>
+              Try Now
+            </button> */}
           </div>
         )}
       </div>
