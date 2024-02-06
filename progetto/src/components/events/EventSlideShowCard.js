@@ -10,7 +10,7 @@ function EventSlideShowCard({ event }) {
   const dispatch = useDispatch();
   const { navigate } = useContext(NavigationContext);
 
-  const eventContainerClass = "max-w-screen-md w-full h-full flex justify-center mx-auto flex-col place-content-center border-2 mb-2 rounded-lg overflow-hidden z-50 p-6 bg-blue-200 border-blue-800 rounded-lg shadow dark:bg-blue-800 dark:border-yellow-700 cursor-pointer transition-colors duration-300 ease-in-out hover:bg-blue-300";
+  const eventContainerClass = "max-w-screen-md w-full h-full flex justify-center mx-auto flex-col place-content-center border-2 mb-2 rounded-lg overflow-hidden z-50 p-6 bg-blue-200 border-blue-800 rounded-lg shadow dark:bg-blue-800 dark:border-yellow-700  transition-colors duration-300 ease-in-out hover:bg-blue-300";
   const imageContainerClass = "relative cursor-pointer transition-transform transform hover:scale-105 w-full h-[300px]";
   const imageClass = "w-full h-full object-cover mx-auto transition-transform transform hover:brightness-75";
   const titleAndHeartClass = "mt-2 text-center";

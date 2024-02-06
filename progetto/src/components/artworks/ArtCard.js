@@ -13,7 +13,7 @@ function ArtCard({ artwork }) {
   const artContainer =
     "z-10 h-full w-full overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700";
   const imageClass =
-    "animate-fade-in block h-full w-full scale-100 transform object-cover object-center opacity-100 transition duration-300 group-hover:scale-110";
+    "animate-fade-in block h-full w-full scale-100 transform object-cover object-center opacity-100 transition duration-300 group-hover:scale-110 cursor-pointer";
   const textContainer =
     "absolute bottomabsolute bottom-0 left-0 p-3 w-full text-white z-30 shadow-md";
   const titleClass =
