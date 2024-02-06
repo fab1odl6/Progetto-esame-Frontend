@@ -26,15 +26,6 @@ function FavoriteEventShow({ event, onClickHeart, open, onClose }) {
   const dataTextClass = "font-bold";
   const labelTextClass = "text-gray-500";
 
-  const handleClickClose = function () {
-    onClose();
-  };
-
-  const handleClickHeart = function () {
-    onClickHeart();
-    onClose();
-  };
-
   return (
     <div className={modalClass}>
       <Dialog open={open} onClose={onClose}>
@@ -47,9 +38,9 @@ function FavoriteEventShow({ event, onClickHeart, open, onClose }) {
                 src={event.image}
                 alt={event.name}
               />
-              <IoIosClose className={close} onClick={handleClickClose} />
+              <IoIosClose className={close} onClick={onClose} />
               <div className={`${favoriteContainerClass} ${heartCircleClass}`}>
-                <FaHeart className={favoriteClass} onClick={handleClickHeart} />
+                <FaHeart className={favoriteClass} onClick={onClickHeart} />
               </div>
             </div>
             <div className={contentClass}>
