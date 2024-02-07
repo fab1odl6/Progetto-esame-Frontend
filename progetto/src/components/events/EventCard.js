@@ -7,14 +7,14 @@ import ConfirmModal from "../modals/ConfirmModal";
 
 function EventCard({ event }) {
   const containerClass =
-    "border-2 mb-4 rounded-lg overflow-hidden z-50 h-[70vh] p-8 bg-blue-100 border-blue-800 rounded-lg shadow hover:bg-blue-200 dark:bg-blue-800 dark:border-yellow-700 dark:hover:bg-blue-700 relative";
+    "flex flex-col justify-center border-2 mb-4 mt-4 rounded-lg overflow-hidden z-50 h-full p-8 bg-blue-100 border-blue-800 rounded-lg shadow hover:bg-blue-200 dark:bg-blue-800 dark:border-yellow-700 dark:hover:bg-blue-700 relative";
   const favoriteClass =
     "absolute bottom-9 right-4 text-4xl text-red-500 cursor-pointer";
   const imageClass =
     "w-full h-96 object-cover cursor-pointer transition-transform transform hover:scale-105";
   const titleClass =
-    "cursor-pointer font-bold text-center mt-6 text-3xl text-white";
-  const generatedByClass = "absolute bottom-6 left-6 text-lg";
+    "cursor-pointer font-bold text-center mt-4 mb-6 text-3xl text-white";
+  const generatedByClass = "absolute bottom-6 left-6 text-lg mr-3";
   const errorMessageClass = "bg-red-500 text-white p-4 text-center";
 
   const dispatch = useDispatch();

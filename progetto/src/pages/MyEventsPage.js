@@ -14,16 +14,15 @@ import { clearText } from "../store";
 
 function MyEventsPage() {
   const titleContainerClass = "flex";
-  const accordionBarColor = 'lightblue';
-  const accordionBarColorDark = 'darkblue';
-  const accordionstyleClass = 
+  const accordionBarColor = "lightblue";
+  const accordionBarColorDark = "darkblue";
+  const accordionstyleClass =
     "w-full flex items-center justify-center bg-[expandedAccordion[event.id] ? accordionBarColorDark : accordionBar] text-white font-bold uppercase";
   const mainContentClass =
     "bg-gradient-to-b from-opacity-80 to-opacity-80 via-white bg-cover bg-center min-h-screen-100px";
   const accordionClass = "mb-20";
-  const typographyClass = 
-    "font-bold font-weight-bold text-uppercase";
-  const sectionnametextClass = 
+  const typographyClass = "font-bold font-weight-bold text-uppercase";
+  const sectionnametextClass =
     "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-shadow-lg text-center text-2xl font-bold";
 
   const dispatch = useDispatch();
@@ -41,7 +40,6 @@ function MyEventsPage() {
     setExpandedAccordion((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  
   const events = [
     { id: 1, title: "Future Events", content: <EventCard future={true} /> },
     { id: 2, title: "Past Events", content: <EventCard future={false} /> },
@@ -57,14 +55,12 @@ function MyEventsPage() {
         <div>
           <div className={mainContentClass}>
             {/* Immagine con scritta */}
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: "relative" }}>
               <img
                 src="https://rare-gallery.com/uploads/posts/505263-historical-art.jpg"
-                style={{ width: '100%', height: '550px', objectFit: "cover" }}
+                style={{ width: "100%", height: "550px", objectFit: "cover" }}
               />
-              <div class={sectionnametextClass}>
-                MY EVENTS
-              </div>
+              <div class={sectionnametextClass}>MY EVENTS</div>
             </div>
 
             {events.map((event) => (
@@ -73,32 +69,41 @@ function MyEventsPage() {
                 expanded={expandedAccordion[event.id]}
                 onChange={() => handleToggle(event.id)}
                 className={accordionClass}
-                style={{ backgroundColor: expandedAccordion[event.id] ? accordionBarColorDark : 'transparent' }}
+                style={{
+                  backgroundColor: expandedAccordion[event.id]
+                    ? accordionBarColorDark
+                    : "transparent",
+                }}
               >
                 <AccordionSummary
                   className={titleContainerClass}
                   style={{
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.5)',
-                    padding: '0',
-                    background: expandedAccordion[event.id] ? accordionBarColorDark : accordionBarColor,
-                    marginBottom: expandedAccordion[event.id] ? '0' : '-1px',
+                    borderBottom: "1px solid rgba(255, 255, 255, 0.5)",
+                    padding: "0",
+                    background: expandedAccordion[event.id]
+                      ? accordionBarColorDark
+                      : accordionBarColor,
+                    marginBottom: expandedAccordion[event.id] ? "0" : "-1px",
                   }}
                 >
                   <div class={accordionstyleClass}>
-
-                    <Typography variant="h6" className={typographyClass} style={{ color: 'white' }}>
+                    <Typography
+                      variant="h6"
+                      className={typographyClass}
+                      style={{ color: "white" }}
+                    >
                       {event.title}
                     </Typography>
                     {expandedAccordion[event.id] ? (
-                      <GoChevronDown style={{ color: 'white' }} />
+                      <GoChevronDown style={{ color: "white" }} />
                     ) : (
-                      <GoChevronLeft style={{ color: 'white' }} />
+                      <GoChevronLeft style={{ color: "white" }} />
                     )}
                   </div>
                 </AccordionSummary>
                 <AccordionDetails
                   style={{
-                    backgroundColor: 'lightgray',
+                    backgroundColor: "lightgray",
                   }}
                 >
                   <div>
