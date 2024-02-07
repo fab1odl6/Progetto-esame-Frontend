@@ -6,61 +6,21 @@ import NavigationContext from "../../context/navigation";
 import LoginModals from "../modals/loginModals";
 import styled from "styled-components";
 
-const ArtContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  max-width: 1000px;
-  margin: auto;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: white;
-  margin-bottom: 20px;
-  height: 500px;
-`;
+const ArtContainer = 
+  "relative flex items-center w-3/4 h-96 mx-auto border border-gray-300 rounded-lg overflow-hidden bg-white mb-16";
 
-const ArtImage = styled.img`
-  width: 50%;
-  height: 100%;
-  object-fit: cover;
-  cursor: pointer;
-`;
+const ArtImage = 
+  "w-1/2 h-full object-cover cursor-pointer";
 
-const ArtContent = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 50px;
-  box-sizing: border-box;
-  color: black;
-`;
+const ArtContent = "flex flex-col justify-between p-12 box-border text-black";
 
-const TitleContainer = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
+const TitleContainer = "flex flex-col justify-between";
 
-const Title = styled.div`
-  font-weight: bold;
-  font-size: 3em;
-  cursor: pointer;
-`;
+const Title = "font-bold text-3xl cursor-pointer";
 
-const Author = styled.div`
-  margin-top: 10px;
-  font-size: 2em;
-`;
+const Author = "mt-4 text-2xl";
 
-const FavoriteIcon = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 4em;
-  cursor: pointer;
-`;
+const FavoriteIcon = "absolute top-10 right-10 text-4xl cursor-pointer";
 
 
 function ArtSlideShowCard({ artwork }) {
@@ -114,7 +74,7 @@ function ArtSlideShowCard({ artwork }) {
   }, [index, logged]);
 
   return (
-    <ArtContainer>
+    <div className={ArtContainer}>
       {modal && (
         <LoginModals
           onClickButton={handleClickButton}
@@ -122,31 +82,32 @@ function ArtSlideShowCard({ artwork }) {
           open={handleClickHeart}
         />
       )}
-      <ArtImage
+      <img
+        className={ArtImage}
         src={artwork.image}
         alt={artwork.title}
         onClick={handleClickDetails}
       />
-      <ArtContent>
-        <TitleContainer>
+      <div className={ArtContent}>
+        <div className={TitleContainer}>
           <div>
-            <Title onClick={handleClickDetails}>{artwork.title}</Title>
+            <div className={Title} onClick={handleClickDetails}>{artwork.title}</div>
             {artwork.authorName ? (
-              <Author>{artwork.authorName}</Author>
+              <div className={Author}>{artwork.authorName}</div>
             ) : (
-              <Author>Unknown Author</Author>
+              <div className={Author}>Unknown Author</div>
             )}
           </div>
-          <FavoriteIcon>
+          <div className={FavoriteIcon}>
             {favoriteState ? (
               <FaHeart className={redcolorClass} onClick={handleClickHeart} />
             ) : (
               <FaRegHeart className={redcolorClass} onClick={handleClickHeart} />
             )}
-          </FavoriteIcon>
-        </TitleContainer>
-      </ArtContent>
-    </ArtContainer>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

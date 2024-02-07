@@ -96,21 +96,23 @@ function PersonalGalleryPage() {
         <div className={gridboxClass}>
           <ArtGrid artworks={currentItems} />
           <div className={paginationbuttonClass}>
-            <button
-              className={buttonClass}
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              Previous
-            </button>
-            <p className={currentpageClass}>{currentPage}</p>
-            <button
-              className={buttonClass}
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={indexOfLastItem >= artworksLocal.length}
-            >
-              Next
-            </button>
+          <button
+            className={`${buttonClass} bg-blue-400`}
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            style={{ backgroundColor: '#77aaff' }}
+          >
+            Previous
+          </button>
+
+          <button
+            className={`${buttonClass} bg-blue-400`}
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={indexOfLastItem >= artworksLocal.length}
+            style={{ backgroundColor: '#77aaff' }}
+          >
+            Next
+          </button>
           </div>
         </div>
       ) : (
