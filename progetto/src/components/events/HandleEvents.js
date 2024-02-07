@@ -3,12 +3,13 @@ import { firebaseConfig } from "../firebase/FirebaseConfig";
 import { get, child, ref, getDatabase } from "firebase/database";
 import HandleEventCard from "./HandleEventCard";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 function HandleEvents() {
   const containerClass =
-    "max-w-screen-md min-w-screen-md h-full p-4 mt-4 shadow overflow-y-auto";
-  const titleClass = "text-2xl font-bold mb-4 mt-2 mx-auto text-center text-[#444455]";
+    "max-w-screen-md min-w-screen-md h-full p-4 mt-4 shadow";
+  const titleClass =
+    "text-2xl font-bold mb-4 mt-2 mx-auto text-center text-[#444455]";
   const emptyContainerClass = "custom-message-container max-w-md min-w-md";
   const textClass = "custom-message-text text-[#444455]";
 
@@ -46,16 +47,20 @@ function HandleEvents() {
     updateLocal();
   }, [customEvents]);
 
-  const render = localEvents.map((event) => {
-    return <HandleEventCard key={event.name} event={event} />;
-  });
+  const eventsContainerRef = useRef(null);
 
   return (
     <div className={containerClass}>
       <div className={titleClass}>CUSTOM EVENTS</div>
-      <div>
+      <div
+        className="max-h-100 overflow-y-auto" 
+        style={{ maxHeight: '600px' }}
+        ref={eventsContainerRef}
+      >
         {localEvents.length > 0 ? (
-          <div>{render}</div>
+          localEvents.map((event, index) => (
+            <HandleEventCard key={event.name} event={event} />
+          ))
         ) : (
           <div className={emptyContainerClass}>
             <p className={textClass}>
