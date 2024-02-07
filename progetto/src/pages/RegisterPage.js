@@ -10,7 +10,7 @@ function RegisterPage() {
   const registerbuttonClass = `"flex items-center justify-between w-full px-5 py-2.5 text-sm font-medium text-white ${buttoncolor} rounded-md hover: ${buttoncolor} focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-50"`;
   const formtextClass = `block mb-2 text-sm ${textcolorClass}`;
   const sectionClass = "bg-white dark:bg-gray-900";
-  const positionClass = "flex justify-center min-h-screen";
+  const positionClass = "flex justify-center min-h-screen bg-opacity-20 bg-white bg-opacity-20 rounded-lg p-5";
   const imageboxClass = "hidden bg-cover lg:block lg:w-2/5";
   const formClass =
     "flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5";
@@ -85,15 +85,10 @@ function RegisterPage() {
     navigate("/");
   };
 
-  const wrapperStyle = {
-    background: "rgba(255, 255, 255, 0.2)",
-    borderRadius: "10px",
-    padding: "20px",
-  };
 
   return (
     <section className={sectionClass}>
-      <div className={positionClass} style={wrapperStyle}>
+      <div className={positionClass}>
         <div
           className={imageboxClass}
           style={{
@@ -110,8 +105,9 @@ function RegisterPage() {
                 <label className={formtextClass}>Name</label>
                 <input
                   type="text"
-                  placeholder="Mario"
+                  placeholder="Jhon"
                   className={tipformClass}
+                  name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
@@ -122,7 +118,7 @@ function RegisterPage() {
                 <label className={formtextClass}>Surname</label>
                 <input
                   type="text"
-                  placeholder="Rossi"
+                  placeholder="Smith"
                   className={tipformClass}
                   name="surname"
                   value={formData.surname}
@@ -135,7 +131,8 @@ function RegisterPage() {
                 <label className={formtextClass}>Username</label>
                 <input
                   type="text"
-                  placeholder="mario.rossi"
+                  placeholder="jhon.smith"
+                  name = "username"
                   className={tipformClass}
                   value={formData.username}
                   onChange={handleChange}

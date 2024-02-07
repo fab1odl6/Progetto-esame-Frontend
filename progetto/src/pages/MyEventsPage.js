@@ -14,11 +14,17 @@ import { clearText } from "../store";
 
 function MyEventsPage() {
   const titleContainerClass = "flex";
+  const accordionBarColor = 'lightblue';
+  const accordionBarColorDark = 'darkblue';
+  const accordionstyleClass = 
+    "w-full flex items-center justify-center bg-[expandedAccordion[event.id] ? accordionBarColorDark : accordionBar] text-white font-bold uppercase";
   const mainContentClass =
     "bg-gradient-to-b from-opacity-80 to-opacity-80 via-white bg-cover bg-center min-h-screen-100px";
-  const titleClass = "text-center font-bold text-4xl my-20";
   const accordionClass = "mb-20";
-  const typographyClass = "font-bold";
+  const typographyClass = 
+    "font-bold font-weight-bold text-uppercase";
+  const sectionnametextClass = 
+    "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-shadow-lg text-center text-2xl font-bold";
 
   const dispatch = useDispatch();
 
@@ -35,9 +41,7 @@ function MyEventsPage() {
     setExpandedAccordion((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  const accordionBarColor = 'lightblue'; // Colore per la barrettta dell'accordion e il container della scritta
-  const accordionBarColorDark = 'darkblue'; // Colore più scuro quando l'Accordion è aperto
-
+  
   const events = [
     { id: 1, title: "Future Events", content: <EventCard future={true} /> },
     { id: 2, title: "Past Events", content: <EventCard future={false} /> },
@@ -58,19 +62,7 @@ function MyEventsPage() {
                 src="https://rare-gallery.com/uploads/posts/505263-historical-art.jpg"
                 style={{ width: '100%', height: '550px', objectFit: "cover" }}
               />
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  color: 'white',
-                  textShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
-                  textAlign: 'center',
-                  fontSize: '24px',
-                  fontWeight: 'bold',
-                }}
-              >
+              <div class={sectionnametextClass}>
                 MY EVENTS
               </div>
             </div>
@@ -92,19 +84,9 @@ function MyEventsPage() {
                     marginBottom: expandedAccordion[event.id] ? '0' : '-1px',
                   }}
                 >
-                  <div
-                    style={{
-                      width: '100%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      background: expandedAccordion[event.id] ? accordionBarColorDark : accordionBarColor,
-                      color: 'white',
-                      fontWeight: 'bold',
-                      textTransform: 'uppercase',
-                    }}
-                  >
-                    <Typography variant="h6" className={`${typographyClass} font-weight-bold text-uppercase`} style={{ color: 'white' }}>
+                  <div class={accordionstyleClass}>
+
+                    <Typography variant="h6" className={typographyClass} style={{ color: 'white' }}>
                       {event.title}
                     </Typography>
                     {expandedAccordion[event.id] ? (
