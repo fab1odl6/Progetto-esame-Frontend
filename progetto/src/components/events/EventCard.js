@@ -4,18 +4,22 @@ import FavoriteEventShow from "./FavoriteEventShow";
 import { useDispatch } from "react-redux";
 import { removeEventUser } from "../../store";
 import ConfirmModal from "../modals/ConfirmModal";
+import { IoIosClose } from "react-icons/io";
 
 function EventCard({ event }) {
   const containerClass =
-    "flex flex-col justify-center border-2 mb-4 mt-4 rounded-lg overflow-hidden z-50 h-full p-8 bg-blue-100 border-blue-800 rounded-lg shadow hover:bg-blue-200 dark:bg-blue-800 dark:border-yellow-700 dark:hover:bg-blue-700 relative";
+    "items-center flex flex-col justify-center border-2 mb-4 mt-4 rounded-lg overflow-hidden z-50 h-full p-8 bg-blue-100 border-blue-800 rounded-lg shadow hover:bg-blue-200 dark:bg-blue-800 dark:border-yellow-700 dark:hover:bg-blue-700 relative";
   const favoriteClass =
     "absolute bottom-9 right-4 text-4xl text-red-500 cursor-pointer";
   const imageClass =
-    "w-full h-96 object-cover cursor-pointer transition-transform transform hover:scale-105";
+    "w-full h-96 object-cover place-item-center cursor-pointer transition-transform transform hover:scale-105";
   const titleClass =
     "cursor-pointer font-bold text-center mt-1 mb-6 text-3xl text-white line-clamp-1";
   const generatedByClass = "absolute bottom-6 left-6 text-lg mr-3";
-  const errorMessageClass = "bg-red-500 text-white p-4 text-center";
+  const errorMessageClass =
+    "bg-red-500 text-white p-4 place-item-center text-center absolute mx-auto z-50";
+  const closeButtonClass =
+    "text-2xl absolute top-2 right-2 cursor-pointer bg-red-900 p-1 rounded-full";
 
   const dispatch = useDispatch();
 
@@ -54,6 +58,10 @@ function EventCard({ event }) {
 
   const closeModal = function () {
     setFullState(false);
+  };
+
+  const handleClose = function () {
+    setErrorState(false);
   };
 
   return (
@@ -96,10 +104,15 @@ function EventCard({ event }) {
             onClose={closeModal}
           />
         )}
+        {errorState && (
+          <div className={errorMessageClass}>
+            <div>You cannot delete a past event!</div>
+            <div>
+              <IoIosClose className={closeButtonClass} onClick={handleClose} />
+            </div>
+          </div>
+        )}
       </div>
-      {errorState && (
-        <div className={errorMessageClass}>You cannot delete a past event!</div>
-      )}
     </div>
   );
 }

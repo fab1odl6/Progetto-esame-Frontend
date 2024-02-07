@@ -6,7 +6,6 @@ import ArtSlideShowCard from "./ArtSlideShowCard";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { IconButton } from "@mui/material";
 
-
 const ArtText = styled.div`
   text-align: center;
   font-weight: bold;
@@ -14,13 +13,11 @@ const ArtText = styled.div`
   margin-bottom: 10px;
 `;
 
-
 function ArtSlideShow() {
   const carouselClass = "relative w-md";
-  const titleClass = "font-bold text-4xl cursor-pointer";
   const leftbuttonClass = "!absolute top-2/4 !left-4 -translate-y-2/4";
   const rightbuttonClass = "!absolute top-2/4 !right-4 -translate-y-2/4";
-
+  const artTextClass = "text-center font-bold text-8xl mb-10 cursor-pointer";
 
   const dispatch = useDispatch();
 
@@ -40,7 +37,7 @@ function ArtSlideShow() {
 
   return (
     <div>
-      <ArtText className={titleClass}></ArtText>
+      <div className={artTextClass}></div>
       <Carousel
         className={carouselClass}
         children={render}
