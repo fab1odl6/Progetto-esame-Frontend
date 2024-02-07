@@ -9,8 +9,8 @@ function EventSlideShow() {
   const containerClass = "overflow:auto z-50";
   const eventTextClass = "text-center font-bold text-4xl my-10";
   const carouselClass = "relative w-md m-0";
-  const iconClass = "!absolute top-2/4 !left-4 -translate-y-2/4";
-
+  const prevArrowClass = "!absolute top-2/4 !left-4 -translate-y-2/4";
+  const nextArrowClass = "!absolute top-2/4 !right-4 -translate-y-2/4";
 
   const dispatch = useDispatch();
 
@@ -50,7 +50,7 @@ function EventSlideShow() {
                 handlePrev();
                 handleClickLeft();
               }}
-              className={iconClass}
+              className={prevArrowClass}
             >
               <FaChevronLeft />
             </IconButton>
@@ -64,7 +64,7 @@ function EventSlideShow() {
                 handleNext();
                 handleClickRight();
               }}
-              className={iconClass}
+              className={nextArrowClass}
             >
               <FaChevronRight />
             </IconButton>
