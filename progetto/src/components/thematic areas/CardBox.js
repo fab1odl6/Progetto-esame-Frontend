@@ -6,41 +6,27 @@ function CardBox({ imageUrl, name, onClick }) {
     width: "100%",
     height: "110%",
   };
+  const textStyle = "w-full p-4 font-bold text-2xl text-#444455 text-shadow-lg relative z-10";
+  const transparentAreaStyle ="absolute bottom-0 left-0 w-full h-16 bg-opacity-80 bg-gray-300 z-0 pb-4"; 
+  const backgroundcontainer = "relative overflow-hidden aspect-video bg-red-400 cursor-pointer rounded-xl group";
+  const textClass = "absolute inset-0 flex items-end";
+  const imageboxClass = "object-cover w-full h-full aspect-square group-hover:scale-110 transition duration-300 ease-in-out";
 
-  const textStyle = {
-    fontWeight: "bold",
-    fontSize: "1.5rem",
-    color: "white",
-    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-    position: "relative",
-    zIndex: 1,
-    marginTop: "50%",
-  };
-
-  const transparentAreaStyle = {
-    position: "absolute",
-    bottom: "0",
-    left: "0",
-    width: "100%",
-    height: "2cm", // Altezza dell'area trasparente aumentata
-    background: "rgba(192, 192, 192, 0.8)",
-    zIndex: 0,
-  };
 
   return (
     <div
-      className="relative overflow-hidden aspect-video bg-red-400 cursor-pointer rounded-xl group"
+      className={backgroundcontainer}
       style={containerStyle}
     >
-      <div className="absolute inset-0 flex items-end">
-        <div className="w-full p-4" style={textStyle}>
+      <div className={textClass}>
+        <div className={textStyle}>
           {name}
         </div>
-        <div style={transparentAreaStyle}></div>
+        <div className={transparentAreaStyle}></div>
       </div>
       <img
         alt=""
-        className="object-cover w-full h-full aspect-square group-hover:scale-110 transition duration-300 ease-in-out"
+        className={imageboxClass}
         src={imageUrl}
         onClick={onClick}
       />

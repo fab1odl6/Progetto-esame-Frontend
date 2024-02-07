@@ -9,7 +9,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCustomEventUser, addNewEvent, addEventUser } from "../../store";
 
 function AddAnEvent() {
-  
+
+  const addeventboxClass = "relative flex flex-col lg:flex-row lg:h-screen lg:items-center larghezza-completa";
+  const dimensionboxClass = "w-full lg:w-1/2 p-4 lg:p-12";
+  const positiontextClass = "mx-auto max-w-full text-center";
+  const titlestyleClass = "text-2xl font-bold sm:text-3xl text-[#444455]";
+  const errorstyleClass = "mx-auto mb-0 mt-8 max-w-md space-y-4 flex flex-col";
+  const errortextClass = "w-md bg-red-500 text-[#444455] p-4";
+  const textinputClass = "w-4/5 rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm";
+  const suggestinputClass = "flex flex-col text-[#444455]";
+  const textcolor = "text-[#444455]";
+  const redcolorClass = "text-red-500";
+  const positionbuttonClass = "flex items-center justify-between";
+  const stylebuttonClass = "inline-block rounded-lg bg-[#77aaff] px-5 py-3 text-sm font-medium text-white";
+  const imgpositionClass = "relative h-64 w-full lg:h-full lg:w-1/2";
+  const imgboxClass = "absolute inset-0 h-full w-full object-cover";
+
 
   const app = initializeApp(firebaseConfig);
   const db = getDatabase();
@@ -142,48 +157,48 @@ function AddAnEvent() {
   }, [customEvents, logged]);
 
   return (
-   <section className="relative flex flex-col lg:flex-row lg:h-screen lg:items-center larghezza-completa">
-      <div className="w-full lg:w-1/2 p-4 lg:p-12">
-        <div className="mx-auto max-w-full text-center">
-          <h1 className="text-2xl font-bold sm:text-3xl text-[#444455]">ADD AN EVENT!</h1>
+   <section className={addeventboxClass}>
+      <div className={dimensionboxClass}>
+        <div className={positiontextClass}>
+          <h1 className={titlestyleClass}>ADD AN EVENT!</h1>
         </div>
 
-        <form onSubmit={handleSubmit} className="mx-auto mb-0 mt-8 max-w-md space-y-4 flex flex-col">
+        <form onSubmit={handleSubmit} className={errorstyleClass}>
           {alreadyExistsError && (
-            <div className="w-md bg-red-500 text-[#444455] p-4">
+            <div className={errortextClass}>
               Questo evento esiste già, prova a cambiarne il nome!
             </div>
           )}
 
-          <div className="flex flex-col text-[#444455]">
-            <label htmlFor="name">Nome: <span className="text-red-500">*</span></label>
+          <div className={suggestinputClass}>
+            <label htmlFor="name">Nome: <span className={redcolorClass}>*</span></label>
             <input
               type="text"
               id="name"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-4/5 rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+              className={textinputClass}
               required
               autoComplete="off"
             />
           </div>
 
 
-          <div className="text-[#444455]">
-            <label htmlFor="image">URL dell'immagine: <span className="text-red-500">*</span></label>
+          <div className={textcolor}>
+            <label htmlFor="image">URL dell'immagine: <span className={redcolorClass}>*</span></label>
             <input
               type="text"
               id="image"
               name="image"
               value={formData.image}
               onChange={handleChange}
-              className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+              className={textinputClass}
               required
               autoComplete="off"
             />
           </div>
-          <div className="text-[#444455]">
+          <div className={textcolor}>
             <label htmlFor="date" className="inputLabelClass">
               Data: <span className="mandatoryClass">*</span>
             </label>
@@ -204,7 +219,7 @@ function AddAnEvent() {
               />
             </div>
           </div>
-          <div className="text-[#444455]">
+          <div className={textcolor}>
             <div>
               <DepartmentDropdown
                 onOptionSelect={handleOptionSelection}
@@ -216,7 +231,7 @@ function AddAnEvent() {
               )}
             </div>
           </div>
-          <div className="text-[#444455]">
+          <div className={textcolor}>
             <label htmlFor="guests" className="inputLabelClass">
               Guest:
             </label>
@@ -231,11 +246,11 @@ function AddAnEvent() {
             />
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className={positionbuttonClass}>
 
             <button
               type="submit"
-              className="inline-block rounded-lg bg-[#77aaff] px-5 py-3 text-sm font-medium text-white"
+              className={stylebuttonClass}
             >
               Send
             </button>
@@ -243,11 +258,11 @@ function AddAnEvent() {
         </form>
       </div>
 
-      <div className="relative h-64 w-full lg:h-full lg:w-1/2">
+      <div className={imgpositionClass}>
         <img
           alt="Benvenuto"
           src="https://www.gallerialivorno.it/wp-content/uploads/2022/07/Gabriella-Caverni-Le-ortensie-azzurre.jpg"
-          className="absolute inset-0 h-full w-full object-cover"
+          className={imgboxClass}
         />
       </div>
     </section>

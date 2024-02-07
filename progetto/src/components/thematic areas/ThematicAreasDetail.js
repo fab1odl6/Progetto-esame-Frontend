@@ -10,7 +10,7 @@ function ThematicAreasDetail({ thematicArea }) {
   const boximageClass =
     "relative max-w-[800px] mx-auto rounded-lg overflow-hidden shadow-md z-1";
   const descriptionboxClass =
-    "relative max-w-[800px] mx-auto rounded-lg overflow-hidden z-1";
+    "relative max-w-[800px] mx-auto rounded-lg overflow-hidden z-1 ";
   const imageClass = "w-full mb-8 rounded-lg shadow-md";
   const departmentnameClass =
     "absolute bottom-20 left-5 text-white text-shadow-md z-2";
