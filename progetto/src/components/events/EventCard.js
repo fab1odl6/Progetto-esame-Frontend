@@ -13,7 +13,7 @@ function EventCard({ event }) {
   const imageClass =
     "w-full h-96 object-cover cursor-pointer transition-transform transform hover:scale-105";
   const titleClass =
-    "cursor-pointer font-bold text-center mt-4 mb-6 text-3xl text-white";
+    "cursor-pointer font-bold text-center mt-1 mb-6 text-3xl text-white line-clamp-1";
   const generatedByClass = "absolute bottom-6 left-6 text-lg mr-3";
   const errorMessageClass = "bg-red-500 text-white p-4 text-center";
 
