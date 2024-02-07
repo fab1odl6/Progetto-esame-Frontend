@@ -21,6 +21,7 @@ function EventSlideShowCard({ event }) {
     "font-bold text-2xl text-white cursor-pointer transition-colors duration-300 ease-in-out hover:text-gray-800";
   const generatedByClass = "text-left pl-2";
   const favoriteClass = "text-right pr-2";
+  const favoritebuttonClass = "text-4xl cursor-pointer text-red-500";
 
   const { logged, events } = useSelector((state) => state.users);
   const { index } = useSelector((state) => state.events);
@@ -91,12 +92,12 @@ function EventSlideShowCard({ event }) {
           <div className={favoriteClass}>
             {favoriteState ? (
               <FaHeart
-                className="text-4xl cursor-pointer text-red-500"
+                className={favoritebuttonClass}
                 onClick={() => handleClickHeart(event)}
               />
             ) : (
               <FaRegHeart
-                className="text-4xl cursor-pointer text-red-500"
+                className={favoritebuttonClass}
                 onClick={() => handleClickHeart(event)}
               />
             )}

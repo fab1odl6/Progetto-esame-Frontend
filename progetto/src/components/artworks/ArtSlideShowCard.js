@@ -36,13 +36,6 @@ const ArtContent = styled.div`
   color: black;
 `;
 
-const ArtText = styled.div`
-  text-align: center;
-  font-weight: bold;
-  font-size: 8xl;
-  margin-bottom: 10px;
-`;
-
 const TitleContainer = styled.div`
   flex: 1;
   display: flex;
@@ -69,22 +62,11 @@ const FavoriteIcon = styled.div`
   cursor: pointer;
 `;
 
-const ChevronIcon = styled.div`
-  font-size: 3em;
-  cursor: pointer;
-`;
 
 function ArtSlideShowCard({ artwork }) {
-  const artContainerClass =
-    "relative flex items-center max-w-1000 mx-auto border-1 border-solid border-gray-300 rounded-lg overflow-hidden bg-white mb-20 h-500";
-  const artImageClass = "w-1/2 h-full object-cover";
-  const artContentClass = "flex-1 flex flex-col p-10 box-border text-black";
-  const artTextClass = "text-center font-bold text-8xl mb-10";
-  const titleContainerClass = "flex-1 flex flex-col justify-between";
-  const titleClass = "font-bold text-3xl cursor-pointer";
-  const authorClass = "mt-10 text-2xl";
-  const favoriteIconClass = "absolute top-10 right-10 text-4xl cursor-pointer";
-  const chevronIconClass = "text-3xl cursor-pointer";
+
+  const redcolorClass = "text-red-500";
+  
 
   const dispatch = useDispatch();
 
@@ -157,9 +139,9 @@ function ArtSlideShowCard({ artwork }) {
           </div>
           <FavoriteIcon>
             {favoriteState ? (
-              <FaHeart className="text-red-500" onClick={handleClickHeart} />
+              <FaHeart className={redcolorClass} onClick={handleClickHeart} />
             ) : (
-              <FaRegHeart className="text-red-500" onClick={handleClickHeart} />
+              <FaRegHeart className={redcolorClass} onClick={handleClickHeart} />
             )}
           </FavoriteIcon>
         </TitleContainer>
