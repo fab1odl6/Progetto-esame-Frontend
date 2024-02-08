@@ -14,16 +14,18 @@ function AddAnEvent() {
   const dimensionboxClass = "w-full lg:w-1/2 p-4 lg:p-12";
   const positiontextClass = "mx-auto max-w-full text-center";
   const titlestyleClass = "text-2xl font-bold sm:text-3xl text-[#444455]";
-  const errorstyleClass = "mx-auto mb-0 mt-8 max-w-md space-y-4 flex flex-col";
+  const errorstyleClass = "mx-auto mb-0 mt-8 max-w-md space-y-4 flex flex-col border-[#77aaff] border-2 rounded p-4 box-border";
   const errortextClass = "w-md bg-red-500 text-[#444455] p-4";
-  const textinputClass = "w-4/5 rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm";
+  const textinputClass = "w-100 rounded-lg border-blue-200 border-1 p-4 pe-12 text-sm shadow-sm h-10";
   const suggestinputClass = "flex flex-col text-[#444455]";
   const textcolor = "text-[#444455]";
   const redcolorClass = "text-red-500";
+  const selectedText ="text-[#77aaff] font-bold"
   const positionbuttonClass = "flex items-center justify-between";
-  const stylebuttonClass = "inline-block rounded-lg bg-[#77aaff] px-5 py-3 text-sm font-medium text-white";
+  const stylebuttonClass = "inline-block rounded-lg bg-blue-400 px-5 py-3 text-sm font-medium text-white";
   const imgpositionClass = "relative h-64 w-full lg:h-full lg:w-1/2";
   const imgboxClass = "absolute inset-0 h-full w-full object-cover";
+  const selectedOptionClass = "mt-2"
 
 
   const app = initializeApp(firebaseConfig);
@@ -166,12 +168,12 @@ function AddAnEvent() {
         <form onSubmit={handleSubmit} className={errorstyleClass}>
           {alreadyExistsError && (
             <div className={errortextClass}>
-              Questo evento esiste già, prova a cambiarne il nome!
+              This event already exists, try changing its name!
             </div>
           )}
 
           <div className={suggestinputClass}>
-            <label htmlFor="name">Nome: <span className={redcolorClass}>*</span></label>
+            <label htmlFor="name">Name: <span className={redcolorClass}>*</span></label>
             <input
               type="text"
               id="name"
@@ -183,10 +185,8 @@ function AddAnEvent() {
               autoComplete="off"
             />
           </div>
-
-
           <div className={textcolor}>
-            <label htmlFor="image">URL dell'immagine: <span className={redcolorClass}>*</span></label>
+            <label htmlFor="image">Image URL: <span className={redcolorClass}>*</span></label>
             <input
               type="text"
               id="image"
@@ -200,7 +200,7 @@ function AddAnEvent() {
           </div>
           <div className={textcolor}>
             <label htmlFor="date" className="inputLabelClass">
-              Data: <span className="mandatoryClass">*</span>
+              Data: <span className={redcolorClass}>*</span>
             </label>
             <div className="datePickerContainerClass">
               <DatePicker
@@ -212,7 +212,7 @@ function AddAnEvent() {
                 selected={selectedDate}
                 onChange={handleChangeDate}
                 dateFormat="dd/MM/yyyy"
-                className="datePickerClass"
+                className={textinputClass}
                 required
                 minDate={new Date()}
                 autoComplete="off"
@@ -225,9 +225,8 @@ function AddAnEvent() {
                 onOptionSelect={handleOptionSelection}
                 autoComplete="off"
               />
-              <span className="mandatoryClass">*</span>
               {selectedOption && (
-                <p className="selectedOptionClass">{selectedOption}</p>
+                <p className={selectedOptionClass}><span className={selectedText}>Selected: </span>{selectedOption}</p>
               )}
             </div>
           </div>
@@ -235,19 +234,19 @@ function AddAnEvent() {
             <label htmlFor="guests" className="inputLabelClass">
               Guest:
             </label>
-            <input
-              type="text"
-              id="guests"
-              name="guests"
-              value={formData.guests}
-              onChange={handleChange}
-              className="inputClass"
-              autoComplete="off"
-            />
+            <div>
+              <input
+                type="text"
+                id="guests"
+                name="guests"
+                value={formData.guests}
+                onChange={handleChange}
+                className={textinputClass}
+                autoComplete="off"
+              />
+            </div>
           </div>
-
           <div className={positionbuttonClass}>
-
             <button
               type="submit"
               className={stylebuttonClass}

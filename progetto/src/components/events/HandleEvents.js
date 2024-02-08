@@ -6,12 +6,11 @@ import { useSelector } from "react-redux";
 import { useEffect, useState, useRef } from "react";
 
 function HandleEvents() {
-  const containerClass =
-    "max-w-screen-md min-w-screen-md h-full p-4 mt-4 shadow";
-  const titleClass =
-    "text-2xl font-bold mb-4 mt-2 mx-auto text-center text-[#444455]";
+  const containerClass ="max-w-screen-md min-w-screen-md h-full p-4";
+  const titleClass ="text-2xl font-bold mb-4 mt-2 mx-auto text-center text-[#444455]";
   const emptyContainerClass = "custom-message-container max-w-md min-w-md";
   const textClass = "custom-message-text text-[#444455]";
+  const eventContainer ="max-h-100 overflow-y-auto h-full p-4 mt-4 shadow rounded border-2 border-[#77aaff]"
 
   const app = initializeApp(firebaseConfig);
   const db = getDatabase();
@@ -53,7 +52,7 @@ function HandleEvents() {
     <div className={containerClass}>
       <div className={titleClass}>CUSTOM EVENTS</div>
       <div
-        className="max-h-100 overflow-y-auto" 
+        className={eventContainer} 
         style={{ maxHeight: '600px' }}
         ref={eventsContainerRef}
       >

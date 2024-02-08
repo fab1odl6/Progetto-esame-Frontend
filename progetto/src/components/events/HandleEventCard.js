@@ -52,33 +52,27 @@ function HandleEventCard({ event }) {
   const app = initializeApp(firebaseConfig);
   const db = getDatabase();
 
-  const fullContainerClass = "bg-gray-200 p-4";
-  const containerClass =
-    "flex items-center justify-between bg-white p-4 shadow-md";
-  const imageContainerClass = "mr-4";
-  const imageClass = "w-16 h-16 object-cover";
+  const fullContainerClass = "bg-blue-100 rounded p-4";
+  const containerClass ="flex items-center justify-between";
+  const imageContainerClass = "rounded";
+  const imageClass = "w-full h-full object-cover rounded";
   const titleAndHeartClass = "flex items-center";
+  const titleClass ="text-white text-3x1";
   const favoriteClass = "text-red-500 cursor-pointer ml-2";
   const iconsContainerClass = "flex mt-1 items-center";
-  const trashIconClass = "text-gray-500 cursor-pointer mr-2";
-  const editIconClass = "text-gray-500 cursor-pointer";
-
-  const successDivClass =
-    "bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative";
+  const trashIconClass = "text-[#77aaff] cursor-pointer mr-2";
+  const editIconClass = "text-[#77aaff] cursor-pointer";
+  const successDivClass ="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative";
   const successPClass = "font-bold";
   const formContainerClass = "max-w-md mx-auto p-4 bg-white shadow-md";
   const inputContainerClass = "mb-4";
   const inputLabelClass = "block text-gray-700 text-sm font-bold mb-2";
-  const inputClass =
-    "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
+  const inputClass ="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
   const datePickerContainerClass = "relative";
-  const datePickerClass =
-    "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
-  const chevronClass =
-    "absolute right-0 top-0 h-full flex items-center p-2 pointer-events-none";
+  const datePickerClass ="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
+  const chevronClass ="absolute right-0 top-0 h-full flex items-center p-2 pointer-events-none";
   const selectedOptionClass = "text-gray-700 text-sm mt-2";
-  const buttonClass =
-    "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded";
+  const buttonClass ="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded";
 
   const dispatch = useDispatch();
 
@@ -199,7 +193,7 @@ function HandleEventCard({ event }) {
                 <img src={event.image} className={imageClass} />
               </div>
               <div className={titleAndHeartClass}>
-                <div>{formData.name}</div>
+                <div className={titleClass}>{formData.name}</div>
               </div>
             </div>
           </div>

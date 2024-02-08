@@ -16,7 +16,7 @@ function ArtworkDetailsPage({ navigateBack }) {
   const heartClass = "text-red-500 mr-2";
   const favoriteboxClass = "flex justify-center text-white";
   const favoritebuttonClass =
-    "inline-flex items-center text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-400 rounded text-lg";
+    "inline-flex items-center text-white bg-blue-300 border-0 py-2 px-6 focus:outline-none hover:bg-blue-400 rounded text-lg";
   const imageClass =
     "max-w-xl max-h-xl rounded object-cover object-center rounded max-w-full max-h-full";
   const linkClass = "text-blue-500 hover:underline";
@@ -24,7 +24,7 @@ function ArtworkDetailsPage({ navigateBack }) {
     "text-gray-600 body-font bg-cover bg-center bg-fixed backdrop-filter backdrop-blur-lg  w-full overflow-hidden";
   const loginmodalClass =
     "container mx-auto flex px-5 py-24 md:flex-row flex-col items-center";
-  const navigatebackClass = `absolute top-4 left-4 inline-flex items-center text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-400 rounded text-l`;
+  const navigatebackClass = `absolute top-4 left-4 inline-flex items-center text-white bg-blue-300 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded text-l`;
   const textboxClass =
     "lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center";
 

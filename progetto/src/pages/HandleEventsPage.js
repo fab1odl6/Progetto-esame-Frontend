@@ -6,10 +6,10 @@ import { clearText } from "../store";
 import { useEffect } from "react";
 
 function HandleEventsPage() {
-  const containerClass = "flex justify-center h-auto lg:flex"; // Aggiungi lg:flex per l'allineamento orizzontale su dispositivi LG
-  const addClass = "w-md h-full lg:w-1/2"; // Aggiungi lg:w-1/2 per far occupare metà della larghezza su dispositivi LG
-  const separatorClass = "m-4 hidden lg:block"; // Nascondi il separatore su dispositivi non LG
-  const handleClass = "mt-10 w-md h-full lg:w-1/2"; // Aggiungi lg:w-1/2 per far occupare metà della larghezza su dispositivi LG
+  const containerClass = "flex justify-center h-auto lg:flex"; 
+  const addClass = "w-md h-full lg:w-1/2";
+  const separatorClass = "m-4 hidden lg:block"; 
+  const handleClass = "mt-10 w-md h-full lg:w-1/2";
 
   const dispatch = useDispatch();
 
