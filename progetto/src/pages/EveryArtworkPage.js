@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { clearText } from "../store";
 import { FaTimes } from "react-icons/fa";
 import { setEveryArtworkPage } from "../store";
-import { animateScroll as scroll } from 'react-scroll';
+import { animateScroll as scroll } from "react-scroll";
 
 function EveryArtworkPage() {
   const pageContainerStyle = {
@@ -20,15 +20,20 @@ function EveryArtworkPage() {
 
   const searchBarClass = "z-50 relative";
   const filterListClass = "z-50 relative";
-  const containerStateClass = "z-10 relative flex items-center mt-4 bg-gray-200";
+  const containerStateClass =
+    "z-10 relative flex items-center mt-4 bg-gray-200";
   const resultTextClass = "text-lg font-bold";
-  const buttonClass = "flex items-center px-2 py-1 bg-gray-300 rounded cursor-pointer ml-3";
+  const buttonClass =
+    "flex items-center px-2 py-1 bg-gray-300 rounded cursor-pointer ml-3";
   const iconClass = "ml-1";
-  const artGridClass = "z-auto relative max-w-screen-xl mx-auto flex flex-col items-center relative";
+  const artGridClass =
+    "z-auto relative max-w-screen-xl mx-auto flex flex-col items-center relative";
   const imageboxClass = "relative w-full h-200px overflow-hidden";
-  const textonimageClass = "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
+  const textonimageClass =
+    "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
   const paginationbuttonClass = "mt-4 flex items-center";
-  const currentpageClass = "flex items-center px-2 py-1 bg-gray-300 rounded ml-3";
+  const currentpageClass =
+    "flex items-center px-2 py-1 bg-gray-300 rounded ml-3";
 
   const { array } = useSelector((state) => {
     return state.artworks;
@@ -38,7 +43,7 @@ function EveryArtworkPage() {
   const filtersState = useSelector((state) => state.filters);
   const searchState = useSelector((state) => state.search.text);
 
-  const currentPage = useSelector((state) => state.activePage.everyArtworkPage)
+  const currentPage = useSelector((state) => state.activePage.everyArtworkPage);
   const itemsPerPage = 20;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -90,7 +95,7 @@ function EveryArtworkPage() {
   };
 
   const handlePageChange = (pageNumber) => {
-    dispatch(setEveryArtworkPage(pageNumber))
+    dispatch(setEveryArtworkPage(pageNumber));
     scroll.scrollToTop();
   };
 
@@ -103,14 +108,15 @@ function EveryArtworkPage() {
           className="filter brightness-50"
           alt="Artwork"
         />
-        <div className={textonimageClass}>
-          EVERY ARTWORKS
-        </div>
+        <div className={textonimageClass}>EVERY ARTWORK</div>
       </div>
       <div className={searchBarClass} style={{ zIndex: 52 }}>
         <SearchBar />
       </div>
-      <div className={filterListClass} style={{ position: 'relative', zIndex: 51 }}>
+      <div
+        className={filterListClass}
+        style={{ position: "relative", zIndex: 51 }}
+      >
         <FilterList artworks={array} />
       </div>
       <div className={artGridClass}>
