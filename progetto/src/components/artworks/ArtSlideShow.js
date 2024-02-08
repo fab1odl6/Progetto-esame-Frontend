@@ -1,17 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { swipeLeftArt, swipeRightArt } from "../../store";
-import styled from "styled-components";
 import { Carousel } from "@material-tailwind/react";
 import ArtSlideShowCard from "./ArtSlideShowCard";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { IconButton } from "@mui/material";
-
-const ArtText = styled.div`
-  text-align: center;
-  font-weight: bold;
-  font-size: 8xl;
-  margin-bottom: 10px;
-`;
 
 function ArtSlideShow() {
   const containerClass = "overflow:auto z-50";

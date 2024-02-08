@@ -31,9 +31,10 @@ function EveryArtworkPage() {
   const imageboxClass = "relative w-full h-200px overflow-hidden";
   const textonimageClass =
     "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
-  const paginationbuttonClass = "mt-4 mb-8 flex items-center";
+  const paginationbuttonClass = "mt-4 mb-8 flex items-center text-white";
   const currentpageClass =
-    "flex items-center px-2 py-1 bg-[#77aaff] rounded ml-3";
+    "flex items-center px-2 py-1 bg-[#77aaff] rounded ml-3 text-white";
+  const hoverButtonClass = "hover:bg-blue-800";
 
   const { array } = useSelector((state) => {
     return state.artworks;
@@ -122,21 +123,21 @@ function EveryArtworkPage() {
       <div className={artGridClass}>
         <ArtGrid artworks={currentItems} />
         <div className={paginationbuttonClass}>
-          <button
-            className={buttonClass}
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          <p className={currentpageClass}>{currentPage}</p>
-          <button
-            className={buttonClass}
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={indexOfLastItem >= filteredArray.length}
-          >
-            Next
-          </button>
+        <button
+          className={`${buttonClass} ${hoverButtonClass}`}
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <p className={currentpageClass}> Page {currentPage}</p>
+        <button
+          className={`${buttonClass} ${hoverButtonClass}`}
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={indexOfLastItem >= filteredArray.length}
+        >
+          Next
+        </button>
         </div>
       </div>
       {searchState && searchState.trim() !== "" && (
