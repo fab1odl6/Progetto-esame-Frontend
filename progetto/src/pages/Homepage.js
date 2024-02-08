@@ -42,7 +42,7 @@ function HomePage() {
         </div>
         <div className={lineClass}></div> 
         
-        <div className={welcometextClass}>WELCOME TO MET</div>
+        <div className={welcometextClass} style={{ textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000' }}>WELCOME TO MET</div>
       </div>
      
       <div className={zIndexEvent}>
