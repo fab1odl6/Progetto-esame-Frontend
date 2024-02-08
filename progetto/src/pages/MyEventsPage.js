@@ -20,7 +20,7 @@ function MyEventsPage() {
     "w-full flex items-center justify-center bg-[expandedAccordion[event.id] ? accordionBarColorDark : accordionBar] text-white font-bold uppercase";
   const mainContentClass =
     "bg-gradient-to-b from-opacity-80 to-opacity-80 via-white bg-cover bg-center min-h-screen-100px";
-  const accordionClass = "mb-20";
+  const accordionClass = "mb-20 mt-0";
   const typographyClass = "font-bold font-weight-bold text-uppercase";
   const sectionnametextClass =
     "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-shadow-lg text-center text-2xl font-bold";
@@ -60,7 +60,7 @@ function MyEventsPage() {
                 src="https://rare-gallery.com/uploads/posts/505263-historical-art.jpg"
                 style={{ width: "100%", height: "550px", objectFit: "cover" }}
               />
-              <div class={sectionnametextClass}>MY EVENTS</div>
+              <div className={sectionnametextClass}>MY EVENTS</div>
             </div>
 
             {events.map((event) => (
@@ -86,7 +86,7 @@ function MyEventsPage() {
                     marginBottom: expandedAccordion[event.id] ? "0" : "-1px",
                   }}
                 >
-                  <div class={accordionstyleClass}>
+                  <div className={accordionstyleClass}>
                     <Typography
                       variant="h6"
                       className={typographyClass}
@@ -103,7 +103,7 @@ function MyEventsPage() {
                 </AccordionSummary>
                 <AccordionDetails
                   style={{
-                    backgroundColor: "lightgray",
+                    backgroundColor: "white",
                   }}
                 >
                   <div>
