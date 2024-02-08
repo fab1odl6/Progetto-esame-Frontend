@@ -4,8 +4,7 @@ import InputDropdownPanel from "./InputDropdownPanel";
 
 function InputDropdown({ option, title }) {
   const containerClass = "w-48 relative z-8";
-  const inputClass =
-    "flex justify-between items-center cursor-pointer border rounded p-3 shadow bg-white w-full";
+  const inputClass = "flex justify-between items-center cursor-pointer border rounded p-3 shadow bg-[#77aaff] w-full text-white";
   const chevronClass = "text-lg";
   const openedContainerClass = "absolute top-full w-full";
   const InputDropdownPanelClass = "flex justify-between items-center z-8";

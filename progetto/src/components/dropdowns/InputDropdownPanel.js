@@ -4,13 +4,11 @@ import { useDispatch } from "react-redux";
 import { addFilterItem } from "../../store";
 
 function InputDropdownPanel({ className, options }) {
-  const finalClassNames = classNames(
-    "border rounded p-2 shadow bg-white w-full",
-    className
-  );
+  const containterClassNames = classNames("border-1 border-blue-500 rounded p-2 shadow bg-white w-full",className);
+  const inputClassNames = classNames("border border-blue-500 rounded p-2 w-full",className);
   const labelClass = "p-2";
   const matchedPanelClass = "matched-panel";
-  const valueClass = classNames("cursor-pointer", finalClassNames);
+  const valueClass = classNames("cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800", inputClassNames);
 
   const [text, setText] = useState("");
   const [matchedValues, setMatchedValues] = useState([]);
@@ -38,11 +36,11 @@ function InputDropdownPanel({ className, options }) {
   };
 
   return (
-    <div className={finalClassNames}>
+    <div className={containterClassNames}>
       <form onSubmit={handleSubmit}>
         <label className={labelClass}>Insert author name</label>
         <input
-          className={finalClassNames}
+          className={inputClassNames}
           value={text}
           onChange={handleChange}
         />

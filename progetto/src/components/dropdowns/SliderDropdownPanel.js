@@ -4,10 +4,8 @@ import { useDispatch } from "react-redux";
 import { addFilterItem } from "../../store";
 
 function SliderDropdownPanel({ option, className }) {
-  const finalClassNames = classNames(
-    "border rounded p-2 shadow bg-white w-full",
-    className
-  );
+  const containterClassNames = classNames("border-1 border-blue-500 rounded p-2 shadow bg-white w-full",className);
+  const inputClassNames = classNames("border border-blue-500 rounded p-2 shadow bg-white w-full",className);
   const p2Class = "p-2";
 
   const [text, setText] = useState(option.min.toString());
@@ -36,12 +34,12 @@ function SliderDropdownPanel({ option, className }) {
   };
 
   return (
-    <div className={finalClassNames}>
+    <div className={containterClassNames}>
       <form onSubmit={handleSubmit}>
         <label className={p2Class}>Insert end year</label>
         <input
           type="number"
-          className={finalClassNames}
+          className={inputClassNames}
           value={text}
           onChange={handleChange}
           min={option.min}
