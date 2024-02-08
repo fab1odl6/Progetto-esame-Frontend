@@ -15,7 +15,7 @@ function ArtCard({ artwork }) {
     "z-10 h-full w-full overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700";
   const imageClass =
     "animate-fade-in block h-full w-full scale-100 transform object-cover object-center opacity-100 transition duration-300 group-hover:scale-110 cursor-pointer";
-  const textContainer = `absolute bottom-0 left-0 p-3 w-full text-white z-30 shadow-md bg-black bg-opacity-50 `;
+  const textContainer = `absolute bottom-0 left-0 p-3 w-full text-white z-30 shadow-md bg-black bg-opacity-50 line-clamp-1 `;
   const titleClass = `font-serif text-lg font-bold text-white-700 shadow-md shadow-black-10 ${textcolor} 
     text-xl border-b-2 border-white-700 mb-1 `;
   const subtitleClass = `text-sm font-light text-white-700 shadow-md shadow-black-10 mb-1 `;
