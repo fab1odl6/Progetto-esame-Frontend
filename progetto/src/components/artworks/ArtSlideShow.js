@@ -63,7 +63,7 @@ function ArtSlideShow() {
               <FaChevronRight />
             </IconButton>
           )}
-        ></Carousel>
+        />
       </div>
     </div>
   );
