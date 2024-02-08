@@ -7,8 +7,8 @@ import { IconButton } from "@mui/material";
 
 function ArtSlideShow() {
   const containerClass = "overflow:auto z-50";
-  const artTextClass = "text-center font-bold text-8xl mb-10 cursor-pointer";
-  const carouselClass = "relative w-md";
+  const artTextClass = "text-center font-bold text-4xl my-10";
+  const carouselClass = "relative w-md m-0";
   const prevArrowClass = "!absolute top-2/4 !left-4 -translate-y-2/4";
   const nextArrowClass = "!absolute top-2/4 !right-4 -translate-y-2/4";
 
