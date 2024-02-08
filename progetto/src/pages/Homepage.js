@@ -7,11 +7,12 @@ import { clearText } from "../store";
 import { useEffect } from "react";
 
 function HomePage() {
+
   const zIndexEvent = "z-40 mb-3 mt-3";
   const zIndexArt = "z-40 mt-3";
   const textClass = "text-gray-500 dark:text-gray-400";
   const positionitemClass = "inline-flex items-center justify-center w-full";
-  const containterstyleClass = "w-[120vh] h-2 my-8 bg-gray-500 border-0 rounded dark:bg-gray-700";
+  const containterstyleClass = "h-2 my-8 bg-gray-500 border-0 rounded dark:bg-gray-700";
   const boxstyleClass = "absolute px-4 -translate-x-1/2 left-1/2 dark:bg-gray-900";
   const textboxClass = "w-8 h-8 text-gray-700 dark:text-gray-300";
   const paragraphtextClass = "text-gray-500 dark:text-gray-400";
@@ -19,14 +20,6 @@ function HomePage() {
   const bgcolor = "bg-white";
   const highlitghtedboxClass = "rounded-lg text-blue-800 text-center text-4xl font-bold max-w-screen-md mx-auto mt-20 mb-4 ";
   const lineClass = "w-3/4 mx-auto border-b-4 border-blue-800 mb-4";
-
-
-  const lineStyle = {
-    width: "60%",
-    margin: "auto",
-    borderBottom: "2px solid blue", // Colore della linea
-    marginBottom: "1px",  // Spazio tra la scritta e la linea
-  };
 
   const dispatch = useDispatch();
 
@@ -43,15 +36,15 @@ function HomePage() {
           style={{ width: "100%", height: "550px", objectFit: "cover" }}
         />
         <SearchBar />
-        {/* Primo box blu con scritte sotto la barra di ricerca */}
+
         <div className={highlitghtedboxClass}>
           Highlighted Events
         </div>
-        <div className={lineClass}></div> {/* Linea sotto "Highlighted Events" */}
-        {/* Aggiunta della scritta "WELCOME TO MET" */}
+        <div className={lineClass}></div> 
+        
         <div className={welcometextClass}>WELCOME TO MET</div>
       </div>
-      {/* Primo carosello */}
+     
       <div className={zIndexEvent}>
         <EventSlideShow />
       </div>
@@ -67,11 +60,11 @@ function HomePage() {
       </div>
       <p className={paragraphtextClass}></p>
       
-      {/* Secondo box blu con scritte */}
+      
       <div className={highlitghtedboxClass}>
         <p>Highlighted Artworks</p>
       </div>
-      <div className={lineClass}></div> {/* Linea sotto "Highlighted Artworks" */}
+      <div className={lineClass}></div> 
       <div className={zIndexArt}>
         <ArtSlideShow />
       </div>
