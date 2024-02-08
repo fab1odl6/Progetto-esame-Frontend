@@ -56,14 +56,10 @@ import { clearText } from "../store";
 import { useEffect } from "react";
 
 function HomePage() {
-  const zIndexClass = "z-50";
   const zIndexEvent = "z-40 mb-3 mt-3";
   const zIndexArt = "z-40 mt-3";
 
-  const headerStyle = {
-    backgroundColor: "#aee4ff", // Colore di sfondo azzurrino
-    padding: "10px",
-  };
+
 
   const welcomeTextStyle = {
     position: "absolute",
@@ -90,7 +86,13 @@ function HomePage() {
     textShadow: "2px 2px 5px #0066ff",
     margin: "40px auto", 
   };
-  
+
+  const lineStyle = {
+    width: "60%",
+    margin: "auto",
+    borderBottom: "2px solid blue", // Colore della linea
+    marginBottom: "1px",  // Spazio tra la scritta e la linea
+  };
 
   const dispatch = useDispatch();
 
@@ -111,6 +113,7 @@ function HomePage() {
         <div style={highlightedBoxStyle}>
           Highlighted Events
         </div>
+        <div style={lineStyle}></div> {/* Linea sotto "Highlighted Events" */}
         {/* Aggiunta della scritta "WELCOME TO MET" */}
         <div style={welcomeTextStyle}>WELCOME TO MET</div>
       </div>
@@ -135,6 +138,7 @@ function HomePage() {
       <div style={highlightedBoxStyle}>
         <p>Highlighted Artworks</p>
       </div>
+      <div style={lineStyle}></div> {/* Linea sotto "Highlighted Artworks" */}
       <div className={zIndexArt}>
         <ArtSlideShow />
       </div>
@@ -143,6 +147,7 @@ function HomePage() {
 }
 
 export default HomePage;
+
 
 
 
