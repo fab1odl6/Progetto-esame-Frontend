@@ -13,12 +13,16 @@ const iconClass = "mb-8 flex flex-col items-center";
 const museumnameClass = "mb-2 text-2xl";
 const errorClass = "mt-2 text-red-500";
 const endformClass = "mt-8 flex justify-center text-lg text-black";
-const submitbuttonClass = "rounded-3xl bg-yellow-400 bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600";
+const submitbuttonClass = "rounded-3xl bg-blue-400 bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-blue-800";
 const cursorpointerClass = "cursor-pointer text-white-500";
-const inputtextClass = "rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-300 shadow-lg outline-none backdrop-blur-md";
+const inputtextClass = "rounded-3xl border-none bg-blue-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-300 shadow-lg outline-none backdrop-blur-md";
 const styleinputtextClass = "mb-4 text-lg";
 const enterloginClass = "text-gray-300";
 const backgroundClass = "w-24 filter brightness-0 invert-1";
+const inputContainerClass = "mb-4 flex justify-center";
+
+
+
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
@@ -202,6 +206,7 @@ const LoginPage = function () {
             <span className={enterloginClass}>Enter Login Details</span>
           </div>
           <form onSubmit={handleLogin}>
+            <div className={inputContainerClass}>
             <div className={styleinputtextClass}>
               <input
                 className={inputtextClass}
@@ -212,6 +217,8 @@ const LoginPage = function () {
                 required
               />
             </div>
+            </div>
+            <div className={inputContainerClass}>
             <div className={styleinputtextClass}>
               <input
                 className={inputtextClass}
@@ -221,6 +228,7 @@ const LoginPage = function () {
                 placeholder="*********"
                 required
               />
+              </div>
             </div>
             <div className={errorClass}>{error}</div>{" "}
             {/* Render error message */}
