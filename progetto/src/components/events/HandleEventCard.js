@@ -220,7 +220,9 @@ function HandleEventCard({ event }) {
         <div className="flex">
           <form className={formContainerClass} onSubmit={handleSubmit}>
             <div className={inputContainerClass}>
-              <label htmlFor="name" className={inputLabelClass}>Nome: <span className={mandatoryClass}>*</span></label>
+              <label htmlFor="name" className={inputLabelClass}>
+                Nome: <span className={mandatoryClass}>*</span>
+              </label>
               <input
                 type="text"
                 id="name"
@@ -228,13 +230,14 @@ function HandleEventCard({ event }) {
                 value={formData.name}
                 onChange={handleChange}
                 className={inputClass}
-                required
                 autoComplete="off"
               />
             </div>
 
             <div className={inputContainerClass}>
-              <label htmlFor="image" className={inputLabelClass}>URL dell'immagine: <span className={mandatoryClass}>*</span></label>
+              <label htmlFor="image" className={inputLabelClass}>
+                URL dell'immagine: <span className={mandatoryClass}>*</span>
+              </label>
               <input
                 type="text"
                 id="img"
@@ -242,13 +245,14 @@ function HandleEventCard({ event }) {
                 value={formData.image}
                 onChange={handleChange}
                 className={inputClass}
-                required
                 autoComplete="off"
               />
             </div>
 
             <div className={inputContainerClass}>
-              <label htmlFor="date" className={inputLabelClass}>Data: <span className={mandatoryClass}>*</span></label>
+              <label htmlFor="date" className={inputLabelClass}>
+                Data: <span className={mandatoryClass}>*</span>
+              </label>
               <div className={datePickerContainerClass}>
                 <DatePicker
                   showIcon
@@ -260,7 +264,6 @@ function HandleEventCard({ event }) {
                   onChange={handleChangeDate}
                   dateFormat="dd/MM/yyyy"
                   className={datePickerClass}
-                  required
                   minDate={new Date()}
                   autoComplete="off"
                 />
@@ -268,7 +271,9 @@ function HandleEventCard({ event }) {
             </div>
 
             <div className={inputContainerClass}>
-              <label htmlFor="guests" className={inputLabelClass}>Guests:</label>
+              <label htmlFor="guests" className={inputLabelClass}>
+                Guests:
+              </label>
               <input
                 type="text"
                 id="guests"
@@ -283,7 +288,9 @@ function HandleEventCard({ event }) {
             <div className={inputContainerClass}>
               <DepartmentDropdown onOptionSelect={handleOptionSelection} />
               {selectedOption && (
-                <p className={selectedOptionClass}>Selected option: {selectedOption}</p>
+                <p className={selectedOptionClass}>
+                  Selected option: {selectedOption}
+                </p>
               )}
             </div>
 
