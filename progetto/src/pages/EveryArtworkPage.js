@@ -31,7 +31,7 @@ function EveryArtworkPage() {
   const imageboxClass = "relative w-full h-200px overflow-hidden";
   const textonimageClass =
     "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
-  const paginationbuttonClass = "mt-4 flex items-center";
+  const paginationbuttonClass = "mt-4 mb-8 flex items-center";
   const currentpageClass =
     "flex items-center px-2 py-1 bg-[#77aaff] rounded ml-3";
 

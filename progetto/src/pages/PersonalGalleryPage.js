@@ -14,7 +14,7 @@ function PersonalGalleryPage() {
   const imageboxClass = "relative w-full h-200px overflow-hidden";
   const textonimageClass = "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
   const gridboxClass = "max-w-screen-xl mx-auto flex flex-col items-center relative";
-  const paginationbuttonClass = "mt-4 flex items-center";
+  const paginationbuttonClass = "mt-4 mb-8 flex items-center";
   const currentpageClass = "flex items-center px-2 py-1 rounded ml-3 bg-[#77aaff]";
 
   const app = initializeApp(firebaseConfig);
