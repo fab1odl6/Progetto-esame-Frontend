@@ -10,7 +10,8 @@ function RegisterPage() {
   const registerbuttonClass = `"flex items-center justify-between w-full px-5 py-2.5 text-sm font-medium text-white ${buttoncolor} rounded-md hover: ${buttoncolor} focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-50"`;
   const formtextClass = `block mb-2 text-sm ${textcolorClass}`;
   const sectionClass = "bg-white dark:bg-gray-900";
-  const positionClass = "flex justify-center min-h-screen bg-opacity-20 bg-white bg-opacity-20 rounded-lg p-5";
+  const positionClass =
+    "flex justify-center min-h-screen bg-opacity-20 bg-white bg-opacity-20 rounded-lg p-5";
   const imageboxClass = "hidden bg-cover lg:block lg:w-2/5";
   const formClass =
     "flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5";
@@ -85,7 +86,6 @@ function RegisterPage() {
     navigate("/");
   };
 
-
   return (
     <section className={sectionClass}>
       <div className={positionClass}>
@@ -98,7 +98,7 @@ function RegisterPage() {
         ></div>
         <div className={formClass}>
           <div className="w-full">
-            <h1 className={textClass}>Get your free account now.</h1>
+            <h1 className={textClass}>Get your free account now!</h1>
 
             <form className={gridformClass} onSubmit={handleSubmit}>
               <div>
@@ -132,7 +132,7 @@ function RegisterPage() {
                 <input
                   type="text"
                   placeholder="jhon.smith"
-                  name = "username"
+                  name="username"
                   className={tipformClass}
                   value={formData.username}
                   onChange={handleChange}
