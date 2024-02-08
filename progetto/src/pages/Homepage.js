@@ -81,16 +81,16 @@ function HomePage() {
   };
 
   const highlightedBoxStyle = {
-    backgroundColor: "#1a237e", // Colore blu scuro
-    padding: "10px",
     borderRadius: "10px",
-    color: "white",
+    color: "blue",
     textAlign: "center",
-    fontSize: "18px",
+    fontSize: "40px",
     fontWeight: "bold",
-    margin: "50px auto",
-    maxWidth: "400px", 
+    maxWidth: "400px",
+    textShadow: "2px 2px 5px #0066ff",
+    margin: "40px auto", 
   };
+  
 
   const dispatch = useDispatch();
 
@@ -109,7 +109,7 @@ function HomePage() {
         <SearchBar />
         {/* Primo box blu con scritte sotto la barra di ricerca */}
         <div style={highlightedBoxStyle}>
-          <p>Highlighted Events</p>
+          Highlighted Events
         </div>
         {/* Aggiunta della scritta "WELCOME TO MET" */}
         <div style={welcomeTextStyle}>WELCOME TO MET</div>
@@ -122,7 +122,7 @@ function HomePage() {
       {/* Nuovo blocco di codice */}
       <p className="text-gray-500 dark:text-gray-400"></p>
       <div className="inline-flex items-center justify-center w-full">
-        <hr className="w-64 h-2 my-8 bg-gray-200 border-0 rounded dark:bg-gray-700" />
+        <hr className="w-[120vh] h-2 my-8 bg-gray-500 border-0 rounded dark:bg-gray-700" />
         <div className="absolute px-4 -translate-x-1/2 left-1/2 dark:bg-gray-900">
           <svg className="w-8 h-8 text-gray-700 dark:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
             <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z"/>
