@@ -4,8 +4,7 @@ import CheckboxDropdownPanel from "./CheckboxDropdownPanel";
 
 function CheckboxDropdown({ options, title }) {
   const containerClass = "w-48 relative";
-  const textClass =
-    "flex justify-between items-center cursor-pointer border rounded p-3 shadow bg-white w-full";
+  const textClass = "flex justify-between items-center cursor-pointer border rounded p-3 shadow bg-[#77aaff] w-full text-white";
   const chevronClass = "text-lg";
   const panelClass = "absolute top-full overflow-y-auto max-h-[150px]";
 
