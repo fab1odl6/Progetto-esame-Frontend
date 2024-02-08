@@ -60,7 +60,7 @@ function MyEventsPage() {
                 src="https://rare-gallery.com/uploads/posts/505263-historical-art.jpg"
                 style={{ width: "100%", height: "550px", objectFit: "cover" }}
               />
-              <div class={sectionnametextClass}>MY EVENTS</div>
+              <div className={sectionnametextClass}>MY EVENTS</div>
             </div>
 
             {events.map((event) => (
@@ -86,7 +86,7 @@ function MyEventsPage() {
                     marginBottom: expandedAccordion[event.id] ? "0" : "-1px",
                   }}
                 >
-                  <div class={accordionstyleClass}>
+                  <div className={accordionstyleClass}>
                     <Typography
                       variant="h6"
                       className={typographyClass}
