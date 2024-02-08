@@ -13,9 +13,9 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/Login";
 import Footer from "./components/header & footer/Footer";
 import { PersistGate } from "redux-persist/integration/react";
-import { persistor } from "./store";
+import { persistor, setPage } from "./store";
 import PageNotFound from "./pages/PageNotFound";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
   const mainContainerStyle = "mt-0";
@@ -38,6 +38,8 @@ function App() {
 
   const isPathValid =
     validPaths.includes(page) || validPaths.includes(previousPage);
+
+  const dispatch = useDispatch();
 
   return (
     <NavigationProvider>
@@ -65,7 +67,12 @@ function App() {
               <HandleEventsPage />
             </Route>
             <Route path="/artworkDetails">
-              <ArtworksDetailsPage navigateBack={() => window.history.back()} />
+              <ArtworksDetailsPage
+                navigateBack={() => {
+                  window.history.back();
+                  dispatch(setPage(previousPage));
+                }}
+              />
             </Route>
             <Route path="/register">
               <RegisterPage />
