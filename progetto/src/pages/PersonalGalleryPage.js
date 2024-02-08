@@ -10,18 +10,17 @@ import { animateScroll as scroll } from 'react-scroll';
 
 function PersonalGalleryPage() {
 
-  const buttonClass = "flex items-center px-2 py-1 bg-gray-300 rounded cursor-pointer ml-3";
+  const buttonClass = "flex items-center px-2 py-1 bg-[#77aaff] rounded cursor-pointer ml-3";
   const imageboxClass = "relative w-full h-200px overflow-hidden";
   const textonimageClass = "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
   const gridboxClass = "max-w-screen-xl mx-auto flex flex-col items-center relative";
   const paginationbuttonClass = "mt-4 flex items-center";
-  const currentpageClass = "flex items-center px-2 py-1 bg-gray-300 rounded ml-3";
+  const currentpageClass = "flex items-center px-2 py-1 rounded ml-3 bg-[#77aaff]";
 
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
   const dbRef = ref(db);
   const dispatch = useDispatch();
-  const artworksRedux = useSelector((state) => state.artworks);
   const [artworksLocal, setArtworksLocal] = useState([]);
   const currentPage = useSelector((state) => state.activePage.personalGalleryPage)
   const itemsPerPage = 8;
@@ -96,23 +95,25 @@ function PersonalGalleryPage() {
         <div className={gridboxClass}>
           <ArtGrid artworks={currentItems} />
           <div className={paginationbuttonClass}>
-          <button
-            className={`${buttonClass} bg-blue-400`}
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            style={{ backgroundColor: '#77aaff' }}
-          >
-            Previous
-          </button>
+            <button
+              className={buttonClass}
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
 
-          <button
-            className={`${buttonClass} bg-blue-400`}
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={indexOfLastItem >= artworksLocal.length}
-            style={{ backgroundColor: '#77aaff' }}
-          >
-            Next
-          </button>
+            <div className={currentpageClass}>
+              Page {currentPage}
+            </div>
+
+            <button
+              className={buttonClass}
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={indexOfLastItem >= artworksLocal.length}
+            >
+              Next
+            </button>
           </div>
         </div>
       ) : (
