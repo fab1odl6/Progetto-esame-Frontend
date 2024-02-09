@@ -11,6 +11,7 @@ function EventSlideShow() {
   const carouselClass = "relative w-md m-0";
   const prevArrowClass = "!absolute top-2/4 !left-4 -translate-y-2/4";
   const nextArrowClass = "!absolute top-2/4 !right-4 -translate-y-2/4";
+  const chevronClass ="text-white"
 
   const dispatch = useDispatch();
 
@@ -45,6 +46,9 @@ function EventSlideShow() {
             <IconButton
               variant="text"
               color="white"
+              style={{
+                backgroundColor: '#77aaff',
+              }}
               size="lg"
               onClick={() => {
                 handlePrev();
@@ -52,13 +56,16 @@ function EventSlideShow() {
               }}
               className={prevArrowClass}
             >
-              <FaChevronLeft />
+              <FaChevronLeft className={chevronClass}/>
             </IconButton>
           )}
           nextArrow={({ handleNext }) => (
             <IconButton
               variant="text"
               color="white"
+              style={{
+                backgroundColor: '#77aaff',
+              }}
               size="lg"
               onClick={() => {
                 handleNext();
@@ -66,7 +73,7 @@ function EventSlideShow() {
               }}
               className={nextArrowClass}
             >
-              <FaChevronRight />
+              <FaChevronRight className={chevronClass}/>
             </IconButton>
           )}
         ></Carousel>

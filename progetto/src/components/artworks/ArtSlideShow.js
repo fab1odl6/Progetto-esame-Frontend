@@ -11,6 +11,7 @@ function ArtSlideShow() {
   const carouselClass = "relative w-md";
   const prevArrowClass = "!absolute top-2/4 !left-4 -translate-y-2/4";
   const nextArrowClass = "!absolute top-2/4 !right-4 -translate-y-2/4";
+  const chevronClass = "text-white"
 
   const dispatch = useDispatch();
 
@@ -39,6 +40,9 @@ function ArtSlideShow() {
             <IconButton
               variant="text"
               color="white"
+              style={{
+                backgroundColor: '#77aaff',
+              }}
               size="lg"
               onClick={() => {
                 handlePrev();
@@ -46,13 +50,16 @@ function ArtSlideShow() {
               }}
               className={prevArrowClass}
             >
-              <FaChevronLeft />
+              <FaChevronLeft className={chevronClass}/>
             </IconButton>
           )}
           nextArrow={({ handleNext }) => (
             <IconButton
               variant="text"
               color="white"
+              style={{
+                backgroundColor: '#77aaff',
+              }}
               size="lg"
               onClick={() => {
                 handleNext();
@@ -60,7 +67,7 @@ function ArtSlideShow() {
               }}
               className={nextArrowClass}
             >
-              <FaChevronRight />
+              <FaChevronRight className={chevronClass}/>
             </IconButton>
           )}
         />
