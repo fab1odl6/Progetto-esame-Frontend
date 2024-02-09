@@ -9,15 +9,11 @@ import ConfirmModal from "../modals/ConfirmModal";
 function ArtCard({ artwork }) {
   const textbgcolor = "bg-[#bbaabb]";
   const textcolor = "#FFFFFF"; 
-  const containerClass = `relative flex items-center justify-center h-60 w-79.5 rounded-xl shadow-xl ${textbgcolor} 
-  mx-auto my-8 group mb-1 bg-opacity-75 rounded-t-xl`;
-const artContainer =
-  "z-10 h-full w-full overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700";
-const imageClass =
-  "animate-fade-in block h-full w-full scale-100 transform object-cover object-center opacity-100 transition duration-300 group-hover:scale-110 cursor-pointer rounded-xl";
-const textContainer = `absolute bottom-0 left-0 p-3 w-full text-white z-30 shadow-md bg-black bg-opacity-50 rounded-b-xl`;
-  const titleClass = `font-serif text-lg font-bold text-white-700 shadow-md shadow-black-10 ${textcolor} 
-    text-xl border-b-2 border-white-700 mb-1 line-clamp-1 cursor-pointer `;
+  const containerClass = `relative flex items-center justify-center h-60 w-79.5 rounded-xl shadow-xl ${textbgcolor} mx-auto my-8 group mb-1 bg-opacity-75 rounded-t-xl`;
+  const artContainer ="z-10 h-full w-full overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700";
+  const imageClass ="animate-fade-in block h-full w-full scale-100 transform object-cover object-center opacity-100 transition duration-300 group-hover:scale-110 cursor-pointer rounded-xl";
+  const textContainer = `absolute bottom-0 left-0 p-3 w-full text-white z-30 shadow-md bg-black bg-opacity-50 rounded-b-xl`;
+  const titleClass = `font-serif text-lg font-bold text-white-700 shadow-md shadow-black-10 ${textcolor} text-xl border-b-2 border-white-700 mb-1 line-clamp-1 cursor-pointer `;
   const subtitleClass = `text-sm font-light text-white-700 shadow-md shadow-black-10 mb-1 line-clamp-1`;
   const heartIconClass = "absolute -top-4 -right-4 m-4 z-20 cursor-pointer";
   const favoriteClass = "favorite text-2xl z-6 text-red-500";

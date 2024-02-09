@@ -2,56 +2,20 @@ import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { MdModeEdit, MdOutlineEditOff } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  removeEvent,
-  addNewEvent,
-  removeCustomEventUser,
-  removeEventUser,
-  addEventUser,
-  addCustomEventUser,
-} from "../../store";
+import {removeEvent,addNewEvent,removeCustomEventUser,removeEventUser,addEventUser,addCustomEventUser,} from "../../store";
 import { ref, getDatabase, set } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebase/FirebaseConfig";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { GoChevronDown } from "react-icons/go";
 import DepartmentDropdown from "../dropdowns/DepartmentDropdown";
 import ConfirmModal from "../modals/ConfirmModal";
-
-const mandatoryClass = "text-red-500";
-
-async function writeData() {
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase();
-
-  try {
-    for (let i = 0; i < 4; i++) {
-      const e = {
-        name: "Event " + i,
-        date: "12/12/12",
-        department: "Art",
-        favorite: false,
-        full: false,
-        guests: "sdf",
-        id: 5 + i,
-        image:
-          "https://cdn.studenti.stbm.it/images/2019/03/11/leonardo-da-vinci-orig.jpeg",
-      };
-
-      set(ref(db, "users/Fabio/customEvents/" + e.name), e);
-    }
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-// await writeData();
 
 function HandleEventCard({ event }) {
   const app = initializeApp(firebaseConfig);
   const db = getDatabase();
 
+  const mandatoryClass = "text-red-500";
   const fullContainerClass = "bg-blue-100 rounded p-4";
   const containerClass ="flex items-center justify-between";
   const imageContainerClass = "rounded";

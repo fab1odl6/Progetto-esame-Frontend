@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import useNavigation from "../../hooks/use-navigation";
 
 const colorClass = "text-[#444455]"

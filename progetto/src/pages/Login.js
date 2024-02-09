@@ -21,9 +21,6 @@ const enterloginClass = "text-gray-300";
 const backgroundClass = "w-24 filter brightness-0 invert-1";
 const inputContainerClass = "mb-4 flex justify-center";
 
-
-
-
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 const dbRef = ref(db);

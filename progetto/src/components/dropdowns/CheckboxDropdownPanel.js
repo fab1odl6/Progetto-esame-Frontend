@@ -6,6 +6,7 @@ import { addFilterItem, removeFilterItem } from "../../store";
 function CheckboxDropdownPanel({ className, options }) {
   const labelClass = "hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer p-1 w-full border-b border-blue-200";
   const inputClass = "mr-2 cursor-pointer";
+  
   const [checkedItems, setCheckedItems] = useState({});
   const dispatch = useDispatch();
   const filterState = useSelector((state) => state.filters.filterCheckbox);
