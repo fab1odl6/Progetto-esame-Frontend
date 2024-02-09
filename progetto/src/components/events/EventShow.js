@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import NavigationContext from "../../context/navigation";
 import LoginModals from "../modals/loginModals";
 import { useSelector } from "react-redux";
-import {FaUser,FaCalendar,FaBuilding,FaUsers,} from "react-icons/fa";
+import { FaUser, FaCalendar, FaBuilding, FaUsers } from "react-icons/fa";
 
 function EventShow({
   event,
@@ -15,11 +15,14 @@ function EventShow({
   open,
   onClose,
 }) {
-  const modalClass ="fixed inset-0 flex flex-col items-center justify-center w-screen h-screen bg-blue bg-auto z-10"; 
-  const containerClass ="border border-gray-300 bg-white rounded-lg overflow-hidden";
+  const modalClass =
+    "fixed inset-0 flex flex-col items-center justify-center w-screen h-screen bg-blue bg-auto z-10";
+  const containerClass =
+    "border border-gray-300 bg-white rounded-lg overflow-hidden";
   const imageContainerClass = "relative overflow-hidden";
   const image = "max-w-lg max-h-lg w-full h-auto rounded-t-lg";
-  const close ="text-4xl absolute top-2 right-2 cursor-pointer bg-white p-1 rounded-full";
+  const close =
+    "text-4xl absolute top-2 right-2 cursor-pointer bg-white p-1 rounded-full";
   const contentClass = "p-4 mt-2 mb-2 relative flex flex-col items-center";
   const favoriteContainerClass = "absolute bottom-1 right-2";
   const favoriteClass = "text-2xl cursor-pointer text-red-500";
