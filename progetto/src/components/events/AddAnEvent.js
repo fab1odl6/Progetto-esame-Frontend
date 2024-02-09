@@ -232,7 +232,7 @@ function AddAnEvent() {
           </div>
           <div className={textcolor}>
             <label htmlFor="guests" className="inputLabelClass">
-              Guest:
+              Guests:
             </label>
             <div>
               <input

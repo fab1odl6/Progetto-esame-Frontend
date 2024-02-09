@@ -58,7 +58,9 @@ function HandleEvents() {
       >
         {localEvents.length > 0 ? (
           localEvents.map((event, index) => (
-            <HandleEventCard key={event.name} event={event} />
+            <div className="mt-4">
+              <HandleEventCard key={event.name} event={event} />
+            </div>
           ))
         ) : (
           <div className={emptyContainerClass}>
