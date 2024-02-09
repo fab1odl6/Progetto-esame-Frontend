@@ -9,24 +9,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCustomEventUser, addNewEvent, addEventUser } from "../../store";
 
 function AddAnEvent() {
-
-  const addeventboxClass = "relative flex flex-col lg:flex-row lg:h-screen lg:items-center larghezza-completa";
+  const addeventboxClass =
+    "relative flex flex-col lg:flex-row lg:h-screen lg:items-center larghezza-completa";
   const dimensionboxClass = "w-full lg:w-1/2 p-4 lg:p-12";
   const positiontextClass = "mx-auto max-w-full text-center";
   const titlestyleClass = "text-2xl font-bold sm:text-3xl text-[#444455]";
-  const errorstyleClass = "mx-auto mb-0 mt-8 max-w-md space-y-4 flex flex-col border-[#77aaff] border-2 rounded p-4 box-border";
+  const errorstyleClass =
+    "mx-auto mb-0 mt-8 max-w-md space-y-4 flex flex-col border-[#77aaff] border-2 rounded p-4 box-border";
   const errortextClass = "w-md bg-red-500 text-[#444455] p-4";
-  const textinputClass = "w-100 rounded-lg border-blue-200 border-1 p-4 pe-12 text-sm shadow-sm h-10";
+  const textinputClass =
+    "w-100 rounded-lg border-blue-200 border-1 p-4 pe-12 text-sm shadow-sm h-10";
   const suggestinputClass = "flex flex-col text-[#444455]";
   const textcolor = "text-[#444455]";
   const redcolorClass = "text-red-500";
-  const selectedText ="text-[#77aaff] font-bold"
+  const selectedText = "text-[#77aaff] font-bold";
   const positionbuttonClass = "flex items-center justify-between";
-  const stylebuttonClass = "inline-block rounded-lg bg-blue-400 px-5 py-3 text-sm font-medium text-white";
+  const stylebuttonClass =
+    "inline-block rounded-lg bg-blue-400 px-5 py-3 text-sm font-medium text-white";
   const imgpositionClass = "relative h-64 w-full lg:h-full lg:w-1/2";
   const imgboxClass = "absolute inset-0 h-full w-full object-cover";
-  const selectedOptionClass = "mt-2"
-
+  const selectedOptionClass = "mt-2";
 
   const app = initializeApp(firebaseConfig);
   const db = getDatabase();
@@ -159,7 +161,7 @@ function AddAnEvent() {
   }, [customEvents, logged]);
 
   return (
-   <section className={addeventboxClass}>
+    <section className={addeventboxClass}>
       <div className={dimensionboxClass}>
         <div className={positiontextClass}>
           <h1 className={titlestyleClass}>ADD AN EVENT!</h1>
@@ -173,7 +175,9 @@ function AddAnEvent() {
           )}
 
           <div className={suggestinputClass}>
-            <label htmlFor="name">Name: <span className={redcolorClass}>*</span></label>
+            <label htmlFor="name">
+              Name: <span className={redcolorClass}>*</span>
+            </label>
             <input
               type="text"
               id="name"
@@ -186,7 +190,9 @@ function AddAnEvent() {
             />
           </div>
           <div className={textcolor}>
-            <label htmlFor="image">Image URL: <span className={redcolorClass}>*</span></label>
+            <label htmlFor="image">
+              Image URL: <span className={redcolorClass}>*</span>
+            </label>
             <input
               type="text"
               id="image"
@@ -200,7 +206,7 @@ function AddAnEvent() {
           </div>
           <div className={textcolor}>
             <label htmlFor="date" className="inputLabelClass">
-              Data: <span className={redcolorClass}>*</span>
+              Date: <span className={redcolorClass}>*</span>
             </label>
             <div className="datePickerContainerClass">
               <DatePicker
@@ -226,7 +232,10 @@ function AddAnEvent() {
                 autoComplete="off"
               />
               {selectedOption && (
-                <p className={selectedOptionClass}><span className={selectedText}>Selected: </span>{selectedOption}</p>
+                <p className={selectedOptionClass}>
+                  <span className={selectedText}>Selected: </span>
+                  {selectedOption}
+                </p>
               )}
             </div>
           </div>
@@ -247,10 +256,7 @@ function AddAnEvent() {
             </div>
           </div>
           <div className={positionbuttonClass}>
-            <button
-              type="submit"
-              className={stylebuttonClass}
-            >
+            <button type="submit" className={stylebuttonClass}>
               Send
             </button>
           </div>
