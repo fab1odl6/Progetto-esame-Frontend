@@ -2,7 +2,14 @@ import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { MdModeEdit, MdOutlineEditOff } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import {removeEvent,addNewEvent,removeCustomEventUser,removeEventUser,addEventUser,addCustomEventUser,} from "../../store";
+import {
+  removeEvent,
+  addNewEvent,
+  removeCustomEventUser,
+  removeEventUser,
+  addEventUser,
+  addCustomEventUser,
+} from "../../store";
 import { ref, getDatabase, set } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebase/FirebaseConfig";
@@ -17,26 +24,34 @@ function HandleEventCard({ event }) {
 
   const mandatoryClass = "text-red-500";
   const fullContainerClass = "bg-blue-100 rounded p-4";
-  const containerClass ="flex items-center justify-between";
+  const containerClass = "flex items-center justify-between";
   const imageContainerClass = "rounded";
-  const imageClass = "w-full h-full object-cover rounded";
+  const imageClass = "w-full h-full object-cover rounded max-h-40";
   const titleAndHeartClass = "flex items-center";
-  const titleClass ="text-white text-2xl font-bold";
+  const titleClass = "text-white text-2xl font-bold";
   const iconsContainerClass = "flex mt-1 items-center";
-  const trashIconClass = "text-[#a9a9a9] cursor-pointer mr-2 hover:text-[#77aaff] text-2xl";
-  const editIconClass = "text-[#a9a9a9] cursor-pointer hover:text-[#77aaff] text-2xl";
-  const notEditIconClass ="text-[#a9a9a9] cursor-pointer hover:text-[#77aaff] text-2xl mr-0 ml-auto"
-  const successDivClass ="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative";
+  const trashIconClass =
+    "text-[#a9a9a9] cursor-pointer mr-2 hover:text-[#77aaff] text-2xl";
+  const editIconClass =
+    "text-[#a9a9a9] cursor-pointer hover:text-[#77aaff] text-2xl";
+  const notEditIconClass =
+    "text-[#a9a9a9] cursor-pointer hover:text-[#77aaff] text-2xl mr-0 ml-auto";
+  const successDivClass =
+    "bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative";
   const successPClass = "font-bold";
-  const formContainerClass = "mx-auto mb-0 mt-8 max-w-md space-y-4 flex flex-col border-[#77aaff] border-2 rounded p-4 box-border";
+  const formContainerClass =
+    "mx-auto mb-0 mt-8 max-w-md space-y-4 flex flex-col border-[#77aaff] border-2 rounded p-4 box-border";
   const inputContainerClass = "mb-4";
   const inputLabelClass = "block text-gray-700 text-sm font-bold mb-2";
-  const inputClass ="shadow appearance-none border-blue-200 border-1 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
+  const inputClass =
+    "shadow appearance-none border-blue-200 border-1 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
   const datePickerContainerClass = "relative";
   const selectedOptionClass = "mt-2";
-  const selectedText ="text-[#77aaff] font-bold";
-  const buttonClass ="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded";
-  const datepickerClass ="w-100 rounded-lg border-blue-200 border-1 p-4 pe-12 text-sm shadow-sm h-10";
+  const selectedText = "text-[#77aaff] font-bold";
+  const buttonClass =
+    "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded";
+  const datepickerClass =
+    "w-100 rounded-lg border-blue-200 border-1 p-4 pe-12 text-sm shadow-sm h-10";
 
   const dispatch = useDispatch();
 
@@ -178,8 +193,8 @@ function HandleEventCard({ event }) {
         <div className="w-200">
           <form className={formContainerClass} onSubmit={handleSubmit}>
             <MdOutlineEditOff
-                  className={notEditIconClass}
-                  onClick={handleClickEdit}
+              className={notEditIconClass}
+              onClick={handleClickEdit}
             />
             <div className={inputContainerClass}>
               <label htmlFor="name" className={inputLabelClass}>
@@ -221,7 +236,7 @@ function HandleEventCard({ event }) {
                   toggleCalendarOnIconClick
                   id="date"
                   name="date"
-                  value={selectedDate}
+                  value={event.date}
                   selected={selectedDate}
                   onChange={handleChangeDate}
                   dateFormat="dd/MM/yyyy"
@@ -251,7 +266,8 @@ function HandleEventCard({ event }) {
               <DepartmentDropdown onOptionSelect={handleOptionSelection} />
               {selectedOption && (
                 <p className={selectedOptionClass}>
-                  <span className={selectedText}>Selected option: </span>{selectedOption}
+                  <span className={selectedText}>Selected option: </span>
+                  {selectedOption}
                 </p>
               )}
             </div>
