@@ -228,7 +228,7 @@ function HandleEventCard({ event }) {
 
             <div className={inputContainerClass}>
               <label htmlFor="date" className={inputLabelClass}>
-                Data: <span className={mandatoryClass}>*</span>
+                Date: <span className={mandatoryClass}>*</span>
               </label>
               <div className={datePickerContainerClass}>
                 <DatePicker
