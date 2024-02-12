@@ -47,8 +47,10 @@ function SearchBar() {
   };
 
   const handleSelect = (selectedValue) => {
-    setText(selectedValue.title);
-    setMatchedValues([]);
+    //setText(selectedValue.title);
+    dispatch(updateText(selectedValue.title));
+    setText("");
+    navigate("/everyArtwork");
   };
 
   return (

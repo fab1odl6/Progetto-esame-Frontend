@@ -25,8 +25,11 @@ function InputDropdownPanel({ className, options }) {
   };
 
   const handleSelect = (selectedValue) => {
-    setText(selectedValue);
-    setMatchedValues([]);
+    //setText(selectedValue);
+    //setMatchedValues([]);
+    dispatch(addFilterItem({ filterName: "filterInput", valueToAdd: selectedValue }));
+    setText("");
+
   };
 
   const handleSubmit = (event) => {
