@@ -4,14 +4,10 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, child } from "firebase/database";
 import { firebaseConfig } from "../components/firebase/FirebaseConfig";
 import ArtGrid from "../components/artworks/ArtGrid";
-import {
-  setArtworks,
-  clearText,
-  setPersonalGalleryPage,
-  setPage,
-} from "../store";
+import {setArtworks,clearText,setPersonalGalleryPage,setPage,} from "../store";
 import LoginPage from "./Login";
 import { animateScroll as scroll } from "react-scroll";
+import PageButtons from "../components/header & footer/PageButtons";
 
 function PersonalGalleryPage() {
   const buttonClass =
@@ -33,9 +29,7 @@ function PersonalGalleryPage() {
   const dbRef = ref(db);
   const dispatch = useDispatch();
   const [artworksLocal, setArtworksLocal] = useState([]);
-  const currentPage = useSelector(
-    (state) => state.activePage.personalGalleryPage
-  );
+  const currentPage = useSelector((state) => state.activePage.personalGalleryPage);
   const itemsPerPage = 8;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -106,23 +100,7 @@ function PersonalGalleryPage() {
       {logged ? (
         <div className={gridboxClass}>
           <ArtGrid artworks={currentItems} />
-          <div className={paginationbuttonClass}>
-            <button
-              className={`${buttonClass} ${hoverButtonClass}`}
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              Previous
-            </button>
-            <div className={currentpageClass}>Page {currentPage}</div>
-            <button
-              className={`${buttonClass} ${hoverButtonClass}`}
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={indexOfLastItem >= artworksLocal.length}
-            >
-              Next
-            </button>
-          </div>
+          <PageButtons indexOfLastItem={indexOfLastItem} filteredArray={currentItems} currentPage={currentPage} page="PersonalGallery"/>
         </div>
       ) : (
         <div>

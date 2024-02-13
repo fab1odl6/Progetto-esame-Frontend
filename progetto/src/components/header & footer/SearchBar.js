@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { useState, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NavigationContext from "../../context/navigation";
-import { updateText } from "../../store";
+import { updateText, setEveryArtworkPage } from "../../store";
 import React from "react";
 
 function SearchBar() {
@@ -53,12 +53,14 @@ function SearchBar() {
     dispatch(updateText(text));
     setText("");
     navigate("/everyArtwork");
+    dispatch(setEveryArtworkPage(1))
   };
 
   const handleSelect = (selectedValue) => {
     dispatch(updateText(selectedValue.title));
     setText("");
     navigate("/everyArtwork");
+    dispatch(setEveryArtworkPage(1))
   };
 
   return (
