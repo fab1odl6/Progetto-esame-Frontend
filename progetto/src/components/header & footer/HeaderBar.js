@@ -78,7 +78,7 @@ function HeaderBar() {
             {user && user.personalData ? (
               <>
                 <span className="text-[#444455] mt-2">
-                  Hi, {user.personalData.username} !
+                  Hi, {user.personalData.username}!
                 </span>
                 <a className={registerButton} onClick={handleLogout}>
                   Logout
