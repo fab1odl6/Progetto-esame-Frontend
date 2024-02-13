@@ -75,9 +75,7 @@ function HeaderBar() {
           <div className={logoutbuttonClass}>
             {user && user.personalData ? (
               <>
-                <a className={loginButton} href="#">
-                  {user.personalData.username}
-                </a>
+                <span className="text-[#444455] mt-2">Hi, {user.personalData.username} !</span>
                 <a className={registerButton} onClick={handleLogout}>
                   Logout
                 </a>
