@@ -39,7 +39,7 @@ function PersonalGalleryPage() {
   const localUpdate = async () => {
     const artworksRef = child(
       dbRef,
-      "/users/" + user.personalData.name + "/artworks"
+      "/users/" + user.personalData.username + "/artworks"
     );
 
     try {

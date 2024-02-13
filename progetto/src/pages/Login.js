@@ -140,34 +140,42 @@ const LoginPage = function () {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     const usersRef = ref(db, "users/");
-
+  
     try {
       const snapshot = await get(usersRef);
-
+  
+      console.log("Users data:", snapshot.val()); // Stampa i dati degli utenti
+  
       if (snapshot.exists()) {
         const users = snapshot.val();
-
+  
+        console.log("Users object:", users); // Stampa l'oggetto users
+  
         if (users) {
+          // Cerca l'utente utilizzando lo username
           const matchedUser = Object.values(users).find(
             (u) =>
+              u.personalData &&
+              u.personalData.username &&
               u.personalData.username.toLowerCase() ===
-                username.toLowerCase() && u.personalData.password === password
+                username.toLowerCase() &&
+              u.personalData.password === password
           );
-
+  
+          console.log("Matched user:", matchedUser); // Stampa l'utente corrispondente
+  
           if (matchedUser) {
             const artworks = await getArts(matchedUser.personalData);
             const events = await getEvents(matchedUser.personalData);
-            const customEvents = await getCustomEvents(
-              matchedUser.personalData
-            );
+            const customEvents = await getCustomEvents(matchedUser.personalData);
             dispatch(setUser({ matchedUser, artworks, events, customEvents }));
             dispatch(setLogged(true));
-
+  
             navigate("/");
           } else {
-            setError("Incorrect Email or Password, try again");
+            setError("Incorrect Username or Password, try again");
             setUsername("");
             setPassword("");
           }

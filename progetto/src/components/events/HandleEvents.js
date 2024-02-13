@@ -27,7 +27,7 @@ function HandleEvents() {
   const updateLocal = async () => {
     const eventsRef = child(
       dbRef,
-      "/users/" + user.personalData.name + "/customEvents/"
+      "/users/" + user.personalData.username + "/customEvents/"
     );
 
     try {

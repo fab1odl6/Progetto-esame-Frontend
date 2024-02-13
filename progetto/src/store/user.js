@@ -7,7 +7,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
 const updateData = async function (user) {
-  await set(ref(db, "/users/" + user.name + "/personalData"), {
+  await set(ref(db, "/users/" + user.username + "/personalData"), {
     name: user.name,
     surname: user.surname,
     password: user.password,
@@ -21,11 +21,11 @@ const updateFavoriteArt = function (artworks, art, user) {
   if (artIndex !== -1) {
     const updatedArtworks = [...artworks];
     updatedArtworks.splice(artIndex, 1);
-    remove(ref(db, `users/${user.name}/artworks/${art.title}`));
+    remove(ref(db, `users/${user.username}/artworks/${art.title}`));
 
     return updatedArtworks;
   } else {
-    set(ref(db, `users/${user.name}/artworks/${art.title}`), {
+    set(ref(db, `users/${user.username}/artworks/${art.title}`), {
       id: art.id,
       link: art.link,
       authorName: art.authorName,
@@ -55,11 +55,11 @@ const updateFavoriteEvent = function (events, event, user) {
   if (eventIndex !== -1) {
     const updatedEvents = [...events];
     updatedEvents.splice(eventIndex, 1);
-    remove(ref(db, `users/${user.name}/events/${event.path}`));
+    remove(ref(db, `users/${user.username}/events/${event.path}`));
 
     return updatedEvents;
   } else {
-    set(ref(db, `users/${user.name}/events/${event.path}`), {
+    set(ref(db, `users/${user.username}/events/${event.path}`), {
       id: event.id,
       name: event.name,
       image: event.image,
@@ -83,11 +83,11 @@ const updatePersonalCustomEvents = function (events, event, user) {
   if (eventIndex !== -1) {
     const updatedEvents = [...events];
     updatedEvents.splice(eventIndex, 1);
-    remove(ref(db, `users/${user.name}/customEvents/${event.path}`));
+    remove(ref(db, `users/${user.username}/customEvents/${event.path}`));
 
     return updatedEvents;
   } else {
-    set(ref(db, `users/${user.name}/customEvents/${event.path}`), {
+    set(ref(db, `users/${user.usename}/customEvents/${event.path}`), {
       id: event.id,
       name: event.name,
       image: event.image,
@@ -215,7 +215,7 @@ const usersSlice = createSlice({
         ref(
           db,
           "users/" +
-            state.user.personalData.name +
+            state.user.personalData.username +
             "/artworks/" +
             action.payload.title
         ),
@@ -250,7 +250,7 @@ const usersSlice = createSlice({
         ref(
           db,
           "users/" +
-            state.user.personalData.name +
+            state.user.personalData.username +
             "/artworks/" +
             action.payload.title
         )
@@ -270,7 +270,7 @@ const usersSlice = createSlice({
         ref(
           db,
           "users/" +
-            state.user.personalData.name +
+            state.user.personalData.username +
             "/events/" +
             action.payload.path
         ),
@@ -299,7 +299,7 @@ const usersSlice = createSlice({
         ref(
           db,
           "users/" +
-            state.user.personalData.name +
+            state.user.personalData.username +
             "/events/" +
             action.payload.path
         )
@@ -320,7 +320,7 @@ const usersSlice = createSlice({
         ref(
           db,
           "users/" +
-            state.user.personalData.name +
+            state.user.personalData.username +
             "/customEvents/" +
             action.payload.path
         ),
@@ -349,7 +349,7 @@ const usersSlice = createSlice({
         ref(
           db,
           "users/" +
-            state.user.personalData.name +
+            state.user.personalData.username +
             "/customEvents/" +
             action.payload.path
         )
