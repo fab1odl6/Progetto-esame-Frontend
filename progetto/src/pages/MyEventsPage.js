@@ -10,22 +10,26 @@ import EventCard from "../components/events/EventCard";
 import { GoChevronDown, GoChevronLeft } from "react-icons/go";
 import { useSelector, useDispatch } from "react-redux";
 import LoginPage from "./Login";
-import { clearText } from "../store";
+import { clearText, setPage } from "../store";
 
 function MyEventsPage() {
   const titleContainerClass = "flex";
   const accordionBarColor = "lightblue";
   const accordionBarColorDark = "darkblue";
-  const accordionstyleClass ="w-full flex items-center justify-center bg-[expandedAccordion[event.id] ? accordionBarColorDark : accordionBar] text-white font-bold uppercase";
-  const mainContentClass ="bg-gradient-to-b from-opacity-80 to-opacity-80 via-white bg-cover bg-center min-h-screen-100px";
+  const accordionstyleClass =
+    "w-full flex items-center justify-center bg-[expandedAccordion[event.id] ? accordionBarColorDark : accordionBar] text-white font-bold uppercase";
+  const mainContentClass =
+    "bg-gradient-to-b from-opacity-80 to-opacity-80 via-white bg-cover bg-center min-h-screen-100px";
   const accordionClass = "mb-20 mt-0";
   const typographyClass = "font-bold font-weight-bold text-uppercase";
-  const sectionnametextClass ="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-shadow-lg text-center text-2xl font-bold";
+  const sectionnametextClass =
+    "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-shadow-lg text-center text-2xl font-bold";
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(clearText());
+    dispatch(setPage("/myEvents"));
   }, []);
 
   const [expandedAccordion, setExpandedAccordion] = useState({

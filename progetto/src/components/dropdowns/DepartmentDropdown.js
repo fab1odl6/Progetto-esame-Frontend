@@ -27,12 +27,15 @@ async function readData() {
 await readData();
 
 function Dropdown({ onOptionSelect }) {
-  const dropdownContainerClass = "relative inline-block text-left rounded-lg bg-[#77aaff] px-5 py-3 text-sm font-medium text-white cursor-pointer";
+  const dropdownContainerClass =
+    "relative inline-block text-left rounded-lg bg-[#77aaff] px-5 py-3 text-sm font-medium text-white cursor-pointer";
   const triggerClass = "flex items-center cursor-pointer";
   const spanClass = "mr-2 text-left";
   const chevronIconClass = "text-xl";
-  const optionsListClass ="z-10 absolute left-0 mt-2 bg-white border rounded shadow-md overflow-y-auto max-h-60";
-  const optionItemClass = "cursor-pointer px-4 py-2 hover:bg-gray-100 border text-[#444455]";
+  const optionsListClass =
+    "z-10 absolute left-0 mt-2 bg-white border rounded shadow-md overflow-y-auto max-h-60";
+  const optionItemClass =
+    "cursor-pointer px-4 py-2 hover:bg-gray-100 border text-[#444455]";
   const redcolorClass = "text-red-500";
 
   const [expanded, setExpanded] = useState(false);
@@ -50,8 +53,10 @@ function Dropdown({ onOptionSelect }) {
 
   return (
     <div className={dropdownContainerClass} onClick={toggleDropdown}>
-      <div className={triggerClass} >
-        <span className={spanClass}>Select a Department <span className={redcolorClass}>*</span></span>
+      <div className={triggerClass}>
+        <span className={spanClass}>
+          Select a Department <span className={redcolorClass}>*</span>
+        </span>
         {expanded ? (
           <GoChevronDown className={chevronIconClass} />
         ) : (

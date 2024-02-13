@@ -5,9 +5,11 @@ import Panel from "./FilterDropdownPanel";
 import { addFilterItem } from "../../store";
 
 function Dropdown({ option, title }) {
-  const optionClass = "hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer p-1 border-b border-blue-200";
+  const optionClass =
+    "hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer p-1 border-b border-blue-200";
   const containerClass = "w-48 relative";
-  const panelClass = "flex justify-between items-center cursor-pointer border rounded p-3 shadow bg-[#77aaff] w-full text-white";
+  const panelClass =
+    "flex justify-between items-center cursor-pointer border rounded p-3 shadow bg-[#77aaff] w-full text-white";
   const chevronClass = "text-lg";
   const openedPanelClass = "absolute top-full overflow-y-auto max-h-[150px]";
 

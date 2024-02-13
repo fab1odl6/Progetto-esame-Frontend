@@ -4,7 +4,8 @@ import SliderDropdownPanel from "./SliderDropdownPanel";
 
 function SliderDropdown({ option, title }) {
   const containerClass = "w-48 relative";
-  const panelClass ="flex justify-between items-center cursor-pointer border rounded p-3 shadow bg-[#77aaff] w-full text-white";
+  const panelClass =
+    "flex justify-between items-center cursor-pointer border rounded p-3 shadow bg-[#77aaff] w-full text-white";
   const chevronClass = "text-lg";
   const openedDivClass = "absolute top-full w-full";
   const SliderDropdownPanelClass = "flex justify-between items-center";

@@ -4,13 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFilterItem, removeFilterItem } from "../../store";
 
 function CheckboxDropdownPanel({ className, options }) {
-  const labelClass = "hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer p-1 w-full border-b border-blue-200";
+  const labelClass =
+    "hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer p-1 w-full border-b border-blue-200";
   const inputClass = "mr-2 cursor-pointer";
-  
+
   const [checkedItems, setCheckedItems] = useState({});
   const dispatch = useDispatch();
   const filterState = useSelector((state) => state.filters.filterCheckbox);
-  const finalClassNames = classNames("border-1 border-blue-500 rounded p-3 shadow bg-white w-full",className);
+  const finalClassNames = classNames(
+    "border-1 border-blue-500 rounded p-3 shadow bg-white w-full",
+    className
+  );
 
   useEffect(() => {
     const initialState = filterState.reduce((acc, value) => {

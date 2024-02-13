@@ -64,10 +64,6 @@ function ArtCard({ artwork }) {
     navigate("/artworkDetails");
   };
 
-  const openModal = function () {
-    setConfirmModal(true);
-  };
-
   const closeModal = function () {
     setConfirmModal(false);
   };

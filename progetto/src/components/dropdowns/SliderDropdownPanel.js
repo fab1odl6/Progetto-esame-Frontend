@@ -4,8 +4,14 @@ import { useDispatch } from "react-redux";
 import { addFilterItem } from "../../store";
 
 function SliderDropdownPanel({ option, className }) {
-  const containterClassNames = classNames("border-1 border-blue-500 rounded p-2 shadow bg-white w-full",className);
-  const inputClassNames = classNames("border border-blue-500 rounded p-2 shadow bg-white w-full",className);
+  const containterClassNames = classNames(
+    "border-1 border-blue-500 rounded p-2 shadow bg-white w-full",
+    className
+  );
+  const inputClassNames = classNames(
+    "border border-blue-500 rounded p-2 shadow bg-white w-full",
+    className
+  );
   const p2Class = "p-2";
 
   const [text, setText] = useState(option.min.toString());

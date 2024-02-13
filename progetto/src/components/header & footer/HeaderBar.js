@@ -1,19 +1,21 @@
 import Link from "../navigation/Link";
 import { useSelector, useDispatch } from "react-redux";
-import { logoutUser, setPage } from "../../store";
+import { logoutUser } from "../../store";
 import NavigationContext from "../../context/navigation";
 import { useContext } from "react";
 
 function HeaderBar() {
   const sectionHeader = "bg-[#99aadd] mt-0 !important";
-  const sectionElement ="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between";
+  const sectionElement =
+    "mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between";
   const navLinks = "hidden md:flex items-center gap-6 text-sm";
   const coloreDesiderato = "bg-[#77aaff]";
   const loginButton = `rounded-md ${coloreDesiderato} px-5 py-2.5 text-sm font-medium text-white shadow cursor-pointer`;
-  const registerButton ="hidden sm:flex rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#444455] cursor-pointer";
+  const registerButton =
+    "hidden sm:flex rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#444455] cursor-pointer";
   const iconClass = "h-8 w-8 mr-2 cursor-pointer";
   const sectioniconClass = "md:flex md:items-center";
-  const registerbuttonClass = "hidden sm:flex"
+  const registerbuttonClass = "hidden sm:flex";
   const buttonClass = "flex items-center gap-4";
   const logoutbuttonClass = "sm:flex sm:gap-4";
 
@@ -75,7 +77,9 @@ function HeaderBar() {
           <div className={logoutbuttonClass}>
             {user && user.personalData ? (
               <>
-                <span className="text-[#444455] mt-2">Hi, {user.personalData.username} !</span>
+                <span className="text-[#444455] mt-2">
+                  Hi, {user.personalData.username} !
+                </span>
                 <a className={registerButton} onClick={handleLogout}>
                   Logout
                 </a>
@@ -100,4 +104,3 @@ function HeaderBar() {
 }
 
 export default HeaderBar;
-

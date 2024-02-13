@@ -1,10 +1,9 @@
 import { useSelector } from "react-redux";
 import useNavigation from "../../hooks/use-navigation";
 
-const colorClass = "text-[#444455]"
+const colorClass = "text-[#444455]";
 
 function Link({ to, children }) {
-
   const { navigate } = useNavigation();
 
   const page = useSelector((state) => {
@@ -24,7 +23,7 @@ function Link({ to, children }) {
   };
 
   return (
-    <a className={classes} href={to} onClick={handleClick} >
+    <a className={classes} href={to} onClick={handleClick}>
       {children}
     </a>
   );

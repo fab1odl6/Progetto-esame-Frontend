@@ -1,14 +1,20 @@
 import { Dialog, DialogContent } from "@mui/material";
 
 function ConfirmModal({ open, onClose, onDelete, onUndo, message }) {
-  const modalContainerClass ="fixed inset-0 z-50 overflow-auto flex items-center justify-center";
-  const modalDivClass ="relative p-4 bg-white rounded-lg shadow dark:bg-gray-700";
-  const closeButtonClass ="absolute top-3 right-3 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white";
+  const modalContainerClass =
+    "fixed inset-0 z-50 overflow-auto flex items-center justify-center";
+  const modalDivClass =
+    "relative p-4 bg-white rounded-lg shadow dark:bg-gray-700";
+  const closeButtonClass =
+    "absolute top-3 right-3 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white";
   const textContainerClass = "p-4 md:p-5 text-center";
-  const iconContainerClass ="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200";
+  const iconContainerClass =
+    "mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200";
   const textClass = "mb-5 text-lg font-normal text-gray-500 dark:text-gray-400";
-  const confrimButtonClass ="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2";
-  const cancelButtonClass ="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600";
+  const confrimButtonClass =
+    "text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2";
+  const cancelButtonClass =
+    "text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600";
 
   return (
     <Dialog open={open} onClose={onClose}>
