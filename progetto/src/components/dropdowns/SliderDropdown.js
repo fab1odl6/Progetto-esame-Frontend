@@ -38,7 +38,7 @@ function SliderDropdown({ option, title }) {
       {isOpen && (
         <div className={openedDivClass}>
           <SliderDropdownPanel
-            option={option}
+            options={option}
             className={SliderDropdownPanelClass}
           />
         </div>

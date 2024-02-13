@@ -21,10 +21,10 @@ function EveryArtworkPage() {
   const searchBarClass = "z-50 relative";
   const filterListClass = "z-50 relative";
   const containerStateClass =
-    "z-10 relative flex items-center mt-4 bg-gray-200";
-  const resultTextClass = "text-lg font-bold";
+    "z-10 relative flex items-center bg-gray-200 h-20";
+  const resultTextClass = "text-lg font-bold p-4";
   const buttonClass =
-    "flex items-center px-2 py-1 bg-[#77aaff] rounded cursor-pointer ml-3";
+    "flex items-center px-2 py-1 bg-[#77aaff] rounded cursor-pointer ml-3 text-white";
   const iconClass = "ml-1";
   const artGridClass =
     "z-auto relative max-w-screen-xl mx-auto flex flex-col items-center relative";
@@ -122,6 +122,15 @@ function EveryArtworkPage() {
       >
         <FilterList artworks={array} />
       </div>
+      {searchState && searchState.trim() !== "" && (
+        <div className={containerStateClass}>
+          <p className={resultTextClass}>Results for: {searchState}</p>
+          <button className={buttonClass} onClick={handleRemove}>
+            <FaTimes className={iconClass} />
+            Clear
+          </button>
+        </div>
+      )}
       <div className={artGridClass}>
         <ArtGrid artworks={currentItems} />
         <div className={paginationbuttonClass}>
@@ -142,15 +151,6 @@ function EveryArtworkPage() {
           </button>
         </div>
       </div>
-      {searchState && searchState.trim() !== "" && (
-        <div className={containerStateClass}>
-          <p className={resultTextClass}>Results for: {searchState}</p>
-          <button className={buttonClass} onClick={handleRemove}>
-            <FaTimes className={iconClass} />
-            Clear
-          </button>
-        </div>
-      )}
     </div>
   );
 }
