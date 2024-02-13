@@ -10,6 +10,8 @@ function HandleEventsPage() {
   const addClass = "w-md h-full lg:w-1/2";
   const separatorClass = "m-4 hidden lg:block";
   const handleClass = "mt-10 w-md h-full lg:w-1/2";
+  const loginMessageClass =
+    "absolute bg-red-500 max-w-lg h-12 mx-auto inset-x-0 mt-10 text-white text-2xl text-center flex justify-center items-center";
 
   const dispatch = useDispatch();
 
@@ -23,9 +25,9 @@ function HandleEventsPage() {
   });
 
   return (
-    <div className={containerClass}>
+    <div>
       {logged ? (
-        <>
+        <div className={containerClass}>
           <div className={addClass}>
             <AddAnEvent />
           </div>
@@ -33,9 +35,14 @@ function HandleEventsPage() {
           <div className={handleClass}>
             <HandleEvents />
           </div>
-        </>
+        </div>
       ) : (
-        <LoginPage />
+        <div>
+          <div className={loginMessageClass}>
+            <p>You must be logged in to access this page!</p>
+          </div>
+          <LoginPage />
+        </div>
       )}
     </div>
   );
