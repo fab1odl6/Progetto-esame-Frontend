@@ -1,7 +1,11 @@
+import React, { useState, useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { registerUser, setLogged, setUser, clearText } from "../store";
-import { useState, useContext, useEffect } from "react";
 import NavigationContext from "../context/navigation";
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, child, get, set } from "firebase/database";
+import { firebaseConfig } from "../components/firebase/FirebaseConfig";
+
 
 function RegisterPage() {
   const textcolorClass = "text-[#444455]";
@@ -17,6 +21,9 @@ function RegisterPage() {
   const tipformClass ="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40";
 
   const { navigate } = useContext(NavigationContext);
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const usersRef = ref(db, 'users');
 
   const [formData, setFormData] = useState({
     name: "",
@@ -36,43 +43,75 @@ function RegisterPage() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (
-      !formData.name ||
-      !formData.surname ||
-      !formData.username ||
-      !formData.password
-    ) {
-      return;
-    }
+  if (
+    !formData.name ||
+    !formData.surname ||
+    !formData.username ||
+    !formData.password
+  ) {
+    return;
+  }
 
-    dispatch(
-      registerUser({
+  // Controlla se l'username esiste già nel database
+  const usernameRef = ref(db, `users/${formData.username}`);
+  const usernameSnapshot = await get(usernameRef);
+
+  if (usernameSnapshot.exists()) {
+    alert("Questo username è già stato utilizzato. Scegli un altro username.");
+    return;
+  }
+
+  try {
+    // Se l'username non esiste, procedi con la registrazione
+    const newUserRef = child(usersRef, formData.username);
+
+    await set(newUserRef, {
+      personalData: {
         name: formData.name,
         surname: formData.surname,
         username: formData.username,
         password: formData.password,
-      })
-    );
-    dispatch(
-      setUser({
-        matchedUser: {
-          personalData: {
-            name: formData.name,
-            surname: formData.surname,
-            username: formData.username,
-            password: formData.password,
-          },
+      },
+      artworks: [],
+      events: [],
+      customEvents: [],
+    });
+
+    // Modifica il dispatch dell'azione setUser
+    dispatch(setUser({
+      matchedUser: {
+        personalData: {
+          name: formData.name,
+          surname: formData.surname,
+          username: formData.username,
+          password: formData.password,
         },
         artworks: [],
         events: [],
         customEvents: [],
-      })
-    );
+      },
+    }));
+    
+    dispatch(setUser({
+      matchedUser: {
+        personalData: {
+          name: formData.name,
+          surname: formData.surname,
+          username: formData.username,
+          password: formData.password,
+        },
+      },
+      artworks: [],
+      events: [],
+      customEvents: [],
+    }));
+
     dispatch(setLogged(true));
 
+    // Reimposta lo stato del form e naviga alla pagina principale
     setFormData({
       name: "",
       surname: "",
@@ -81,7 +120,11 @@ function RegisterPage() {
     });
 
     navigate("/");
-  };
+  } catch (error) {
+    console.error("Errore durante la registrazione dell'utente:", error);
+    // Gestisci l'errore di registrazione qui, ad esempio mostrando un messaggio all'utente
+  }
+};
 
   return (
     <section className={sectionClass}>
@@ -96,6 +139,7 @@ function RegisterPage() {
         <div className={formClass}>
           <div className="w-full">
             <h1 className={textClass}>Get your free account now!</h1>
+
 
             <form className={gridformClass} onSubmit={handleSubmit}>
               <div>
