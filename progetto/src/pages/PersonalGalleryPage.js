@@ -25,6 +25,8 @@ function PersonalGalleryPage() {
   const currentpageClass =
     "flex items-center px-2 py-1 rounded ml-3 bg-[#77aaff] text-white";
   const hoverButtonClass = "hover:bg-blue-800";
+  const loginMessageClass =
+    "absolute bg-red-500 max-w-lg h-12 mx-auto inset-x-0 mt-10 text-white text-2xl text-center flex justify-center items-center";
 
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
@@ -123,7 +125,12 @@ function PersonalGalleryPage() {
           </div>
         </div>
       ) : (
-        <LoginPage />
+        <div>
+          <div className={loginMessageClass}>
+            <p>You must be logged in to access this page!</p>
+          </div>
+          <LoginPage />
+        </div>
       )}
     </div>
   );

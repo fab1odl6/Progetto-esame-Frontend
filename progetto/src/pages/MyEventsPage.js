@@ -24,6 +24,8 @@ function MyEventsPage() {
   const typographyClass = "font-bold font-weight-bold text-uppercase";
   const sectionnametextClass =
     "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-shadow-lg text-center text-2xl font-bold";
+  const loginMessageClass =
+    "absolute bg-red-500 max-w-lg h-12 mx-auto inset-x-0 mt-10 text-white text-2xl text-center flex justify-center items-center";
 
   const dispatch = useDispatch();
 
@@ -118,7 +120,12 @@ function MyEventsPage() {
           </div>
         </div>
       ) : (
-        <LoginPage />
+        <div>
+          <div className={loginMessageClass}>
+            <p>You must be logged in to access this page!</p>
+          </div>
+          <LoginPage />
+        </div>
       )}
     </div>
   );
