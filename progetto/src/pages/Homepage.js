@@ -35,7 +35,7 @@ function HomePage() {
     <div className={bgcolor}>
       <div className="custom-image-container" style={{ position: "relative" }}>
         <img
-          src="https://cdn.sanity.io/images/cctd4ker/production/644670e7c77a813b8fc7d6dfa427beefacad4684-3840x2160.jpg?w=3840&q=75&fit=clip&auto=format"
+          src="https://www.perugino2023.org/wp-content/uploads/2022/08/Metropolitan-Museum.jpg"
           alt="Custom Image"
           style={{ width: "100%", height: "550px", objectFit: "cover" }}
         />
