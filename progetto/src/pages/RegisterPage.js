@@ -58,9 +58,16 @@ function RegisterPage() {
       return;
     }
 
+<<<<<<< HEAD
+  // Controlla se l'username esiste già nel database
+  
+  const usernameRef = ref(db, `users/${formData.username}`);
+  const usernameSnapshot = await get(usernameRef);
+=======
     // Controlla se l'username esiste già nel database
     const usernameRef = ref(db, `users/${formData.username}`);
     const usernameSnapshot = await get(usernameRef);
+>>>>>>> 3b631b26f60805cee67de6bd1e99cf0e4e47cb1b
 
     if (usernameSnapshot.exists()) {
       alert(
@@ -83,7 +90,26 @@ function RegisterPage() {
         artworks: [],
         events: [],
         customEvents: [],
+<<<<<<< HEAD
+      },
+    }));
+
+    dispatch(setUser({
+      matchedUser: {
+        personalData: {
+          name: formData.name,
+          surname: formData.surname,
+          username: formData.username,
+          password: formData.password,
+        },
+      },
+      artworks: [],
+      events: [],
+      customEvents: [],
+    }));
+=======
       });
+>>>>>>> 3b631b26f60805cee67de6bd1e99cf0e4e47cb1b
 
       // Modifica il dispatch dell'azione setUser
       dispatch(
