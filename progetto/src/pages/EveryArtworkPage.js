@@ -19,7 +19,7 @@ function EveryArtworkPage() {
   };
 
   const searchBarClass = "z-50 relative";
-  const filterListClass = "z-50 relative";
+  const filterListClass ="z-50 relative";
   const containerStateClass ="z-10 relative flex items-center bg-gray-200 h-20";
   const resultTextClass = "text-lg font-bold p-4";
   const buttonClass ="flex items-center px-2 py-1 bg-[#77aaff] rounded cursor-pointer ml-3 text-white hover:bg-blue-800";

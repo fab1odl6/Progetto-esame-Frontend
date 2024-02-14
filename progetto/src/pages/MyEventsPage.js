@@ -13,7 +13,7 @@ import LoginPage from "./Login";
 import { clearText, setPage } from "../store";
 
 function MyEventsPage() {
-  const titleContainerClass = "flex";
+  const titleContainerClass ="flex";
   const accordionBarColor = "lightblue";
   const accordionBarColorDark = "darkblue";
   const accordionstyleClass =
