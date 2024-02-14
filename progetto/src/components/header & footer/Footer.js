@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import NavigationContext from "../../context/navigation";
 
 function Footer() {
-  const bgcolor = "bg-[#334466]"
+  const bgcolor = "bg-[#334466]";
   const footerStyle = `${bgcolor} text-white py-10 mt-0`;
   const containerStyle = "max-w-7xl mx-auto flex justify-between flex-wrap";
   const sectionStyle = "flex-1 mb-10";
@@ -38,36 +38,35 @@ function Footer() {
   return (
     <footer className={`${footerStyle} ${footerContainerStyle}`}>
       <div className={containerStyle}>
-      <div className={`${sectionStyle} ${marginRightStyle} mb-12`}>
-        <h2 className={textClass}>WELCOME TO OUR VIRTUAL MUSEUM</h2>
-        <p>
-          Explore a world where each artwork tells a unique story. Discover
-          art that inspires, captivates, and connects. Thank you for joining
-          us on this artistic journey.
-        </p>
-      </div>
+        <div className={`${sectionStyle} ${marginRightStyle} mb-12`}>
+          <h2 className={textClass}>WELCOME TO OUR VIRTUAL MUSEUM</h2>
+          <p>
+            Explore a world where each artwork tells a unique story. Discover
+            art that inspires, captivates, and connects. Thank you for joining
+            us on this artistic journey.
+          </p>
+        </div>
 
-      <div className={`${sectionStyle} ${linkContainerClass} ml-12 mb-16`}>
-        <h3 className={linkContainerClass}>QUICK LINKS</h3>
-        <ul>
-          <li>
-            <a onClick={handleClickEveryArtwork} className={linkClass}>
-              Permanent Collection
-            </a>
-          </li>
-          <li>
-            <a onClick={handleClickHomePage} className={linkClass}>
-              Events and Initiatives
-            </a>
-          </li>
-          <li>
-            <a onClick={handleClickThematicAreas} className={linkClass}>
-              Themathic Areas
-            </a>
-          </li>
-        </ul>
-      </div>
-
+        <div className={`${sectionStyle} ${linkContainerClass} ml-12 mb-16`}>
+          <h3 className={linkContainerClass}>QUICK LINKS</h3>
+          <ul>
+            <li>
+              <a onClick={handleClickEveryArtwork} className={linkClass}>
+                Permanent Collection
+              </a>
+            </li>
+            <li>
+              <a onClick={handleClickHomePage} className={linkClass}>
+                Events and Initiatives
+              </a>
+            </li>
+            <li>
+              <a onClick={handleClickThematicAreas} className={linkClass}>
+                Themathic Areas
+              </a>
+            </li>
+          </ul>
+        </div>
 
         <div className={`${sectionStyle} ${borderRightStyle}`}>
           <h3 className={h3Class}>CONTACT US</h3>

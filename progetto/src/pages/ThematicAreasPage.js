@@ -5,7 +5,7 @@ import { firebaseConfig } from "../components/firebase/FirebaseConfig";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { useDispatch } from "react-redux";
-import { clearText } from "../store";
+import { clearText, setPage } from "../store";
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
@@ -14,7 +14,12 @@ const departmentsRef = ref(database, "/departments");
 function ThematicAreasPage() {
   const containerClass = "mt-4";
   const imageboxClass = "relative w-full h-200px overflow-hidden";
+<<<<<<< HEAD
   const textonimageClass ="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-4xl z-10";
+=======
+  const textonimageClass =
+    "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
+>>>>>>> 3b631b26f60805cee67de6bd1e99cf0e4e47cb1b
 
   const [thematicAreas, setThematicAreas] = useState([]);
   const [modal, setModal] = useState(false);
@@ -24,6 +29,7 @@ function ThematicAreasPage() {
 
   useEffect(() => {
     dispatch(clearText());
+    dispatch(setPage("/thematicAreas"));
   }, []);
 
   useEffect(() => {

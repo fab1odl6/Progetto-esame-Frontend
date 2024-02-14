@@ -36,6 +36,13 @@ function AddAnEvent() {
 
   const dispatch = useDispatch();
 
+  const { user, logged, customEvents, events } = useSelector((state) => {
+    return state.users;
+  });
+
+  const [alreadyExistsError, setAlreadyExistsError] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
   const [formData, setFormData] = useState({
     date: "",
     guests: "",
@@ -44,21 +51,10 @@ function AddAnEvent() {
     department: "",
   });
 
-  const { user, logged, customEvents, events } = useSelector((state) => {
-    return state.users;
-  });
-
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
-  const [alreadyExistsError, setAlreadyExistsError] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [localEvents, setLocalEvents] = useState(customEvents);
-
   const updateLocal = async function () {
     const eventsRef = child(
       dbRef,
-      "/users/" + user.personalData.name + "/customEvents"
+      "/users/" + user.personalData.username + "/customEvents"
     );
 
     try {
@@ -72,8 +68,6 @@ function AddAnEvent() {
           const event = data[key];
           updatedEvents.push(event);
         }
-
-        setLocalEvents(updatedEvents);
       }
     } catch (e) {
       console.error(e);
@@ -115,8 +109,6 @@ function AddAnEvent() {
     }
 
     if (!formData.name || !selectedDate || !formData.image || !selectedOption) {
-      setError("Fill the mandatory fields!");
-      setSuccess(null);
       return;
     }
 
@@ -147,8 +139,6 @@ function AddAnEvent() {
       name: "",
     });
 
-    setSuccess(true);
-    setError(null);
     setSelectedDate(null);
     setSelectedOption(null);
     setAlreadyExistsError(null);

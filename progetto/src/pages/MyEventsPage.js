@@ -10,22 +10,32 @@ import EventCard from "../components/events/EventCard";
 import { GoChevronDown, GoChevronLeft } from "react-icons/go";
 import { useSelector, useDispatch } from "react-redux";
 import LoginPage from "./Login";
-import { clearText } from "../store";
+import { clearText, setPage } from "../store";
 
 function MyEventsPage() {
   const titleContainerClass = "flex";
   const accordionBarColor = "lightblue";
   const accordionBarColorDark = "darkblue";
-  const accordionstyleClass ="w-full flex items-center justify-center bg-[expandedAccordion[event.id] ? accordionBarColorDark : accordionBar] text-white font-bold uppercase";
-  const mainContentClass ="bg-gradient-to-b from-opacity-80 to-opacity-80 via-white bg-cover bg-center min-h-screen-100px";
+  const accordionstyleClass =
+    "w-full flex items-center justify-center bg-[expandedAccordion[event.id] ? accordionBarColorDark : accordionBar] text-white font-bold uppercase";
+  const mainContentClass =
+    "bg-gradient-to-b from-opacity-80 to-opacity-80 via-white bg-cover bg-center min-h-screen-100px";
   const accordionClass = "mb-20 mt-0";
   const typographyClass = "font-bold font-weight-bold text-uppercase";
+<<<<<<< HEAD
   const sectionnametextClass ="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-shadow-lg text-center text-4xl font-bold";
+=======
+  const sectionnametextClass =
+    "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-shadow-lg text-center text-2xl font-bold";
+  const loginMessageClass =
+    "absolute bg-red-500 max-w-lg h-12 mx-auto inset-x-0 mt-10 text-white text-2xl text-center flex justify-center items-center";
+>>>>>>> 3b631b26f60805cee67de6bd1e99cf0e4e47cb1b
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(clearText());
+    dispatch(setPage("/myEvents"));
   }, []);
 
   const [expandedAccordion, setExpandedAccordion] = useState({
@@ -114,7 +124,12 @@ function MyEventsPage() {
           </div>
         </div>
       ) : (
-        <LoginPage />
+        <div>
+          <div className={loginMessageClass}>
+            <p>You must be logged in to access this page!</p>
+          </div>
+          <LoginPage />
+        </div>
       )}
     </div>
   );

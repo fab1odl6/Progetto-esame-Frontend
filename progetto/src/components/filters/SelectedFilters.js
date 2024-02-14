@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 import { removeFilterItem } from "../../store";
 
 function SelectedFilters({ filters }) {
-  const containerClass = "w-full mt-2 p-4 bg-gray-200";
+  const containerClass = "w-full mt-2 p-4 bg-gray-200 flex";
+  const textClass =" text-lg font-bold mt-1 ml-1"
 
   const dispatch = useDispatch();
 
@@ -47,7 +48,7 @@ function SelectedFilters({ filters }) {
     );
   });
 
-  return <div className={containerClass}>{renderedFilters}</div>;
+  return <div className={containerClass}><p className={textClass}> Active Filters: </p>{renderedFilters}</div>;
 }
 
 export default SelectedFilters;

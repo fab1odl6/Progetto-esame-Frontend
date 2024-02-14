@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ArtGrid from "../components/artworks/ArtGrid";
 import FilterList from "../components/filters/FilterList";
 import SearchBar from "../components/header & footer/SearchBar";
+import PageButtons from "../components/header & footer/PageButtons";
 import { useSelector, useDispatch } from "react-redux";
-import { clearText } from "../store";
+import { clearText, setPage } from "../store";
 import { FaTimes } from "react-icons/fa";
 import { setEveryArtworkPage } from "../store";
-import { animateScroll as scroll } from "react-scroll";
 
 function EveryArtworkPage() {
   const pageContainerStyle = {
@@ -20,25 +20,29 @@ function EveryArtworkPage() {
 
   const searchBarClass = "z-50 relative";
   const filterListClass = "z-50 relative";
-  const containerStateClass ="z-10 relative flex items-center mt-4 bg-gray-200";
-  const resultTextClass = "text-lg font-bold";
-  const buttonClass ="flex items-center px-2 py-1 bg-[#77aaff] rounded cursor-pointer ml-3";
+  const containerStateClass ="z-10 relative flex items-center bg-gray-200 h-20";
+  const resultTextClass = "text-lg font-bold p-4";
+  const buttonClass ="flex items-center px-2 py-1 bg-[#77aaff] rounded cursor-pointer ml-3 text-white hover:bg-blue-800";
   const iconClass = "ml-1";
   const artGridClass ="z-auto relative max-w-screen-xl mx-auto flex flex-col items-center relative";
   const imageboxClass = "relative w-full h-200px overflow-hidden";
+<<<<<<< HEAD
   const textonimageClass ="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-4xl z-10";
   const paginationbuttonClass = "mt-4 mb-8 flex items-center text-white";
   const currentpageClass ="flex items-center px-2 py-1 bg-[#77aaff] rounded ml-3 text-white";
   const hoverButtonClass = "hover:bg-blue-800";
+=======
+  const textonimageClass ="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
+>>>>>>> 3b631b26f60805cee67de6bd1e99cf0e4e47cb1b
 
   const { array } = useSelector((state) => {
     return state.artworks;
   });
 
   const dispatch = useDispatch();
+
   const filtersState = useSelector((state) => state.filters);
   const searchState = useSelector((state) => state.search.text);
-
   const currentPage = useSelector((state) => state.activePage.everyArtworkPage);
   const itemsPerPage = 20;
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -83,6 +87,7 @@ function EveryArtworkPage() {
   useEffect(() => {
     if (!searchState) {
       dispatch(clearText());
+      dispatch(setPage("/everyArtwork"));
     }
   }, []);
 
@@ -90,10 +95,9 @@ function EveryArtworkPage() {
     dispatch(clearText());
   };
 
-  const handlePageChange = (pageNumber) => {
-    dispatch(setEveryArtworkPage(pageNumber));
-    scroll.scrollToTop();
-  };
+  useEffect(() =>{
+    dispatch(setEveryArtworkPage(1));
+  },[filtersState])
 
   return (
     <div className={pageContainerStyle}>
@@ -115,26 +119,6 @@ function EveryArtworkPage() {
       >
         <FilterList artworks={array} />
       </div>
-      <div className={artGridClass}>
-        <ArtGrid artworks={currentItems} />
-        <div className={paginationbuttonClass}>
-        <button
-          className={`${buttonClass} ${hoverButtonClass}`}
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <p className={currentpageClass}> Page {currentPage}</p>
-        <button
-          className={`${buttonClass} ${hoverButtonClass}`}
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={indexOfLastItem >= filteredArray.length}
-        >
-          Next
-        </button>
-        </div>
-      </div>
       {searchState && searchState.trim() !== "" && (
         <div className={containerStateClass}>
           <p className={resultTextClass}>Results for: {searchState}</p>
@@ -144,6 +128,10 @@ function EveryArtworkPage() {
           </button>
         </div>
       )}
+      <div className={artGridClass}>
+        <ArtGrid artworks={currentItems} />
+        <PageButtons indexOfLastItem={indexOfLastItem} filteredArray={filteredArray} currentPage={currentPage} page="EveryArtwork"/>
+      </div>
     </div>
   );
 }

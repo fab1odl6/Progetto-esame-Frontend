@@ -7,7 +7,8 @@ import LoginModals from "../modals/loginModals";
 
 function ArtSlideShowCard({ artwork }) {
   const redcolorClass = "text-red-500";
-  const ArtContainer ="max-w-screen-md relative flex items-center w-3/4 h-96 mx-auto border-3 border-blue-800 rounded-lg overflow-hidden mb-16 bg-blue-100 shadow dark:bg-blue-800 dark:border-yellow-700 transition-colors duration-300 ease-in-out hover:bg-blue-200";
+  const ArtContainer =
+    "max-w-screen-md relative flex items-center w-3/4 h-96 mx-auto border-3 border-blue-800 rounded-lg overflow-hidden mb-16 bg-blue-100 shadow dark:bg-blue-800 dark:border-yellow-700 transition-colors duration-300 ease-in-out hover:bg-blue-200";
   const ArtImage = "w-1/2 h-full object-cover hover:scale-105 cursor-pointer";
   const ArtContent = "flex flex-col justify-between p-12 box-border text-black";
   const TitleContainer = "flex flex-col justify-between";
