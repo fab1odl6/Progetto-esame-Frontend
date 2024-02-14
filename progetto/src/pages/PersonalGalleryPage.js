@@ -53,7 +53,7 @@ function PersonalGalleryPage() {
           dispatch(setArtworks(dataArray));
           setArtworksLocal(dataArray);
         } else {
-          console.error("Artworks data is not in a recognized format");
+          console.error("Artworks data is not in a recognized format.");
         }
       }
     } catch (e) {
