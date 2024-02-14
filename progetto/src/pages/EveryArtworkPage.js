@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { clearText, setPage } from "../store";
 import { FaTimes } from "react-icons/fa";
 import { setEveryArtworkPage } from "../store";
-import { animateScroll as scroll } from "react-scroll";
 
 function EveryArtworkPage() {
   const pageContainerStyle = {
@@ -21,21 +20,13 @@ function EveryArtworkPage() {
 
   const searchBarClass = "z-50 relative";
   const filterListClass = "z-50 relative";
-  const containerStateClass =
-    "z-10 relative flex items-center bg-gray-200 h-20";
+  const containerStateClass ="z-10 relative flex items-center bg-gray-200 h-20";
   const resultTextClass = "text-lg font-bold p-4";
-  const buttonClass =
-    "flex items-center px-2 py-1 bg-[#77aaff] rounded cursor-pointer ml-3 text-white hover:bg-blue-800";
+  const buttonClass ="flex items-center px-2 py-1 bg-[#77aaff] rounded cursor-pointer ml-3 text-white hover:bg-blue-800";
   const iconClass = "ml-1";
-  const artGridClass =
-    "z-auto relative max-w-screen-xl mx-auto flex flex-col items-center relative";
+  const artGridClass ="z-auto relative max-w-screen-xl mx-auto flex flex-col items-center relative";
   const imageboxClass = "relative w-full h-200px overflow-hidden";
-  const textonimageClass =
-    "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
-  const paginationbuttonClass = "mt-4 mb-8 flex items-center text-white";
-  const currentpageClass =
-    "flex items-center px-2 py-1 bg-[#77aaff] rounded ml-3 text-white";
-  const notButtonClass = "pointer-events-none opacity-50";
+  const textonimageClass ="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
 
   const { array } = useSelector((state) => {
     return state.artworks;
@@ -95,11 +86,6 @@ function EveryArtworkPage() {
 
   const handleRemove = () => {
     dispatch(clearText());
-  };
-
-  const handlePageChange = (pageNumber) => {
-    dispatch(setEveryArtworkPage(pageNumber));
-    scroll.scrollToTop();
   };
 
   useEffect(() =>{

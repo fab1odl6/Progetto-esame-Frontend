@@ -34,9 +34,7 @@ function InputDropdownPanel({ className, options }) {
   };
 
   const handleSelect = (selectedValue) => {
-    dispatch(
-      addFilterItem({ filterName: "filterInput", valueToAdd: selectedValue })
-    );
+    dispatch(addFilterItem({ filterName: "filterInput", valueToAdd: selectedValue }));
     setText("");
   };
 

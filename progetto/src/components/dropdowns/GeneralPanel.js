@@ -22,8 +22,7 @@ function GeneralPanel({options,title, setIsOpen}){
             <div className={openedDivClass}>
                 <InputDropdownPanel className={InputDropdownPanelClass} options={labelOptions} />
             </div>
-        )
-        
+        )   
     } else if (title =="Artwork type"){
         const handleOptionClick = (option) => {
             setIsOpen(false);
@@ -58,7 +57,6 @@ function GeneralPanel({options,title, setIsOpen}){
         return(
             <CheckboxDropdownPanel className={panelClass} options={options} />
         )
-
     }
 }
 

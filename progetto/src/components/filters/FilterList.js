@@ -1,11 +1,6 @@
-import FilterDropdown from "../dropdowns/FilterDropdown";
-import InputDropdown from "../dropdowns/InputDropdown";
-import SliderDropdown from "../dropdowns/SliderDropdown";
-import CheckboxDropdown from "../dropdowns/CheckboxDropdown";
 import SelectedFilters from "./SelectedFilters";
 import { useSelector } from "react-redux";
 import GeneralDropdown from "../dropdowns/GeneralDropdown";
-import SliderDropdownPanel from "../dropdowns/SliderDropdown";
 
 function FilterList({ artworks }) {
   const containerClass = "z-8";
@@ -91,11 +86,7 @@ function FilterList({ artworks }) {
       </div>
     </div>
   );
-
-  //<CheckboxDropdown options={nations} title="Nationality" />
-  //<FilterDropdown option={artworkType} title="Artwork type" />
-  //<SliderDropdown option={intervalYears} title="End Year" />
-  //<InputDropdown option={artworkAuthors} title="Author" />
+  
 }
 
 export default FilterList;

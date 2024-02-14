@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { animateScroll as scroll } from "react-scroll";
 import { setEveryArtworkPage, setPersonalGalleryPage } from "../../store";
 

@@ -10,19 +10,10 @@ import { animateScroll as scroll } from "react-scroll";
 import PageButtons from "../components/header & footer/PageButtons";
 
 function PersonalGalleryPage() {
-  const buttonClass =
-    "flex items-center px-2 py-1 bg-[#77aaff] rounded cursor-pointer ml-3";
   const imageboxClass = "relative w-full h-200px overflow-hidden";
-  const textonimageClass =
-    "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
-  const gridboxClass =
-    "max-w-screen-xl mx-auto flex flex-col items-center relative";
-  const paginationbuttonClass = "mt-4 mb-8 flex items-center text-white";
-  const currentpageClass =
-    "flex items-center px-2 py-1 rounded ml-3 bg-[#77aaff] text-white";
-  const hoverButtonClass = "hover:bg-blue-800";
-  const loginMessageClass =
-    "absolute bg-red-500 max-w-lg h-12 mx-auto inset-x-0 mt-10 text-white text-2xl text-center flex justify-center items-center";
+  const textonimageClass ="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
+  const gridboxClass ="max-w-screen-xl mx-auto flex flex-col items-center relative";
+  const loginMessageClass ="absolute bg-red-500 max-w-lg h-12 mx-auto inset-x-0 mt-10 text-white text-2xl text-center flex justify-center items-center";
 
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
@@ -79,11 +70,6 @@ function PersonalGalleryPage() {
 
   const currentItems = artworksLocal.slice(indexOfFirstItem, indexOfLastItem);
 
-  const handlePageChange = (pageNumber) => {
-    dispatch(setPersonalGalleryPage(pageNumber));
-    scroll.scrollToTop();
-  };
-
   return (
     <div>
       {logged && (
@@ -100,7 +86,7 @@ function PersonalGalleryPage() {
       {logged ? (
         <div className={gridboxClass}>
           <ArtGrid artworks={currentItems} />
-          <PageButtons indexOfLastItem={indexOfLastItem} filteredArray={currentItems} currentPage={currentPage} page="PersonalGallery"/>
+          <PageButtons indexOfLastItem={indexOfLastItem} filteredArray={artworksLocal} currentPage={currentPage} page="PersonalGallery"/>
         </div>
       ) : (
         <div>
