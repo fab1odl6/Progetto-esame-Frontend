@@ -4,9 +4,8 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, child } from "firebase/database";
 import { firebaseConfig } from "../components/firebase/FirebaseConfig";
 import ArtGrid from "../components/artworks/ArtGrid";
-import {setArtworks,clearText,setPersonalGalleryPage,setPage,} from "../store";
+import {setArtworks,clearText,setPage,} from "../store";
 import LoginPage from "./Login";
-import { animateScroll as scroll } from "react-scroll";
 import PageButtons from "../components/header & footer/PageButtons";
 
 function PersonalGalleryPage() {
