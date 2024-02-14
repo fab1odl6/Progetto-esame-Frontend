@@ -14,7 +14,7 @@ const departmentsRef = ref(database, "/departments");
 function ThematicAreasPage() {
   const containerClass = "mt-4";
   const imageboxClass = "relative w-full h-200px overflow-hidden";
-  const textonimageClass ="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-2xl z-10";
+  const textonimageClass ="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-bold text-4xl z-10";
 
   const [thematicAreas, setThematicAreas] = useState([]);
   const [modal, setModal] = useState(false);

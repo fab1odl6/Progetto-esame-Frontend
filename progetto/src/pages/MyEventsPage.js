@@ -20,7 +20,7 @@ function MyEventsPage() {
   const mainContentClass ="bg-gradient-to-b from-opacity-80 to-opacity-80 via-white bg-cover bg-center min-h-screen-100px";
   const accordionClass = "mb-20 mt-0";
   const typographyClass = "font-bold font-weight-bold text-uppercase";
-  const sectionnametextClass ="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-shadow-lg text-center text-2xl font-bold";
+  const sectionnametextClass ="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-shadow-lg text-center text-4xl font-bold";
 
   const dispatch = useDispatch();
 

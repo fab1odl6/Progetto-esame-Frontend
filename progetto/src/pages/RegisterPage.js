@@ -56,6 +56,7 @@ function RegisterPage() {
   }
 
   // Controlla se l'username esiste già nel database
+  
   const usernameRef = ref(db, `users/${formData.username}`);
   const usernameSnapshot = await get(usernameRef);
 
@@ -94,7 +95,7 @@ function RegisterPage() {
         customEvents: [],
       },
     }));
-    
+
     dispatch(setUser({
       matchedUser: {
         personalData: {
