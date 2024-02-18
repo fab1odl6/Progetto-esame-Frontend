@@ -13,14 +13,12 @@ function RegisterPage() {
   const registerbuttonClass = `"flex items-center justify-between w-full px-5 py-2.5 text-sm font-medium text-white ${buttoncolor} rounded-md hover: ${buttoncolor} focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-50"`;
   const formtextClass = `block mb-2 text-sm ${textcolorClass}`;
   const sectionClass = "bg-white dark:bg-gray-900";
-  const positionClass =
-    "flex justify-center min-h-screen bg-opacity-20 bg-white bg-opacity-20 rounded-lg p-5";
+  const positionClass ="flex justify-center min-h-screen bg-opacity-20 bg-white bg-opacity-20 rounded-lg p-5";
   const imageboxClass = "hidden bg-cover lg:block lg:w-2/5";
-  const formClass =
-    "flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5";
+  const formClass ="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5";
   const gridformClass ="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2";
-  const tipformClass =
-    "block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40";
+  const tipformClass ="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40";
+  const errorClass = "mt-2 text-red-500"
 
   const { navigate } = useContext(NavigationContext);
   const app = initializeApp(firebaseConfig);
@@ -33,6 +31,8 @@ function RegisterPage() {
     username: "",
     password: "",
   });
+
+  const [errorState, setErrorState] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -63,9 +63,8 @@ function RegisterPage() {
     const usernameSnapshot = await get(usernameRef);
 
     if (usernameSnapshot.exists()) {
-      alert(
-        "Questo username è già stato utilizzato. Scegli un altro username."
-      );
+      //alert("Questo username è già stato utilizzato. Scegli un altro username.");
+      setErrorState(true);
       return;
     }
 
@@ -148,7 +147,10 @@ function RegisterPage() {
         <div className={formClass}>
           <div className="w-full">
             <h1 className={textClass}>Get your free account now!</h1>
-
+            {errorState && (
+              <h1 className={errorClass}>
+                This username has already been used. Please choose another one.
+              </h1>)}
             <form className={gridformClass} onSubmit={handleSubmit}>
               <div>
                 <label className={formtextClass}>Name</label>

@@ -151,12 +151,12 @@ const LoginPage = function () {
     try {
       const snapshot = await get(usersRef);
 
-      console.log("Users data:", snapshot.val()); // Stampa i dati degli utenti
+      //console.log("Users data:", snapshot.val()); // Stampa i dati degli utenti
 
       if (snapshot.exists()) {
         const users = snapshot.val();
 
-        console.log("Users object:", users); // Stampa l'oggetto users
+        //console.log("Users object:", users); // Stampa l'oggetto users
 
         if (users) {
           // Cerca l'utente utilizzando lo username
@@ -169,7 +169,7 @@ const LoginPage = function () {
               u.personalData.password === password
           );
 
-          console.log("Matched user:", matchedUser); // Stampa l'utente corrispondente
+          //console.log("Matched user:", matchedUser); // Stampa l'utente corrispondente
 
           if (matchedUser) {
             const artworks = await getArts(matchedUser.personalData);
